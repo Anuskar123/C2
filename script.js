@@ -259,7 +259,7 @@ const mcqs = [
     explanation: "Declare a default argument with 'void func(int x = 0);'. This lets you call the function without providing a value for x."
   },
   {
-    question: "Which of the following is used to declare a member initializer list?",
+    question: "How do you initialize member variables in a constructor using a member initializer list in C++?",
     options: [": member(value)", "= value", "member = value", "member(value)"],
     answer: 0,
     explanation: "A member initializer list is written as ': member(value)' in the constructor. This sets up member variables before the constructor body runs."
@@ -271,10 +271,10 @@ const mcqs = [
     explanation: "Declare private members with 'private:'. Only the class itself can access these members."
   },
   {
-    question: "Which of the following is used to declare a protected member?",
-    options: ["protected:", "private:", "public:", "internal:"],
+    question: "How do you declare a static member function in C++?",
+    options: ["static void func();", "void static func();", "func static();", "static: func();"],
     answer: 0,
-    explanation: "Declare protected members with 'protected:'. These can be accessed by the class and its derived classes."
+    explanation: "Declare a static function with 'static void func();'. Static functions belong to the class, not to any object."
   },
   {
     question: "Which of the following is used to declare a public member?",
@@ -307,7 +307,7 @@ const mcqs = [
     explanation: "Both 'const int x;' and 'int const x;' declare a constant member variable that can't be changed."
   },
   {
-    question: "Which of the following is used to declare a constant member function?",
+    question: "How do you declare a member function that does not modify any data members in C++?",
     options: ["void func() const;", "const void func();", "void const func();", "func() const void;"],
     answer: 0,
     explanation: "Declare a constant member function with 'void func() const;'. This means the function won't change any data in the object."
@@ -401,7 +401,8 @@ const questions = [
     answer: "private"
   },
   {
-    question: "Which of these is not considered a feature of object-oriented programming?",
+    question: "Which of the following is NOT a feature of object-oriented programming?",
+    options: ["Encapsulation", "Inheritance", "Polymorphism", "Compilation"],
     answer: "Compilation"
   },
   {
