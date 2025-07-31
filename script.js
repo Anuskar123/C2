@@ -1,7 +1,3 @@
-// Removed duplicate 'notes' declaration to fix redeclaration error.
-
-// Remove redeclaration of 'questions' to fix the error.
-// The 'questions' array is already declared and expanded below, so you can safely delete this block.
 
 const mcqs = [
   {
