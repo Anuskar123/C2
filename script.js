@@ -390,10 +390,8 @@ const notes = [
   { title: "C++ Best Practices", content: "Use meaningful variable names, keep functions short, prefer STL containers over raw arrays, use smart pointers, validate input, and write comments to explain complex logic. Follow coding standards for readability and maintainability." }
 ];
 
-// 50+ detailed questions with explanations and answers
 const questions = [
-  // ...existing questions...
-  // Now only plain questions and answers, no code or code explanations
+  
   {
     question: "What does encapsulation mean in object-oriented programming?",
     answer: "Bundling data and methods together."
