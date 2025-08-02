@@ -2458,6 +2458,296 @@ int main() {
                             <p><strong>Explanation:</strong> prepend() adds elements at the beginning. First 1 is added, then 2 is added before 1, then 3 is added before 2. The final order is 3 → 2 → 1.</p>
                         </div>
                     </div>
+
+                    <div class="question-card" onclick="toggleAnswer(this)">
+                        <div class="question-header">
+                            <span class="question-number">Q6.</span>
+                            <span class="question-type output">Find Output</span>
+                        </div>
+                        <p><strong>What output is produced by the following C++ code segment?</strong></p>
+                        <div class="code-container">
+                            <pre><code class="language-cpp">#include &lt;iostream&gt;
+using namespace std;
+struct nodeType{
+    int info;
+    nodeType *link;
+};
+int main(){
+    nodeType *list, *ptr;
+    list = new nodeType;
+    list -> info = 10;
+    ptr = new nodeType;
+    ptr -> info = 13;
+    ptr -> link = NULL;
+    list -> link = ptr;
+    ptr = new nodeType;
+    ptr -> info = 18;
+    ptr -> link = list -> link;
+    list -> link = ptr;
+    cout << list -> info << " " << ptr -> info << " ";
+    ptr = ptr -> link;
+    cout << ptr -> info << endl;
+    return 0;
+}</code></pre>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Output:</strong></p>
+                            <pre>10 18 13</pre>
+                            <p><strong>Explanation:</strong></p>
+                            <ul>
+                                <li>Initial: list [10] → NULL</li>
+                                <li>Add node [13]: list [10] → [13] → NULL</li>
+                                <li>Insert node [18] at beginning: list [10] → [18] → [13] → NULL</li>
+                                <li>Print: list->info (10), ptr->info (18), ptr->link->info (13)</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="question-card" onclick="toggleAnswer(this)">
+                        <div class="question-header">
+                            <span class="question-number">Q7.</span>
+                            <span class="question-type output">Find Output</span>
+                        </div>
+                        <p><strong>What output is produced by the following C++ code segment?</strong></p>
+                        <div class="code-container">
+                            <pre><code class="language-cpp">#include &lt;iostream&gt;
+using namespace std;
+struct nodeType{
+    int info;
+    nodeType *link;
+};
+int main(){
+    nodeType *list, *ptr;
+    list = new nodeType;
+    list->info = 20;
+    ptr = new nodeType;
+    ptr->info = 28;
+    ptr->link = NULL;
+    list->link = ptr;
+    ptr = new nodeType;
+    ptr->info = 30;
+    ptr->link = list;
+    list = ptr;
+    ptr = new nodeType;
+    ptr->info = 42;
+    ptr->link = list->link;
+    list->link = ptr;
+    ptr = list;
+    while (ptr != NULL){
+        cout << ptr->info << endl;
+        ptr = ptr->link;
+    }
+    return 0;
+}</code></pre>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Output:</strong></p>
+                            <pre>30
+42
+20
+28</pre>
+                            <p><strong>Explanation:</strong></p>
+                            <ul>
+                                <li>Build list: [20] → [28] → NULL</li>
+                                <li>Add [30] at front: [30] → [20] → [28] → NULL</li>
+                                <li>Insert [42] after [30]: [30] → [42] → [20] → [28] → NULL</li>
+                                <li>Traverse and print all nodes</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="question-card" onclick="toggleAnswer(this)">
+                        <div class="question-header">
+                            <span class="question-number">Q8.</span>
+                            <span class="question-type output">Find Output</span>
+                        </div>
+                        <p><strong>What output is produced by the following C++ code segment?</strong></p>
+                        <div class="code-container">
+                            <pre><code class="language-cpp">#include &lt;iostream&gt;
+using namespace std;
+struct nodeType{
+    int info;
+    nodeType *link;
+};
+int main(){
+    nodeType *list, *ptr;
+    list = new nodeType;
+    list -> info = 21;
+    ptr = new nodeType;
+    ptr -> info = 45;
+    ptr -> link = NULL;
+    list -> link = ptr;
+    ptr = new nodeType;
+    ptr -> info = 79;
+    ptr -> link = list -> link;
+    list -> link = ptr;
+    cout << list -> info << " " << ptr -> info << " ";
+    ptr = ptr -> link;
+    cout << ptr -> info << endl;
+    return 0;
+}</code></pre>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Output:</strong></p>
+                            <pre>21 79 45</pre>
+                            <p><strong>Explanation:</strong></p>
+                            <ul>
+                                <li>Initial: list [21] → NULL</li>
+                                <li>Add node [45]: list [21] → [45] → NULL</li>
+                                <li>Insert node [79] after [21]: list [21] → [79] → [45] → NULL</li>
+                                <li>Print: list->info (21), ptr->info (79), ptr->link->info (45)</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="question-card" onclick="toggleAnswer(this)">
+                        <div class="question-header">
+                            <span class="question-number">Q9.</span>
+                            <span class="question-type output">Find Output</span>
+                        </div>
+                        <p><strong>What output is produced by the following C++ code segment?</strong></p>
+                        <div class="code-container">
+                            <pre><code class="language-cpp">#include &lt;iostream&gt;
+using namespace std;
+struct nodeType{
+    int info;
+    nodeType *link;
+};
+int main(){
+    nodeType *list, *ptr;
+    list = new nodeType;
+    list->info = 34;
+    ptr = new nodeType;
+    ptr->info = 56;
+    ptr->link = NULL;
+    list->link = ptr;
+    ptr = new nodeType;
+    ptr->info = 73;
+    ptr->link = list;
+    list = ptr;
+    ptr = new nodeType;
+    ptr->info = 99;
+    ptr->link = list->link;
+    list->link = ptr;
+    ptr = list;
+    while (ptr != NULL) {
+        cout << ptr->info << endl;
+        ptr = ptr->link;
+    }
+    return 0;
+}</code></pre>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Output:</strong></p>
+                            <pre>73
+99
+34
+56</pre>
+                            <p><strong>Explanation:</strong></p>
+                            <ul>
+                                <li>Build list: [34] → [56] → NULL</li>
+                                <li>Add [73] at front: [73] → [34] → [56] → NULL</li>
+                                <li>Insert [99] after [73]: [73] → [99] → [34] → [56] → NULL</li>
+                                <li>Traverse and print all nodes</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="question-card" onclick="toggleAnswer(this)">
+                        <div class="question-header">
+                            <span class="question-number">Q10.</span>
+                            <span class="question-type output">Find Output</span>
+                        </div>
+                        <p><strong>What output is produced by the following C++ code segment?</strong></p>
+                        <div class="code-container">
+                            <pre><code class="language-cpp">#include &lt;iostream&gt;
+using namespace std;
+struct nodeType{
+    int info;
+    nodeType *link;
+};
+int main(){
+    list = new nodeType;
+    list -> info = 34;
+    ptr = new nodeType;
+    ptr -> info = 45;
+    ptr -> link = NULL;
+    list -> link = ptr;
+    ptr = new nodeType;
+    ptr -> info = 55;
+    ptr -> link = list -> link;
+    list -> link = ptr;
+    cout << list -> info << " " << ptr -> info << " ";
+    ptr = ptr -> link;
+    cout << ptr -> info << endl;
+    return 0;
+}</code></pre>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Output:</strong></p>
+                            <pre>34 55 45</pre>
+                            <p><strong>Explanation:</strong></p>
+                            <ul>
+                                <li>Initial: list [34] → NULL</li>
+                                <li>Add node [45]: list [34] → [45] → NULL</li>
+                                <li>Insert node [55] after [34]: list [34] → [55] → [45] → NULL</li>
+                                <li>Print: list->info (34), ptr->info (55), ptr->link->info (45)</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="question-card" onclick="toggleAnswer(this)">
+                        <div class="question-header">
+                            <span class="question-number">Q11.</span>
+                            <span class="question-type output">Find Output</span>
+                        </div>
+                        <p><strong>What output is produced by the following C++ code segment?</strong></p>
+                        <div class="code-container">
+                            <pre><code class="language-cpp">#include &lt;iostream&gt;
+using namespace std;
+struct nodeType{
+    int info;
+    nodeType *link;
+};
+int main(){
+    nodeType *list, *ptr;
+    list = new nodeType;
+    list->info = 45;
+    ptr = new nodeType;
+    ptr->info = 66;
+    ptr->link = NULL;
+    list->link = ptr;
+    ptr = new nodeType;
+    ptr->info = 91;
+    ptr->link = list;
+    list = ptr;
+    ptr = new nodeType;
+    ptr->info = 70;
+    ptr->link = list->link;
+    list->link = ptr;
+    ptr = list;
+    while (ptr != NULL) {
+        cout << ptr->info << endl;
+        ptr = ptr->link;
+    }
+    return 0;
+}</code></pre>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Output:</strong></p>
+                            <pre>91
+70
+45
+66</pre>
+                            <p><strong>Explanation:</strong></p>
+                            <ul>
+                                <li>Build list: [45] → [66] → NULL</li>
+                                <li>Add [91] at front: [91] → [45] → [66] → NULL</li>
+                                <li>Insert [70] after [91]: [91] → [70] → [45] → [66] → NULL</li>
+                                <li>Traverse and print all nodes</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Complete the Code Questions -->
@@ -3146,79 +3436,524 @@ int main() {
 
         <!-- Week 20 Content -->
         <section id="week20" class="week-content">
-            <h2><i class="fas fa-layer-group"></i> Week 20 - Stacks & Queues</h2>
+            <h2><i class="fas fa-layer-group"></i> Week 20 - Stacks and Queues</h2>
             
-            <div class="concept-card">
-                <h3>Key Concepts</h3>
-                <ul>
-                    <li><strong>Stack:</strong> LIFO (Last In, First Out) data structure</li>
-                    <li><strong>Queue:</strong> FIFO (First In, First Out) data structure</li>
-                    <li><strong>Push/Pop:</strong> Stack operations for adding/removing elements</li>
-                    <li><strong>Enqueue/Dequeue:</strong> Queue operations for adding/removing elements</li>
-                    <li><strong>Static vs Dynamic:</strong> Array-based vs pointer-based implementations</li>
-                </ul>
+            <!-- Notes Section -->
+            <div class="notes-section">
+                <h3><i class="fas fa-book"></i> Detailed Notes</h3>
+                
+                <div class="concept-card">
+                    <h4>Stack Data Structure</h4>
+                    <p><strong>Definition:</strong> A stack is a linear data structure that follows the LIFO (Last In, First Out) principle. Elements are added and removed from the same end called the "top".</p>
+                    
+                    <h5>Real-world Examples:</h5>
+                    <ul>
+                        <li><strong>Plate stack:</strong> You add and remove plates from the top</li>
+                        <li><strong>Browser history:</strong> Back button returns to last visited page</li>
+                        <li><strong>Function calls:</strong> Most recently called function returns first</li>
+                        <li><strong>Undo operations:</strong> Last action is undone first</li>
+                    </ul>
+
+                    <h5>Stack Operations:</h5>
+                    <table class="operations-table">
+                        <tr>
+                            <th>Operation</th>
+                            <th>Description</th>
+                            <th>Time Complexity</th>
+                        </tr>
+                        <tr>
+                            <td>Push</td>
+                            <td>Add element to top</td>
+                            <td>O(1)</td>
+                        </tr>
+                        <tr>
+                            <td>Pop</td>
+                            <td>Remove and return top element</td>
+                            <td>O(1)</td>
+                        </tr>
+                        <tr>
+                            <td>Top/Peek</td>
+                            <td>Return top element without removing</td>
+                            <td>O(1)</td>
+                        </tr>
+                        <tr>
+                            <td>IsEmpty</td>
+                            <td>Check if stack is empty</td>
+                            <td>O(1)</td>
+                        </tr>
+                        <tr>
+                            <td>Size</td>
+                            <td>Return number of elements</td>
+                            <td>O(1)</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="concept-card">
+                    <h4>Queue Data Structure</h4>
+                    <p><strong>Definition:</strong> A queue is a linear data structure that follows the FIFO (First In, First Out) principle. Elements are added at the rear and removed from the front.</p>
+                    
+                    <h5>Real-world Examples:</h5>
+                    <ul>
+                        <li><strong>Line at bank:</strong> First person in line is served first</li>
+                        <li><strong>Print queue:</strong> Documents print in order they were sent</li>
+                        <li><strong>CPU scheduling:</strong> Processes are executed in arrival order</li>
+                        <li><strong>Breadth-First Search:</strong> Explore nodes level by level</li>
+                    </ul>
+
+                    <h5>Queue Operations:</h5>
+                    <table class="operations-table">
+                        <tr>
+                            <th>Operation</th>
+                            <th>Description</th>
+                            <th>Time Complexity</th>
+                        </tr>
+                        <tr>
+                            <td>Enqueue</td>
+                            <td>Add element to rear</td>
+                            <td>O(1)</td>
+                        </tr>
+                        <tr>
+                            <td>Dequeue</td>
+                            <td>Remove and return front element</td>
+                            <td>O(1)</td>
+                        </tr>
+                        <tr>
+                            <td>Front</td>
+                            <td>Return front element without removing</td>
+                            <td>O(1)</td>
+                        </tr>
+                        <tr>
+                            <td>Rear</td>
+                            <td>Return rear element without removing</td>
+                            <td>O(1)</td>
+                        </tr>
+                        <tr>
+                            <td>IsEmpty</td>
+                            <td>Check if queue is empty</td>
+                            <td>O(1)</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="concept-card">
+                    <h4>Implementation Comparison</h4>
+                    
+                    <div class="implementation-grid">
+                        <div class="impl-item">
+                            <h5>Array-based Implementation</h5>
+                            <p><strong>Advantages:</strong></p>
+                            <ul>
+                                <li>Simple and fast</li>
+                                <li>No extra memory for pointers</li>
+                                <li>Good cache locality</li>
+                            </ul>
+                            <p><strong>Disadvantages:</strong></p>
+                            <ul>
+                                <li>Fixed size</li>
+                                <li>Memory waste if not full</li>
+                                <li>Stack overflow if limit exceeded</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="impl-item">
+                            <h5>Linked List Implementation</h5>
+                            <p><strong>Advantages:</strong></p>
+                            <ul>
+                                <li>Dynamic size</li>
+                                <li>Memory allocated as needed</li>
+                                <li>No size limit (except available memory)</li>
+                            </ul>
+                            <p><strong>Disadvantages:</strong></p>
+                            <ul>
+                                <li>Extra memory for pointers</li>
+                                <li>Slower due to pointer dereferencing</li>
+                                <li>More complex memory management</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="concept-card">
+                    <h4>Applications in Programming</h4>
+                    
+                    <h5>Stack Applications:</h5>
+                    <ul>
+                        <li><strong>Expression evaluation:</strong> Converting infix to postfix</li>
+                        <li><strong>Balanced parentheses:</strong> Checking matching brackets</li>
+                        <li><strong>Function call management:</strong> Call stack in recursion</li>
+                        <li><strong>Memory management:</strong> Automatic variables storage</li>
+                        <li><strong>Backtracking algorithms:</strong> Maze solving, N-Queens</li>
+                    </ul>
+                    
+                    <h5>Queue Applications:</h5>
+                    <ul>
+                        <li><strong>Process scheduling:</strong> Operating system task management</li>
+                        <li><strong>Buffer for I/O:</strong> Keyboard input, printer spooling</li>
+                        <li><strong>Graph algorithms:</strong> BFS traversal</li>
+                        <li><strong>Cache implementation:</strong> LRU cache replacement</li>
+                        <li><strong>Simulation systems:</strong> Modeling real-world queues</li>
+                    </ul>
+                </div>
             </div>
 
-            <div class="exercise-card">
-                <h3>Exercise 1: Static Stack Template</h3>
-                <div class="code-container">
-                    <pre><code class="language-cpp">#include &lt;iostream&gt;
-#include &lt;stdexcept&gt;
-using namespace std;
+            <!-- Questions Section -->
+            <div class="questions-section">
+                <h3><i class="fas fa-question-circle"></i> Week 20 Practice Questions</h3>
 
-template &lt;typename T&gt;
-class Stack {
+                <!-- MCQ Questions -->
+                <div class="question-category">
+                    <h4>Multiple Choice Questions</h4>
+                    
+                    <div class="question-card" onclick="toggleAnswer(this)">
+                        <div class="question-header">
+                            <span class="question-number">Q1.</span>
+                            <span class="question-type mcq">MCQ</span>
+                        </div>
+                        <p><strong>Which data structure follows the LIFO principle?</strong></p>
+                        <div class="mcq-options">
+                            <div class="option">A) Queue</div>
+                            <div class="option">B) Stack</div>
+                            <div class="option">C) Array</div>
+                            <div class="option">D) Linked List</div>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Answer: B) Stack</strong></p>
+                            <p><strong>Explanation:</strong> Stack follows Last In, First Out (LIFO) principle where the last element added is the first one to be removed. Queue follows FIFO, while arrays and linked lists don't have specific ordering principles.</p>
+                        </div>
+                    </div>
+
+                    <div class="question-card" onclick="toggleAnswer(this)">
+                        <div class="question-header">
+                            <span class="question-number">Q2.</span>
+                            <span class="question-type mcq">MCQ</span>
+                        </div>
+                        <p><strong>What is the time complexity of push and pop operations in a stack implemented using arrays?</strong></p>
+                        <div class="mcq-options">
+                            <div class="option">A) O(n) for both</div>
+                            <div class="option">B) O(1) for both</div>
+                            <div class="option">C) O(log n) for both</div>
+                            <div class="option">D) O(1) for push, O(n) for pop</div>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Answer: B) O(1) for both</strong></p>
+                            <p><strong>Explanation:</strong> Both push and pop operations in array-based stack only involve updating the top index and accessing/modifying a single array element, which takes constant time regardless of stack size.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Find the Error Questions -->
+                <div class="question-category">
+                    <h4>Find the Error</h4>
+                    
+                    <div class="question-card" onclick="toggleAnswer(this)">
+                        <div class="question-header">
+                            <span class="question-number">Q3.</span>
+                            <span class="question-type error">Find Error</span>
+                        </div>
+                        <p><strong>Find the error in this stack implementation:</strong></p>
+                        <div class="code-container">
+                            <pre><code class="language-cpp">class Stack {
 private:
-    T* stackArray;
-    int stackSize;
+    int arr[100];
     int top;
-
 public:
-    Stack(int size) {
-        stackArray = new T[size];
-        stackSize = size;
-        top = -1;
+    Stack() : top(0) {}  // Error here
+    
+    void push(int value) {
+        arr[top] = value;
+        top++;
     }
     
-    ~Stack() {
-        delete[] stackArray;
+    int pop() {
+        top--;
+        return arr[top];
     }
+};</code></pre>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Error:</strong> Constructor initializes top to 0 instead of -1, and no bounds checking.</p>
+                            <p><strong>Correction:</strong></p>
+                            <div class="code-container">
+                                <pre><code class="language-cpp">class Stack {
+private:
+    int arr[100];
+    int top;
+    static const int MAX_SIZE = 100;
+public:
+    Stack() : top(-1) {}  // Initialize to -1 for empty stack
     
-    void push(const T& value) {
-        if (isFull()) {
-            throw overflow_error("Stack overflow: Cannot push to full stack");
-        }
-        stackArray[++top] = value;
-    }
-    
-    T pop() {
-        if (isEmpty()) {
-            throw underflow_error("Stack underflow: Cannot pop from empty stack");
-        }
-        return stackArray[top--];
-    }
-    
-    T peek() const {
-        if (isEmpty()) {
-            throw underflow_error("Stack is empty: Cannot peek");
-        }
-        return stackArray[top];
+    bool isFull() const {
+        return top == MAX_SIZE - 1;
     }
     
     bool isEmpty() const {
         return top == -1;
     }
     
+    void push(int value) {
+        if (isFull()) {
+            throw overflow_error("Stack overflow");
+        }
+        arr[++top] = value;  // Increment first, then assign
+    }
+    
+    int pop() {
+        if (isEmpty()) {
+            throw underflow_error("Stack underflow");
+        }
+        return arr[top--];  // Return value, then decrement
+    }
+};</code></pre>
+                            </div>
+                            <p><strong>Explanation:</strong> Empty stack should have top = -1. Must check bounds to prevent overflow/underflow. Pre-increment for push, post-decrement for pop ensures correct indexing.</p>
+                        </div>
+                    </div>
+
+                    <div class="question-card" onclick="toggleAnswer(this)">
+                        <div class="question-header">
+                            <span class="question-number">Q4.</span>
+                            <span class="question-type error">Find Error</span>
+                        </div>
+                        <p><strong>What's wrong with this queue dequeue operation?</strong></p>
+                        <div class="code-container">
+                            <pre><code class="language-cpp">int dequeue() {
+    if (front == rear) {
+        cout << "Queue is empty" << endl;
+        return -1;
+    }
+    int value = arr[front];
+    front++;
+    return value;
+}</code></pre>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Error:</strong> Incorrect empty condition and no circular array handling.</p>
+                            <p><strong>Correction:</strong></p>
+                            <div class="code-container">
+                                <pre><code class="language-cpp">int dequeue() {
+    if (isEmpty()) {  // Use proper isEmpty() method
+        throw underflow_error("Queue underflow");
+    }
+    int value = arr[front];
+    front = (front + 1) % MAX_SIZE;  // Circular increment
+    size--;  // Decrease size counter
+    return value;
+}
+
+bool isEmpty() const {
+    return size == 0;  // Use size counter for accurate check
+}</code></pre>
+                            </div>
+                            <p><strong>Explanation:</strong> Queue is empty when size is 0, not when front equals rear. Use circular array to reuse space and maintain a size counter for accurate state tracking.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Find Output Questions -->
+                <div class="question-category">
+                    <h4>Find the Output</h4>
+                    
+                    <div class="question-card" onclick="toggleAnswer(this)">
+                        <div class="question-header">
+                            <span class="question-number">Q5.</span>
+                            <span class="question-type output">Find Output</span>
+                        </div>
+                        <p><strong>What will be the output?</strong></p>
+                        <div class="code-container">
+                            <pre><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;stack&gt;
+using namespace std;
+
+int main() {
+    stack&lt;int&gt; s;
+    
+    for (int i = 1; i <= 5; i++) {
+        s.push(i * 2);
+    }
+    
+    while (!s.empty()) {
+        cout << s.top() << " ";
+        s.pop();
+    }
+    cout << endl;
+    
+    return 0;
+}</code></pre>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Output:</strong></p>
+                            <pre>10 8 6 4 2 </pre>
+                            <p><strong>Explanation:</strong> The loop pushes 2, 4, 6, 8, 10 onto the stack. Since stack is LIFO, they are popped in reverse order: 10, 8, 6, 4, 2.</p>
+                        </div>
+                    </div>
+
+                    <div class="question-card" onclick="toggleAnswer(this)">
+                        <div class="question-header">
+                            <span class="question-number">Q6.</span>
+                            <span class="question-type output">Find Output</span>
+                        </div>
+                        <p><strong>What will be printed?</strong></p>
+                        <div class="code-container">
+                            <pre><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;queue&gt;
+using namespace std;
+
+int main() {
+    queue&lt;char&gt; q;
+    string word = "HELLO";
+    
+    for (char c : word) {
+        q.push(c);
+    }
+    
+    while (!q.empty()) {
+        cout << q.front();
+        q.pop();
+    }
+    cout << endl;
+    
+    return 0;
+}</code></pre>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Output:</strong></p>
+                            <pre>HELLO</pre>
+                            <p><strong>Explanation:</strong> Queue follows FIFO principle. Characters H, E, L, L, O are enqueued in that order and dequeued in the same order, preserving the original word.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Complete the Code Questions -->
+                <div class="question-category">
+                    <h4>Complete the Code</h4>
+                    
+                    <div class="question-card" onclick="toggleAnswer(this)">
+                        <div class="question-header">
+                            <span class="question-number">Q7.</span>
+                            <span class="question-type complete">Complete Code</span>
+                        </div>
+                        <p><strong>Complete the function to check balanced parentheses using a stack:</strong></p>
+                        <div class="code-container">
+                            <pre><code class="language-cpp">bool isBalanced(string expression) {
+    stack&lt;char&gt; s;
+    
+    for (char c : expression) {
+        if (c == '(' || c == '[' || c == '{') {
+            __________;  // Push opening bracket
+        }
+        else if (c == ')' || c == ']' || c == '}') {
+            if (__________) {  // Check if stack is empty
+                return false;
+            }
+            
+            char top = __________;  // Get top element
+            __________;             // Remove top element
+            
+            if ((c == ')' && top != '(') ||
+                (c == ']' && top != '[') ||
+                (c == '}' && top != '{')) {
+                return false;
+            }
+        }
+    }
+    
+    return __________;  // Check if all brackets matched
+}</code></pre>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Complete Code:</strong></p>
+                            <div class="code-container">
+                                <pre><code class="language-cpp">bool isBalanced(string expression) {
+    stack&lt;char&gt; s;
+    
+    for (char c : expression) {
+        if (c == '(' || c == '[' || c == '{') {
+            s.push(c);  // Push opening bracket
+        }
+        else if (c == ')' || c == ']' || c == '}') {
+            if (s.empty()) {  // Check if stack is empty
+                return false;
+            }
+            
+            char top = s.top();  // Get top element
+            s.pop();             // Remove top element
+            
+            if ((c == ')' && top != '(') ||
+                (c == ']' && top != '[') ||
+                (c == '}' && top != '{')) {
+                return false;
+            }
+        }
+    }
+    
+    return s.empty();  // Check if all brackets matched
+}</code></pre>
+                            </div>
+                            <p><strong>Explanation:</strong> Push opening brackets onto stack. For closing brackets, check if stack is empty (unmatched closing) and if the popped opening bracket matches the current closing bracket. Finally, stack should be empty if all brackets are balanced.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lab Exercise Questions -->
+                <div class="question-category">
+                    <h4>Lab Exercise Questions</h4>
+                    
+                    <div class="question-card" onclick="toggleAnswer(this)">
+                        <div class="question-header">
+                            <span class="question-number">Q8.</span>
+                            <span class="question-type lab">Lab Exercise</span>
+                        </div>
+                        <p><strong>Implement a complete stack and queue using templates with all operations and error handling.</strong></p>
+                        <div class="answer">
+                            <p><strong>Solution:</strong></p>
+                            <div class="code-container">
+                                <pre><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;stdexcept&gt;
+using namespace std;
+
+// Template Stack Implementation
+template &lt;typename T&gt;
+class Stack {
+private:
+    static const int MAX_SIZE = 1000;
+    T arr[MAX_SIZE];
+    int top;
+
+public:
+    Stack() : top(-1) {}
+    
+    bool isEmpty() const {
+        return top == -1;
+    }
+    
     bool isFull() const {
-        return top == stackSize - 1;
+        return top == MAX_SIZE - 1;
+    }
+    
+    void push(const T& item) {
+        if (isFull()) {
+            throw overflow_error("Stack overflow: Cannot push to full stack");
+        }
+        arr[++top] = item;
+    }
+    
+    T pop() {
+        if (isEmpty()) {
+            throw underflow_error("Stack underflow: Cannot pop from empty stack");
+        }
+        return arr[top--];
+    }
+    
+    T peek() const {
+        if (isEmpty()) {
+            throw underflow_error("Stack underflow: Cannot peek empty stack");
+        }
+        return arr[top];
     }
     
     int size() const {
         return top + 1;
-    }
-    
-    int capacity() const {
-        return stackSize;
     }
     
     void display() const {
@@ -3229,107 +3964,42 @@ public:
         
         cout << "Stack (top to bottom): ";
         for (int i = top; i >= 0; i--) {
-            cout << stackArray[i];
+            cout << arr[i];
             if (i > 0) cout << " <- ";
         }
         cout << endl;
     }
-};
-
-int main() {
-    try {
-        cout << "=== Testing Stack Template ===" << endl;
-        
-        // Test with integers
-        cout << "\n--- Integer Stack ---" << endl;
-        Stack&lt;int&gt; intStack(5);
-        
-        cout << "Pushing values: 10, 20, 30" << endl;
-        intStack.push(10);
-        intStack.push(20);
-        intStack.push(30);
-        intStack.display();
-        
-        cout << "Top element: " << intStack.peek() << endl;
-        cout << "Stack size: " << intStack.size() << endl;
-        
-        cout << "Popping elements:" << endl;
-        while (!intStack.isEmpty()) {
-            cout << "Popped: " << intStack.pop() << endl;
-            intStack.display();
-        }
-        
-        // Test with strings
-        cout << "\n--- String Stack ---" << endl;
-        Stack&lt;string&gt; stringStack(3);
-        
-        stringStack.push("First");
-        stringStack.push("Second");
-        stringStack.push("Third");
-        stringStack.display();
-        
-        cout << "Popped: " << stringStack.pop() << endl;
-        stringStack.display();
-        
-        // Test overflow
-        cout << "\n--- Testing Stack Overflow ---" << endl;
-        Stack&lt;int&gt; smallStack(2);
-        smallStack.push(1);
-        smallStack.push(2);
-        try {
-            smallStack.push(3); // Should throw exception
-        } catch (const overflow_error& e) {
-            cout << "Caught exception: " << e.what() << endl;
-        }
-        
-    } catch (const exception& e) {
-        cout << "Error: " << e.what() << endl;
+    
+    void clear() {
+        top = -1;
     }
-    
-    return 0;
-}</code></pre>
-                </div>
-            </div>
-
-            <div class="exercise-card">
-                <h3>Exercise 2: Dynamic Queue Template</h3>
-                <div class="code-container">
-                    <pre><code class="language-cpp">#include &lt;iostream&gt;
-#include &lt;stdexcept&gt;
-using namespace std;
-
-template &lt;typename T&gt;
-class QueueNode {
-public:
-    T data;
-    QueueNode&lt;T&gt;* next;
-    
-    QueueNode(const T& value) : data(value), next(nullptr) {}
 };
 
+// Template Queue Implementation
 template &lt;typename T&gt;
 class Queue {
 private:
-    QueueNode&lt;T&gt;* front;
-    QueueNode&lt;T&gt;* rear;
-    int count;
+    static const int MAX_SIZE = 1000;
+    T arr[MAX_SIZE];
+    int front, rear, count;
 
 public:
-    Queue() : front(nullptr), rear(nullptr), count(0) {}
+    Queue() : front(0), rear(-1), count(0) {}
     
-    ~Queue() {
-        clear();
+    bool isEmpty() const {
+        return count == 0;
     }
     
-    void enqueue(const T& value) {
-        QueueNode&lt;T&gt;* newNode = new QueueNode&lt;T&gt;(value);
-        
-        if (isEmpty()) {
-            front = rear = newNode;
-        } else {
-            rear->next = newNode;
-            rear = newNode;
+    bool isFull() const {
+        return count == MAX_SIZE;
+    }
+    
+    void enqueue(const T& item) {
+        if (isFull()) {
+            throw overflow_error("Queue overflow: Cannot enqueue to full queue");
         }
+        rear = (rear + 1) % MAX_SIZE;
+        arr[rear] = item;
         count++;
     }
     
@@ -3337,36 +4007,24 @@ public:
         if (isEmpty()) {
             throw underflow_error("Queue underflow: Cannot dequeue from empty queue");
         }
-        
-        QueueNode&lt;T&gt;* temp = front;
-        T value = front->data;
-        front = front->next;
-        
-        if (front == nullptr) {
-            rear = nullptr;
-        }
-        
-        delete temp;
+        T item = arr[front];
+        front = (front + 1) % MAX_SIZE;
         count--;
-        return value;
+        return item;
     }
     
     T getFront() const {
         if (isEmpty()) {
-            throw underflow_error("Queue is empty: Cannot get front element");
+            throw underflow_error("Queue underflow: Cannot get front of empty queue");
         }
-        return front->data;
+        return arr[front];
     }
     
     T getRear() const {
         if (isEmpty()) {
-            throw underflow_error("Queue is empty: Cannot get rear element");
+            throw underflow_error("Queue underflow: Cannot get rear of empty queue");
         }
-        return rear->data;
-    }
-    
-    bool isEmpty() const {
-        return front == nullptr;
+        return arr[rear];
     }
     
     int size() const {
@@ -3380,100 +4038,144 @@ public:
         }
         
         cout << "Queue (front to rear): ";
-        QueueNode&lt;T&gt;* current = front;
-        while (current != nullptr) {
-            cout << current->data;
-            if (current->next != nullptr) {
-                cout << " <- ";
-            }
-            current = current->next;
+        for (int i = 0; i < count; i++) {
+            int index = (front + i) % MAX_SIZE;
+            cout << arr[index];
+            if (i < count - 1) cout << " <- ";
         }
         cout << endl;
     }
     
     void clear() {
-        while (!isEmpty()) {
-            dequeue();
+        front = 0;
+        rear = -1;
+        count = 0;
+    }
+};
+
+// Utility Functions
+template &lt;typename T&gt;
+bool isBalancedParentheses(const string& expression) {
+    Stack&lt;char&gt; s;
+    
+    for (char c : expression) {
+        if (c == '(' || c == '[' || c == '{') {
+            s.push(c);
         }
-    }
-};
-
-// Example: Inventory System using Queue
-class InventoryItem {
-public:
-    int serialNum;
-    string manufactDate;
-    int lotNum;
-    
-    InventoryItem(int serial, const string& date, int lot) 
-        : serialNum(serial), manufactDate(date), lotNum(lot) {}
-    
-    void display() const {
-        cout << "Serial: " << serialNum << ", Date: " << manufactDate 
-             << ", Lot: " << lotNum;
-    }
-};
-
-int main() {
-    try {
-        cout << "=== Testing Queue Template ===" << endl;
-        
-        // Test with integers
-        cout << "\n--- Integer Queue ---" << endl;
-        Queue&lt;int&gt; intQueue;
-        
-        cout << "Enqueuing values: 10, 20, 30" << endl;
-        intQueue.enqueue(10);
-        intQueue.enqueue(20);
-        intQueue.enqueue(30);
-        intQueue.display();
-        
-        cout << "Front element: " << intQueue.getFront() << endl;
-        cout << "Rear element: " << intQueue.getRear() << endl;
-        cout << "Queue size: " << intQueue.size() << endl;
-        
-        cout << "\nDequeuing elements:" << endl;
-        while (!intQueue.isEmpty()) {
-            cout << "Dequeued: " << intQueue.dequeue() << endl;
-            if (!intQueue.isEmpty()) {
-                intQueue.display();
+        else if (c == ')' || c == ']' || c == '}') {
+            if (s.isEmpty()) {
+                return false;
+            }
+            
+            char top = s.pop();
+            if ((c == ')' && top != '(') ||
+                (c == ']' && top != '[') ||
+                (c == '}' && top != '{')) {
+                return false;
             }
         }
+    }
+    
+    return s.isEmpty();
+}
+
+string infixToPostfix(const string& infix) {
+    Stack&lt;char&gt; s;
+    string postfix = "";
+    
+    auto precedence = [](char op) {
+        if (op == '+' || op == '-') return 1;
+        if (op == '*' || op == '/') return 2;
+        return 0;
+    };
+    
+    for (char c : infix) {
+        if (isalnum(c)) {
+            postfix += c;
+        }
+        else if (c == '(') {
+            s.push(c);
+        }
+        else if (c == ')') {
+            while (!s.isEmpty() && s.peek() != '(') {
+                postfix += s.pop();
+            }
+            if (!s.isEmpty()) s.pop(); // Remove '('
+        }
+        else if (c == '+' || c == '-' || c == '*' || c == '/') {
+            while (!s.isEmpty() && s.peek() != '(' && 
+                   precedence(s.peek()) >= precedence(c)) {
+                postfix += s.pop();
+            }
+            s.push(c);
+        }
+    }
+    
+    while (!s.isEmpty()) {
+        postfix += s.pop();
+    }
+    
+    return postfix;
+}
+
+// Test Program
+int main() {
+    try {
+        cout << "=== Stack Operations Demo ===" << endl;
+        Stack&lt;int&gt; intStack;
         
-        // Test with strings
-        cout << "\n--- String Queue ---" << endl;
+        // Test stack operations
+        cout << "Pushing elements 1, 2, 3, 4, 5..." << endl;
+        for (int i = 1; i <= 5; i++) {
+            intStack.push(i);
+        }
+        intStack.display();
+        
+        cout << "Top element: " << intStack.peek() << endl;
+        cout << "Stack size: " << intStack.size() << endl;
+        
+        cout << "Popping two elements..." << endl;
+        cout << "Popped: " << intStack.pop() << endl;
+        cout << "Popped: " << intStack.pop() << endl;
+        intStack.display();
+        
+        cout << "\n=== Queue Operations Demo ===" << endl;
         Queue&lt;string&gt; stringQueue;
         
-        stringQueue.enqueue("First");
-        stringQueue.enqueue("Second");
-        stringQueue.enqueue("Third");
+        // Test queue operations
+        cout << "Enqueueing: Apple, Banana, Cherry..." << endl;
+        stringQueue.enqueue("Apple");
+        stringQueue.enqueue("Banana");
+        stringQueue.enqueue("Cherry");
         stringQueue.display();
         
+        cout << "Front element: " << stringQueue.getFront() << endl;
+        cout << "Rear element: " << stringQueue.getRear() << endl;
+        cout << "Queue size: " << stringQueue.size() << endl;
+        
+        cout << "Dequeuing one element..." << endl;
         cout << "Dequeued: " << stringQueue.dequeue() << endl;
         stringQueue.display();
         
-        // Test inventory system
-        cout << "\n--- Inventory System Example ---" << endl;
-        Queue&lt;InventoryItem&gt; inventory;
+        cout << "\n=== Applications Demo ===" << endl;
         
-        inventory.enqueue(InventoryItem(12345, "2024-01-15", 101));
-        inventory.enqueue(InventoryItem(12346, "2024-01-16", 102));
-        inventory.enqueue(InventoryItem(12347, "2024-01-17", 103));
+        // Balanced parentheses
+        string expr1 = "{[()]}";
+        string expr2 = "{[(])}";
+        cout << "Is '" << expr1 << "' balanced? " << (isBalancedParentheses&lt;char&gt;(expr1) ? "Yes" : "No") << endl;
+        cout << "Is '" << expr2 << "' balanced? " << (isBalancedParentheses&lt;char&gt;(expr2) ? "Yes" : "No") << endl;
         
-        cout << "Inventory items:" << endl;
-        Queue&lt;InventoryItem&gt; tempQueue = inventory; // For display purposes
-        int itemNum = 1;
-        while (!tempQueue.isEmpty()) {
-            cout << "Item " << itemNum++ << ": ";
-            tempQueue.dequeue().display();
-            cout << endl;
-        }
+        // Infix to postfix conversion
+        string infix = "A+B*C-D";
+        cout << "Infix: " << infix << endl;
+        cout << "Postfix: " << infixToPostfix(infix) << endl;
         
-        cout << "\nProcessing inventory (FIFO):" << endl;
-        while (!inventory.isEmpty()) {
-            cout << "Processing: ";
-            inventory.dequeue().display();
-            cout << endl;
+        cout << "\n=== Error Handling Demo ===" << endl;
+        Stack&lt;int&gt; emptyStack;
+        try {
+            emptyStack.pop(); // This will throw an exception
+        } catch (const exception& e) {
+            cout << "Caught exception: " << e.what() << endl;
         }
         
     } catch (const exception& e) {
@@ -3482,6 +4184,19 @@ int main() {
     
     return 0;
 }</code></pre>
+                            </div>
+                            <p><strong>Key Features Implemented:</strong></p>
+                            <ul>
+                                <li><strong>Template classes:</strong> Work with any data type</li>
+                                <li><strong>Complete error handling:</strong> Overflow/underflow exceptions</li>
+                                <li><strong>Circular queue:</strong> Efficient space utilization</li>
+                                <li><strong>Balanced parentheses checker:</strong> Practical stack application</li>
+                                <li><strong>Infix to postfix converter:</strong> Expression evaluation</li>
+                                <li><strong>Display methods:</strong> Visual representation of data structures</li>
+                                <li><strong>Size and state methods:</strong> isEmpty, isFull, size functions</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
