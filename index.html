@@ -3917,7 +3917,7 @@ int main() {
                 <div class="question-category">
                     <h4>Find the Error</h4>
                     
-                    <div class="question-card" onclick="toggleAnswer(this)">
+                    <div class="question-card">
                         <div class="question-header">
                             <span class="question-number">Q3.</span>
                             <span class="question-type error">Find Error</span>
@@ -3942,6 +3942,7 @@ public:
     }
 };</code></pre>
                         </div>
+                        <button class="show-answer-btn" onclick="toggleAnswerWithButton(this)">Show Answer</button>
                         <div class="answer">
                             <p><strong>Error:</strong> Constructor initializes top to 0 instead of -1, and no bounds checking.</p>
                             <p><strong>Correction:</strong></p>
@@ -3981,7 +3982,7 @@ public:
                         </div>
                     </div>
 
-                    <div class="question-card" onclick="toggleAnswer(this)">
+                    <div class="question-card">
                         <div class="question-header">
                             <span class="question-number">Q4.</span>
                             <span class="question-type error">Find Error</span>
@@ -3998,6 +3999,7 @@ public:
     return value;
 }</code></pre>
                         </div>
+                        <button class="show-answer-btn" onclick="toggleAnswerWithButton(this)">Show Answer</button>
                         <div class="answer">
                             <p><strong>Error:</strong> Incorrect empty condition and no circular array handling.</p>
                             <p><strong>Correction:</strong></p>
