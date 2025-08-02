@@ -36,15 +36,438 @@
         <section id="week10" class="week-content active">
             <h2><i class="fas fa-cube"></i> Week 10 - Introduction to Classes</h2>
             
-            <div class="concept-card">
-                <h3>Key Concepts</h3>
-                <ul>
-                    <li><strong>Class:</strong> A blueprint for creating objects</li>
-                    <li><strong>Object:</strong> An instance of a class</li>
-                    <li><strong>Encapsulation:</strong> Bundling data and methods together</li>
-                    <li><strong>Data Hiding:</strong> Making data members private</li>
-                    <li><strong>Access Specifiers:</strong> public, private, protected</li>
-                </ul>
+            <!-- Notes Section -->
+            <div class="notes-section">
+                <h3><i class="fas fa-book"></i> Detailed Notes</h3>
+                
+                <div class="concept-card">
+                    <h4>What is Object-Oriented Programming?</h4>
+                    <p>Object-oriented programming (OOP) is a programming paradigm that organizes code around objects rather than functions. It's like thinking about real-world entities and modeling them in code.</p>
+                    
+                    <h5>Why OOP over Procedural Programming?</h5>
+                    <ul>
+                        <li><strong>Modularity:</strong> Code is organized into separate, manageable units</li>
+                        <li><strong>Reusability:</strong> Objects can be reused in different programs</li>
+                        <li><strong>Maintainability:</strong> Changes to one part don't affect other parts</li>
+                        <li><strong>Scalability:</strong> Easier to build large, complex programs</li>
+                    </ul>
+                </div>
+
+                <div class="concept-card">
+                    <h4>Core OOP Concepts</h4>
+                    <div class="concept-item">
+                        <h5>1. Class</h5>
+                        <p>A class is like a blueprint or template. Just like a house blueprint shows how to build a house, a class shows how to create objects.</p>
+                        <div class="code-container">
+                            <pre><code class="language-cpp">class Student {
+    // Blueprint for creating student objects
+};</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="concept-item">
+                        <h5>2. Object</h5>
+                        <p>An object is an instance of a class. If class is the blueprint, object is the actual house built from that blueprint.</p>
+                        <div class="code-container">
+                            <pre><code class="language-cpp">Student john;     // john is an object of Student class
+Student mary;     // mary is another object of Student class</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="concept-item">
+                        <h5>3. Encapsulation</h5>
+                        <p>Bundling data (variables) and methods (functions) that work on that data into a single unit (class).</p>
+                    </div>
+
+                    <div class="concept-item">
+                        <h5>4. Data Hiding</h5>
+                        <p>Making data members private so they can't be accessed directly from outside the class. This protects data from accidental modification.</p>
+                    </div>
+                </div>
+
+                <div class="concept-card">
+                    <h4>Access Specifiers</h4>
+                    <table class="access-table">
+                        <tr>
+                            <th>Specifier</th>
+                            <th>Access Level</th>
+                            <th>Use Case</th>
+                        </tr>
+                        <tr>
+                            <td><code>private</code></td>
+                            <td>Only within the same class</td>
+                            <td>Data members, internal helper functions</td>
+                        </tr>
+                        <tr>
+                            <td><code>public</code></td>
+                            <td>Accessible from anywhere</td>
+                            <td>Interface functions, constructors</td>
+                        </tr>
+                        <tr>
+                            <td><code>protected</code></td>
+                            <td>Same class and derived classes</td>
+                            <td>Inheritance scenarios</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="concept-card">
+                    <h4>Constructors and Destructors</h4>
+                    
+                    <h5>Constructor</h5>
+                    <p>Special function that automatically runs when an object is created. Used to initialize object data.</p>
+                    <ul>
+                        <li>Same name as class</li>
+                        <li>No return type</li>
+                        <li>Can be overloaded</li>
+                    </ul>
+
+                    <h5>Destructor</h5>
+                    <p>Special function that automatically runs when an object is destroyed. Used to clean up resources.</p>
+                    <ul>
+                        <li>Same name as class with ~ prefix</li>
+                        <li>No return type, no parameters</li>
+                        <li>Only one per class</li>
+                    </ul>
+                </div>
+
+                <div class="concept-card">
+                    <h4>Static Members</h4>
+                    <p><strong>Static variables:</strong> Shared among all objects of a class. Only one copy exists regardless of how many objects are created.</p>
+                    <p><strong>Static functions:</strong> Can be called without creating an object. Can only access static variables.</p>
+                </div>
+            </div>
+
+            <!-- Questions Section -->
+            <div class="questions-section">
+                <h3><i class="fas fa-question-circle"></i> Week 10 Practice Questions</h3>
+
+                <!-- MCQ Questions -->
+                <div class="question-category">
+                    <h4>Multiple Choice Questions</h4>
+                    
+                    <div class="question-card" onclick="toggleAnswer(this)">
+                        <div class="question-header">
+                            <span class="question-number">Q1.</span>
+                            <span class="question-type mcq">MCQ</span>
+                        </div>
+                        <p><strong>Which access specifier should be used for data members to implement data hiding?</strong></p>
+                        <div class="mcq-options">
+                            <div class="option">A) public</div>
+                            <div class="option">B) private</div>
+                            <div class="option">C) protected</div>
+                            <div class="option">D) static</div>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Answer: B) private</strong></p>
+                            <p><strong>Explanation:</strong> Data hiding is achieved by making data members private. This prevents direct access from outside the class, ensuring data integrity and security. Public members can be accessed from anywhere, which breaks encapsulation.</p>
+                        </div>
+                    </div>
+
+                    <div class="question-card" onclick="toggleAnswer(this)">
+                        <div class="question-header">
+                            <span class="question-number">Q2.</span>
+                            <span class="question-type mcq">MCQ</span>
+                        </div>
+                        <p><strong>What is the default access specifier for class members in C++?</strong></p>
+                        <div class="mcq-options">
+                            <div class="option">A) public</div>
+                            <div class="option">B) private</div>
+                            <div class="option">C) protected</div>
+                            <div class="option">D) default</div>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Answer: B) private</strong></p>
+                            <p><strong>Explanation:</strong> In C++ classes, if no access specifier is mentioned, members are private by default. This is different from structures where members are public by default.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Find the Error Questions -->
+                <div class="question-category">
+                    <h4>Find the Error</h4>
+                    
+                    <div class="question-card" onclick="toggleAnswer(this)">
+                        <div class="question-header">
+                            <span class="question-number">Q3.</span>
+                            <span class="question-type error">Find Error</span>
+                        </div>
+                        <p><strong>Find the error in this Circle class definition:</strong></p>
+                        <div class="code-container">
+                            <pre><code class="language-cpp">class Circle {
+    double radius;
+    const double PI = 3.14159;  // Error here
+public:
+    Circle() { radius = 0.0; }
+    double getArea() { return PI * radius * radius; }
+};</code></pre>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Error:</strong> Cannot initialize const member PI inside class declaration.</p>
+                            <p><strong>Correction:</strong></p>
+                            <div class="code-container">
+                                <pre><code class="language-cpp">class Circle {
+    double radius;
+    static const double PI;  // Declare as static const
+public:
+    Circle() { radius = 0.0; }
+    double getArea() { return PI * radius * radius; }
+};
+
+// Define outside class
+const double Circle::PI = 3.14159;</code></pre>
+                            </div>
+                            <p><strong>Explanation:</strong> Const members must be initialized in the constructor's initialization list or declared as static const and defined outside the class.</p>
+                        </div>
+                    </div>
+
+                    <div class="question-card" onclick="toggleAnswer(this)">
+                        <div class="question-header">
+                            <span class="question-number">Q4.</span>
+                            <span class="question-type error">Find Error</span>
+                        </div>
+                        <p><strong>What's wrong with this constructor?</strong></p>
+                        <div class="code-container">
+                            <pre><code class="language-cpp">class Car {
+private:
+    string make;
+    int year;
+public:
+    void Car(string m, int y) {  // Error here
+        make = m;
+        year = y;
+    }
+};</code></pre>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Error:</strong> Constructor cannot have a return type (not even void).</p>
+                            <p><strong>Correction:</strong></p>
+                            <div class="code-container">
+                                <pre><code class="language-cpp">class Car {
+private:
+    string make;
+    int year;
+public:
+    Car(string m, int y) {  // No return type
+        make = m;
+        year = y;
+    }
+};</code></pre>
+                            </div>
+                            <p><strong>Explanation:</strong> Constructors are special functions that don't have return types. They automatically return the object being constructed.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Find Output Questions -->
+                <div class="question-category">
+                    <h4>Find the Output</h4>
+                    
+                    <div class="question-card" onclick="toggleAnswer(this)">
+                        <div class="question-header">
+                            <span class="question-number">Q5.</span>
+                            <span class="question-type output">Find Output</span>
+                        </div>
+                        <p><strong>What will be the output of this code?</strong></p>
+                        <div class="code-container">
+                            <pre><code class="language-cpp">#include &lt;iostream&gt;
+using namespace std;
+
+class Counter {
+private:
+    static int count;
+public:
+    Counter() { count++; }
+    static int getCount() { return count; }
+};
+
+int Counter::count = 0;
+
+int main() {
+    Counter c1, c2, c3;
+    cout << Counter::getCount() << endl;
+    Counter c4;
+    cout << Counter::getCount() << endl;
+    return 0;
+}</code></pre>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Output:</strong></p>
+                            <pre>3
+4</pre>
+                            <p><strong>Explanation:</strong> The static variable 'count' is shared among all Counter objects. Each time a Counter object is created, the constructor increments count. After creating c1, c2, c3: count = 3. After creating c4: count = 4.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Complete the Code Questions -->
+                <div class="question-category">
+                    <h4>Complete the Code</h4>
+                    
+                    <div class="question-card" onclick="toggleAnswer(this)">
+                        <div class="question-header">
+                            <span class="question-number">Q6.</span>
+                            <span class="question-type complete">Complete Code</span>
+                        </div>
+                        <p><strong>Complete the BankAccount class with automatic account number assignment:</strong></p>
+                        <div class="code-container">
+                            <pre><code class="language-cpp">class BankAccount {
+private:
+    string holderName;
+    int accountNumber;
+    string accountType;
+    double balance;
+    double interestRate;
+    _________ int nextAccountNumber;  // Fill blank 1
+
+public:
+    BankAccount(string name, string type, double initialBalance, double rate) {
+        holderName = name;
+        accountType = type;
+        balance = initialBalance;
+        interestRate = rate;
+        accountNumber = __________;  // Fill blank 2
+        __________;  // Fill blank 3 (increment counter)
+    }
+    
+    _________ int getNextAccountNumber() {  // Fill blank 4
+        return nextAccountNumber;
+    }
+};</code></pre>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Complete Code:</strong></p>
+                            <div class="code-container">
+                                <pre><code class="language-cpp">class BankAccount {
+private:
+    string holderName;
+    int accountNumber;
+    string accountType;
+    double balance;
+    double interestRate;
+    static int nextAccountNumber;  // Blank 1: static
+
+public:
+    BankAccount(string name, string type, double initialBalance, double rate) {
+        holderName = name;
+        accountType = type;
+        balance = initialBalance;
+        interestRate = rate;
+        accountNumber = nextAccountNumber;  // Blank 2: nextAccountNumber
+        nextAccountNumber++;  // Blank 3: nextAccountNumber++
+    }
+    
+    static int getNextAccountNumber() {  // Blank 4: static
+        return nextAccountNumber;
+    }
+};
+
+// Don't forget to define the static member outside class
+int BankAccount::nextAccountNumber = 1000;</code></pre>
+                            </div>
+                            <p><strong>Explanation:</strong> Static members are shared among all objects. nextAccountNumber keeps track of the next available account number, automatically incrementing for each new account.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lab Exercise Questions -->
+                <div class="question-category">
+                    <h4>Lab Exercise Questions</h4>
+                    
+                    <div class="question-card" onclick="toggleAnswer(this)">
+                        <div class="question-header">
+                            <span class="question-number">Q7.</span>
+                            <span class="question-type lab">Lab Exercise</span>
+                        </div>
+                        <p><strong>Design a class that has an array of floating-point numbers. The constructor should accept an integer argument and dynamically allocate the array to hold that many numbers.</strong></p>
+                        <div class="answer">
+                            <p><strong>Solution:</strong></p>
+                            <div class="code-container">
+                                <pre><code class="language-cpp">#include &lt;iostream&gt;
+using namespace std;
+
+class FloatArray {
+private:
+    double* numbers;
+    int size;
+
+public:
+    // Constructor - dynamically allocates array
+    FloatArray(int arraySize) {
+        size = arraySize;
+        numbers = new double[size];
+        // Initialize all elements to 0
+        for (int i = 0; i < size; i++) {
+            numbers[i] = 0.0;
+        }
+    }
+    
+    // Destructor - frees allocated memory
+    ~FloatArray() {
+        delete[] numbers;
+    }
+    
+    // Store a number at given index
+    void setNumber(int index, double value) {
+        if (index >= 0 && index < size) {
+            numbers[index] = value;
+        } else {
+            cout << "Index out of bounds!" << endl;
+        }
+    }
+    
+    // Retrieve a number from given index
+    double getNumber(int index) const {
+        if (index >= 0 && index < size) {
+            return numbers[index];
+        } else {
+            cout << "Index out of bounds!" << endl;
+            return 0.0;
+        }
+    }
+    
+    // Get array size
+    int getSize() const {
+        return size;
+    }
+    
+    // Display all numbers
+    void display() const {
+        cout << "Array contents: ";
+        for (int i = 0; i < size; i++) {
+            cout << numbers[i] << " ";
+        }
+        cout << endl;
+    }
+};
+
+int main() {
+    FloatArray arr(5);
+    
+    // Store some numbers
+    arr.setNumber(0, 3.14);
+    arr.setNumber(1, 2.71);
+    arr.setNumber(2, 1.41);
+    
+    // Display array
+    arr.display();
+    
+    // Retrieve and display individual numbers
+    cout << "Element at index 1: " << arr.getNumber(1) << endl;
+    
+    return 0;
+}</code></pre>
+                            </div>
+                            <p><strong>Key Points:</strong></p>
+                            <ul>
+                                <li><strong>Dynamic allocation:</strong> Using 'new' to allocate memory at runtime</li>
+                                <li><strong>Destructor:</strong> Essential to prevent memory leaks by using 'delete[]'</li>
+                                <li><strong>Bounds checking:</strong> Prevents array access errors</li>
+                                <li><strong>Encapsulation:</strong> Array and size are private, accessed through public methods</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div class="exercise-card">
