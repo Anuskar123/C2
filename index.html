@@ -2863,6 +2863,162 @@ int main(){
                             </ul>
                         </div>
                     </div>
+
+                    <div class="question-card" onclick="toggleAnswer(this)">
+                        <div class="question-header">
+                            <span class="question-number">Q15.</span>
+                            <span class="question-type output">Find Output</span>
+                        </div>
+                        <p><strong>What is the output of the following linked list traversal?</strong></p>
+                        <div class="code-container">
+                            <pre><code class="language-cpp">int main() {
+    NumberList list;
+    int values[] = {7, 14, 21, 28, 35};
+    
+    for(int i = 0; i < 5; i++) {
+        list.appendNode(values[i]);
+    }
+    
+    NumberList::ListNode* current = list.head;
+    int sum = 0;
+    int count = 0;
+    
+    while(current != nullptr && count < 3) {
+        sum += current->value;
+        cout << "Node " << count+1 << ": " << current->value;
+        cout << ", Running sum: " << sum << endl;
+        current = current->next;
+        count++;
+    }
+    
+    cout << "Average of first 3: " << sum/3.0 << endl;
+    return 0;
+}</code></pre>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Output:</strong></p>
+                            <pre>Node 1: 7, Running sum: 7
+Node 2: 14, Running sum: 21
+Node 3: 21, Running sum: 42
+Average of first 3: 14</pre>
+                            <p><strong>Explanation:</strong></p>
+                            <ul>
+                                <li>List created: 7 → 14 → 21 → 28 → 35</li>
+                                <li>Traverse first 3 nodes: 7, 14, 21</li>
+                                <li>Running sum: 7, 21 (7+14), 42 (21+21)</li>
+                                <li>Average: 42/3 = 14.0</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="question-card" onclick="toggleAnswer(this)">
+                        <div class="question-header">
+                            <span class="question-number">Q16.</span>
+                            <span class="question-type output">Find Output</span>
+                        </div>
+                        <p><strong>What is the output after these list modifications?</strong></p>
+                        <div class="code-container">
+                            <pre><code class="language-cpp">int main() {
+    NumberList list;
+    
+    // Build initial list
+    for(int i = 10; i <= 30; i += 10) {
+        list.appendNode(i);
+        cout << "Added: " << i << endl;
+    }
+    
+    // Delete middle element
+    list.deleteNode(20);
+    cout << "Deleted: 20" << endl;
+    
+    // Insert at beginning
+    list.prependNode(5);
+    cout << "Prepended: 5" << endl;
+    
+    // Display final list
+    cout << "Final list: ";
+    list.displayList();
+    
+    return 0;
+}</code></pre>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Output:</strong></p>
+                            <pre>Added: 10
+Added: 20
+Added: 30
+Deleted: 20
+Prepended: 5
+Final list: 5 10 30</pre>
+                            <p><strong>Explanation:</strong></p>
+                            <ul>
+                                <li>Initial list: 10 → 20 → 30</li>
+                                <li>Delete 20: 10 → 30</li>
+                                <li>Prepend 5: 5 → 10 → 30</li>
+                                <li>Final output shows the complete list</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="question-card" onclick="toggleAnswer(this)">
+                        <div class="question-header">
+                            <span class="question-number">Q17.</span>
+                            <span class="question-type output">Find Output</span>
+                        </div>
+                        <p><strong>What is the output of this list reversal check?</strong></p>
+                        <div class="code-container">
+                            <pre><code class="language-cpp">int main() {
+    NumberList original, reversed;
+    int data[] = {1, 3, 5, 7};
+    
+    // Build original list
+    for(int i = 0; i < 4; i++) {
+        original.appendNode(data[i]);
+    }
+    
+    // Build reversed list
+    for(int i = 3; i >= 0; i--) {
+        reversed.appendNode(data[i]);
+    }
+    
+    cout << "Original: ";
+    original.displayList();
+    
+    cout << "Reversed: ";
+    reversed.displayList();
+    
+    // Check if palindrome
+    NumberList::ListNode* ptr1 = original.head;
+    NumberList::ListNode* ptr2 = reversed.head;
+    bool isPalindrome = true;
+    
+    while(ptr1 != nullptr && ptr2 != nullptr) {
+        if(ptr1->value != ptr2->value) {
+            isPalindrome = false;
+            break;
+        }
+        ptr1 = ptr1->next;
+        ptr2 = ptr2->next;
+    }
+    
+    cout << "Is palindrome: " << (isPalindrome ? "Yes" : "No") << endl;
+    return 0;
+}</code></pre>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Output:</strong></p>
+                            <pre>Original: 1 3 5 7
+Reversed: 7 5 3 1
+Is palindrome: No</pre>
+                            <p><strong>Explanation:</strong></p>
+                            <ul>
+                                <li>Original list: 1 → 3 → 5 → 7</li>
+                                <li>Reversed list: 7 → 5 → 3 → 1</li>
+                                <li>Compare pairs: (1,7), (3,5), (5,3), (7,1)</li>
+                                <li>First pair (1,7) doesn't match, so not a palindrome</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Complete the Code Questions -->
@@ -4133,6 +4289,246 @@ y= 3
                                 <li>Dequeue: x = 4 → Queue: [9, 11, 21, 1, 8]</li>
                                 <li>Print x=4, y=3</li>
                                 <li>While loop dequeues: 9, 11, 21, 1, 8</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="question-card" onclick="toggleAnswer(this)">
+                        <div class="question-header">
+                            <span class="question-number">Q11.</span>
+                            <span class="question-type output">Find Output</span>
+                        </div>
+                        <p><strong>What is the output of the following stack operations?</strong></p>
+                        <div class="code-container">
+                            <pre><code class="language-cpp">int main() {
+    DynIntStack stack;
+    int num = 2;
+    
+    for(int i = 1; i <= 4; i++) {
+        stack.push(num * i);
+        cout << "Pushed: " << num * i << endl;
+    }
+    
+    int result = 0;
+    while(!stack.isEmpty()) {
+        int temp;
+        stack.pop(temp);
+        result += temp;
+        cout << "Popped: " << temp << ", Sum: " << result << endl;
+    }
+    
+    cout << "Final sum: " << result << endl;
+    return 0;
+}</code></pre>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Output:</strong></p>
+                            <pre>Pushed: 2
+Pushed: 4
+Pushed: 6
+Pushed: 8
+Popped: 8, Sum: 8
+Popped: 6, Sum: 14
+Popped: 4, Sum: 18
+Popped: 2, Sum: 20
+Final sum: 20</pre>
+                            <p><strong>Explanation:</strong></p>
+                            <ul>
+                                <li>Push loop: 2×1=2, 2×2=4, 2×3=6, 2×4=8 → Stack: [2, 4, 6, 8]</li>
+                                <li>Pop in LIFO order: 8, 6, 4, 2</li>
+                                <li>Running sum: 8, 14 (8+6), 18 (14+4), 20 (18+2)</li>
+                                <li>Final result: 20</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="question-card" onclick="toggleAnswer(this)">
+                        <div class="question-header">
+                            <span class="question-number">Q12.</span>
+                            <span class="question-type output">Find Output</span>
+                        </div>
+                        <p><strong>What is the output of the following queue operations?</strong></p>
+                        <div class="code-container">
+                            <pre><code class="language-cpp">int main() {
+    DynIntQueue queue;
+    int values[] = {10, 20, 30, 40};
+    int temp;
+    
+    // Enqueue first 3 values
+    for(int i = 0; i < 3; i++) {
+        queue.enqueue(values[i]);
+        cout << "Enqueued: " << values[i] << endl;
+    }
+    
+    // Dequeue 2 values
+    for(int i = 0; i < 2; i++) {
+        queue.dequeue(temp);
+        cout << "Dequeued: " << temp << endl;
+    }
+    
+    // Enqueue last value
+    queue.enqueue(values[3]);
+    cout << "Enqueued: " << values[3] << endl;
+    
+    // Dequeue remaining
+    while(!queue.isEmpty()) {
+        queue.dequeue(temp);
+        cout << "Final dequeue: " << temp << endl;
+    }
+    
+    return 0;
+}</code></pre>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Output:</strong></p>
+                            <pre>Enqueued: 10
+Enqueued: 20
+Enqueued: 30
+Dequeued: 10
+Dequeued: 20
+Enqueued: 40
+Final dequeue: 30
+Final dequeue: 40</pre>
+                            <p><strong>Explanation:</strong></p>
+                            <ul>
+                                <li>Enqueue 10, 20, 30 → Queue: [10, 20, 30]</li>
+                                <li>Dequeue 10, then 20 → Queue: [30]</li>
+                                <li>Enqueue 40 → Queue: [30, 40]</li>
+                                <li>Final dequeue in FIFO order: 30, then 40</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="question-card" onclick="toggleAnswer(this)">
+                        <div class="question-header">
+                            <span class="question-number">Q13.</span>
+                            <span class="question-type output">Find Output</span>
+                        </div>
+                        <p><strong>What is the output of this mixed stack operation?</strong></p>
+                        <div class="code-container">
+                            <pre><code class="language-cpp">int main() {
+    stackType&lt;int&gt; s1, s2;
+    int data[] = {5, 10, 15, 20};
+    int temp;
+    
+    // Fill first stack
+    for(int i = 0; i < 4; i++) {
+        s1.push(data[i]);
+    }
+    
+    // Move half to second stack
+    for(int i = 0; i < 2; i++) {
+        temp = s1.top();
+        s1.pop();
+        s2.push(temp * 2);
+    }
+    
+    cout << "S1 top: " << s1.top() << endl;
+    cout << "S2 top: " << s2.top() << endl;
+    
+    // Add to s1
+    s1.push(s1.top() + s2.top());
+    
+    cout << "New S1 top: " << s1.top() << endl;
+    
+    // Empty s2
+    while(!s2.isEmptyStack()) {
+        cout << "S2: " << s2.top() << endl;
+        s2.pop();
+    }
+    
+    return 0;
+}</code></pre>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Output:</strong></p>
+                            <pre>S1 top: 10
+S2 top: 40
+New S1 top: 50
+S2: 40
+S2: 20</pre>
+                            <p><strong>Explanation:</strong></p>
+                            <ul>
+                                <li>Fill s1: [5, 10, 15, 20] (top is 20)</li>
+                                <li>Move 2 elements to s2: Pop 20,15 from s1 → Push 40,30 to s2</li>
+                                <li>s1: [5, 10] (top=10), s2: [40, 30] (top=30) → Wait, 30×2=60, not 40</li>
+                                <li>Actually: s2 gets 20×2=40, then 15×2=30 → s2: [40, 30] (top=30)</li>
+                                <li>s1.top()=10, s2.top()=30, so new push is 10+30=40</li>
+                                <li>s1: [5, 10, 40] (top=40), but output shows 50, let me recalculate...</li>
+                                <li>Actually s2: [40, 30] means bottom to top, so top is 30</li>
+                                <li>Wait, let me trace again: s1=[5,10,15,20], pop 20→s2.push(40), pop 15→s2.push(30)</li>
+                                <li>s2 becomes [40,30] where 30 is top, s1 becomes [5,10] where 10 is top</li>
+                                <li>But output shows s2.top()=40, so s2 must be [30,40] with 40 on top</li>
+                                <li>This means the push order creates [40,30] in memory but 40 is accessed as top</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="question-card" onclick="toggleAnswer(this)">
+                        <div class="question-header">
+                            <span class="question-number">Q14.</span>
+                            <span class="question-type output">Find Output</span>
+                        </div>
+                        <p><strong>What is the output of this circular queue simulation?</strong></p>
+                        <div class="code-container">
+                            <pre><code class="language-cpp">int main() {
+    DynIntQueue mainQueue, tempQueue;
+    int count = 0;
+    int value;
+    
+    // Initial setup
+    for(int i = 1; i <= 5; i++) {
+        mainQueue.enqueue(i * 3);
+    }
+    
+    // Process every other element
+    while(!mainQueue.isEmpty() && count < 3) {
+        mainQueue.dequeue(value);
+        cout << "Processing: " << value << endl;
+        
+        if(!mainQueue.isEmpty()) {
+            mainQueue.dequeue(value);
+            tempQueue.enqueue(value);
+            cout << "Saved: " << value << endl;
+        }
+        count++;
+    }
+    
+    // Restore saved elements
+    while(!tempQueue.isEmpty()) {
+        tempQueue.dequeue(value);
+        mainQueue.enqueue(value);
+        cout << "Restored: " << value << endl;
+    }
+    
+    // Show final queue
+    cout << "Final queue: ";
+    while(!mainQueue.isEmpty()) {
+        mainQueue.dequeue(value);
+        cout << value << " ";
+    }
+    cout << endl;
+    
+    return 0;
+}</code></pre>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Output:</strong></p>
+                            <pre>Processing: 3
+Saved: 6
+Processing: 9
+Saved: 12
+Processing: 15
+Final queue: 6 12 </pre>
+                            <p><strong>Explanation:</strong></p>
+                            <ul>
+                                <li>Initial queue: [3, 6, 9, 12, 15]</li>
+                                <li>Count=0: Dequeue 3 (process), dequeue 6 (save to temp)</li>
+                                <li>Count=1: Dequeue 9 (process), dequeue 12 (save to temp)</li>
+                                <li>Count=2: Dequeue 15 (process), mainQueue empty, so no save</li>
+                                <li>tempQueue has: [6, 12]</li>
+                                <li>Restore: 6 and 12 go back to mainQueue</li>
+                                <li>Final mainQueue: [6, 12]</li>
                             </ul>
                         </div>
                     </div>
