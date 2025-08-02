@@ -822,6 +822,1250 @@ int main() {
             </div>
         </section>
 
+        <!-- Week 17 Content -->
+        <section id="week17" class="week-content">
+            <h2><i class="fas fa-layer-group"></i> Week 17 - Polymorphism & Virtual Functions</h2>
+            
+            <div class="concept-card">
+                <h3>Key Concepts</h3>
+                <ul>
+                    <li><strong>Polymorphism:</strong> Objects of different types responding to the same interface</li>
+                    <li><strong>Virtual Functions:</strong> Functions that can be overridden in derived classes</li>
+                    <li><strong>Pure Virtual Functions:</strong> Functions that must be implemented by derived classes</li>
+                    <li><strong>Abstract Classes:</strong> Classes with at least one pure virtual function</li>
+                    <li><strong>Dynamic Binding:</strong> Runtime determination of which function to call</li>
+                </ul>
+            </div>
+
+            <div class="exercise-card">
+                <h3>Exercise 1: Publication Hierarchy with Virtual Functions</h3>
+                <div class="code-container">
+                    <pre><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;string&gt;
+using namespace std;
+
+class Publication {
+protected:
+    string title;
+    float price;
+
+public:
+    Publication() : title(""), price(0.0) {}
+    
+    virtual void getdata() {
+        cout << "Enter title: ";
+        getline(cin, title);
+        cout << "Enter price: $";
+        cin >> price;
+        cin.ignore();
+    }
+    
+    virtual void putdata() const {
+        cout << "Title: " << title << endl;
+        cout << "Price: $" << price << endl;
+    }
+    
+    virtual ~Publication() {} // Virtual destructor
+};
+
+class Book : public Publication {
+private:
+    int pageCount;
+
+public:
+    Book() : Publication(), pageCount(0) {}
+    
+    void getdata() override {
+        Publication::getdata();
+        cout << "Enter page count: ";
+        cin >> pageCount;
+        cin.ignore();
+    }
+    
+    void putdata() const override {
+        cout << "\n--- Book Information ---" << endl;
+        Publication::putdata();
+        cout << "Page Count: " << pageCount << endl;
+    }
+};
+
+class Tape : public Publication {
+private:
+    float playingTime; // in minutes
+
+public:
+    Tape() : Publication(), playingTime(0.0) {}
+    
+    void getdata() override {
+        Publication::getdata();
+        cout << "Enter playing time (minutes): ";
+        cin >> playingTime;
+        cin.ignore();
+    }
+    
+    void putdata() const override {
+        cout << "\n--- Tape Information ---" << endl;
+        Publication::putdata();
+        cout << "Playing Time: " << playingTime << " minutes" << endl;
+    }
+};
+
+int main() {
+    Book book;
+    Tape tape;
+    
+    cout << "=== Enter Book Data ===" << endl;
+    book.getdata();
+    
+    cout << "\n=== Enter Tape Data ===" << endl;
+    tape.getdata();
+    
+    cout << "\n=== Displaying Data ===" << endl;
+    book.putdata();
+    tape.putdata();
+    
+    // Demonstrating polymorphism
+    Publication* publications[2] = {&book, &tape};
+    
+    cout << "\n=== Polymorphic Display ===" << endl;
+    for (int i = 0; i < 2; i++) {
+        publications[i]->putdata();
+    }
+    
+    return 0;
+}</code></pre>
+                </div>
+            </div>
+
+            <div class="exercise-card">
+                <h3>Exercise 2: Abstract Shape Classes</h3>
+                <div class="code-container">
+                    <pre><code class="language-cpp">#include &lt;iostream&gt;
+using namespace std;
+
+// Abstract base class
+class BasicShape {
+private:
+    double area;
+
+public:
+    BasicShape() : area(0.0) {}
+    
+    double getArea() const {
+        return area;
+    }
+    
+    // Pure virtual function makes this an abstract class
+    virtual void calcArea() = 0;
+    
+    virtual ~BasicShape() {}
+
+protected:
+    void setArea(double a) {
+        area = a;
+    }
+};
+
+class Circle : public BasicShape {
+private:
+    long centerX, centerY;
+    double radius;
+
+public:
+    Circle(long x, long y, double r) : centerX(x), centerY(y), radius(r) {
+        calcArea();
+    }
+    
+    long getCenterX() const { return centerX; }
+    long getCenterY() const { return centerY; }
+    double getRadius() const { return radius; }
+    
+    void calcArea() override {
+        double area = 3.14159 * radius * radius;
+        setArea(area);
+    }
+    
+    void display() const {
+        cout << "Circle at (" << centerX << ", " << centerY << ")" << endl;
+        cout << "Radius: " << radius << endl;
+        cout << "Area: " << getArea() << endl;
+    }
+};
+
+class Rectangle : public BasicShape {
+private:
+    long width, length;
+
+public:
+    Rectangle(long w, long l) : width(w), length(l) {
+        calcArea();
+    }
+    
+    long getWidth() const { return width; }
+    long getLength() const { return length; }
+    
+    void calcArea() override {
+        double area = length * width;
+        setArea(area);
+    }
+    
+    void display() const {
+        cout << "Rectangle " << width << " x " << length << endl;
+        cout << "Area: " << getArea() << endl;
+    }
+};
+
+int main() {
+    Circle circle(0, 0, 5.0);
+    Rectangle rectangle(10, 15);
+    
+    cout << "=== Circle Information ===" << endl;
+    circle.display();
+    
+    cout << "\n=== Rectangle Information ===" << endl;
+    rectangle.display();
+    
+    // Using polymorphism
+    BasicShape* shapes[2] = {&circle, &rectangle};
+    
+    cout << "\n=== Polymorphic Area Calculation ===" << endl;
+    for (int i = 0; i < 2; i++) {
+        cout << "Shape " << (i+1) << " area: " << shapes[i]->getArea() << endl;
+    }
+    
+    return 0;
+}</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- Week 18 Content -->
+        <section id="week18" class="week-content">
+            <h2><i class="fas fa-cogs"></i> Week 18 - Templates & Exception Handling</h2>
+            
+            <div class="concept-card">
+                <h3>Key Concepts</h3>
+                <ul>
+                    <li><strong>Function Templates:</strong> Generic functions that work with multiple data types</li>
+                    <li><strong>Class Templates:</strong> Generic classes for creating type-safe containers</li>
+                    <li><strong>Exception Handling:</strong> try, catch, throw statements</li>
+                    <li><strong>Standard Exceptions:</strong> Built-in exception classes</li>
+                    <li><strong>Custom Exceptions:</strong> Creating your own exception classes</li>
+                </ul>
+            </div>
+
+            <div class="exercise-card">
+                <h3>Exercise 1: Function Templates</h3>
+                <div class="code-container">
+                    <pre><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;cmath&gt;
+using namespace std;
+
+// Template for finding minimum
+template &lt;typename T&gt;
+T minimum(T a, T b) {
+    return (a < b) ? a : b;
+}
+
+// Template for finding maximum
+template &lt;typename T&gt;
+T maximum(T a, T b) {
+    return (a > b) ? a : b;
+}
+
+// Template for absolute value
+template &lt;typename T&gt;
+T absolute(T value) {
+    return (value < 0) ? -value : value;
+}
+
+int main() {
+    // Test with integers
+    cout << "=== Integer Tests ===" << endl;
+    cout << "min(10, 5) = " << minimum(10, 5) << endl;
+    cout << "max(10, 5) = " << maximum(10, 5) << endl;
+    cout << "abs(-15) = " << absolute(-15) << endl;
+    
+    // Test with doubles
+    cout << "\n=== Double Tests ===" << endl;
+    cout << "min(3.7, 8.2) = " << minimum(3.7, 8.2) << endl;
+    cout << "max(3.7, 8.2) = " << maximum(3.7, 8.2) << endl;
+    cout << "abs(-5.5) = " << absolute(-5.5) << endl;
+    
+    // Test with characters
+    cout << "\n=== Character Tests ===" << endl;
+    cout << "min('a', 'z') = " << minimum('a', 'z') << endl;
+    cout << "max('a', 'z') = " << maximum('a', 'z') << endl;
+    
+    // Test with strings
+    cout << "\n=== String Tests ===" << endl;
+    string str1 = "apple", str2 = "banana";
+    cout << "min(\"apple\", \"banana\") = " << minimum(str1, str2) << endl;
+    cout << "max(\"apple\", \"banana\") = " << maximum(str1, str2) << endl;
+    
+    return 0;
+}</code></pre>
+                </div>
+            </div>
+
+            <div class="exercise-card">
+                <h3>Exercise 2: Exception Handling with TestScores</h3>
+                <div class="code-container">
+                    <pre><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;stdexcept&gt;
+using namespace std;
+
+class TestScores {
+private:
+    double* scores;
+    int numScores;
+
+public:
+    TestScores(double testScores[], int size) {
+        numScores = size;
+        scores = new double[numScores];
+        
+        // Validate and copy scores
+        for (int i = 0; i < numScores; i++) {
+            if (testScores[i] < 0 || testScores[i] > 100) {
+                delete[] scores; // Clean up allocated memory
+                throw invalid_argument("Test score must be between 0 and 100");
+            }
+            scores[i] = testScores[i];
+        }
+    }
+    
+    ~TestScores() {
+        delete[] scores;
+    }
+    
+    double getAverage() const {
+        double sum = 0;
+        for (int i = 0; i < numScores; i++) {
+            sum += scores[i];
+        }
+        return sum / numScores;
+    }
+    
+    void displayScores() const {
+        cout << "Test Scores: ";
+        for (int i = 0; i < numScores; i++) {
+            cout << scores[i];
+            if (i < numScores - 1) cout << ", ";
+        }
+        cout << endl;
+    }
+};
+
+// Custom exception class
+class InvalidScoreException : public exception {
+private:
+    string message;
+public:
+    InvalidScoreException(const string& msg) : message(msg) {}
+    const char* what() const noexcept override {
+        return message.c_str();
+    }
+};
+
+int main() {
+    try {
+        // Test with valid scores
+        cout << "=== Test 1: Valid Scores ===" << endl;
+        double validScores[] = {85.5, 92.0, 78.5, 96.0, 88.0};
+        TestScores test1(validScores, 5);
+        test1.displayScores();
+        cout << "Average: " << test1.getAverage() << endl;
+        
+        // Test with invalid score
+        cout << "\n=== Test 2: Invalid Score ===" << endl;
+        double invalidScores[] = {85.5, 105.0, 78.5}; // 105 is invalid
+        TestScores test2(invalidScores, 3);
+        test2.displayScores();
+        
+    } catch (const invalid_argument& e) {
+        cout << "Error: " << e.what() << endl;
+    }
+    
+    try {
+        // Test with negative score
+        cout << "\n=== Test 3: Negative Score ===" << endl;
+        double negativeScores[] = {85.5, -10.0, 78.5}; // -10 is invalid
+        TestScores test3(negativeScores, 3);
+        
+    } catch (const invalid_argument& e) {
+        cout << "Error: " << e.what() << endl;
+    }
+    
+    return 0;
+}</code></pre>
+                </div>
+            </div>
+
+            <div class="exercise-card">
+                <h3>Exercise 3: Account Class with Exception Handling</h3>
+                <div class="code-container">
+                    <pre><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;stdexcept&gt;
+#include &lt;string&gt;
+using namespace std;
+
+// Custom exception classes
+class InsufficientFundsException : public exception {
+private:
+    string message;
+public:
+    InsufficientFundsException(const string& msg) : message(msg) {}
+    const char* what() const noexcept override {
+        return message.c_str();
+    }
+};
+
+class InvalidAmountException : public exception {
+private:
+    string message;
+public:
+    InvalidAmountException(const string& msg) : message(msg) {}
+    const char* what() const noexcept override {
+        return message.c_str();
+    }
+};
+
+class Account {
+private:
+    double balance;
+
+public:
+    Account() : balance(0.0) {}
+    
+    Account(double initialDeposit) {
+        if (initialDeposit < 0) {
+            throw InvalidAmountException("Initial deposit cannot be negative");
+        }
+        balance = initialDeposit;
+    }
+    
+    double getBalance() const {
+        return balance;
+    }
+    
+    void deposit(double amount) {
+        if (amount <= 0) {
+            throw InvalidAmountException("Deposit amount must be positive");
+        }
+        balance += amount;
+    }
+    
+    void withdraw(double amount) {
+        if (amount <= 0) {
+            throw InvalidAmountException("Withdrawal amount must be positive");
+        }
+        if (amount > balance) {
+            throw InsufficientFundsException("Insufficient funds for withdrawal");
+        }
+        balance -= amount;
+    }
+};
+
+int main() {
+    try {
+        // Create account with initial deposit
+        Account account(1000.0);
+        cout << "Account created with balance: $" << account.getBalance() << endl;
+        
+        // Valid deposit
+        account.deposit(250.0);
+        cout << "After deposit of $250: $" << account.getBalance() << endl;
+        
+        // Valid withdrawal
+        account.withdraw(150.0);
+        cout << "After withdrawal of $150: $" << account.getBalance() << endl;
+        
+        // Test invalid operations
+        cout << "\nTesting invalid operations..." << endl;
+        
+        try {
+            account.deposit(-50.0); // Should throw exception
+        } catch (const InvalidAmountException& e) {
+            cout << "Deposit error: " << e.what() << endl;
+        }
+        
+        try {
+            account.withdraw(2000.0); // Should throw exception
+        } catch (const InsufficientFundsException& e) {
+            cout << "Withdrawal error: " << e.what() << endl;
+        }
+        
+        try {
+            account.withdraw(-100.0); // Should throw exception
+        } catch (const InvalidAmountException& e) {
+            cout << "Withdrawal error: " << e.what() << endl;
+        }
+        
+        cout << "Final balance: $" << account.getBalance() << endl;
+        
+    } catch (const exception& e) {
+        cout << "Account creation error: " << e.what() << endl;
+    }
+    
+    return 0;
+}</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- Week 19 Content -->
+        <section id="week19" class="week-content">
+            <h2><i class="fas fa-link"></i> Week 19 - Linked Lists</h2>
+            
+            <div class="concept-card">
+                <h3>Key Concepts</h3>
+                <ul>
+                    <li><strong>Linked List:</strong> Dynamic data structure with nodes containing data and pointers</li>
+                    <li><strong>Node:</strong> Basic unit containing data and pointer to next node</li>
+                    <li><strong>Dynamic Memory:</strong> Allocating and deallocating memory at runtime</li>
+                    <li><strong>Traversal:</strong> Moving through the list to access elements</li>
+                    <li><strong>Insertion/Deletion:</strong> Adding and removing nodes from the list</li>
+                </ul>
+            </div>
+
+            <div class="exercise-card">
+                <h3>Exercise 1: Basic Linked List Implementation</h3>
+                <div class="code-container">
+                    <pre><code class="language-cpp">#include &lt;iostream&gt;
+using namespace std;
+
+class Node {
+public:
+    int data;
+    Node* next;
+    
+    Node(int value) : data(value), next(nullptr) {}
+};
+
+class LinkedList {
+private:
+    Node* head;
+
+public:
+    LinkedList() : head(nullptr) {}
+    
+    // Copy constructor
+    LinkedList(const LinkedList& other) : head(nullptr) {
+        Node* current = other.head;
+        while (current != nullptr) {
+            append(current->data);
+            current = current->next;
+        }
+    }
+    
+    // Destructor
+    ~LinkedList() {
+        clear();
+    }
+    
+    // Append to end of list
+    void append(int value) {
+        Node* newNode = new Node(value);
+        
+        if (head == nullptr) {
+            head = newNode;
+        } else {
+            Node* current = head;
+            while (current->next != nullptr) {
+                current = current->next;
+            }
+            current->next = newNode;
+        }
+    }
+    
+    // Insert at beginning
+    void prepend(int value) {
+        Node* newNode = new Node(value);
+        newNode->next = head;
+        head = newNode;
+    }
+    
+    // Insert at specific position
+    void insertAt(int position, int value) {
+        if (position == 0) {
+            prepend(value);
+            return;
+        }
+        
+        Node* newNode = new Node(value);
+        Node* current = head;
+        
+        // Find the position
+        for (int i = 0; i < position - 1 && current != nullptr; i++) {
+            current = current->next;
+        }
+        
+        if (current == nullptr) {
+            // Position is beyond the list, append to end
+            delete newNode;
+            append(value);
+        } else {
+            newNode->next = current->next;
+            current->next = newNode;
+        }
+    }
+    
+    // Delete node with specific value
+    void deleteValue(int value) {
+        if (head == nullptr) return;
+        
+        if (head->data == value) {
+            Node* temp = head;
+            head = head->next;
+            delete temp;
+            return;
+        }
+        
+        Node* current = head;
+        while (current->next != nullptr && current->next->data != value) {
+            current = current->next;
+        }
+        
+        if (current->next != nullptr) {
+            Node* temp = current->next;
+            current->next = current->next->next;
+            delete temp;
+        }
+    }
+    
+    // Search for a value and return position (-1 if not found)
+    int search(int value) const {
+        Node* current = head;
+        int position = 0;
+        
+        while (current != nullptr) {
+            if (current->data == value) {
+                return position;
+            }
+            current = current->next;
+            position++;
+        }
+        
+        return -1; // Not found
+    }
+    
+    // Reverse the linked list
+    void reverse() {
+        Node* prev = nullptr;
+        Node* current = head;
+        Node* next = nullptr;
+        
+        while (current != nullptr) {
+            next = current->next;
+            current->next = prev;
+            prev = current;
+            current = next;
+        }
+        
+        head = prev;
+    }
+    
+    // Print the list
+    void print() const {
+        Node* current = head;
+        cout << "List: ";
+        while (current != nullptr) {
+            cout << current->data;
+            if (current->next != nullptr) {
+                cout << " -> ";
+            }
+            current = current->next;
+        }
+        cout << " -> NULL" << endl;
+    }
+    
+    // Get list size
+    int size() const {
+        int count = 0;
+        Node* current = head;
+        while (current != nullptr) {
+            count++;
+            current = current->next;
+        }
+        return count;
+    }
+    
+    // Clear the list
+    void clear() {
+        while (head != nullptr) {
+            Node* temp = head;
+            head = head->next;
+            delete temp;
+        }
+    }
+    
+    bool isEmpty() const {
+        return head == nullptr;
+    }
+};
+
+int main() {
+    LinkedList list;
+    
+    cout << "=== Testing Linked List Operations ===" << endl;
+    
+    // Test append
+    cout << "\nAppending values 10, 20, 30:" << endl;
+    list.append(10);
+    list.append(20);
+    list.append(30);
+    list.print();
+    
+    // Test prepend
+    cout << "\nPrepending value 5:" << endl;
+    list.prepend(5);
+    list.print();
+    
+    // Test insert at position
+    cout << "\nInserting 15 at position 2:" << endl;
+    list.insertAt(2, 15);
+    list.print();
+    
+    // Test search
+    cout << "\nSearching for value 20:" << endl;
+    int pos = list.search(20);
+    if (pos != -1) {
+        cout << "Found at position: " << pos << endl;
+    } else {
+        cout << "Not found" << endl;
+    }
+    
+    // Test delete
+    cout << "\nDeleting value 15:" << endl;
+    list.deleteValue(15);
+    list.print();
+    
+    // Test reverse
+    cout << "\nReversing the list:" << endl;
+    list.reverse();
+    list.print();
+    
+    // Test copy constructor
+    cout << "\nTesting copy constructor:" << endl;
+    LinkedList listCopy(list);
+    cout << "Original: ";
+    list.print();
+    cout << "Copy: ";
+    listCopy.print();
+    
+    cout << "\nList size: " << list.size() << endl;
+    
+    return 0;
+}</code></pre>
+                </div>
+            </div>
+
+            <div class="exercise-card">
+                <h3>Exercise 2: Linked List Template</h3>
+                <div class="code-container">
+                    <pre><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;string&gt;
+using namespace std;
+
+template &lt;typename T&gt;
+class Node {
+public:
+    T data;
+    Node&lt;T&gt;* next;
+    
+    Node(const T& value) : data(value), next(nullptr) {}
+};
+
+template &lt;typename T&gt;
+class LinkedList {
+private:
+    Node&lt;T&gt;* head;
+
+public:
+    LinkedList() : head(nullptr) {}
+    
+    ~LinkedList() {
+        clear();
+    }
+    
+    void append(const T& value) {
+        Node&lt;T&gt;* newNode = new Node&lt;T&gt;(value);
+        
+        if (head == nullptr) {
+            head = newNode;
+        } else {
+            Node&lt;T&gt;* current = head;
+            while (current->next != nullptr) {
+                current = current->next;
+            }
+            current->next = newNode;
+        }
+    }
+    
+    void prepend(const T& value) {
+        Node&lt;T&gt;* newNode = new Node&lt;T&gt;(value);
+        newNode->next = head;
+        head = newNode;
+    }
+    
+    int search(const T& value) const {
+        Node&lt;T&gt;* current = head;
+        int position = 0;
+        
+        while (current != nullptr) {
+            if (current->data == value) {
+                return position;
+            }
+            current = current->next;
+            position++;
+        }
+        
+        return -1; // Not found
+    }
+    
+    void deleteValue(const T& value) {
+        if (head == nullptr) return;
+        
+        if (head->data == value) {
+            Node&lt;T&gt;* temp = head;
+            head = head->next;
+            delete temp;
+            return;
+        }
+        
+        Node&lt;T&gt;* current = head;
+        while (current->next != nullptr && current->next->data != value) {
+            current = current->next;
+        }
+        
+        if (current->next != nullptr) {
+            Node&lt;T&gt;* temp = current->next;
+            current->next = current->next->next;
+            delete temp;
+        }
+    }
+    
+    void print() const {
+        Node&lt;T&gt;* current = head;
+        cout << "List: ";
+        while (current != nullptr) {
+            cout << current->data;
+            if (current->next != nullptr) {
+                cout << " -> ";
+            }
+            current = current->next;
+        }
+        cout << " -> NULL" << endl;
+    }
+    
+    void clear() {
+        while (head != nullptr) {
+            Node&lt;T&gt;* temp = head;
+            head = head->next;
+            delete temp;
+        }
+    }
+    
+    bool isEmpty() const {
+        return head == nullptr;
+    }
+    
+    int size() const {
+        int count = 0;
+        Node&lt;T&gt;* current = head;
+        while (current != nullptr) {
+            count++;
+            current = current->next;
+        }
+        return count;
+    }
+};
+
+int main() {
+    cout << "=== Testing Template Linked List ===" << endl;
+    
+    // Test with integers
+    cout << "\n--- Integer List ---" << endl;
+    LinkedList&lt;int&gt; intList;
+    intList.append(10);
+    intList.append(20);
+    intList.append(30);
+    intList.prepend(5);
+    intList.print();
+    
+    cout << "Searching for 20: position " << intList.search(20) << endl;
+    cout << "Searching for 100: position " << intList.search(100) << endl;
+    
+    // Test with strings
+    cout << "\n--- String List ---" << endl;
+    LinkedList&lt;string&gt; stringList;
+    stringList.append("Apple");
+    stringList.append("Banana");
+    stringList.append("Cherry");
+    stringList.prepend("Avocado");
+    stringList.print();
+    
+    cout << "Searching for \"Banana\": position " << stringList.search("Banana") << endl;
+    
+    // Test with doubles
+    cout << "\n--- Double List ---" << endl;
+    LinkedList&lt;double&gt; doubleList;
+    doubleList.append(3.14);
+    doubleList.append(2.71);
+    doubleList.append(1.41);
+    doubleList.print();
+    
+    cout << "List size: " << doubleList.size() << endl;
+    
+    return 0;
+}</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- Week 20 Content -->
+        <section id="week20" class="week-content">
+            <h2><i class="fas fa-layer-group"></i> Week 20 - Stacks & Queues</h2>
+            
+            <div class="concept-card">
+                <h3>Key Concepts</h3>
+                <ul>
+                    <li><strong>Stack:</strong> LIFO (Last In, First Out) data structure</li>
+                    <li><strong>Queue:</strong> FIFO (First In, First Out) data structure</li>
+                    <li><strong>Push/Pop:</strong> Stack operations for adding/removing elements</li>
+                    <li><strong>Enqueue/Dequeue:</strong> Queue operations for adding/removing elements</li>
+                    <li><strong>Static vs Dynamic:</strong> Array-based vs pointer-based implementations</li>
+                </ul>
+            </div>
+
+            <div class="exercise-card">
+                <h3>Exercise 1: Static Stack Template</h3>
+                <div class="code-container">
+                    <pre><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;stdexcept&gt;
+using namespace std;
+
+template &lt;typename T&gt;
+class Stack {
+private:
+    T* stackArray;
+    int stackSize;
+    int top;
+
+public:
+    Stack(int size) {
+        stackArray = new T[size];
+        stackSize = size;
+        top = -1;
+    }
+    
+    ~Stack() {
+        delete[] stackArray;
+    }
+    
+    void push(const T& value) {
+        if (isFull()) {
+            throw overflow_error("Stack overflow: Cannot push to full stack");
+        }
+        stackArray[++top] = value;
+    }
+    
+    T pop() {
+        if (isEmpty()) {
+            throw underflow_error("Stack underflow: Cannot pop from empty stack");
+        }
+        return stackArray[top--];
+    }
+    
+    T peek() const {
+        if (isEmpty()) {
+            throw underflow_error("Stack is empty: Cannot peek");
+        }
+        return stackArray[top];
+    }
+    
+    bool isEmpty() const {
+        return top == -1;
+    }
+    
+    bool isFull() const {
+        return top == stackSize - 1;
+    }
+    
+    int size() const {
+        return top + 1;
+    }
+    
+    int capacity() const {
+        return stackSize;
+    }
+    
+    void display() const {
+        if (isEmpty()) {
+            cout << "Stack is empty" << endl;
+            return;
+        }
+        
+        cout << "Stack (top to bottom): ";
+        for (int i = top; i >= 0; i--) {
+            cout << stackArray[i];
+            if (i > 0) cout << " <- ";
+        }
+        cout << endl;
+    }
+};
+
+int main() {
+    try {
+        cout << "=== Testing Stack Template ===" << endl;
+        
+        // Test with integers
+        cout << "\n--- Integer Stack ---" << endl;
+        Stack&lt;int&gt; intStack(5);
+        
+        cout << "Pushing values: 10, 20, 30" << endl;
+        intStack.push(10);
+        intStack.push(20);
+        intStack.push(30);
+        intStack.display();
+        
+        cout << "Top element: " << intStack.peek() << endl;
+        cout << "Stack size: " << intStack.size() << endl;
+        
+        cout << "Popping elements:" << endl;
+        while (!intStack.isEmpty()) {
+            cout << "Popped: " << intStack.pop() << endl;
+            intStack.display();
+        }
+        
+        // Test with strings
+        cout << "\n--- String Stack ---" << endl;
+        Stack&lt;string&gt; stringStack(3);
+        
+        stringStack.push("First");
+        stringStack.push("Second");
+        stringStack.push("Third");
+        stringStack.display();
+        
+        cout << "Popped: " << stringStack.pop() << endl;
+        stringStack.display();
+        
+        // Test overflow
+        cout << "\n--- Testing Stack Overflow ---" << endl;
+        Stack&lt;int&gt; smallStack(2);
+        smallStack.push(1);
+        smallStack.push(2);
+        try {
+            smallStack.push(3); // Should throw exception
+        } catch (const overflow_error& e) {
+            cout << "Caught exception: " << e.what() << endl;
+        }
+        
+    } catch (const exception& e) {
+        cout << "Error: " << e.what() << endl;
+    }
+    
+    return 0;
+}</code></pre>
+                </div>
+            </div>
+
+            <div class="exercise-card">
+                <h3>Exercise 2: Dynamic Queue Template</h3>
+                <div class="code-container">
+                    <pre><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;stdexcept&gt;
+using namespace std;
+
+template &lt;typename T&gt;
+class QueueNode {
+public:
+    T data;
+    QueueNode&lt;T&gt;* next;
+    
+    QueueNode(const T& value) : data(value), next(nullptr) {}
+};
+
+template &lt;typename T&gt;
+class Queue {
+private:
+    QueueNode&lt;T&gt;* front;
+    QueueNode&lt;T&gt;* rear;
+    int count;
+
+public:
+    Queue() : front(nullptr), rear(nullptr), count(0) {}
+    
+    ~Queue() {
+        clear();
+    }
+    
+    void enqueue(const T& value) {
+        QueueNode&lt;T&gt;* newNode = new QueueNode&lt;T&gt;(value);
+        
+        if (isEmpty()) {
+            front = rear = newNode;
+        } else {
+            rear->next = newNode;
+            rear = newNode;
+        }
+        count++;
+    }
+    
+    T dequeue() {
+        if (isEmpty()) {
+            throw underflow_error("Queue underflow: Cannot dequeue from empty queue");
+        }
+        
+        QueueNode&lt;T&gt;* temp = front;
+        T value = front->data;
+        front = front->next;
+        
+        if (front == nullptr) {
+            rear = nullptr;
+        }
+        
+        delete temp;
+        count--;
+        return value;
+    }
+    
+    T getFront() const {
+        if (isEmpty()) {
+            throw underflow_error("Queue is empty: Cannot get front element");
+        }
+        return front->data;
+    }
+    
+    T getRear() const {
+        if (isEmpty()) {
+            throw underflow_error("Queue is empty: Cannot get rear element");
+        }
+        return rear->data;
+    }
+    
+    bool isEmpty() const {
+        return front == nullptr;
+    }
+    
+    int size() const {
+        return count;
+    }
+    
+    void display() const {
+        if (isEmpty()) {
+            cout << "Queue is empty" << endl;
+            return;
+        }
+        
+        cout << "Queue (front to rear): ";
+        QueueNode&lt;T&gt;* current = front;
+        while (current != nullptr) {
+            cout << current->data;
+            if (current->next != nullptr) {
+                cout << " <- ";
+            }
+            current = current->next;
+        }
+        cout << endl;
+    }
+    
+    void clear() {
+        while (!isEmpty()) {
+            dequeue();
+        }
+    }
+};
+
+// Example: Inventory System using Queue
+class InventoryItem {
+public:
+    int serialNum;
+    string manufactDate;
+    int lotNum;
+    
+    InventoryItem(int serial, const string& date, int lot) 
+        : serialNum(serial), manufactDate(date), lotNum(lot) {}
+    
+    void display() const {
+        cout << "Serial: " << serialNum << ", Date: " << manufactDate 
+             << ", Lot: " << lotNum;
+    }
+};
+
+int main() {
+    try {
+        cout << "=== Testing Queue Template ===" << endl;
+        
+        // Test with integers
+        cout << "\n--- Integer Queue ---" << endl;
+        Queue&lt;int&gt; intQueue;
+        
+        cout << "Enqueuing values: 10, 20, 30" << endl;
+        intQueue.enqueue(10);
+        intQueue.enqueue(20);
+        intQueue.enqueue(30);
+        intQueue.display();
+        
+        cout << "Front element: " << intQueue.getFront() << endl;
+        cout << "Rear element: " << intQueue.getRear() << endl;
+        cout << "Queue size: " << intQueue.size() << endl;
+        
+        cout << "\nDequeuing elements:" << endl;
+        while (!intQueue.isEmpty()) {
+            cout << "Dequeued: " << intQueue.dequeue() << endl;
+            if (!intQueue.isEmpty()) {
+                intQueue.display();
+            }
+        }
+        
+        // Test with strings
+        cout << "\n--- String Queue ---" << endl;
+        Queue&lt;string&gt; stringQueue;
+        
+        stringQueue.enqueue("First");
+        stringQueue.enqueue("Second");
+        stringQueue.enqueue("Third");
+        stringQueue.display();
+        
+        cout << "Dequeued: " << stringQueue.dequeue() << endl;
+        stringQueue.display();
+        
+        // Test inventory system
+        cout << "\n--- Inventory System Example ---" << endl;
+        Queue&lt;InventoryItem&gt; inventory;
+        
+        inventory.enqueue(InventoryItem(12345, "2024-01-15", 101));
+        inventory.enqueue(InventoryItem(12346, "2024-01-16", 102));
+        inventory.enqueue(InventoryItem(12347, "2024-01-17", 103));
+        
+        cout << "Inventory items:" << endl;
+        Queue&lt;InventoryItem&gt; tempQueue = inventory; // For display purposes
+        int itemNum = 1;
+        while (!tempQueue.isEmpty()) {
+            cout << "Item " << itemNum++ << ": ";
+            tempQueue.dequeue().display();
+            cout << endl;
+        }
+        
+        cout << "\nProcessing inventory (FIFO):" << endl;
+        while (!inventory.isEmpty()) {
+            cout << "Processing: ";
+            inventory.dequeue().display();
+            cout << endl;
+        }
+        
+    } catch (const exception& e) {
+        cout << "Error: " << e.what() << endl;
+    }
+    
+    return 0;
+}</code></pre>
+                </div>
+            </div>
+        </section>
+
         <!-- Quiz Section -->
         <section id="quiz" class="week-content">
             <h2><i class="fas fa-question-circle"></i> Interactive C++ Quiz</h2>
