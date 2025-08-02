@@ -352,8 +352,9 @@ mark {
 }
 
 .option:hover {
-    background: #e9ecef;
+    background: #4a5f7a;
     border-color: #667eea;
+    transform: translateY(-2px);
 }
 
 .option.selected {
@@ -375,11 +376,41 @@ mark {
 }
 
 .quiz-stats {
-    background: #f8f9fa;
+    background: #34495e;
     padding: 1rem;
     border-radius: 8px;
     margin-top: 1rem;
     text-align: center;
+    color: white;
+    border: 1px solid #4a5f7a;
+}
+
+/* Show Answer Button */
+.show-answer-btn {
+    background: linear-gradient(135deg, #e74c3c, #c0392b);
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    margin: 1rem 0;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.show-answer-btn:hover {
+    background: linear-gradient(135deg, #c0392b, #a93226);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.show-answer-btn.hide-answer {
+    background: linear-gradient(135deg, #27ae60, #229954);
+}
+
+.show-answer-btn.hide-answer:hover {
+    background: linear-gradient(135deg, #229954, #1e8449);
 }
 
 .feedback {

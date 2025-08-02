@@ -305,6 +305,25 @@ function toggleAnswer(questionElement) {
     }
 }
 
+// Function to toggle answer with button
+function toggleAnswerWithButton(button) {
+    const questionCard = button.closest('.question-card');
+    const answer = questionCard.querySelector('.answer');
+    
+    if (answer) {
+        answer.classList.toggle('show');
+        
+        // Update button text
+        if (answer.classList.contains('show')) {
+            button.textContent = 'Hide Answer';
+            button.classList.add('hide-answer');
+        } else {
+            button.textContent = 'Show Answer';
+            button.classList.remove('hide-answer');
+        }
+    }
+}
+
 // Quiz Functions
 function startQuiz() {
     currentQuestionIndex = 0;
