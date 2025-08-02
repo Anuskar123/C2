@@ -2698,10 +2698,10 @@ int main(){
 
                     <div class="question-card" onclick="toggleAnswer(this)">
                         <div class="question-header">
-                            <span class="question-number">Q11.</span>
+                            <span class="question-number">Q12.</span>
                             <span class="question-type output">Find Output</span>
                         </div>
-                        <p><strong>What output is produced by the following C++ code segment?</strong></p>
+                        <p><strong>What output is produced by the following linked list code segment?</strong></p>
                         <div class="code-container">
                             <pre><code class="language-cpp">#include &lt;iostream&gt;
 using namespace std;
@@ -2710,41 +2710,156 @@ struct nodeType{
     nodeType *link;
 };
 int main(){
-    nodeType *list, *ptr;
+    nodeType *list, *ptr, *temp;
     list = new nodeType;
-    list->info = 45;
+    list->info = 15;
+    list->link = NULL;
+    
     ptr = new nodeType;
-    ptr->info = 66;
-    ptr->link = NULL;
-    list->link = ptr;
-    ptr = new nodeType;
-    ptr->info = 91;
+    ptr->info = 25;
     ptr->link = list;
     list = ptr;
-    ptr = new nodeType;
-    ptr->info = 70;
-    ptr->link = list->link;
-    list->link = ptr;
+    
+    temp = new nodeType;
+    temp->info = 35;
+    temp->link = NULL;
+    
     ptr = list;
-    while (ptr != NULL) {
-        cout << ptr->info << endl;
+    while(ptr->link != NULL) {
         ptr = ptr->link;
     }
+    ptr->link = temp;
+    
+    ptr = list;
+    while(ptr != NULL) {
+        cout << ptr->info << " ";
+        ptr = ptr->link;
+    }
+    cout << endl;
     return 0;
 }</code></pre>
                         </div>
                         <div class="answer">
                             <p><strong>Output:</strong></p>
-                            <pre>91
-70
-45
-66</pre>
+                            <pre>25 15 35 </pre>
                             <p><strong>Explanation:</strong></p>
                             <ul>
-                                <li>Build list: [45] → [66] → NULL</li>
-                                <li>Add [91] at front: [91] → [45] → [66] → NULL</li>
-                                <li>Insert [70] after [91]: [91] → [70] → [45] → [66] → NULL</li>
-                                <li>Traverse and print all nodes</li>
+                                <li>Create list [15] → NULL</li>
+                                <li>Add [25] at front: [25] → [15] → NULL</li>
+                                <li>Create temp [35] → NULL</li>
+                                <li>Traverse to end and append temp: [25] → [15] → [35] → NULL</li>
+                                <li>Print all nodes: 25, 15, 35</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="question-card" onclick="toggleAnswer(this)">
+                        <div class="question-header">
+                            <span class="question-number">Q13.</span>
+                            <span class="question-type output">Find Output</span>
+                        </div>
+                        <p><strong>What output is produced by the following linked list manipulation?</strong></p>
+                        <div class="code-container">
+                            <pre><code class="language-cpp">#include &lt;iostream&gt;
+using namespace std;
+struct nodeType{
+    int info;
+    nodeType *link;
+};
+int main(){
+    nodeType *head, *current;
+    
+    head = new nodeType;
+    head->info = 100;
+    head->link = NULL;
+    
+    for(int i = 1; i <= 3; i++) {
+        current = new nodeType;
+        current->info = head->info + (i * 10);
+        current->link = head;
+        head = current;
+    }
+    
+    current = head;
+    int count = 0;
+    while(current != NULL && count < 3) {
+        cout << current->info << " ";
+        current = current->link;
+        count++;
+    }
+    cout << endl;
+    return 0;
+}</code></pre>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Output:</strong></p>
+                            <pre>130 120 110 </pre>
+                            <p><strong>Explanation:</strong></p>
+                            <ul>
+                                <li>Start with head [100] → NULL</li>
+                                <li>i=1: Add [110] → [100] → NULL (head->info + 10 = 110)</li>
+                                <li>i=2: Add [120] → [110] → [100] → NULL (head->info + 20 = 120)</li>
+                                <li>i=3: Add [130] → [120] → [110] → [100] → NULL (head->info + 30 = 130)</li>
+                                <li>Print first 3 nodes: 130, 120, 110</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="question-card" onclick="toggleAnswer(this)">
+                        <div class="question-header">
+                            <span class="question-number">Q14.</span>
+                            <span class="question-type output">Find Output</span>
+                        </div>
+                        <p><strong>What output is produced by this linked list code?</strong></p>
+                        <div class="code-container">
+                            <pre><code class="language-cpp">#include &lt;iostream&gt;
+using namespace std;
+struct nodeType{
+    int info;
+    nodeType *link;
+};
+
+void insertAfter(nodeType* prevNode, int value) {
+    if(prevNode == NULL) return;
+    nodeType* newNode = new nodeType;
+    newNode->info = value;
+    newNode->link = prevNode->link;
+    prevNode->link = newNode;
+}
+
+int main(){
+    nodeType *list, *second;
+    
+    list = new nodeType;
+    list->info = 50;
+    list->link = NULL;
+    
+    second = new nodeType;
+    second->info = 60;
+    second->link = NULL;
+    list->link = second;
+    
+    insertAfter(list, 55);
+    insertAfter(second, 65);
+    
+    nodeType* current = list;
+    while(current != NULL) {
+        cout << current->info << " ";
+        current = current->link;
+    }
+    cout << endl;
+    return 0;
+}</code></pre>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Output:</strong></p>
+                            <pre>50 55 60 65 </pre>
+                            <p><strong>Explanation:</strong></p>
+                            <ul>
+                                <li>Initial list: [50] → [60] → NULL</li>
+                                <li>insertAfter(list, 55): Insert 55 after 50 → [50] → [55] → [60] → NULL</li>
+                                <li>insertAfter(second, 65): Insert 65 after 60 → [50] → [55] → [60] → [65] → NULL</li>
+                                <li>Print all nodes: 50, 55, 60, 65</li>
                             </ul>
                         </div>
                     </div>
@@ -3820,6 +3935,205 @@ int main() {
                             <p><strong>Output:</strong></p>
                             <pre>HELLO</pre>
                             <p><strong>Explanation:</strong> Queue follows FIFO principle. Characters H, E, L, L, O are enqueued in that order and dequeued in the same order, preserving the original word.</p>
+                        </div>
+                    </div>
+
+                    <div class="question-card" onclick="toggleAnswer(this)">
+                        <div class="question-header">
+                            <span class="question-number">Q7.</span>
+                            <span class="question-type output">Find Output</span>
+                        </div>
+                        <p><strong>What is the output of the following DynIntStack code segment?</strong></p>
+                        <div class="code-container">
+                            <pre><code class="language-cpp">int main() {
+    int catchVar;
+    DynIntStack stack;
+    catchVar = 5;
+    stack.push(catchVar);
+    stack.push(10);
+    stack.push(15);
+    stack.pop(catchVar);
+    stack.pop(catchVar);
+    cout << catchVar << endl;
+    stack.push(10);
+    stack.push(catchVar);
+    cout << catchVar << endl;
+    while (!stack.isEmpty()) {
+        stack.pop(catchVar);
+        cout << catchVar << endl;
+    }
+    return 0;
+}</code></pre>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Output:</strong></p>
+                            <pre>10
+10
+10
+10
+5</pre>
+                            <p><strong>Explanation:</strong></p>
+                            <ul>
+                                <li>Push 5, 10, 15 → Stack: [5, 10, 15]</li>
+                                <li>Pop twice: catchVar becomes 15, then 10 → Stack: [5]</li>
+                                <li>Print catchVar: 10</li>
+                                <li>Push 10, then catchVar (10) → Stack: [5, 10, 10]</li>
+                                <li>Print catchVar: 10</li>
+                                <li>While loop pops: 10, 10, 5</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="question-card" onclick="toggleAnswer(this)">
+                        <div class="question-header">
+                            <span class="question-number">Q8.</span>
+                            <span class="question-type output">Find Output</span>
+                        </div>
+                        <p><strong>What is the output of the following stackType&lt;int&gt; code segment?</strong></p>
+                        <div class="code-container">
+                            <pre><code class="language-cpp">int main() {
+    stackType&lt;int&gt; stack;
+    int x = 9;
+    int y = 0;
+    stack.push(3);
+    stack.push(4);
+    stack.push(x);
+    stack.push(x+2);
+    y = stack.top();
+    stack.pop();
+    stack.push(x+y+3);
+    stack.push(y-2);
+    stack.push(8);
+    x = stack.top();
+    stack.pop();
+    cout << "x= " << x << endl;
+    cout << "y= " << y << endl;
+    while (!stack.isEmptyStack()) {
+        cout << stack.top() << endl;
+        stack.pop();
+    }
+    return 0;
+}</code></pre>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Output:</strong></p>
+                            <pre>x= 8
+y= 11
+9
+23
+9
+4
+3</pre>
+                            <p><strong>Explanation:</strong></p>
+                            <ul>
+                                <li>Build stack: [3, 4, 9, 11] (x=9, x+2=11)</li>
+                                <li>y = top() = 11, then pop → Stack: [3, 4, 9]</li>
+                                <li>Push x+y+3 = 9+11+3 = 23 → Stack: [3, 4, 9, 23]</li>
+                                <li>Push y-2 = 11-2 = 9 → Stack: [3, 4, 9, 23, 9]</li>
+                                <li>Push 8 → Stack: [3, 4, 9, 23, 9, 8]</li>
+                                <li>x = top() = 8, then pop → Stack: [3, 4, 9, 23, 9]</li>
+                                <li>While loop pops: 9, 23, 9, 4, 3</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="question-card" onclick="toggleAnswer(this)">
+                        <div class="question-header">
+                            <span class="question-number">Q9.</span>
+                            <span class="question-type output">Find Output</span>
+                        </div>
+                        <p><strong>What is the output of the following DynIntQueue code segment?</strong></p>
+                        <div class="code-container">
+                            <pre><code class="language-cpp">int main() {
+    int catchVar;
+    DynIntQueue iqueue;
+    catchVar = 5;
+    iqueue.enqueue(catchVar);
+    iqueue.enqueue(10);
+    iqueue.enqueue(15);
+    iqueue.dequeue(catchVar);
+    cout << catchVar << endl;
+    iqueue.dequeue(catchVar);
+    cout << catchVar << endl;
+    iqueue.enqueue(10);
+    iqueue.enqueue(catchVar);
+    cout << catchVar << endl;
+    while (!iqueue.isEmpty()) {
+        iqueue.dequeue(catchVar);
+        cout << catchVar << endl;
+    }
+    return 0;
+}</code></pre>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Output:</strong></p>
+                            <pre>5
+10
+10
+15
+10
+10</pre>
+                            <p><strong>Explanation:</strong></p>
+                            <ul>
+                                <li>Enqueue 5, 10, 15 → Queue: [5, 10, 15]</li>
+                                <li>Dequeue: catchVar = 5 → Queue: [10, 15], Print: 5</li>
+                                <li>Dequeue: catchVar = 10 → Queue: [15], Print: 10</li>
+                                <li>Enqueue 10, then catchVar (10) → Queue: [15, 10, 10]</li>
+                                <li>Print catchVar: 10</li>
+                                <li>While loop dequeues: 15, 10, 10</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="question-card" onclick="toggleAnswer(this)">
+                        <div class="question-header">
+                            <span class="question-number">Q10.</span>
+                            <span class="question-type output">Find Output</span>
+                        </div>
+                        <p><strong>What is the output of the following DynIntQueue code segment?</strong></p>
+                        <div class="code-container">
+                            <pre><code class="language-cpp">int main() {
+    DynIntQueue iqueue;
+    int x = 9;
+    int y = 0;
+    iqueue.enqueue(3);
+    iqueue.enqueue(4);
+    iqueue.enqueue(x);
+    iqueue.enqueue(x+2);
+    iqueue.dequeue(y);
+    iqueue.enqueue(x+y+3);
+    iqueue.enqueue(y-2);
+    iqueue.enqueue(8);
+    iqueue.dequeue(x);
+    cout << "x= " << x << endl;
+    cout << "y= " << y << endl;
+    while (!iqueue.isEmpty()) {
+        iqueue.dequeue(y);
+        cout << y << endl;
+    }
+    return 0;
+}</code></pre>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Output:</strong></p>
+                            <pre>x= 4
+y= 3
+9
+11
+21
+1
+8</pre>
+                            <p><strong>Explanation:</strong></p>
+                            <ul>
+                                <li>Enqueue 3, 4, 9, 11 → Queue: [3, 4, 9, 11] (x=9, x+2=11)</li>
+                                <li>Dequeue: y = 3 → Queue: [4, 9, 11]</li>
+                                <li>Enqueue x+y+3 = 9+3+3 = 21 → Queue: [4, 9, 11, 21]</li>
+                                <li>Enqueue y-2 = 3-2 = 1 → Queue: [4, 9, 11, 21, 1]</li>
+                                <li>Enqueue 8 → Queue: [4, 9, 11, 21, 1, 8]</li>
+                                <li>Dequeue: x = 4 → Queue: [9, 11, 21, 1, 8]</li>
+                                <li>Print x=4, y=3</li>
+                                <li>While loop dequeues: 9, 11, 21, 1, 8</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
