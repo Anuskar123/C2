@@ -750,14 +750,456 @@ int main() {
         <section id="week15" class="week-content">
             <h2><i class="fas fa-plus-circle"></i> Week 15 - Operator Overloading</h2>
             
-            <div class="concept-card">
-                <h3>Key Concepts</h3>
-                <ul>
-                    <li><strong>Operator Overloading:</strong> Giving additional meanings to operators</li>
-                    <li><strong>Member vs Non-member functions:</strong> Different approaches to overloading</li>
-                    <li><strong>Copy Constructor:</strong> Creates a copy of an object</li>
-                    <li><strong>Const correctness:</strong> Using const appropriately</li>
-                </ul>
+            <!-- Notes Section -->
+            <div class="notes-section">
+                <h3><i class="fas fa-book"></i> Detailed Notes</h3>
+                
+                <div class="concept-card">
+                    <h4>What is Operator Overloading?</h4>
+                    <p>Operator overloading allows you to give additional meanings to operators when used with objects of your class. It's like teaching C++ how to add, subtract, or compare your custom objects.</p>
+                    
+                    <h5>Why Use Operator Overloading?</h5>
+                    <ul>
+                        <li><strong>Natural syntax:</strong> Write <code>obj1 + obj2</code> instead of <code>obj1.add(obj2)</code></li>
+                        <li><strong>Readability:</strong> Code becomes more intuitive and easier to understand</li>
+                        <li><strong>Consistency:</strong> Objects behave like built-in types</li>
+                    </ul>
+                </div>
+
+                <div class="concept-card">
+                    <h4>Overloadable Operators</h4>
+                    <div class="operator-grid">
+                        <div class="operator-category">
+                            <h5>Arithmetic Operators</h5>
+                            <code>+ - * / % ++ --</code>
+                        </div>
+                        <div class="operator-category">
+                            <h5>Comparison Operators</h5>
+                            <code>== != < > <= >=</code>
+                        </div>
+                        <div class="operator-category">
+                            <h5>Assignment Operators</h5>
+                            <code>= += -= *= /= %=</code>
+                        </div>
+                        <div class="operator-category">
+                            <h5>Other Operators</h5>
+                            <code>[] () -> << >></code>
+                        </div>
+                    </div>
+                    
+                    <h5>Non-Overloadable Operators</h5>
+                    <code>. :: ?: sizeof .*</code>
+                </div>
+
+                <div class="concept-card">
+                    <h4>Copy Constructor</h4>
+                    <p>A special constructor that creates a new object as a copy of an existing object.</p>
+                    
+                    <h5>When is Copy Constructor Called?</h5>
+                    <ul>
+                        <li>When an object is initialized with another object: <code>Student s2 = s1;</code></li>
+                        <li>When an object is passed by value to a function</li>
+                        <li>When an object is returned by value from a function</li>
+                    </ul>
+
+                    <h5>Deep vs Shallow Copy</h5>
+                    <table class="copy-table">
+                        <tr>
+                            <th>Shallow Copy</th>
+                            <th>Deep Copy</th>
+                        </tr>
+                        <tr>
+                            <td>Copies memory addresses</td>
+                            <td>Copies actual data</td>
+                        </tr>
+                        <tr>
+                            <td>Objects share same memory</td>
+                            <td>Objects have separate memory</td>
+                        </tr>
+                        <tr>
+                            <td>Default copy constructor</td>
+                            <td>Custom copy constructor needed</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="concept-card">
+                    <h4>Const Correctness</h4>
+                    <p>Using <code>const</code> appropriately to prevent unintended modifications.</p>
+                    
+                    <h5>Types of const usage:</h5>
+                    <ul>
+                        <li><strong>const parameters:</strong> <code>void func(const Object& obj)</code></li>
+                        <li><strong>const member functions:</strong> <code>int getValue() const</code></li>
+                        <li><strong>const objects:</strong> <code>const Object obj;</code></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Questions Section -->
+            <div class="questions-section">
+                <h3><i class="fas fa-question-circle"></i> Week 15 Practice Questions</h3>
+
+                <!-- MCQ Questions -->
+                <div class="question-category">
+                    <h4>Multiple Choice Questions</h4>
+                    
+                    <div class="question-card" onclick="toggleAnswer(this)">
+                        <div class="question-header">
+                            <span class="question-number">Q1.</span>
+                            <span class="question-type mcq">MCQ</span>
+                        </div>
+                        <p><strong>Which operator cannot be overloaded in C++?</strong></p>
+                        <div class="mcq-options">
+                            <div class="option">A) +</div>
+                            <div class="option">B) []</div>
+                            <div class="option">C) ::</div>
+                            <div class="option">D) ==</div>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Answer: C) ::</strong></p>
+                            <p><strong>Explanation:</strong> The scope resolution operator (::) cannot be overloaded. Other non-overloadable operators include ., .*, ?:, and sizeof. These operators have special meaning in C++ and their behavior cannot be changed.</p>
+                        </div>
+                    </div>
+
+                    <div class="question-card" onclick="toggleAnswer(this)">
+                        <div class="question-header">
+                            <span class="question-number">Q2.</span>
+                            <span class="question-type mcq">MCQ</span>
+                        </div>
+                        <p><strong>What is the correct syntax for overloading the + operator?</strong></p>
+                        <div class="mcq-options">
+                            <div class="option">A) Time operator+(Time& other)</div>
+                            <div class="option">B) Time operator+(const Time& other) const</div>
+                            <div class="option">C) operator+(const Time& other)</div>
+                            <div class="option">D) Time +(const Time& other)</div>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Answer: B) Time operator+(const Time& other) const</strong></p>
+                            <p><strong>Explanation:</strong> The correct syntax includes return type (Time), operator keyword, operator symbol (+), const reference parameter, and const function qualifier since addition doesn't modify the original object.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Find the Error Questions -->
+                <div class="question-category">
+                    <h4>Find the Error</h4>
+                    
+                    <div class="question-card" onclick="toggleAnswer(this)">
+                        <div class="question-header">
+                            <span class="question-number">Q3.</span>
+                            <span class="question-type error">Find Error</span>
+                        </div>
+                        <p><strong>Find the error in this operator overloading:</strong></p>
+                        <div class="code-container">
+                            <pre><code class="language-cpp">class Time {
+private:
+    int hours, minutes;
+public:
+    Time operator+(Time other) {  // Error here
+        Time result;
+        result.minutes = minutes + other.minutes;
+        result.hours = hours + other.hours;
+        if (result.minutes >= 60) {
+            result.hours++;
+            result.minutes -= 60;
+        }
+        return result;
+    }
+};</code></pre>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Error:</strong> Parameter should be const reference and function should be const.</p>
+                            <p><strong>Correction:</strong></p>
+                            <div class="code-container">
+                                <pre><code class="language-cpp">Time operator+(const Time& other) const {
+    // Pass by const reference to avoid unnecessary copying
+    // Function is const because it doesn't modify the object
+    Time result;
+    result.minutes = minutes + other.minutes;
+    result.hours = hours + other.hours;
+    if (result.minutes >= 60) {
+        result.hours++;
+        result.minutes -= 60;
+    }
+    return result;
+}</code></pre>
+                            </div>
+                            <p><strong>Explanation:</strong> Using const reference parameter avoids unnecessary copying and prevents modification of the parameter. The const function qualifier indicates the method doesn't change the object's state.</p>
+                        </div>
+                    </div>
+
+                    <div class="question-card" onclick="toggleAnswer(this)">
+                        <div class="question-header">
+                            <span class="question-number">Q4.</span>
+                            <span class="question-type error">Find Error</span>
+                        </div>
+                        <p><strong>What's wrong with this copy constructor?</strong></p>
+                        <div class="code-container">
+                            <pre><code class="language-cpp">class StringClass {
+private:
+    char* str;
+    int length;
+public:
+    StringClass(const StringClass& other) {  // Copy constructor
+        length = other.length;
+        str = other.str;  // Error here
+    }
+};</code></pre>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Error:</strong> Shallow copy - both objects will point to the same memory.</p>
+                            <p><strong>Correction:</strong></p>
+                            <div class="code-container">
+                                <pre><code class="language-cpp">StringClass(const StringClass& other) {
+    length = other.length;
+    str = new char[length + 1];  // Allocate new memory
+    strcpy(str, other.str);      // Copy the actual data
+}</code></pre>
+                            </div>
+                            <p><strong>Explanation:</strong> Shallow copy causes both objects to share the same memory. When one object is destroyed, it deletes the memory, leaving the other object with a dangling pointer. Deep copy allocates separate memory for each object.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Find Output Questions -->
+                <div class="question-category">
+                    <h4>Find the Output</h4>
+                    
+                    <div class="question-card" onclick="toggleAnswer(this)">
+                        <div class="question-header">
+                            <span class="question-number">Q5.</span>
+                            <span class="question-type output">Find Output</span>
+                        </div>
+                        <p><strong>What will be the output?</strong></p>
+                        <div class="code-container">
+                            <pre><code class="language-cpp">#include &lt;iostream&gt;
+using namespace std;
+
+class Point {
+private:
+    int x, y;
+public:
+    Point(int a = 0, int b = 0) : x(a), y(b) {}
+    
+    Point operator+(const Point& other) const {
+        return Point(x + other.x, y + other.y);
+    }
+    
+    void display() const {
+        cout << "(" << x << ", " << y << ")";
+    }
+};
+
+int main() {
+    Point p1(3, 4);
+    Point p2(1, 2);
+    Point p3 = p1 + p2;
+    
+    p1.display(); cout << " + ";
+    p2.display(); cout << " = ";
+    p3.display(); cout << endl;
+    
+    return 0;
+}</code></pre>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Output:</strong></p>
+                            <pre>(3, 4) + (1, 2) = (4, 6)</pre>
+                            <p><strong>Explanation:</strong> The + operator is overloaded to add corresponding coordinates. p1(3,4) + p2(1,2) creates a new Point with coordinates (3+1, 4+2) = (4, 6).</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Complete the Code Questions -->
+                <div class="question-category">
+                    <h4>Complete the Code</h4>
+                    
+                    <div class="question-card" onclick="toggleAnswer(this)">
+                        <div class="question-header">
+                            <span class="question-number">Q6.</span>
+                            <span class="question-type complete">Complete Code</span>
+                        </div>
+                        <p><strong>Complete the FeetInches class with comparison operators:</strong></p>
+                        <div class="code-container">
+                            <pre><code class="language-cpp">class FeetInches {
+private:
+    int feet, inches;
+public:
+    FeetInches(int f = 0, int i = 0) : feet(f), inches(i) {
+        normalize();
+    }
+    
+    void normalize() {
+        if (inches >= 12) {
+            feet += inches / 12;
+            inches %= 12;
+        }
+    }
+    
+    // Complete the <= operator
+    bool operator<=(________) ________ {
+        int total1 = ________;
+        int total2 = ________;
+        return ________;
+    }
+    
+    // Complete the != operator  
+    bool operator!=(________) ________ {
+        return ________;
+    }
+};</code></pre>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Complete Code:</strong></p>
+                            <div class="code-container">
+                                <pre><code class="language-cpp">class FeetInches {
+private:
+    int feet, inches;
+public:
+    FeetInches(int f = 0, int i = 0) : feet(f), inches(i) {
+        normalize();
+    }
+    
+    void normalize() {
+        if (inches >= 12) {
+            feet += inches / 12;
+            inches %= 12;
+        }
+    }
+    
+    // Complete the <= operator
+    bool operator<=(const FeetInches& other) const {
+        int total1 = feet * 12 + inches;
+        int total2 = other.feet * 12 + other.inches;
+        return total1 <= total2;
+    }
+    
+    // Complete the != operator  
+    bool operator!=(const FeetInches& other) const {
+        return !(feet == other.feet && inches == other.inches);
+    }
+};</code></pre>
+                            </div>
+                            <p><strong>Explanation:</strong> Convert both measurements to total inches for easy comparison. The != operator can be implemented by negating the equality check.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lab Exercise Questions -->
+                <div class="question-category">
+                    <h4>Lab Exercise Questions</h4>
+                    
+                    <div class="question-card" onclick="toggleAnswer(this)">
+                        <div class="question-header">
+                            <span class="question-number">Q7.</span>
+                            <span class="question-type lab">Lab Exercise</span>
+                        </div>
+                        <p><strong>Create a LandTract class that is composed of two FeetInches objects for length and width. Include a member function that returns the tract's area.</strong></p>
+                        <div class="answer">
+                            <p><strong>Solution:</strong></p>
+                            <div class="code-container">
+                                <pre><code class="language-cpp">#include &lt;iostream&gt;
+using namespace std;
+
+class FeetInches {
+private:
+    int feet, inches;
+    
+    void normalize() {
+        if (inches >= 12) {
+            feet += inches / 12;
+            inches %= 12;
+        }
+        if (inches < 0) {
+            feet--;
+            inches += 12;
+        }
+    }
+
+public:
+    FeetInches(int f = 0, int i = 0) : feet(f), inches(i) {
+        normalize();
+    }
+    
+    // Convert to total inches for calculations
+    int toInches() const {
+        return feet * 12 + inches;
+    }
+    
+    // Multiply two FeetInches objects
+    FeetInches multiply(const FeetInches& other) const {
+        int totalInches = toInches() * other.toInches();
+        return FeetInches(0, totalInches);
+    }
+    
+    void display() const {
+        cout << feet << " feet, " << inches << " inches";
+    }
+    
+    bool operator==(const FeetInches& other) const {
+        return (feet == other.feet && inches == other.inches);
+    }
+};
+
+class LandTract {
+private:
+    FeetInches length;
+    FeetInches width;
+
+public:
+    LandTract(const FeetInches& l, const FeetInches& w) 
+        : length(l), width(w) {}
+    
+    FeetInches getArea() const {
+        return length.multiply(width);
+    }
+    
+    void displayTract() const {
+        cout << "Length: "; length.display(); cout << endl;
+        cout << "Width: "; width.display(); cout << endl;
+        cout << "Area: "; getArea().display(); cout << endl;
+    }
+    
+    bool operator==(const LandTract& other) const {
+        FeetInches area1 = getArea();
+        FeetInches area2 = other.getArea();
+        return area1 == area2;
+    }
+};
+
+int main() {
+    // Create two land tracts
+    FeetInches length1(100, 6);
+    FeetInches width1(50, 8);
+    LandTract tract1(length1, width1);
+    
+    FeetInches length2(75, 10);
+    FeetInches width2(67, 2);
+    LandTract tract2(length2, width2);
+    
+    cout << "=== Tract 1 ===" << endl;
+    tract1.displayTract();
+    
+    cout << "\n=== Tract 2 ===" << endl;
+    tract2.displayTract();
+    
+    cout << "\nAre the tracts equal in size? " 
+         << (tract1 == tract2 ? "Yes" : "No") << endl;
+    
+    return 0;
+}</code></pre>
+                            </div>
+                            <p><strong>Key Points:</strong></p>
+                            <ul>
+                                <li><strong>Composition:</strong> LandTract "has-a" length and width (FeetInches objects)</li>
+                                <li><strong>Area calculation:</strong> Multiply length by width</li>
+                                <li><strong>Operator overloading:</strong> Implement == to compare tract sizes</li>
+                                <li><strong>Encapsulation:</strong> Hide implementation details in private methods</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div class="exercise-card">
@@ -1741,15 +2183,570 @@ int main() {
         <section id="week19" class="week-content">
             <h2><i class="fas fa-link"></i> Week 19 - Linked Lists</h2>
             
-            <div class="concept-card">
-                <h3>Key Concepts</h3>
-                <ul>
-                    <li><strong>Linked List:</strong> Dynamic data structure with nodes containing data and pointers</li>
-                    <li><strong>Node:</strong> Basic unit containing data and pointer to next node</li>
-                    <li><strong>Dynamic Memory:</strong> Allocating and deallocating memory at runtime</li>
-                    <li><strong>Traversal:</strong> Moving through the list to access elements</li>
-                    <li><strong>Insertion/Deletion:</strong> Adding and removing nodes from the list</li>
-                </ul>
+            <!-- Notes Section -->
+            <div class="notes-section">
+                <h3><i class="fas fa-book"></i> Detailed Notes</h3>
+                
+                <div class="concept-card">
+                    <h4>What is a Linked List?</h4>
+                    <p>A linked list is a dynamic data structure where elements (nodes) are stored in sequence, but not in contiguous memory locations. Each node contains data and a pointer to the next node.</p>
+                    
+                    <h5>Why Use Linked Lists?</h5>
+                    <ul>
+                        <li><strong>Dynamic size:</strong> Can grow or shrink during runtime</li>
+                        <li><strong>Efficient insertion/deletion:</strong> O(1) at known positions</li>
+                        <li><strong>Memory efficient:</strong> Only allocates memory when needed</li>
+                        <li><strong>No memory waste:</strong> Unlike arrays with fixed size</li>
+                    </ul>
+                </div>
+
+                <div class="concept-card">
+                    <h4>Linked List Components</h4>
+                    
+                    <div class="component-item">
+                        <h5>Node Structure</h5>
+                        <div class="code-container">
+                            <pre><code class="language-cpp">class Node {
+public:
+    int data;        // Stores the actual value
+    Node* next;      // Points to next node
+    
+    Node(int value) : data(value), next(nullptr) {}
+};</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="component-item">
+                        <h5>Head Pointer</h5>
+                        <p>Points to the first node in the list. If head is nullptr, the list is empty.</p>
+                    </div>
+                </div>
+
+                <div class="concept-card">
+                    <h4>Basic Operations</h4>
+                    
+                    <table class="operations-table">
+                        <tr>
+                            <th>Operation</th>
+                            <th>Time Complexity</th>
+                            <th>Description</th>
+                        </tr>
+                        <tr>
+                            <td>Insert at beginning</td>
+                            <td>O(1)</td>
+                            <td>Add new node at the start</td>
+                        </tr>
+                        <tr>
+                            <td>Insert at end</td>
+                            <td>O(n)</td>
+                            <td>Add new node at the end</td>
+                        </tr>
+                        <tr>
+                            <td>Delete</td>
+                            <td>O(n)</td>
+                            <td>Remove node with specific value</td>
+                        </tr>
+                        <tr>
+                            <td>Search</td>
+                            <td>O(n)</td>
+                            <td>Find node with specific value</td>
+                        </tr>
+                        <tr>
+                            <td>Traverse</td>
+                            <td>O(n)</td>
+                            <td>Visit all nodes in sequence</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="concept-card">
+                    <h4>Memory Management</h4>
+                    <p><strong>Dynamic allocation:</strong> Nodes are created using 'new' and must be deleted using 'delete' to prevent memory leaks.</p>
+                    
+                    <h5>Important Rules:</h5>
+                    <ul>
+                        <li>Always check for nullptr before accessing nodes</li>
+                        <li>Update pointers carefully to avoid losing nodes</li>
+                        <li>Implement destructor to free all allocated memory</li>
+                        <li>Consider copy constructor for deep copying</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Questions Section -->
+            <div class="questions-section">
+                <h3><i class="fas fa-question-circle"></i> Week 19 Practice Questions</h3>
+
+                <!-- MCQ Questions -->
+                <div class="question-category">
+                    <h4>Multiple Choice Questions</h4>
+                    
+                    <div class="question-card" onclick="toggleAnswer(this)">
+                        <div class="question-header">
+                            <span class="question-number">Q1.</span>
+                            <span class="question-type mcq">MCQ</span>
+                        </div>
+                        <p><strong>What is the time complexity of inserting an element at the beginning of a linked list?</strong></p>
+                        <div class="mcq-options">
+                            <div class="option">A) O(n)</div>
+                            <div class="option">B) O(1)</div>
+                            <div class="option">C) O(log n)</div>
+                            <div class="option">D) O(n²)</div>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Answer: B) O(1)</strong></p>
+                            <p><strong>Explanation:</strong> Inserting at the beginning requires only updating the head pointer and the new node's next pointer, regardless of list size. No traversal is needed.</p>
+                        </div>
+                    </div>
+
+                    <div class="question-card" onclick="toggleAnswer(this)">
+                        <div class="question-header">
+                            <span class="question-number">Q2.</span>
+                            <span class="question-type mcq">MCQ</span>
+                        </div>
+                        <p><strong>Which statement about linked lists is true?</strong></p>
+                        <div class="mcq-options">
+                            <div class="option">A) Elements are stored in contiguous memory</div>
+                            <div class="option">B) Random access is possible</div>
+                            <div class="option">C) Size is fixed at compile time</div>
+                            <div class="option">D) Memory is allocated dynamically</div>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Answer: D) Memory is allocated dynamically</strong></p>
+                            <p><strong>Explanation:</strong> Linked lists allocate memory for nodes as needed during runtime. Elements are not stored contiguously, random access is not possible (must traverse from head), and size can change during execution.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Find the Error Questions -->
+                <div class="question-category">
+                    <h4>Find the Error</h4>
+                    
+                    <div class="question-card" onclick="toggleAnswer(this)">
+                        <div class="question-header">
+                            <span class="question-number">Q3.</span>
+                            <span class="question-type error">Find Error</span>
+                        </div>
+                        <p><strong>Find the error in this linked list insertion function:</strong></p>
+                        <div class="code-container">
+                            <pre><code class="language-cpp">void insertAtBeginning(int value) {
+    Node* newNode = new Node(value);
+    head = newNode;              // Error here
+    newNode->next = head;
+}</code></pre>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Error:</strong> Order of operations is wrong. Setting head = newNode before newNode->next = head creates a circular reference.</p>
+                            <p><strong>Correction:</strong></p>
+                            <div class="code-container">
+                                <pre><code class="language-cpp">void insertAtBeginning(int value) {
+    Node* newNode = new Node(value);
+    newNode->next = head;        // First: point new node to current head
+    head = newNode;              // Then: update head to new node
+}</code></pre>
+                            </div>
+                            <p><strong>Explanation:</strong> Must first connect the new node to the existing list, then update the head pointer. Otherwise, the new node points to itself.</p>
+                        </div>
+                    </div>
+
+                    <div class="question-card" onclick="toggleAnswer(this)">
+                        <div class="question-header">
+                            <span class="question-number">Q4.</span>
+                            <span class="question-type error">Find Error</span>
+                        </div>
+                        <p><strong>What's wrong with this delete function?</strong></p>
+                        <div class="code-container">
+                            <pre><code class="language-cpp">void deleteValue(int value) {
+    Node* current = head;
+    while (current != nullptr && current->data != value) {
+        current = current->next;
+    }
+    if (current != nullptr) {
+        current->next = current->next->next;  // Error here
+        delete current;
+    }
+}</code></pre>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Error:</strong> Doesn't handle deletion of the first node, and doesn't properly update previous node's pointer.</p>
+                            <p><strong>Correction:</strong></p>
+                            <div class="code-container">
+                                <pre><code class="language-cpp">void deleteValue(int value) {
+    if (head == nullptr) return;
+    
+    // Special case: deleting first node
+    if (head->data == value) {
+        Node* temp = head;
+        head = head->next;
+        delete temp;
+        return;
+    }
+    
+    // Find the node before the one to delete
+    Node* current = head;
+    while (current->next != nullptr && current->next->data != value) {
+        current = current->next;
+    }
+    
+    if (current->next != nullptr) {
+        Node* temp = current->next;
+        current->next = current->next->next;
+        delete temp;
+    }
+}</code></pre>
+                            </div>
+                            <p><strong>Explanation:</strong> Need to handle first node deletion separately and keep track of the previous node to properly update links.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Find Output Questions -->
+                <div class="question-category">
+                    <h4>Find the Output</h4>
+                    
+                    <div class="question-card" onclick="toggleAnswer(this)">
+                        <div class="question-header">
+                            <span class="question-number">Q5.</span>
+                            <span class="question-type output">Find Output</span>
+                        </div>
+                        <p><strong>What will be printed?</strong></p>
+                        <div class="code-container">
+                            <pre><code class="language-cpp">#include &lt;iostream&gt;
+using namespace std;
+
+class Node {
+public:
+    int data;
+    Node* next;
+    Node(int value) : data(value), next(nullptr) {}
+};
+
+class LinkedList {
+private:
+    Node* head;
+public:
+    LinkedList() : head(nullptr) {}
+    
+    void prepend(int value) {
+        Node* newNode = new Node(value);
+        newNode->next = head;
+        head = newNode;
+    }
+    
+    void print() {
+        Node* current = head;
+        while (current != nullptr) {
+            cout << current->data << " ";
+            current = current->next;
+        }
+        cout << endl;
+    }
+};
+
+int main() {
+    LinkedList list;
+    list.prepend(1);
+    list.prepend(2);
+    list.prepend(3);
+    list.print();
+    return 0;
+}</code></pre>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Output:</strong></p>
+                            <pre>3 2 1 </pre>
+                            <p><strong>Explanation:</strong> prepend() adds elements at the beginning. First 1 is added, then 2 is added before 1, then 3 is added before 2. The final order is 3 → 2 → 1.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Complete the Code Questions -->
+                <div class="question-category">
+                    <h4>Complete the Code</h4>
+                    
+                    <div class="question-card" onclick="toggleAnswer(this)">
+                        <div class="question-header">
+                            <span class="question-number">Q6.</span>
+                            <span class="question-type complete">Complete Code</span>
+                        </div>
+                        <p><strong>Complete the reverse function for a linked list:</strong></p>
+                        <div class="code-container">
+                            <pre><code class="language-cpp">void reverse() {
+    Node* prev = _________;
+    Node* current = _________;
+    Node* next = nullptr;
+    
+    while (current != nullptr) {
+        next = _________;           // Store next node
+        current->next = _________;  // Reverse the link
+        prev = _________;           // Move prev forward
+        current = _________;        // Move current forward
+    }
+    
+    head = _________;  // Update head
+}</code></pre>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Complete Code:</strong></p>
+                            <div class="code-container">
+                                <pre><code class="language-cpp">void reverse() {
+    Node* prev = nullptr;
+    Node* current = head;
+    Node* next = nullptr;
+    
+    while (current != nullptr) {
+        next = current->next;       // Store next node
+        current->next = prev;       // Reverse the link
+        prev = current;             // Move prev forward
+        current = next;             // Move current forward
+    }
+    
+    head = prev;  // Update head to last processed node
+}</code></pre>
+                            </div>
+                            <p><strong>Explanation:</strong> Use three pointers to reverse links one by one. prev tracks the previous node, current is the node being processed, and next stores the next node to avoid losing it.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lab Exercise Questions -->
+                <div class="question-category">
+                    <h4>Lab Exercise Questions</h4>
+                    
+                    <div class="question-card" onclick="toggleAnswer(this)">
+                        <div class="question-header">
+                            <span class="question-number">Q7.</span>
+                            <span class="question-type lab">Lab Exercise</span>
+                        </div>
+                        <p><strong>Create a linked list template that includes a search function returning the position of a specific value (-1 if not found).</strong></p>
+                        <div class="answer">
+                            <p><strong>Solution:</strong></p>
+                            <div class="code-container">
+                                <pre><code class="language-cpp">#include &lt;iostream&gt;
+using namespace std;
+
+template &lt;typename T&gt;
+class Node {
+public:
+    T data;
+    Node&lt;T&gt;* next;
+    
+    Node(const T& value) : data(value), next(nullptr) {}
+};
+
+template &lt;typename T&gt;
+class LinkedList {
+private:
+    Node&lt;T&gt;* head;
+
+public:
+    LinkedList() : head(nullptr) {}
+    
+    // Copy constructor for deep copying
+    LinkedList(const LinkedList&lt;T&gt;& other) : head(nullptr) {
+        Node&lt;T&gt;* current = other.head;
+        while (current != nullptr) {
+            append(current->data);
+            current = current->next;
+        }
+    }
+    
+    ~LinkedList() {
+        clear();
+    }
+    
+    void append(const T& value) {
+        Node&lt;T&gt;* newNode = new Node&lt;T&gt;(value);
+        
+        if (head == nullptr) {
+            head = newNode;
+        } else {
+            Node&lt;T&gt;* current = head;
+            while (current->next != nullptr) {
+                current = current->next;
+            }
+            current->next = newNode;
+        }
+    }
+    
+    void insertAt(int position, const T& value) {
+        if (position == 0) {
+            prepend(value);
+            return;
+        }
+        
+        Node&lt;T&gt;* newNode = new Node&lt;T&gt;(value);
+        Node&lt;T&gt;* current = head;
+        
+        // Navigate to position
+        for (int i = 0; i < position - 1 && current != nullptr; i++) {
+            current = current->next;
+        }
+        
+        if (current == nullptr) {
+            // Position beyond list, append to end
+            delete newNode;
+            append(value);
+        } else {
+            newNode->next = current->next;
+            current->next = newNode;
+        }
+    }
+    
+    void prepend(const T& value) {
+        Node&lt;T&gt;* newNode = new Node&lt;T&gt;(value);
+        newNode->next = head;
+        head = newNode;
+    }
+    
+    // Search function - returns position or -1 if not found
+    int search(const T& value) const {
+        Node&lt;T&gt;* current = head;
+        int position = 0;
+        
+        while (current != nullptr) {
+            if (current->data == value) {
+                return position;
+            }
+            current = current->next;
+            position++;
+        }
+        
+        return -1; // Not found
+    }
+    
+    void deleteValue(const T& value) {
+        if (head == nullptr) return;
+        
+        if (head->data == value) {
+            Node&lt;T&gt;* temp = head;
+            head = head->next;
+            delete temp;
+            return;
+        }
+        
+        Node&lt;T&gt;* current = head;
+        while (current->next != nullptr && current->next->data != value) {
+            current = current->next;
+        }
+        
+        if (current->next != nullptr) {
+            Node&lt;T&gt;* temp = current->next;
+            current->next = current->next->next;
+            delete temp;
+        }
+    }
+    
+    void reverse() {
+        Node&lt;T&gt;* prev = nullptr;
+        Node&lt;T&gt;* current = head;
+        Node&lt;T&gt;* next = nullptr;
+        
+        while (current != nullptr) {
+            next = current->next;
+            current->next = prev;
+            prev = current;
+            current = next;
+        }
+        
+        head = prev;
+    }
+    
+    void print() const {
+        Node&lt;T&gt;* current = head;
+        cout << "List: ";
+        while (current != nullptr) {
+            cout << current->data;
+            if (current->next != nullptr) {
+                cout << " -> ";
+            }
+            current = current->next;
+        }
+        cout << " -> NULL" << endl;
+    }
+    
+    bool isEmpty() const {
+        return head == nullptr;
+    }
+    
+    int size() const {
+        int count = 0;
+        Node&lt;T&gt;* current = head;
+        while (current != nullptr) {
+            count++;
+            current = current->next;
+        }
+        return count;
+    }
+    
+    void clear() {
+        while (head != nullptr) {
+            Node&lt;T&gt;* temp = head;
+            head = head->next;
+            delete temp;
+        }
+    }
+};
+
+// Test program
+int main() {
+    cout << "=== Testing Linked List Template ===" << endl;
+    
+    // Test with integers
+    LinkedList&lt;int&gt; intList;
+    intList.append(10);
+    intList.append(20);
+    intList.append(30);
+    intList.prepend(5);
+    intList.print();
+    
+    cout << "Search for 20: position " << intList.search(20) << endl;
+    cout << "Search for 100: position " << intList.search(100) << endl;
+    
+    // Test insertion at position
+    intList.insertAt(2, 15);
+    cout << "After inserting 15 at position 2:" << endl;
+    intList.print();
+    
+    // Test with strings
+    cout << "\n=== String List ===" << endl;
+    LinkedList&lt;string&gt; stringList;
+    stringList.append("Apple");
+    stringList.append("Banana");
+    stringList.append("Cherry");
+    stringList.print();
+    
+    cout << "Search for 'Banana': position " << stringList.search("Banana") << endl;
+    
+    // Test copy constructor
+    cout << "\n=== Testing Copy Constructor ===" << endl;
+    LinkedList&lt;int&gt; copyList(intList);
+    cout << "Original: ";
+    intList.print();
+    cout << "Copy: ";
+    copyList.print();
+    
+    // Test reverse
+    cout << "\n=== Testing Reverse ===" << endl;
+    intList.reverse();
+    cout << "Reversed list: ";
+    intList.print();
+    
+    return 0;
+}</code></pre>
+                            </div>
+                            <p><strong>Key Features Implemented:</strong></p>
+                            <ul>
+                                <li><strong>Template class:</strong> Works with any data type</li>
+                                <li><strong>Search function:</strong> Returns position of element or -1</li>
+                                <li><strong>Copy constructor:</strong> Deep copying for safe object copying</li>
+                                <li><strong>Insert at position:</strong> Flexible insertion at any position</li>
+                                <li><strong>Reverse function:</strong> Reverses the entire list</li>
+                                <li><strong>Memory management:</strong> Proper cleanup in destructor</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div class="exercise-card">
