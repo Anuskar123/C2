@@ -1,37 +1,861 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>C++ Notes & Practice Questions</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C++ Programming Notes - CSY2006</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
-  <header>
-    <h1>C++ Notes & Practice Questions</h1>
+    <header>
+        <div class="container">
+            <h1><i class="fas fa-code"></i> C++ Programming Notes</h1>
+            <p>CSY2006 - Software Engineering 2</p>
+        </div>
+    </header>
+
     <nav>
-      <button onclick="showSection('notes')">Notes</button>
-      <button onclick="showSection('questions')">Questions</button>
-      <button onclick="showSection('mcqs')">MCQs</button>
+        <div class="container">
+            <ul>
+                <li><a href="#week10" onclick="showWeek('week10')">Week 10 - Classes</a></li>
+                <li><a href="#week15" onclick="showWeek('week15')">Week 15 - Operators</a></li>
+                <li><a href="#week16" onclick="showWeek('week16')">Week 16 - Inheritance</a></li>
+                <li><a href="#week17" onclick="showWeek('week17')">Week 17 - Polymorphism</a></li>
+                <li><a href="#week18" onclick="showWeek('week18')">Week 18 - Templates</a></li>
+                <li><a href="#week19" onclick="showWeek('week19')">Week 19 - Linked Lists</a></li>
+                <li><a href="#week20" onclick="showWeek('week20')">Week 20 - Stacks & Queues</a></li>
+                <li><a href="#quiz" onclick="showQuiz()">Interactive Quiz</a></li>
+            </ul>
+        </div>
     </nav>
-  </header>
-  <main>
-    <section id="notes" class="content-section"></section>
-    <section id="questions" class="content-section" style="display:none;"></section>
-    <section id="mcqs" class="content-section" style="display:none;"></section>
-  </main>
-  <footer>
-    <p>&copy; 2025 C++ Study Website</p>
-  </footer>
-  <script src="script.js"></script>
-  <script>
+
+    <main class="container">
+        <!-- Week 10 Content -->
+        <section id="week10" class="week-content active">
+            <h2><i class="fas fa-cube"></i> Week 10 - Introduction to Classes</h2>
+            
+            <div class="concept-card">
+                <h3>Key Concepts</h3>
+                <ul>
+                    <li><strong>Class:</strong> A blueprint for creating objects</li>
+                    <li><strong>Object:</strong> An instance of a class</li>
+                    <li><strong>Encapsulation:</strong> Bundling data and methods together</li>
+                    <li><strong>Data Hiding:</strong> Making data members private</li>
+                    <li><strong>Access Specifiers:</strong> public, private, protected</li>
+                </ul>
+            </div>
+
+            <div class="exercise-card">
+                <h3>Exercise 1: Circle Class</h3>
+                <div class="code-container">
+                    <h4>Circle.h (Header File)</h4>
+                    <pre><code class="language-cpp">#ifndef CIRCLE_H
+#define CIRCLE_H
+
+class Circle {
+private:
+    double radius;
+    static const double PI;
+
+public:
+    // Constructors
+    Circle();                    // Default constructor
+    Circle(double r);           // Parameterized constructor
     
-    window.onload = function() {
-      renderNotes();
-      renderQuestions();
-      renderMCQs();
-      showSection('notes'); 
-    };
-  </script>
+    // Mutator and Accessor methods
+    void setRadius(double r);
+    double getRadius() const;
+    
+    // Calculation methods
+    double getArea() const;
+    double getDiameter() const;
+    double getCircumference() const;
+};
+
+#endif</code></pre>
+                </div>
+
+                <div class="code-container">
+                    <h4>Circle.cpp (Implementation File)</h4>
+                    <pre><code class="language-cpp">#include "Circle.h"
+#include &lt;iostream&gt;
+
+const double Circle::PI = 3.14159;
+
+// Default constructor
+Circle::Circle() {
+    radius = 0.0;
+}
+
+// Parameterized constructor
+Circle::Circle(double r) {
+    setRadius(r);
+}
+
+// Mutator method
+void Circle::setRadius(double r) {
+    if (r >= 0) {
+        radius = r;
+    } else {
+        radius = 0.0;
+    }
+}
+
+// Accessor method
+double Circle::getRadius() const {
+    return radius;
+}
+
+// Calculate area
+double Circle::getArea() const {
+    return PI * radius * radius;
+}
+
+// Calculate diameter
+double Circle::getDiameter() const {
+    return radius * 2;
+}
+
+// Calculate circumference
+double Circle::getCircumference() const {
+    return 2 * PI * radius;
+}</code></pre>
+                </div>
+
+                <div class="code-container">
+                    <h4>Main Program</h4>
+                    <pre><code class="language-cpp">#include &lt;iostream&gt;
+#include "Circle.h"
+using namespace std;
+
+int main() {
+    double userRadius;
+    
+    cout << "Enter the radius of the circle: ";
+    cin >> userRadius;
+    
+    Circle myCircle(userRadius);
+    
+    cout << "\nCircle Properties:" << endl;
+    cout << "Radius: " << myCircle.getRadius() << endl;
+    cout << "Area: " << myCircle.getArea() << endl;
+    cout << "Diameter: " << myCircle.getDiameter() << endl;
+    cout << "Circumference: " << myCircle.getCircumference() << endl;
+    
+    return 0;
+}</code></pre>
+                </div>
+
+                <div class="output-container">
+                    <h4>Sample Output</h4>
+                    <pre>Enter the radius of the circle: 5
+
+Circle Properties:
+Radius: 5
+Area: 78.5397
+Diameter: 10
+Circumference: 31.4159</pre>
+                </div>
+
+                <div class="question-card">
+                    <h4>Practice Questions</h4>
+                    <div class="question" onclick="toggleAnswer(this)">
+                        <p><strong>Q1:</strong> What happens if we don't use const in the getRadius() method?</p>
+                        <div class="answer">
+                            <p><strong>Answer:</strong> The method will still work, but it's considered bad practice. The const keyword indicates that the method doesn't modify the object's state, making the code more readable and allowing the method to be called on const objects.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="question" onclick="toggleAnswer(this)">
+                        <p><strong>Q2:</strong> Complete the code: What's missing in this class declaration?</p>
+                        <pre><code>class Rectangle {
+    double width, height;
+    // What's missing here?
+public:
+    Rectangle(double w, double h);
+    double getArea();
+};</code></pre>
+                        <div class="answer">
+                            <p><strong>Answer:</strong> Missing "private:" access specifier. While members are private by default, it's good practice to explicitly state it.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="exercise-card">
+                <h3>Exercise 2: Car Class</h3>
+                <div class="code-container">
+                    <pre><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;string&gt;
+using namespace std;
+
+class Car {
+private:
+    int yearModel;
+    string make;
+    int speed;
+
+public:
+    // Constructor
+    Car(int year, string carMake) {
+        yearModel = year;
+        make = carMake;
+        speed = 0;
+    }
+    
+    // Accessors
+    int getYearModel() const { return yearModel; }
+    string getMake() const { return make; }
+    int getSpeed() const { return speed; }
+    
+    // Methods to modify speed
+    void accelerate() { speed += 5; }
+    void brake() { 
+        speed -= 5;
+        if (speed < 0) speed = 0;  // Prevent negative speed
+    }
+};
+
+int main() {
+    Car myCar(2023, "Toyota");
+    
+    cout << "Car: " << myCar.getMake() << " " << myCar.getYearModel() << endl;
+    cout << "Initial speed: " << myCar.getSpeed() << endl;
+    
+    // Accelerate 5 times
+    for (int i = 0; i < 5; i++) {
+        myCar.accelerate();
+        cout << "After acceleration " << (i+1) << ": " << myCar.getSpeed() << " mph" << endl;
+    }
+    
+    // Brake 5 times
+    for (int i = 0; i < 5; i++) {
+        myCar.brake();
+        cout << "After braking " << (i+1) << ": " << myCar.getSpeed() << " mph" << endl;
+    }
+    
+    return 0;
+}</code></pre>
+                </div>
+            </div>
+
+            <div class="exercise-card">
+                <h3>Exercise 3: PayRoll Class</h3>
+                <div class="code-container">
+                    <pre><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;iomanip&gt;
+using namespace std;
+
+class PayRoll {
+private:
+    double hourlyPayRate;
+    double hoursWorked;
+    double totalPay;
+
+public:
+    // Constructor
+    PayRoll(double payRate = 0.0) {
+        hourlyPayRate = payRate;
+        hoursWorked = 0.0;
+        totalPay = 0.0;
+    }
+    
+    // Mutators
+    void setHourlyPayRate(double rate) {
+        hourlyPayRate = (rate >= 0) ? rate : 0;
+    }
+    
+    void setHoursWorked(double hours) {
+        if (hours >= 0 && hours <= 60) {
+            hoursWorked = hours;
+            calculatePay();
+        } else {
+            cout << "Invalid hours! Must be between 0 and 60." << endl;
+        }
+    }
+    
+    // Accessors
+    double getHourlyPayRate() const { return hourlyPayRate; }
+    double getHoursWorked() const { return hoursWorked; }
+    double getTotalPay() const { return totalPay; }
+    
+private:
+    void calculatePay() {
+        totalPay = hourlyPayRate * hoursWorked;
+    }
+};
+
+int main() {
+    const int NUM_EMPLOYEES = 7;
+    PayRoll employees[NUM_EMPLOYEES];
+    
+    // Get pay rates and hours for each employee
+    for (int i = 0; i < NUM_EMPLOYEES; i++) {
+        double rate, hours;
+        
+        cout << "\nEmployee " << (i + 1) << ":" << endl;
+        cout << "Enter hourly pay rate: $";
+        cin >> rate;
+        employees[i].setHourlyPayRate(rate);
+        
+        cout << "Enter hours worked (max 60): ";
+        cin >> hours;
+        employees[i].setHoursWorked(hours);
+    }
+    
+    // Display results
+    cout << "\n" << setw(10) << "Employee" << setw(12) << "Pay Rate" 
+         << setw(12) << "Hours" << setw(12) << "Gross Pay" << endl;
+    cout << string(46, '-') << endl;
+    
+    for (int i = 0; i < NUM_EMPLOYEES; i++) {
+        cout << setw(10) << (i + 1) 
+             << setw(12) << fixed << setprecision(2) << employees[i].getHourlyPayRate()
+             << setw(12) << employees[i].getHoursWorked()
+             << setw(12) << employees[i].getTotalPay() << endl;
+    }
+    
+    return 0;
+}</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- Week 15 Content -->
+        <section id="week15" class="week-content">
+            <h2><i class="fas fa-plus-circle"></i> Week 15 - Operator Overloading</h2>
+            
+            <div class="concept-card">
+                <h3>Key Concepts</h3>
+                <ul>
+                    <li><strong>Operator Overloading:</strong> Giving additional meanings to operators</li>
+                    <li><strong>Member vs Non-member functions:</strong> Different approaches to overloading</li>
+                    <li><strong>Copy Constructor:</strong> Creates a copy of an object</li>
+                    <li><strong>Const correctness:</strong> Using const appropriately</li>
+                </ul>
+            </div>
+
+            <div class="exercise-card">
+                <h3>Exercise 1: Time Class with Operator Overloading</h3>
+                <div class="code-container">
+                    <pre><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;iomanip&gt;
+using namespace std;
+
+class Time {
+private:
+    int hours, minutes, seconds;
+
+public:
+    // Constructors
+    Time() : hours(0), minutes(0), seconds(0) {}
+    
+    Time(int h, int m, int s) {
+        setTime(h, m, s);
+    }
+    
+    // Set time with validation
+    void setTime(int h, int m, int s) {
+        hours = (h >= 0 && h < 24) ? h : 0;
+        minutes = (m >= 0 && m < 60) ? m : 0;
+        seconds = (s >= 0 && s < 60) ? s : 0;
+    }
+    
+    // Display time in HH:MM:SS format
+    void display() const {
+        cout << setfill('0') << setw(2) << hours << ":"
+             << setw(2) << minutes << ":"
+             << setw(2) << seconds;
+    }
+    
+    // Overload + operator
+    Time operator+(const Time& other) const {
+        Time result;
+        result.seconds = seconds + other.seconds;
+        result.minutes = minutes + other.minutes + (result.seconds / 60);
+        result.seconds %= 60;
+        result.hours = hours + other.hours + (result.minutes / 60);
+        result.minutes %= 60;
+        result.hours %= 24;  // Keep within 24-hour format
+        return result;
+    }
+    
+    // Accessors
+    int getHours() const { return hours; }
+    int getMinutes() const { return minutes; }
+    int getSeconds() const { return seconds; }
+};
+
+int main() {
+    const Time time1(10, 30, 45);
+    const Time time2(5, 45, 20);
+    Time result;
+    
+    cout << "Time 1: ";
+    time1.display();
+    cout << "\nTime 2: ";
+    time2.display();
+    
+    result = time1 + time2;
+    
+    cout << "\nSum: ";
+    result.display();
+    cout << endl;
+    
+    return 0;
+}</code></pre>
+                </div>
+
+                <div class="output-container">
+                    <h4>Sample Output</h4>
+                    <pre>Time 1: 10:30:45
+Time 2: 05:45:20
+Sum: 16:16:05</pre>
+                </div>
+            </div>
+
+            <div class="exercise-card">
+                <h3>Exercise 2: FeetInches Class with Extended Operators</h3>
+                <div class="code-container">
+                    <pre><code class="language-cpp">#include &lt;iostream&gt;
+using namespace std;
+
+class FeetInches {
+private:
+    int feet;
+    int inches;
+    
+    void simplify() {
+        if (inches >= 12) {
+            feet += inches / 12;
+            inches %= 12;
+        } else if (inches < 0) {
+            feet -= ((-inches - 1) / 12) + 1;
+            inches = 12 - ((-inches) % 12);
+            if (inches == 12) {
+                inches = 0;
+                feet++;
+            }
+        }
+    }
+
+public:
+    // Constructors
+    FeetInches(int f = 0, int i = 0) : feet(f), inches(i) {
+        simplify();
+    }
+    
+    // Copy constructor
+    FeetInches(const FeetInches& other) {
+        feet = other.feet;
+        inches = other.inches;
+    }
+    
+    // Overloaded operators
+    bool operator<=(const FeetInches& other) const {
+        return (feet * 12 + inches) <= (other.feet * 12 + other.inches);
+    }
+    
+    bool operator>=(const FeetInches& other) const {
+        return (feet * 12 + inches) >= (other.feet * 12 + other.inches);
+    }
+    
+    bool operator!=(const FeetInches& other) const {
+        return !(*this == other);
+    }
+    
+    bool operator==(const FeetInches& other) const {
+        return (feet == other.feet && inches == other.inches);
+    }
+    
+    // Multiply member function
+    FeetInches multiply(const FeetInches& other) const {
+        int totalInches1 = feet * 12 + inches;
+        int totalInches2 = other.feet * 12 + other.inches;
+        int resultInches = totalInches1 * totalInches2;
+        return FeetInches(0, resultInches);
+    }
+    
+    // Display function
+    void display() const {
+        cout << feet << " feet, " << inches << " inches";
+    }
+    
+    // Accessors
+    int getFeet() const { return feet; }
+    int getInches() const { return inches; }
+};
+
+int main() {
+    FeetInches distance1(5, 8);
+    FeetInches distance2(3, 10);
+    FeetInches distance3(5, 8);  // Same as distance1
+    
+    cout << "Distance 1: "; distance1.display(); cout << endl;
+    cout << "Distance 2: "; distance2.display(); cout << endl;
+    cout << "Distance 3: "; distance3.display(); cout << endl;
+    
+    // Test comparison operators
+    cout << "\nComparisons:" << endl;
+    cout << "Distance1 <= Distance2: " << (distance1 <= distance2) << endl;
+    cout << "Distance1 >= Distance2: " << (distance1 >= distance2) << endl;
+    cout << "Distance1 != Distance2: " << (distance1 != distance2) << endl;
+    cout << "Distance1 == Distance3: " << (distance1 == distance3) << endl;
+    
+    // Test multiply function
+    FeetInches result = distance1.multiply(FeetInches(0, 2));
+    cout << "\nDistance1 multiplied by 2 inches: ";
+    result.display();
+    cout << endl;
+    
+    return 0;
+}</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- Week 16 Content -->
+        <section id="week16" class="week-content">
+            <h2><i class="fas fa-sitemap"></i> Week 16 - Inheritance</h2>
+            
+            <div class="concept-card">
+                <h3>Key Concepts</h3>
+                <ul>
+                    <li><strong>Inheritance:</strong> Creating new classes based on existing classes</li>
+                    <li><strong>Base Class:</strong> The parent class being inherited from</li>
+                    <li><strong>Derived Class:</strong> The child class that inherits</li>
+                    <li><strong>Access Specifiers:</strong> public, protected, private inheritance</li>
+                    <li><strong>Constructor Chaining:</strong> How constructors are called in inheritance</li>
+                </ul>
+            </div>
+
+            <div class="exercise-card">
+                <h3>Exercise 1: Employee Hierarchy</h3>
+                <div class="code-container">
+                    <h4>Base Classes</h4>
+                    <pre><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;string&gt;
+using namespace std;
+
+// Employee base class
+class Employee {
+protected:
+    string name;
+    int employeeNumber;
+
+public:
+    Employee() : name(""), employeeNumber(0) {}
+    
+    Employee(string n, int num) : name(n), employeeNumber(num) {}
+    
+    virtual void getData() {
+        cout << "Enter employee name: ";
+        getline(cin, name);
+        cout << "Enter employee number: ";
+        cin >> employeeNumber;
+        cin.ignore(); // Clear input buffer
+    }
+    
+    virtual void putData() const {
+        cout << "Name: " << name << endl;
+        cout << "Employee Number: " << employeeNumber << endl;
+    }
+    
+    virtual ~Employee() {} // Virtual destructor
+};
+
+// Student base class
+class Student {
+protected:
+    string school;
+    string degree;
+
+public:
+    Student() : school(""), degree("") {}
+    
+    Student(string s, string d) : school(s), degree(d) {}
+    
+    virtual void getData() {
+        cout << "Enter school: ";
+        getline(cin, school);
+        cout << "Enter degree: ";
+        getline(cin, degree);
+    }
+    
+    virtual void putData() const {
+        cout << "School: " << school << endl;
+        cout << "Degree: " << degree << endl;
+    }
+    
+    virtual ~Student() {}
+};</code></pre>
+                </div>
+
+                <div class="code-container">
+                    <h4>Derived Classes</h4>
+                    <pre><code class="language-cpp">// Manager class (multiple inheritance)
+class Manager : public Employee, public Student {
+private:
+    string title;
+    double dues;
+
+public:
+    Manager() : Employee(), Student(), title(""), dues(0.0) {}
+    
+    void getData() override {
+        Employee::getData();
+        Student::getData();
+        cout << "Enter title: ";
+        getline(cin, title);
+        cout << "Enter dues: $";
+        cin >> dues;
+        cin.ignore();
+    }
+    
+    void putData() const override {
+        cout << "\n--- Manager Information ---" << endl;
+        Employee::putData();
+        Student::putData();
+        cout << "Title: " << title << endl;
+        cout << "Dues: $" << dues << endl;
+    }
+};
+
+// Scientist class (multiple inheritance)
+class Scientist : public Employee, public Student {
+private:
+    int publications;
+
+public:
+    Scientist() : Employee(), Student(), publications(0) {}
+    
+    void getData() override {
+        Employee::getData();
+        Student::getData();
+        cout << "Enter number of publications: ";
+        cin >> publications;
+        cin.ignore();
+    }
+    
+    void putData() const override {
+        cout << "\n--- Scientist Information ---" << endl;
+        Employee::putData();
+        Student::putData();
+        cout << "Publications: " << publications << endl;
+    }
+};
+
+// Laborer class (single inheritance)
+class Laborer : public Employee {
+public:
+    Laborer() : Employee() {}
+    
+    void getData() override {
+        Employee::getData();
+    }
+    
+    void putData() const override {
+        cout << "\n--- Laborer Information ---" << endl;
+        Employee::putData();
+    }
+};</code></pre>
+                </div>
+
+                <div class="code-container">
+                    <h4>Main Program</h4>
+                    <pre><code class="language-cpp">int main() {
+    Manager mgr;
+    Scientist sci;
+    Laborer lab;
+    
+    cout << "=== Enter Manager Data ===" << endl;
+    mgr.getData();
+    
+    cout << "\n=== Enter Scientist Data ===" << endl;
+    sci.getData();
+    
+    cout << "\n=== Enter Laborer Data ===" << endl;
+    lab.getData();
+    
+    cout << "\n\n=== DISPLAYING ALL DATA ===" << endl;
+    mgr.putData();
+    sci.putData();
+    lab.putData();
+    
+    return 0;
+}</code></pre>
+                </div>
+            </div>
+
+            <div class="exercise-card">
+                <h3>Exercise 2: ProductionWorker and TeamLeader</h3>
+                <div class="code-container">
+                    <pre><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;string&gt;
+using namespace std;
+
+class Employee {
+protected:
+    string name;
+    int employeeNumber;
+    string hireDate;
+
+public:
+    Employee() : name(""), employeeNumber(0), hireDate("") {}
+    
+    Employee(string n, int num, string date) 
+        : name(n), employeeNumber(num), hireDate(date) {}
+    
+    // Accessors
+    string getName() const { return name; }
+    int getEmployeeNumber() const { return employeeNumber; }
+    string getHireDate() const { return hireDate; }
+    
+    // Mutators
+    void setName(string n) { name = n; }
+    void setEmployeeNumber(int num) { employeeNumber = num; }
+    void setHireDate(string date) { hireDate = date; }
+    
+    virtual void displayInfo() const {
+        cout << "Name: " << name << endl;
+        cout << "Employee Number: " << employeeNumber << endl;
+        cout << "Hire Date: " << hireDate << endl;
+    }
+};
+
+class ProductionWorker : public Employee {
+protected:
+    int shift;          // 1 = day, 2 = night
+    double hourlyPayRate;
+
+public:
+    ProductionWorker() : Employee(), shift(1), hourlyPayRate(0.0) {}
+    
+    ProductionWorker(string n, int num, string date, int s, double pay)
+        : Employee(n, num, date), shift(s), hourlyPayRate(pay) {}
+    
+    // Accessors
+    int getShift() const { return shift; }
+    double getHourlyPayRate() const { return hourlyPayRate; }
+    
+    // Mutators
+    void setShift(int s) { 
+        shift = (s == 1 || s == 2) ? s : 1; 
+    }
+    void setHourlyPayRate(double pay) { 
+        hourlyPayRate = (pay >= 0) ? pay : 0; 
+    }
+    
+    string getShiftName() const {
+        return (shift == 1) ? "Day" : "Night";
+    }
+    
+    void displayInfo() const override {
+        Employee::displayInfo();
+        cout << "Shift: " << getShiftName() << endl;
+        cout << "Hourly Pay Rate: $" << hourlyPayRate << endl;
+    }
+};
+
+class TeamLeader : public ProductionWorker {
+private:
+    double monthlyBonus;
+    int requiredTrainingHours;
+    int attendedTrainingHours;
+
+public:
+    TeamLeader() : ProductionWorker(), monthlyBonus(0.0), 
+                   requiredTrainingHours(0), attendedTrainingHours(0) {}
+    
+    TeamLeader(string n, int num, string date, int s, double pay,
+               double bonus, int reqHours, int attHours)
+        : ProductionWorker(n, num, date, s, pay), monthlyBonus(bonus),
+          requiredTrainingHours(reqHours), attendedTrainingHours(attHours) {}
+    
+    // Accessors
+    double getMonthlyBonus() const { return monthlyBonus; }
+    int getRequiredTrainingHours() const { return requiredTrainingHours; }
+    int getAttendedTrainingHours() const { return attendedTrainingHours; }
+    
+    // Mutators
+    void setMonthlyBonus(double bonus) { 
+        monthlyBonus = (bonus >= 0) ? bonus : 0; 
+    }
+    void setRequiredTrainingHours(int hours) { 
+        requiredTrainingHours = (hours >= 0) ? hours : 0; 
+    }
+    void setAttendedTrainingHours(int hours) { 
+        attendedTrainingHours = (hours >= 0) ? hours : 0; 
+    }
+    
+    bool hasMetTrainingRequirement() const {
+        return attendedTrainingHours >= requiredTrainingHours;
+    }
+    
+    void displayInfo() const override {
+        cout << "\n--- Team Leader Information ---" << endl;
+        ProductionWorker::displayInfo();
+        cout << "Monthly Bonus: $" << monthlyBonus << endl;
+        cout << "Required Training Hours: " << requiredTrainingHours << endl;
+        cout << "Attended Training Hours: " << attendedTrainingHours << endl;
+        cout << "Training Requirement Met: " << (hasMetTrainingRequirement() ? "Yes" : "No") << endl;
+    }
+};
+
+int main() {
+    // Create a TeamLeader object
+    TeamLeader leader("John Smith", 12345, "2023-01-15", 1, 25.50, 500.0, 40, 35);
+    
+    leader.displayInfo();
+    
+    cout << "\nUpdating training hours..." << endl;
+    leader.setAttendedTrainingHours(45);
+    
+    cout << "\nUpdated Information:" << endl;
+    leader.displayInfo();
+    
+    return 0;
+}</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quiz Section -->
+        <section id="quiz" class="week-content">
+            <h2><i class="fas fa-question-circle"></i> Interactive C++ Quiz</h2>
+            
+            <div class="quiz-container">
+                <div id="quiz-question" class="question-card">
+                    <h3 id="question-text"></h3>
+                    <div id="code-block" class="code-container" style="display: none;">
+                        <pre><code id="code-content"></code></pre>
+                    </div>
+                    <div id="options" class="options-container">
+                        <!-- Options will be inserted here -->
+                    </div>
+                    <button id="submit-answer" onclick="checkAnswer()">Submit Answer</button>
+                    <div id="feedback" class="feedback"></div>
+                    <button id="next-question" onclick="nextQuestion()" style="display: none;">Next Question</button>
+                </div>
+                
+                <div class="quiz-stats">
+                    <p>Question <span id="current-question">1</span> of <span id="total-questions">10</span></p>
+                    <p>Score: <span id="score">0</span></p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 CSY2006 C++ Programming Notes. Created for educational purposes.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-cpp.min.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
