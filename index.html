@@ -5263,13 +5263,169 @@ Postorder: 20 40 30 60 80 70 50</pre>
                     </div>
                 </div>
 
+                <!-- Tree Traversal Exercises -->
+                <div class="question-category">
+                    <h4>Tree Traversal Exercises</h4>
+                    <p><em>For each tree diagram below, perform inorder, preorder, and postorder traversals and write the output sequence.</em></p>
+                    
+                    <div class="question-card" onclick="toggleAnswer(this)">
+                        <div class="question-header">
+                            <span class="question-number">Q7.</span>
+                            <span class="question-type output">Tree Traversal</span>
+                        </div>
+                        <p><strong>Question 1: Traverse the tree below in inorder, preorder and postorder. Output the results.</strong></p>
+                        <div class="tree-diagram">
+                            <img src="1.jpg.png" alt="Binary Tree 1" style="max-width: 100%; height: auto; border: 1px solid #ddd; border-radius: 8px; padding: 10px; background: white; margin: 1rem 0;">
+                        </div>
+                        <div class="answer">
+                            <p><strong>Traversal Results:</strong></p>
+                            <ul>
+                                <li><strong>Inorder (Left-Root-Right):</strong> D B E A F C G</li>
+                                <li><strong>Preorder (Root-Left-Right):</strong> A B D E C F G</li>
+                                <li><strong>Postorder (Left-Right-Root):</strong> D E B F G C A</li>
+                            </ul>
+                            <p><strong>Step-by-step Explanation:</strong></p>
+                            <ul>
+                                <li><strong>Inorder:</strong> Visit left subtree first (D B E), then root (A), then right subtree (F C G)</li>
+                                <li><strong>Preorder:</strong> Visit root first (A), then left subtree (B D E), then right subtree (C F G)</li>
+                                <li><strong>Postorder:</strong> Visit left subtree (D E B), then right subtree (F G C), then root (A)</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="question-card" onclick="toggleAnswer(this)">
+                        <div class="question-header">
+                            <span class="question-number">Q8.</span>
+                            <span class="question-type output">Tree Traversal</span>
+                        </div>
+                        <p><strong>Question 2: Traverse the tree below in inorder, preorder and postorder. Output the results.</strong></p>
+                        <div class="tree-diagram">
+                            <img src="2.jpg" alt="Binary Tree 2" style="max-width: 100%; height: auto; border: 1px solid #ddd; border-radius: 8px; padding: 10px; background: white; margin: 1rem 0;">
+                        </div>
+                        <div class="answer">
+                            <p><strong>Traversal Results:</strong></p>
+                            <ul>
+                                <li><strong>Inorder (Left-Root-Right):</strong> H D I B J E K A F L C M G N</li>
+                                <li><strong>Preorder (Root-Left-Right):</strong> A B D H I E J K C F L G M N</li>
+                                <li><strong>Postorder (Left-Right-Root):</strong> H I D J K E B L F M N G C A</li>
+                            </ul>
+                            <p><strong>Step-by-step Explanation:</strong></p>
+                            <ul>
+                                <li><strong>Inorder:</strong> Traverse left subtree (H D I B J E K), root (A), right subtree (F L C M G N)</li>
+                                <li><strong>Preorder:</strong> Root (A), left subtree (B D H I E J K), right subtree (C F L G M N)</li>
+                                <li><strong>Postorder:</strong> Left subtree (H I D J K E B), right subtree (L F M N G C), root (A)</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="question-card" onclick="toggleAnswer(this)">
+                        <div class="question-header">
+                            <span class="question-number">Q9.</span>
+                            <span class="question-type output">Tree Traversal</span>
+                        </div>
+                        <p><strong>Question 3: Traverse the tree below in inorder, preorder and postorder. Output the results.</strong></p>
+                        <div class="tree-diagram">
+                            <img src="3.jpg.png" alt="Binary Tree 3" style="max-width: 100%; height: auto; border: 1px solid #ddd; border-radius: 8px; padding: 10px; background: white; margin: 1rem 0;">
+                        </div>
+                        <div class="answer">
+                            <p><strong>Traversal Results:</strong></p>
+                            <ul>
+                                <li><strong>Inorder (Left-Root-Right):</strong> 4 2 5 1 6 3 7</li>
+                                <li><strong>Preorder (Root-Left-Right):</strong> 1 2 4 5 3 6 7</li>
+                                <li><strong>Postorder (Left-Right-Root):</strong> 4 5 2 6 7 3 1</li>
+                            </ul>
+                            <p><strong>Step-by-step Explanation:</strong></p>
+                            <ul>
+                                <li><strong>Inorder:</strong> Left subtree (4 2 5), root (1), right subtree (6 3 7)</li>
+                                <li><strong>Preorder:</strong> Root (1), left subtree (2 4 5), right subtree (3 6 7)</li>
+                                <li><strong>Postorder:</strong> Left subtree (4 5 2), right subtree (6 7 3), root (1)</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="question-card" onclick="toggleAnswer(this)">
+                        <div class="question-header">
+                            <span class="question-number">Q10.</span>
+                            <span class="question-type output">Tree Traversal</span>
+                        </div>
+                        <p><strong>Question 4: Traverse the tree below in inorder, preorder and postorder. Output the results.</strong></p>
+                        <div class="tree-diagram">
+                            <img src="4.jpg.png" alt="Binary Tree 4" style="max-width: 100%; height: auto; border: 1px solid #ddd; border-radius: 8px; padding: 10px; background: white; margin: 1rem 0;">
+                        </div>
+                        <div class="answer">
+                            <p><strong>Traversal Results:</strong></p>
+                            <ul>
+                                <li><strong>Inorder (Left-Root-Right):</strong> 8 4 9 2 10 5 11 1 12 6 13 3 14 7 15</li>
+                                <li><strong>Preorder (Root-Left-Right):</strong> 1 2 4 8 9 5 10 11 3 6 12 13 7 14 15</li>
+                                <li><strong>Postorder (Left-Right-Root):</strong> 8 9 4 10 11 5 2 12 13 6 14 15 7 3 1</li>
+                            </ul>
+                            <p><strong>Step-by-step Explanation:</strong></p>
+                            <ul>
+                                <li><strong>Inorder:</strong> Complete left subtree first, then root, then complete right subtree</li>
+                                <li><strong>Preorder:</strong> Root first, then recursively traverse left and right subtrees</li>
+                                <li><strong>Postorder:</strong> Both subtrees first, then root at the end</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="question-card" onclick="toggleAnswer(this)">
+                        <div class="question-header">
+                            <span class="question-number">Q11.</span>
+                            <span class="question-type output">Tree Traversal</span>
+                        </div>
+                        <p><strong>Question 5: Traverse the tree below in inorder, preorder and postorder. Output the results.</strong></p>
+                        <div class="tree-diagram">
+                            <img src="5.jpg" alt="Binary Tree 5" style="max-width: 100%; height: auto; border: 1px solid #ddd; border-radius: 8px; padding: 10px; background: white; margin: 1rem 0;">
+                        </div>
+                        <div class="answer">
+                            <p><strong>Traversal Results:</strong></p>
+                            <ul>
+                                <li><strong>Inorder (Left-Root-Right):</strong> D B A E C F</li>
+                                <li><strong>Preorder (Root-Left-Right):</strong> A B D C E F</li>
+                                <li><strong>Postorder (Left-Right-Root):</strong> D B E F C A</li>
+                            </ul>
+                            <p><strong>Step-by-step Explanation:</strong></p>
+                            <ul>
+                                <li><strong>Inorder:</strong> Left subtree (D B), root (A), right subtree (E C F)</li>
+                                <li><strong>Preorder:</strong> Root (A), left subtree (B D), right subtree (C E F)</li>
+                                <li><strong>Postorder:</strong> Left subtree (D B), right subtree (E F C), root (A)</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="question-card" onclick="toggleAnswer(this)">
+                        <div class="question-header">
+                            <span class="question-number">Q12.</span>
+                            <span class="question-type output">Tree Traversal</span>
+                        </div>
+                        <p><strong>Question 6: Traverse the tree below in inorder, preorder and postorder. Output the results.</strong></p>
+                        <div class="tree-diagram">
+                            <img src="6.jpg" alt="Binary Tree 6" style="max-width: 100%; height: auto; border: 1px solid #ddd; border-radius: 8px; padding: 10px; background: white; margin: 1rem 0;">
+                        </div>
+                        <div class="answer">
+                            <p><strong>Traversal Results:</strong></p>
+                            <ul>
+                                <li><strong>Inorder (Left-Root-Right):</strong> 3 1 4 2 5</li>
+                                <li><strong>Preorder (Root-Left-Right):</strong> 2 1 3 4 5</li>
+                                <li><strong>Postorder (Left-Right-Root):</strong> 3 4 1 5 2</li>
+                            </ul>
+                            <p><strong>Step-by-step Explanation:</strong></p>
+                            <ul>
+                                <li><strong>Inorder:</strong> Left subtree (3 1 4), root (2), right subtree (5)</li>
+                                <li><strong>Preorder:</strong> Root (2), left subtree (1 3 4), right subtree (5)</li>
+                                <li><strong>Postorder:</strong> Left subtree (3 4 1), right subtree (5), root (2)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Lab Exercise Questions -->
                 <div class="question-category">
                     <h4>Lab Exercise Questions</h4>
                     
                     <div class="question-card" onclick="toggleAnswer(this)">
                         <div class="question-header">
-                            <span class="question-number">Q7.</span>
+                            <span class="question-number">Q13.</span>
                             <span class="question-type lab">Lab Exercise</span>
                         </div>
                         <p><strong>Implement a complete Binary Search Tree template class with all basic operations.</strong></p>

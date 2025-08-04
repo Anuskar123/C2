@@ -482,6 +482,37 @@ mark {
     margin-top: 0.5rem;
 }
 
+/* Tree Diagram Styles */
+.tree-diagram {
+    text-align: center;
+    margin: 1.5rem 0;
+    padding: 1rem;
+    background: #f8f9fa;
+    border-radius: 10px;
+    border: 1px solid #e9ecef;
+}
+
+.tree-diagram img {
+    max-width: 100%;
+    height: auto;
+    border: 2px solid #667eea;
+    border-radius: 8px;
+    padding: 15px;
+    background: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.tree-diagram img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Tree Traversal Question Styles */
+.question-type[class*="Tree"] {
+    background: linear-gradient(135deg, #28a745, #20c997);
+}
+
 .feedback {
     margin: 1rem 0;
     padding: 1rem;
