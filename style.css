@@ -413,6 +413,75 @@ mark {
     background: linear-gradient(135deg, #229954, #1e8449);
 }
 
+/* Week 21 Binary Trees Styles */
+.terminology-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1rem;
+    margin: 1rem 0;
+}
+
+.term-item {
+    background: #f8f9fa;
+    padding: 1rem;
+    border-radius: 8px;
+    border-left: 4px solid #667eea;
+}
+
+.term-item h4 {
+    color: #667eea;
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+}
+
+.term-item p {
+    margin: 0;
+    color: #666;
+    font-size: 0.95rem;
+}
+
+.traversal-methods {
+    display: grid;
+    gap: 1.5rem;
+    margin: 1rem 0;
+}
+
+.method {
+    background: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 10px;
+    border: 1px solid #e9ecef;
+}
+
+.method h4 {
+    color: #495057;
+    margin-bottom: 0.8rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #667eea;
+}
+
+.algorithm-box {
+    background: linear-gradient(135deg, #e3f2fd, #f1f8e9);
+    padding: 1.5rem;
+    border-radius: 10px;
+    border-left: 5px solid #2196f3;
+    margin: 1rem 0;
+}
+
+.algorithm-box h4 {
+    color: #1976d2;
+    margin-bottom: 1rem;
+}
+
+.algorithm-box ol {
+    margin-left: 1rem;
+}
+
+.algorithm-box ul {
+    margin-left: 1.5rem;
+    margin-top: 0.5rem;
+}
+
 .feedback {
     margin: 1rem 0;
     padding: 1rem;

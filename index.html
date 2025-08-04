@@ -26,6 +26,7 @@
                 <li><a href="#week18" onclick="showWeek('week18')">Week 18 - Templates</a></li>
                 <li><a href="#week19" onclick="showWeek('week19')">Week 19 - Linked Lists</a></li>
                 <li><a href="#week20" onclick="showWeek('week20')">Week 20 - Stacks & Queues</a></li>
+                <li><a href="#week21" onclick="showWeek('week21')">Week 21 - Binary Trees</a></li>
                 <li><a href="#quiz" onclick="showQuiz()">Interactive Quiz</a></li>
             </ul>
         </div>
@@ -4906,6 +4907,586 @@ int main() {
                                 <li><strong>Infix to postfix converter:</strong> Expression evaluation</li>
                                 <li><strong>Display methods:</strong> Visual representation of data structures</li>
                                 <li><strong>Size and state methods:</strong> isEmpty, isFull, size functions</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Week 21 Content -->
+        <section id="week21" class="week-content">
+            <h2><i class="fas fa-sitemap"></i> Week 21 - Binary Trees</h2>
+            
+            <!-- Notes Section -->
+            <div class="notes-section">
+                <div class="concept-card">
+                    <h3><i class="fas fa-info-circle"></i> What is a Binary Tree?</h3>
+                    <p><strong>Binary Tree:</strong> A nonlinear linked list in which each node may point to 0, 1, or 2 other nodes.</p>
+                    
+                    <h4>Node Structure:</h4>
+                    <ul>
+                        <li><strong>Data fields:</strong> Store the actual information</li>
+                        <li><strong>Left pointer:</strong> Points to the left child node</li>
+                        <li><strong>Right pointer:</strong> Points to the right child node</li>
+                    </ul>
+                    
+                    <div class="code-container">
+                        <pre><code class="language-cpp">template &lt;typename T&gt;
+struct TreeNode {
+    T data;
+    TreeNode* left;
+    TreeNode* right;
+    
+    TreeNode(T value) : data(value), left(nullptr), right(nullptr) {}
+};</code></pre>
+                    </div>
+                    
+                    <p><strong>Advantages:</strong> Binary trees make excellent data structures for searching large amounts of data efficiently. Unlike arrays and linked lists (linear structures), binary trees allow for fast binary search operations.</p>
+                </div>
+
+                <div class="concept-card">
+                    <h3><i class="fas fa-tree"></i> Binary Tree Terminology</h3>
+                    
+                    <div class="terminology-grid">
+                        <div class="term-item">
+                            <h4>Root Node</h4>
+                            <p>The node at the top of the tree, starting point for all operations</p>
+                        </div>
+                        
+                        <div class="term-item">
+                            <h4>Leaf Nodes</h4>
+                            <p>Nodes that have no children (both left and right pointers are NULL)</p>
+                        </div>
+                        
+                        <div class="term-item">
+                            <h4>Parent Node</h4>
+                            <p>A node that has one or more child nodes</p>
+                        </div>
+                        
+                        <div class="term-item">
+                            <h4>Child Nodes</h4>
+                            <p>Nodes that are directly connected below a parent node</p>
+                        </div>
+                        
+                        <div class="term-item">
+                            <h4>Subtree</h4>
+                            <p>The portion of a tree from a node down to its leaves</p>
+                        </div>
+                        
+                        <div class="term-item">
+                            <h4>Tree Pointer</h4>
+                            <p>Like a head pointer for linked lists, points to the root of the tree</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="concept-card">
+                    <h3><i class="fas fa-search"></i> Binary Search Trees</h3>
+                    <p><strong>Binary Search Tree (BST):</strong> A special type of binary tree where data is organized to simplify searches.</p>
+                    
+                    <h4>BST Properties:</h4>
+                    <ul>
+                        <li><strong>Left Subtree Rule:</strong> All values in the left subtree are less than the parent node's value</li>
+                        <li><strong>Right Subtree Rule:</strong> All values in the right subtree are greater than the parent node's value</li>
+                        <li><strong>Recursive Property:</strong> Each subtree is also a valid BST</li>
+                    </ul>
+                    
+                    <div class="algorithm-box">
+                        <h4>Search Algorithm:</h4>
+                        <ol>
+                            <li>Start at the root node</li>
+                            <li>Compare the target value with current node:
+                                <ul>
+                                    <li>If equal: Found! Return the node</li>
+                                    <li>If target < current: Move to left child</li>
+                                    <li>If target > current: Move to right child</li>
+                                </ul>
+                            </li>
+                            <li>Repeat until found or reach NULL pointer</li>
+                        </ol>
+                    </div>
+                    
+                    <div class="code-container">
+                        <pre><code class="language-cpp">bool search(TreeNode* root, int target) {
+    if (root == nullptr) return false;  // Not found
+    
+    if (target == root->data) return true;  // Found
+    
+    if (target < root->data)
+        return search(root->left, target);   // Search left
+    else
+        return search(root->right, target);  // Search right
+}</code></pre>
+                    </div>
+                </div>
+
+                <div class="concept-card">
+                    <h3><i class="fas fa-route"></i> Tree Traversal Methods</h3>
+                    <p>Three main ways to visit all nodes in a binary tree:</p>
+                    
+                    <div class="traversal-methods">
+                        <div class="method">
+                            <h4>1. Inorder Traversal (Left-Root-Right)</h4>
+                            <p>Visit left subtree → Visit root → Visit right subtree</p>
+                            <div class="code-container">
+                                <pre><code class="language-cpp">void inorder(TreeNode* root) {
+    if (root != nullptr) {
+        inorder(root->left);        // Left
+        cout << root->data << " ";  // Root
+        inorder(root->right);       // Right
+    }
+}</code></pre>
+                            </div>
+                        </div>
+                        
+                        <div class="method">
+                            <h4>2. Preorder Traversal (Root-Left-Right)</h4>
+                            <p>Visit root → Visit left subtree → Visit right subtree</p>
+                            <div class="code-container">
+                                <pre><code class="language-cpp">void preorder(TreeNode* root) {
+    if (root != nullptr) {
+        cout << root->data << " ";  // Root
+        preorder(root->left);       // Left
+        preorder(root->right);      // Right
+    }
+}</code></pre>
+                            </div>
+                        </div>
+                        
+                        <div class="method">
+                            <h4>3. Postorder Traversal (Left-Right-Root)</h4>
+                            <p>Visit left subtree → Visit right subtree → Visit root</p>
+                            <div class="code-container">
+                                <pre><code class="language-cpp">void postorder(TreeNode* root) {
+    if (root != nullptr) {
+        postorder(root->left);      // Left
+        postorder(root->right);     // Right
+        cout << root->data << " ";  // Root
+    }
+}</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Questions Section -->
+            <div class="questions-section">
+                <h3><i class="fas fa-question-circle"></i> Week 21 Practice Questions</h3>
+
+                <!-- MCQ Questions -->
+                <div class="question-category">
+                    <h4>Multiple Choice Questions</h4>
+                    
+                    <div class="question-card" onclick="toggleAnswer(this)">
+                        <div class="question-header">
+                            <span class="question-number">Q1.</span>
+                            <span class="question-type mcq">MCQ</span>
+                        </div>
+                        <p><strong>In a binary search tree, if we want to find a value greater than the root, we should search in which subtree?</strong></p>
+                        <ul class="options">
+                            <li>A) Left subtree</li>
+                            <li>B) Right subtree</li>
+                            <li>C) Both subtrees</li>
+                            <li>D) Neither subtree</li>
+                        </ul>
+                        <div class="answer">
+                            <p><strong>Answer: B) Right subtree</strong></p>
+                            <p><strong>Explanation:</strong> In a BST, all values in the right subtree are greater than the root node's value, while all values in the left subtree are smaller.</p>
+                        </div>
+                    </div>
+
+                    <div class="question-card" onclick="toggleAnswer(this)">
+                        <div class="question-header">
+                            <span class="question-number">Q2.</span>
+                            <span class="question-type mcq">MCQ</span>
+                        </div>
+                        <p><strong>Which traversal method visits nodes in sorted order for a binary search tree?</strong></p>
+                        <ul class="options">
+                            <li>A) Preorder</li>
+                            <li>B) Inorder</li>
+                            <li>C) Postorder</li>
+                            <li>D) Level order</li>
+                        </ul>
+                        <div class="answer">
+                            <p><strong>Answer: B) Inorder</strong></p>
+                            <p><strong>Explanation:</strong> Inorder traversal (Left-Root-Right) visits nodes in ascending sorted order for a BST because it visits smaller values first (left), then current, then larger values (right).</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Find the Error Questions -->
+                <div class="question-category">
+                    <h4>Find the Error</h4>
+                    
+                    <div class="question-card">
+                        <div class="question-header">
+                            <span class="question-number">Q3.</span>
+                            <span class="question-type error">Find Error</span>
+                        </div>
+                        <p><strong>Find the error in this binary tree insertion function:</strong></p>
+                        <div class="code-container">
+                            <pre><code class="language-cpp">void insert(TreeNode* root, int value) {
+    if (root == nullptr) {
+        root = new TreeNode(value);  // Error here
+        return;
+    }
+    
+    if (value < root->data) {
+        insert(root->left, value);
+    } else {
+        insert(root->right, value);
+    }
+}</code></pre>
+                        </div>
+                        <button class="show-answer-btn" onclick="toggleAnswerWithButton(this)">Show Answer</button>
+                        <div class="answer">
+                            <p><strong>Error:</strong> Passing pointer by value instead of by reference.</p>
+                            <p><strong>Correction:</strong></p>
+                            <div class="code-container">
+                                <pre><code class="language-cpp">void insert(TreeNode*& root, int value) {  // Pass by reference
+    if (root == nullptr) {
+        root = new TreeNode(value);  // Now this works correctly
+        return;
+    }
+    
+    if (value < root->data) {
+        insert(root->left, value);
+    } else {
+        insert(root->right, value);
+    }
+}</code></pre>
+                            </div>
+                            <p><strong>Explanation:</strong> When creating a new root node, we need to modify the actual pointer. Passing by value creates a copy, so the original pointer remains nullptr.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Find Output Questions -->
+                <div class="question-category">
+                    <h4>Find the Output</h4>
+                    
+                    <div class="question-card" onclick="toggleAnswer(this)">
+                        <div class="question-header">
+                            <span class="question-number">Q4.</span>
+                            <span class="question-type output">Find Output</span>
+                        </div>
+                        <p><strong>What will be the inorder traversal output for this BST after insertions?</strong></p>
+                        <div class="code-container">
+                            <pre><code class="language-cpp">BinaryTree tree;
+tree.insert(50);
+tree.insert(30);
+tree.insert(70);
+tree.insert(20);
+tree.insert(40);
+tree.insert(60);
+tree.insert(80);
+
+cout << "Inorder: ";
+tree.inorderTraversal();
+cout << endl;</code></pre>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Output:</strong></p>
+                            <pre>Inorder: 20 30 40 50 60 70 80</pre>
+                            <p><strong>Explanation:</strong></p>
+                            <ul>
+                                <li>Tree structure: 50 is root, 30 and 70 are children</li>
+                                <li>20,40 are children of 30; 60,80 are children of 70</li>
+                                <li>Inorder traversal visits in sorted order: 20 30 40 50 60 70 80</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="question-card" onclick="toggleAnswer(this)">
+                        <div class="question-header">
+                            <span class="question-number">Q5.</span>
+                            <span class="question-type output">Find Output</span>
+                        </div>
+                        <p><strong>What will be the preorder and postorder traversal outputs?</strong></p>
+                        <div class="code-container">
+                            <pre><code class="language-cpp">// Same tree as above
+cout << "Preorder: ";
+tree.preorderTraversal();
+cout << endl;
+
+cout << "Postorder: ";
+tree.postorderTraversal();
+cout << endl;</code></pre>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Output:</strong></p>
+                            <pre>Preorder: 50 30 20 40 70 60 80
+Postorder: 20 40 30 60 80 70 50</pre>
+                            <p><strong>Explanation:</strong></p>
+                            <ul>
+                                <li><strong>Preorder (Root-Left-Right):</strong> Visit root first, then left subtree, then right subtree</li>
+                                <li><strong>Postorder (Left-Right-Root):</strong> Visit left subtree, then right subtree, then root</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Complete the Code Questions -->
+                <div class="question-category">
+                    <h4>Complete the Code</h4>
+                    
+                    <div class="question-card" onclick="toggleAnswer(this)">
+                        <div class="question-header">
+                            <span class="question-number">Q6.</span>
+                            <span class="question-type complete">Complete Code</span>
+                        </div>
+                        <p><strong>Complete the function to count total nodes in a binary tree:</strong></p>
+                        <div class="code-container">
+                            <pre><code class="language-cpp">int countNodes(TreeNode* root) {
+    if (root == _______) {
+        return _______;
+    }
+    
+    return _______ + countNodes(_______) + countNodes(_______);
+}</code></pre>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Complete Code:</strong></p>
+                            <div class="code-container">
+                                <pre><code class="language-cpp">int countNodes(TreeNode* root) {
+    if (root == nullptr) {
+        return 0;
+    }
+    
+    return 1 + countNodes(root->left) + countNodes(root->right);
+}</code></pre>
+                            </div>
+                            <p><strong>Explanation:</strong> Base case returns 0 for empty tree. Recursive case counts current node (1) plus all nodes in left and right subtrees.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lab Exercise Questions -->
+                <div class="question-category">
+                    <h4>Lab Exercise Questions</h4>
+                    
+                    <div class="question-card" onclick="toggleAnswer(this)">
+                        <div class="question-header">
+                            <span class="question-number">Q7.</span>
+                            <span class="question-type lab">Lab Exercise</span>
+                        </div>
+                        <p><strong>Implement a complete Binary Search Tree template class with all basic operations.</strong></p>
+                        <div class="answer">
+                            <p><strong>Solution:</strong></p>
+                            <div class="code-container">
+                                <pre><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;queue&gt;
+using namespace std;
+
+template &lt;typename T&gt;
+class BinarySearchTree {
+private:
+    struct TreeNode {
+        T data;
+        TreeNode* left;
+        TreeNode* right;
+        
+        TreeNode(T value) : data(value), left(nullptr), right(nullptr) {}
+    };
+    
+    TreeNode* root;
+    
+    // Helper functions
+    void insert(TreeNode*& node, T value) {
+        if (node == nullptr) {
+            node = new TreeNode(value);
+        } else if (value < node->data) {
+            insert(node->left, value);
+        } else if (value > node->data) {
+            insert(node->right, value);
+        }
+        // Ignore duplicates
+    }
+    
+    bool search(TreeNode* node, T value) const {
+        if (node == nullptr) return false;
+        if (value == node->data) return true;
+        if (value < node->data) return search(node->left, value);
+        return search(node->right, value);
+    }
+    
+    void inorder(TreeNode* node) const {
+        if (node != nullptr) {
+            inorder(node->left);
+            cout << node->data << " ";
+            inorder(node->right);
+        }
+    }
+    
+    void preorder(TreeNode* node) const {
+        if (node != nullptr) {
+            cout << node->data << " ";
+            preorder(node->left);
+            preorder(node->right);
+        }
+    }
+    
+    void postorder(TreeNode* node) const {
+        if (node != nullptr) {
+            postorder(node->left);
+            postorder(node->right);
+            cout << node->data << " ";
+        }
+    }
+    
+    int countNodes(TreeNode* node) const {
+        if (node == nullptr) return 0;
+        return 1 + countNodes(node->left) + countNodes(node->right);
+    }
+    
+    int countLeaves(TreeNode* node) const {
+        if (node == nullptr) return 0;
+        if (node->left == nullptr && node->right == nullptr) return 1;
+        return countLeaves(node->left) + countLeaves(node->right);
+    }
+    
+    int getHeight(TreeNode* node) const {
+        if (node == nullptr) return 0;
+        return 1 + max(getHeight(node->left), getHeight(node->right));
+    }
+    
+    void destroyTree(TreeNode* node) {
+        if (node != nullptr) {
+            destroyTree(node->left);
+            destroyTree(node->right);
+            delete node;
+        }
+    }
+
+public:
+    BinarySearchTree() : root(nullptr) {}
+    
+    ~BinarySearchTree() {
+        destroyTree(root);
+    }
+    
+    void insert(T value) {
+        insert(root, value);
+    }
+    
+    bool search(T value) const {
+        return search(root, value);
+    }
+    
+    void inorderTraversal() const {
+        cout << "Inorder: ";
+        inorder(root);
+        cout << endl;
+    }
+    
+    void preorderTraversal() const {
+        cout << "Preorder: ";
+        preorder(root);
+        cout << endl;
+    }
+    
+    void postorderTraversal() const {
+        cout << "Postorder: ";
+        postorder(root);
+        cout << endl;
+    }
+    
+    int totalNodes() const {
+        return countNodes(root);
+    }
+    
+    int leafNodes() const {
+        return countLeaves(root);
+    }
+    
+    int height() const {
+        return getHeight(root);
+    }
+    
+    bool isEmpty() const {
+        return root == nullptr;
+    }
+    
+    // Level order traversal (breadth-first)
+    void levelOrder() const {
+        if (root == nullptr) return;
+        
+        queue&lt;TreeNode*&gt; q;
+        q.push(root);
+        
+        cout << "Level Order: ";
+        while (!q.empty()) {
+            TreeNode* current = q.front();
+            q.pop();
+            
+            cout << current->data << " ";
+            
+            if (current->left) q.push(current->left);
+            if (current->right) q.push(current->right);
+        }
+        cout << endl;
+    }
+};
+
+// Test program
+int main() {
+    BinarySearchTree&lt;int&gt; bst;
+    
+    cout << "=== Binary Search Tree Demo ===" << endl;
+    
+    // Insert values
+    cout << "Inserting: 50, 30, 70, 20, 40, 60, 80" << endl;
+    bst.insert(50);
+    bst.insert(30);
+    bst.insert(70);
+    bst.insert(20);
+    bst.insert(40);
+    bst.insert(60);
+    bst.insert(80);
+    
+    // Test traversals
+    cout << "\nTraversal Results:" << endl;
+    bst.inorderTraversal();
+    bst.preorderTraversal();
+    bst.postorderTraversal();
+    bst.levelOrder();
+    
+    // Test tree properties
+    cout << "\nTree Properties:" << endl;
+    cout << "Total nodes: " << bst.totalNodes() << endl;
+    cout << "Leaf nodes: " << bst.leafNodes() << endl;
+    cout << "Height: " << bst.height() << endl;
+    
+    // Test search
+    cout << "\nSearch Results:" << endl;
+    cout << "Search 40: " << (bst.search(40) ? "Found" : "Not found") << endl;
+    cout << "Search 90: " << (bst.search(90) ? "Found" : "Not found") << endl;
+    
+    // Test with string data
+    cout << "\n=== String BST Demo ===" << endl;
+    BinarySearchTree&lt;string&gt; stringBst;
+    
+    stringBst.insert("dog");
+    stringBst.insert("cat");
+    stringBst.insert("elephant");
+    stringBst.insert("bird");
+    stringBst.insert("fish");
+    
+    stringBst.inorderTraversal();  // Should print in alphabetical order
+    
+    return 0;
+}</code></pre>
+                            </div>
+                            <p><strong>Key Features Implemented:</strong></p>
+                            <ul>
+                                <li><strong>Template class:</strong> Works with any comparable data type</li>
+                                <li><strong>All traversal methods:</strong> Inorder, preorder, postorder, level order</li>
+                                <li><strong>Tree properties:</strong> Count nodes, count leaves, get height</li>
+                                <li><strong>Search functionality:</strong> Efficient BST search</li>
+                                <li><strong>Memory management:</strong> Proper cleanup in destructor</li>
+                                <li><strong>Insert operation:</strong> Maintains BST property</li>
                             </ul>
                         </div>
                     </div>
