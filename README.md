@@ -135,5 +135,4 @@ This educational resource is created for academic purposes. Please respect copyr
 
 ---
 
-*Created for CSY2006 - Software Engineering 2*
-*Last updated: August 2025*
+
