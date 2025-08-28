@@ -28,14 +28,7 @@ This is an interactive website containing comprehensive C++ programming notes fo
 - Local storage for progress tracking
 - Keyboard shortcuts (Ctrl+1-7 for weeks, Ctrl+Q for quiz)
 
-## File Structure
-```
-cpp-notes-website/
-├── index.html          # Main HTML file with all content
-├── style.css          # CSS styling and responsive design
-├── script.js          # JavaScript functionality and interactivity
-└── README.md          # This documentation file
-```
+
 
 ## How to Use
 
