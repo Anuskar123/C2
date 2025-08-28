@@ -38,10 +38,7 @@ This is an interactive website containing comprehensive C++ programming notes fo
 3. Click on code examples to copy them
 4. Take the interactive quiz to test your knowledge
 
-### ⌨️ Keyboard Shortcuts
-- `Ctrl + 1-7`: Switch between different weeks
-- `Ctrl + Q`: Open the interactive quiz
-- `Ctrl + C`: Copy code when focused on code blocks
+
 
 ### 📝 Quiz Features
 - 10 multiple-choice questions
