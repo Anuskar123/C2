@@ -37,29 +37,78 @@
             <div class="main-content">
                 <section id="overview">
                     <h3>Week 17 Overview</h3>
-                    <p>This week covers expression evaluation techniques, focusing on converting infix expressions to postfix notation and evaluating postfix expressions using stacks.</p>
+                    <p>This week covers expression evaluation techniques - learning how computers understand and calculate mathematical expressions. We'll explore different ways to write expressions and how to convert between them using stacks.</p>
+
+                    <div class="beginner-tip">
+                        <h4>🧠 Think Like a Beginner</h4>
+                        <p><strong>Real-World Analogy:</strong> Think of expressions like recipes. Different notations are like different ways of writing the same recipe. Infix is how humans naturally write math (2 + 3), postfix is how computers prefer to read it (2 3 +).</p>
+                    </div>
 
                     <h4>Key Topics:</h4>
                     <ul>
-                        <li>Infix, Prefix, and Postfix notations</li>
-                        <li>Operator precedence and associativity</li>
-                        <li>Stack-based conversion algorithms</li>
-                        <li>Postfix expression evaluation</li>
-                        <li>Handling parentheses</li>
+                        <li><strong>Infix notation:</strong> Human-friendly (2 + 3 * 4)</li>
+                        <li><strong>Prefix notation:</strong> Operator first (+ 2 * 3 4)</li>
+                        <li><strong>Postfix notation:</strong> Operator last (2 3 4 * +)</li>
+                        <li><strong>Operator precedence:</strong> Multiplication before addition</li>
+                        <li><strong>Stack-based conversion:</strong> Using stacks to convert between formats</li>
+                        <li><strong>Expression evaluation:</strong> Calculating the final result</li>
                     </ul>
+
+                    <div class="important-note">
+                        <h4>💡 Why Expression Evaluation Matters</h4>
+                        <p>Understanding expression evaluation is crucial for building calculators, compilers, and any program that needs to process mathematical expressions. It's the foundation of how programming languages handle calculations!</p>
+                    </div>
                 </section>
 
                 <section id="infix-postfix">
                     <h3>Infix to Postfix Conversion</h3>
+                    
+                    <div class="beginner-tip">
+                        <h4>🔄 The Conversion Process</h4>
+                        <p><strong>Simple Explanation:</strong> Converting infix to postfix is like rearranging a sentence. In infix, operators sit between operands (2 + 3). In postfix, operators come after their operands (2 3 +). We use a stack to temporarily hold operators until it's their turn to be output.</p>
+                    </div>
+
+                    <h4>📝 Understanding the Notations:</h4>
+                    <div class="comparison-table">
+                        <div class="comparison-item">
+                            <h5>🧑‍💻 Infix (Human Style)</h5>
+                            <ul>
+                                <li>2 + 3 * 4</li>
+                                <li>Easy for humans to read</li>
+                                <li>Operators between operands</li>
+                                <li>Parentheses needed for clarity</li>
+                            </ul>
+                        </div>
+                        <div class="comparison-item">
+                            <h5>🤖 Postfix (Computer Style)</h5>
+                            <ul>
+                                <li>2 3 4 * +</li>
+                                <li>Easy for computers to process</li>
+                                <li>Operators after operands</li>
+                                <li>No parentheses needed</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <h4>🎯 Step-by-Step Example:</h4>
+                    <p>Convert: 2 + 3 * 4</p>
+                    <ol>
+                        <li>Read '2': Output it → Output: "2"</li>
+                        <li>Read '+': Push to stack → Stack: "+"</li>
+                        <li>Read '3': Output it → Output: "2 3"</li>
+                        <li>Read '*': Push to stack (higher precedence) → Stack: "+ *"</li>
+                        <li>Read '4': Output it → Output: "2 3 4"</li>
+                        <li>End of expression: Pop all operators → Output: "2 3 4 * +"</li>
+                    </ol>
 
                     <h4>Algorithm Steps</h4>
                     <ol>
                         <li>Scan the infix expression from left to right</li>
-                        <li>If operand, output it</li>
-                        <li>If operator, push to stack based on precedence</li>
-                        <li>If left parenthesis, push to stack</li>
-                        <li>If right parenthesis, pop until left parenthesis</li>
-                        <li>At end, pop all operators from stack</li>
+                        <li>If operand, output it immediately</li>
+                        <li>If operator, check precedence and pop higher/equal precedence operators first</li>
+                        <li>If left parenthesis, push to stack (save for later)</li>
+                        <li>If right parenthesis, pop operators until left parenthesis is found</li>
+                        <li>At end, pop all remaining operators from stack</li>
                     </ol>
 
                     <div class="code-block">

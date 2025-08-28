@@ -37,20 +37,78 @@
             <div class="main-content">
                 <section id="overview">
                     <h3>Week 22 Overview</h3>
-                    <p>This week covers the Standard Template Library (STL), which provides reusable components for common data structures and algorithms.</p>
+                    <p>This week introduces the Standard Template Library (STL) - a powerful collection of pre-built data structures and algorithms that save you from reinventing the wheel. The STL makes C++ programming much more efficient and productive.</p>
+
+                    <div class="beginner-tip">
+                        <h4>🧠 Think Like a Beginner</h4>
+                        <p><strong>Real-World Analogy:</strong> The STL is like a professional toolbox that comes with your programming "house." Instead of making your own hammer, screwdriver, and wrench from scratch, you get high-quality, tested tools ready to use. The STL provides containers (toolboxes) and algorithms (ways to use the tools).</p>
+                    </div>
 
                     <h4>Key Topics:</h4>
                     <ul>
-                        <li>STL Containers (vector, list, deque, set, map)</li>
-                        <li>STL Algorithms (sort, find, transform)</li>
-                        <li>Iterators</li>
-                        <li>Function objects and lambdas</li>
-                        <li>STL utility classes</li>
+                        <li><strong>STL Containers:</strong> vector (dynamic array), list (linked list), deque (double-ended queue), set (unique sorted items), map (key-value pairs)</li>
+                        <li><strong>STL Algorithms:</strong> sort, find, search, transform, copy - all working with any container</li>
+                        <li><strong>Iterators:</strong> Smart pointers that let algorithms work with any container type</li>
+                        <li><strong>Function objects:</strong> Objects that behave like functions (useful for custom sorting)</li>
+                        <li><strong>Lambdas:</strong> Anonymous functions for quick, one-time use</li>
                     </ul>
+
+                    <div class="important-note">
+                        <h4>💡 Why STL Matters</h4>
+                        <p>The STL contains battle-tested code written by C++ experts. Using STL components means fewer bugs, better performance, and code that's easier for other programmers to understand!</p>
+                    </div>
                 </section>
 
                 <section id="containers">
                     <h3>STL Containers</h3>
+                    
+                    <div class="beginner-tip">
+                        <h4>📦 STL Containers Analogy: Different Types of Storage Boxes</h4>
+                        <p><strong>Simple Explanation:</strong> STL containers are like different types of storage solutions. A vector is like a expandable folder that grows as you add papers. A map is like a filing cabinet where you store documents by name. Each container type is optimized for different use cases.</p>
+                    </div>
+
+                    <h4>🏗️ Choosing the Right Container:</h4>
+                    <div class="comparison-table">
+                        <div class="comparison-item">
+                            <h5>📋 vector (Dynamic Array)</h5>
+                            <ul>
+                                <li>Fast random access by index</li>
+                                <li>Slow insertions in the middle</li>
+                                <li>Good for: Lists that change size frequently</li>
+                                <li>Use when: You need fast access by position</li>
+                            </ul>
+                        </div>
+                        <div class="comparison-item">
+                            <h5>🔗 list (Doubly Linked List)</h5>
+                            <ul>
+                                <li>Slow random access (must traverse)</li>
+                                <li>Fast insertions anywhere</li>
+                                <li>Good for: Lists that change structure often</li>
+                                <li>Use when: You add/remove items frequently</li>
+                            </ul>
+                        </div>
+                        <div class="comparison-item">
+                            <h5>🗂️ map (Sorted Key-Value Pairs)</h5>
+                            <ul>
+                                <li>Items automatically sorted by key</li>
+                                <li>Keys must be unique</li>
+                                <li>Good for: Looking up by name/ID</li>
+                                <li>Use when: You need sorted data with fast lookup</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <h4>🎯 Real-World Examples:</h4>
+                    <ul>
+                        <li><strong>vector:</strong> Shopping cart items, game high scores, sensor readings</li>
+                        <li><strong>list:</strong> Playlist songs, browser history, undo/redo actions</li>
+                        <li><strong>map:</strong> Student grades (name→grade), phone book (name→number), configuration settings</li>
+                    </ul>
+
+                    <div class="important-note">
+                        <h4>⚠️ Container Selection Tips</h4>
+                        <p>Choose based on your main operations: If you mainly access by index, use vector. If you mainly search by key, use map. If you frequently add/remove in the middle, use list.</p>
+                    </div>
 
                     <h4>Vector Usage</h4>
                     <div class="code-block">
