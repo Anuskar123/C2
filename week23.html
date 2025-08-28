@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 23: Course Review - CSY2006</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>CSY2006 C++ Programming Course Notes</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="code-library.html">Code Library</a></li>
+                <li><a href="week10.html">Week 10</a></li>
+                <li><a href="week15.html">Week 15</a></li>
+                <li><a href="week16.html">Week 16</a></li>
+                <li><a href="week17.html">Week 17</a></li>
+                <li><a href="week18.html">Week 18</a></li>
+                <li><a href="week19.html">Week 19</a></li>
+                <li><a href="week20.html">Week 20</a></li>
+                <li><a href="week21.html">Week 21</a></li>
+                <li><a href="week22.html">Week 22</a></li>
+                <li><a href="week23.html">Week 23</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="week-header">
+            <h2>Week 23: Course Review</h2>
+            <p>Final Review and Advanced Topics</p>
+        </section>
+
+        <div class="week-content">
+            <div class="main-content">
+                <section id="overview">
+                    <h3>Week 23 Overview</h3>
+                    <p>This final week provides a comprehensive review of all course topics and introduces some advanced concepts for further study.</p>
+
+                    <h4>Key Topics:</h4>
+                    <ul>
+                        <li>Course recap and key concepts</li>
+                        <li>Common programming pitfalls</li>
+                        <li>Best practices and coding standards</li>
+                        <li>Advanced topics overview</li>
+                        <li>Final project guidelines</li>
+                    </ul>
+                </section>
+
+                <section id="course-summary">
+                    <h3>Course Summary</h3>
+
+                    <h4>Major Topics Covered</h4>
+                    <div class="overview-grid">
+                        <div class="overview-item">
+                            <h5>Object-Oriented Programming</h5>
+                            <ul>
+                                <li>Classes and Objects</li>
+                                <li>Inheritance and Polymorphism</li>
+                                <li>Encapsulation and Abstraction</li>
+                            </ul>
+                        </div>
+                        <div class="overview-item">
+                            <h5>Data Structures</h5>
+                            <ul>
+                                <li>Stacks, Queues, Linked Lists</li>
+                                <li>Trees and Graphs</li>
+                                <li>STL Containers</li>
+                            </ul>
+                        </div>
+                        <div class="overview-item">
+                            <h5>Algorithms</h5>
+                            <ul>
+                                <li>Sorting and Searching</li>
+                                <li>Expression Evaluation</li>
+                                <li>Graph Algorithms</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="best-practices">
+                    <h3>Best Practices</h3>
+
+                    <h4>Coding Standards</h4>
+                    <ul>
+                        <li>Use meaningful variable and function names</li>
+                        <li>Add comments for complex logic</li>
+                        <li>Follow consistent indentation</li>
+                        <li>Use proper error handling</li>
+                        <li>Avoid global variables when possible</li>
+                    </ul>
+
+                    <h4>Memory Management</h4>
+                    <ul>
+                        <li>Always delete dynamically allocated memory</li>
+                        <li>Use smart pointers when possible</li>
+                        <li>Check for null pointers</li>
+                        <li>Avoid memory leaks</li>
+                    </ul>
+                </section>
+
+                <section id="qa-section">
+                    <h3>Final Practice Questions</h3>
+
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>What are the four fundamental principles of Object-Oriented Programming?</h4>
+                        </div>
+                        <div class="answer">
+                            <p>The four pillars of OOP are:<br>1. <strong>Encapsulation</strong> - Bundling data and methods, hiding implementation details<br>2. <strong>Abstraction</strong> - Focusing on essential features while ignoring irrelevant details<br>3. <strong>Inheritance</strong> - Creating new classes from existing ones, promoting code reuse<br>4. <strong>Polymorphism</strong> - Ability of objects to take many forms (compile-time and runtime)</p>
+                        </div>
+                    </div>
+
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Find the memory leak in this code and explain how to fix it:</h4>
+                            <div class="code-block">
+                                <pre>class Shape {
+public:
+    virtual double area() = 0;
+};
+
+class Circle : public Shape {
+private:
+    double radius;
+public:
+    Circle(double r) { radius = r; }
+    double area() { return 3.14 * radius * radius; }
+};
+
+int main() {
+    Shape* s = new Circle(5);
+    cout &lt;&lt; s-&gt;area() &lt;&lt; endl;
+    delete s;
+    return 0;
+}</pre>
+                            </div>
+                        </div>
+                        <div class="answer">
+                            <p>The issue is that the base class <code>Shape</code> doesn't have a virtual destructor. When deleting a derived object through a base pointer, this causes undefined behavior and potential memory leaks.</p>
+                            <p><strong>Fix:</strong> Add <code>virtual ~Shape() {}</code> to the base class to ensure proper cleanup of derived objects.</p>
+                        </div>
+                    </div>
+
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>What is the difference between pass-by-value, pass-by-reference, and pass-by-pointer?</h4>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Pass-by-value:</strong> Creates a copy, changes don't affect original<br><strong>Pass-by-reference:</strong> Passes memory address using <code>&amp;</code>, changes affect original<br><strong>Pass-by-pointer:</strong> Passes memory address using <code>*</code>, requires null checks<br><br>Reference is generally safer and cleaner than pointer for non-null parameters.</p>
+                        </div>
+                    </div>
+
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Write a complete Stack class with proper encapsulation and error handling.</h4>
+                        </div>
+                        <div class="answer">
+                            <p>Here's a complete Stack implementation:</p>
+                            <div class="code-block">
+                                <pre>class Stack {
+private:
+    int* arr;
+    int top;
+    int capacity;
+public:
+    Stack(int size = 100) {
+        capacity = size;
+        arr = new int[capacity];
+        top = -1;
+    }
+    
+    ~Stack() {
+        delete[] arr;
+    }
+    
+    void push(int value) {
+        if (top >= capacity - 1) {
+            throw "Stack overflow";
+        }
+        arr[++top] = value;
+    }
+    
+    int pop() {
+        if (isEmpty()) {
+            throw "Stack underflow";
+        }
+        return arr[top--];
+    }
+    
+    int peek() const {
+        if (isEmpty()) {
+            throw "Stack is empty";
+        }
+        return arr[top];
+    }
+    
+    bool isEmpty() const {
+        return top == -1;
+    }
+    
+    bool isFull() const {
+        return top >= capacity - 1;
+    }
+};</pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>What are the main differences between C++ and other programming languages you've learned?</h4>
+                        </div>
+                        <div class="answer">
+                            <p>Key differences include:<br>• <strong>Manual memory management</strong> - Explicit allocation/deallocation with new/delete<br>• <strong>Strong typing</strong> - Strict type system with fewer implicit conversions<br>• <strong>Performance focus</strong> - Low-level control over hardware resources<br>• <strong>Multiple inheritance</strong> - Classes can inherit from multiple base classes<br>• <strong>Operator overloading</strong> - Ability to redefine operators for custom types<br>• <strong>Templates</strong> - Generic programming without runtime overhead</p>
+                        </div>
+                    </div>
+
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Explain the concept of virtual functions and when to use them.</h4>
+                        </div>
+                        <div class="answer">
+                            <p>Virtual functions enable runtime polymorphism. They're declared with <code>virtual</code> keyword in base class and can be overridden in derived classes. The correct function is called based on actual object type, not pointer/reference type.</p>
+                            <p><strong>Use when:</strong><br>• You have inheritance hierarchy<br>• You want derived classes to provide different implementations<br>• You're using base class pointers/references to derived objects</p>
+                        </div>
+                    </div>
+
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>What are some common mistakes beginners make with pointers?</h4>
+                        </div>
+                        <div class="answer">
+                            <p>Common pointer mistakes:<br>1. <strong>Dangling pointers</strong> - Using deleted memory<br>2. <strong>Memory leaks</strong> - Forgetting to delete allocated memory<br>3. <strong>Null pointer dereference</strong> - Accessing null pointers<br>4. <strong>Pointer arithmetic errors</strong> - Incorrect array indexing<br>5. <strong>Double deletion</strong> - Deleting the same memory twice<br>6. <strong>Uninitialized pointers</strong> - Using garbage addresses</p>
+                        </div>
+                    </div>
+
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Design a simple Student class with proper encapsulation and validation.</h4>
+                        </div>
+                        <div class="answer">
+                            <p>Here's a well-designed Student class:</p>
+                            <div class="code-block">
+                                <pre>class Student {
+private:
+    string name;
+    int id;
+    vector&lt;int&gt; grades;
+    
+public:
+    Student(string n, int i) : name(n), id(i) {
+        if (id &lt;= 0) throw "Invalid student ID";
+    }
+    
+    void addGrade(int grade) {
+        if (grade &lt; 0 || grade &gt; 100) {
+            throw "Grade must be between 0 and 100";
+        }
+        grades.push_back(grade);
+    }
+    
+    double getAverage() const {
+        if (grades.empty()) return 0.0;
+        int sum = 0;
+        for(int grade : grades) sum += grade;
+        return static_cast&lt;double&gt;(sum) / grades.size();
+    }
+    
+    string getName() const { return name; }
+    int getId() const { return id; }
+    const vector&lt;int&gt;&amp; getGrades() const { return grades; }
+};</pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>What is the difference between static and dynamic memory allocation?</h4>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Static allocation:</strong><br>• Memory allocated at compile time<br>• Fixed size throughout program execution<br>• Automatic cleanup when scope ends<br>• Examples: local variables, global variables<br><br><strong>Dynamic allocation:</strong><br>• Memory allocated at runtime<br>• Size can change during execution<br>• Manual memory management required<br>• Examples: new/delete, malloc/free</p>
+                        </div>
+                    </div>
+
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Explain the concept of templates and provide a practical example.</h4>
+                        </div>
+                        <div class="answer">
+                            <p>Templates enable generic programming by allowing functions and classes to work with different data types. The compiler generates specific code for each type used.</p>
+                            <div class="code-block">
+                                <pre>// Function template
+template &lt;typename T&gt;
+T maximum(T a, T b) {
+    return (a &gt; b) ? a : b;
+}
+
+// Class template
+template &lt;typename T&gt;
+class Container {
+private:
+    T data;
+public:
+    Container(T val) : data(val) {}
+    T getData() const { return data; }
+};
+
+// Usage
+int main() {
+    cout &lt;&lt; maximum(5, 10) &lt;&lt; endl;           // int
+    cout &lt;&lt; maximum(3.14, 2.71) &lt;&lt; endl;     // double
+    
+    Container&lt;int&gt; c1(42);
+    Container&lt;string&gt; c2("Hello");
+}</pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>What are the advantages and disadvantages of multiple inheritance?</h4>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Advantages:</strong><br>• Code reuse from multiple sources<br>• Modeling complex relationships (e.g., amphibious vehicle)<br>• Combining unrelated functionality<br><br><strong>Disadvantages:</strong><br>• Diamond problem (ambiguous base class)<br>• Complex class hierarchies<br>• Increased coupling between classes<br>• Virtual inheritance complexity</p>
+                        </div>
+                    </div>
+
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Write a function to reverse a string without using standard library functions.</h4>
+                        </div>
+                        <div class="answer">
+                            <p>Here's a manual string reversal function:</p>
+                            <div class="code-block">
+                                <pre>string reverseString(string str) {
+    int left = 0;
+    int right = str.length() - 1;
+    
+    while (left &lt; right) {
+        // Swap characters
+        char temp = str[left];
+        str[left] = str[right];
+        str[right] = temp;
+        
+        left++;
+        right--;
+    }
+    
+    return str;
+}
+
+int main() {
+    string original = "Hello World";
+    string reversed = reverseString(original);
+    cout &lt;&lt; reversed &lt;&lt; endl;  // Output: dlroW olleH
+    return 0;
+}</pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>What are smart pointers and why should you use them?</h4>
+                        </div>
+                        <div class="answer">
+                            <p>Smart pointers are wrapper classes that automatically manage memory. They prevent memory leaks by automatically deleting objects when they go out of scope.</p>
+                            <p><strong>Types:</strong><br>• <code>unique_ptr</code> - Exclusive ownership<br>• <code>shared_ptr</code> - Shared ownership with reference counting<br>• <code>weak_ptr</code> - Non-owning reference to shared_ptr<br><br><strong>Benefits:</strong> Automatic cleanup, exception safety, prevention of memory leaks.</p>
+                        </div>
+                    </div>
+
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Explain the difference between stack and heap memory.</h4>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Stack:</strong><br>• Automatic memory management<br>• Fast allocation/deallocation<br>• Limited size<br>• Local variables, function parameters<br>• LIFO (Last In, First Out)<br><br><strong>Heap:</strong><br>• Manual memory management<br>• Slower allocation/deallocation<br>• Large memory pool<br>• Dynamic allocation with new/delete<br>• More flexible but error-prone</p>
+                        </div>
+                    </div>
+
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>What are some best practices for writing maintainable C++ code?</h4>
+                        </div>
+                        <div class="answer">
+                            <p>Key best practices:<br>1. <strong>Use meaningful names</strong> - Variables, functions, classes should be self-documenting<br>2. <strong>Follow consistent formatting</strong> - Use proper indentation and spacing<br>3. <strong>Add documentation</strong> - Comments for complex logic, function purposes<br>4. <strong>Use RAII</strong> - Resource acquisition is initialization<br>5. <strong>Avoid global variables</strong> - Minimize global state<br>6. <strong>Handle errors properly</strong> - Use exceptions or error codes consistently<br>7. <strong>Write testable code</strong> - Single responsibility principle</p>
+                        </div>
+                    </div>
+
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Design a simple file I/O class for reading and writing text files.</h4>
+                        </div>
+                        <div class="answer">
+                            <p>Here's a simple file I/O utility class:</p>
+                            <div class="code-block">
+                                <pre>class FileHandler {
+public:
+    static vector&lt;string&gt; readLines(const string&amp; filename) {
+        vector&lt;string&gt; lines;
+        ifstream file(filename);
+        
+        if (!file.is_open()) {
+            throw "Could not open file: " + filename;
+        }
+        
+        string line;
+        while (getline(file, line)) {
+            lines.push_back(line);
+        }
+        
+        file.close();
+        return lines;
+    }
+    
+    static void writeLines(const string&amp; filename, 
+                          const vector&lt;string&gt;&amp; lines) {
+        ofstream file(filename);
+        
+        if (!file.is_open()) {
+            throw "Could not create file: " + filename;
+        }
+        
+        for (const string&amp; line : lines) {
+            file &lt;&lt; line &lt;&lt; endl;
+        }
+        
+        file.close();
+    }
+};</pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>What is the difference between early binding and late binding?</h4>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Early binding (static):</strong><br>• Function calls resolved at compile time<br>• Faster execution<br>• No runtime overhead<br>• Examples: regular function calls, overloaded functions<br><br><strong>Late binding (dynamic):</strong><br>• Function calls resolved at runtime<br>• Slower execution<br>• Runtime polymorphism<br>• Examples: virtual functions, function pointers</p>
+                        </div>
+                    </div>
+
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Explain exception handling in C++ with a complete example.</h4>
+                        </div>
+                        <div class="answer">
+                            <p>Exception handling uses try-catch blocks to handle runtime errors gracefully:</p>
+                            <div class="code-block">
+                                <pre>double divide(double a, double b) {
+    if (b == 0) {
+        throw "Division by zero error";
+    }
+    return a / b;
+}
+
+int main() {
+    try {
+        double result = divide(10, 0);
+        cout &lt;&lt; "Result: " &lt;&lt; result &lt;&lt; endl;
+    } catch (const char* error) {
+        cout &lt;&lt; "Error: " &lt;&lt; error &lt;&lt; endl;
+    } catch (...) {
+        cout &lt;&lt; "Unknown error occurred" &lt;&lt; endl;
+    }
+    
+    return 0;
+}</pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>What are some common STL containers and when to use each?</h4>
+                        </div>
+                        <div class="answer">
+                            <p><strong>vector:</strong> Dynamic array, frequent end operations, random access<br><strong>list:</strong> Frequent insertions/deletions anywhere, no random access needed<br><strong>deque:</strong> Frequent operations at both ends<br><strong>set:</strong> Unique elements, ordered, fast lookup<br><strong>map:</strong> Key-value pairs, ordered by key<br><strong>unordered_map:</strong> Key-value pairs, fast average lookup<br><strong>stack:</strong> LIFO operations<br><strong>queue:</strong> FIFO operations</p>
+                        </div>
+                    </div>
+
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Write a program that demonstrates the use of inheritance and polymorphism.</h4>
+                        </div>
+                        <div class="answer">
+                            <p>Here's a complete example with shapes:</p>
+                            <div class="code-block">
+                                <pre>class Shape {
+public:
+    virtual double area() const = 0;
+    virtual string getName() const = 0;
+    virtual ~Shape() {}
+};
+
+class Circle : public Shape {
+private:
+    double radius;
+public:
+    Circle(double r) : radius(r) {}
+    double area() const override {
+        return 3.14159 * radius * radius;
+    }
+    string getName() const override {
+        return "Circle";
+    }
+};
+
+class Rectangle : public Shape {
+private:
+    double width, height;
+public:
+    Rectangle(double w, double h) : width(w), height(h) {}
+    double area() const override {
+        return width * height;
+    }
+    string getName() const override {
+        return "Rectangle";
+    }
+};
+
+int main() {
+    vector&lt;Shape*&gt; shapes;
+    shapes.push_back(new Circle(5));
+    shapes.push_back(new Rectangle(4, 6));
+    
+    for (Shape* shape : shapes) {
+        cout &lt;&lt; shape-&gt;getName() &lt;&lt; " area: " 
+             &lt;&lt; shape-&gt;area() &lt;&lt; endl;
+        delete shape;
+    }
+    
+    return 0;
+}</pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>What are some final tips for becoming a better C++ programmer?</h4>
+                        </div>
+                        <div class="answer">
+                            <p>Key tips for improvement:<br>1. <strong>Practice regularly</strong> - Code daily, work on projects<br>2. <strong>Read good code</strong> - Study open source projects, STL implementation<br>3. <strong>Learn debugging</strong> - Master gdb, valgrind, and debugging techniques<br>4. <strong>Understand performance</strong> - Learn about big O notation, profiling<br>5. <strong>Follow modern C++</strong> - Use C++11/14/17/20 features when appropriate<br>6. <strong>Join communities</strong> - Participate in forums, code reviews<br>7. <strong>Build projects</strong> - Apply knowledge to real-world problems</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="final-project">
+                    <h3>Final Project Ideas</h3>
+
+                    <h4>Project Suggestions</h4>
+                    <ul>
+                        <li>Student Management System</li>
+                        <li>Library Management System</li>
+                        <li>Bank Account Management</li>
+                        <li>Calculator with Expression Evaluation</li>
+                        <li>Data Structure Visualizer</li>
+                        <li>Simple Game (Tic-tac-toe, Snake, etc.)</li>
+                    </ul>
+
+                    <h4>Project Requirements</h4>
+                    <ul>
+                        <li>Use OOP principles (classes, inheritance)</li>
+                        <li>Implement data structures</li>
+                        <li>Include file I/O operations</li>
+                        <li>Add proper error handling</li>
+                        <li>Create user-friendly interface</li>
+                    </ul>
+                </section>
+            </div>
+
+            <div class="sidebar">
+                <h3>Navigation</h3>
+                <ul>
+                    <li><a href="#overview">Overview</a></li>
+                    <li><a href="#course-summary">Summary</a></li>
+                    <li><a href="#best-practices">Best Practices</a></li>
+                    <li><a href="#qa-section">Final Q&A</a></li>
+                    <li><a href="#final-project">Final Project</a></li>
+                </ul>
+
+                <h3>Quick Review</h3>
+                <ul>
+                    <li>OOP Concepts</li>
+                    <li>Data Structures</li>
+                    <li>Algorithms</li>
+                    <li>STL Usage</li>
+                    <li>Best Practices</li>
+                </ul>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 CSY2006 C++ Programming Course. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

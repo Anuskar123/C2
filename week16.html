@@ -1,0 +1,1499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 16: Data Structures - CSY2006</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>CSY2006 C++ Programming Course Notes</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="code-library.html">Code Library</a></li>
+                <li><a href="week10.html">Week 10</a></li>
+                <li><a href="week15.html">Week 15</a></li>
+                <li><a href="week16.html">Week 16</a></li>
+                <li><a href="week17.html">Week 17</a></li>
+                <li><a href="week18.html">Week 18</a></li>
+                <li><a href="week19.html">Week 19</a></li>
+                <li><a href="week20.html">Week 20</a></li>
+                <li><a href="week21.html">Week 21</a></li>
+                <li><a href="week22.html">Week 22</a></li>
+                <li><a href="week23.html">Week 23</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="week-header">
+            <h2>Week 16: Data Structures</h2>
+            <p>Stacks, Queues, and Linked Lists</p>
+        </section>
+
+        <div class="week-content">
+            <div class="main-content">
+                <section id="overview">
+                    <h3>Week 16 Overview</h3>
+                    <p>This week focuses on implementing fundamental data structures in C++. We'll learn about stacks, queues, and linked lists with practical implementations.</p>
+
+                    <h4>Key Topics:</h4>
+                    <ul>
+                        <li>Stack implementation (LIFO)</li>
+                        <li>Queue implementation (FIFO)</li>
+                        <li>Linked List operations</li>
+                        <li>Template classes for generic data structures</li>
+                        <li>Memory management</li>
+                    </ul>
+                </section>
+
+                <section id="stack">
+                    <h3>Stack Implementation</h3>
+
+                    <h4>Stack ADT</h4>
+                    <div class="code-block">
+                        <pre>// stackADT.h
+#ifndef H_StackADT
+#define H_StackADT
+
+template &lt;class Type&gt;
+class stackADT {
+public:
+    virtual void initializeStack() = 0;
+    virtual bool isEmptyStack() const = 0;
+    virtual bool isFullStack() const = 0;
+    virtual void push(const Type&amp; newItem) = 0;
+    virtual Type top() const = 0;
+    virtual void pop() = 0;
+};
+
+#endif</pre>
+                    </div>
+
+                    <h4>Stack Implementation</h4>
+                    <div class="code-block">
+                        <pre>// myStack.h
+template &lt;class Type&gt;
+class stackType : public stackADT&lt;Type&gt; {
+private:
+    int maxStackSize;
+    int stackTop;
+    Type *list;
+
+public:
+    stackType(int stackSize = 100) {
+        maxStackSize = stackSize;
+        stackTop = 0;
+        list = new Type[maxStackSize];
+    }
+
+    ~stackType() { delete [] list; }
+
+    void initializeStack() { stackTop = 0; }
+
+    bool isEmptyStack() const { return stackTop == 0; }
+
+    bool isFullStack() const { return stackTop == maxStackSize; }
+
+    void push(const Type&amp; newItem) {
+        if (!isFullStack()) {
+            list[stackTop] = newItem;
+            stackTop++;
+        }
+    }
+
+    Type top() const {
+        if (!isEmptyStack())
+            return list[stackTop - 1];
+    }
+
+    void pop() {
+        if (!isEmptyStack())
+            stackTop--;
+    }
+};</pre>
+                    </div>
+                </section>
+
+                <section id="queue">
+                    <h3>Queue Implementation</h3>
+
+                    <h4>Queue Class</h4>
+                    <div class="code-block">
+                        <pre>template &lt;class Type&gt;
+class queueType {
+private:
+    int maxQueueSize;
+    int queueFront;
+    int queueRear;
+    Type *list;
+
+public:
+    queueType(int queueSize = 100) {
+        maxQueueSize = queueSize;
+        queueFront = 0;
+        queueRear = maxQueueSize - 1;
+        list = new Type[maxQueueSize];
+    }
+
+    ~queueType() { delete [] list; }
+
+    bool isEmptyQueue() const { return queueFront == (queueRear + 1) % maxQueueSize; }
+
+    bool isFullQueue() const { return queueFront == (queueRear + 2) % maxQueueSize; }
+
+    void addQueue(const Type&amp; newElement) {
+        if (!isFullQueue()) {
+            queueRear = (queueRear + 1) % maxQueueSize;
+            list[queueRear] = newElement;
+        }
+    }
+
+    Type front() const {
+        if (!isEmptyQueue())
+            return list[queueFront];
+    }
+
+    void deleteQueue() {
+        if (!isEmptyQueue())
+            queueFront = (queueFront + 1) % maxQueueSize;
+    }
+};</pre>
+                    </div>
+                </section>
+
+                <section id="linked-list">
+                    <h3>Linked List</h3>
+
+                    <h4>Node Structure</h4>
+                    <div class="code-block">
+                        <pre>template &lt;class Type&gt;
+struct nodeType {
+    Type info;
+    nodeType&lt;Type&gt; *link;
+};
+
+template &lt;class Type&gt;
+class linkedListType {
+private:
+    nodeType&lt;Type&gt; *first;
+    nodeType&lt;Type&gt; *last;
+    int count;
+
+public:
+    linkedListType() {
+        first = NULL;
+        last = NULL;
+        count = 0;
+    }
+
+    void insertFirst(const Type&amp; newItem) {
+        nodeType&lt;Type&gt; *newNode = new nodeType&lt;Type&gt;;
+        newNode-&gt;info = newItem;
+        newNode-&gt;link = first;
+        first = newNode;
+
+        if (last == NULL)
+            last = newNode;
+        count++;
+    }
+
+    void insertLast(const Type&amp; newItem) {
+        nodeType&lt;Type&gt; *newNode = new nodeType&lt;Type&gt;;
+        newNode-&gt;info = newItem;
+        newNode-&gt;link = NULL;
+
+        if (first == NULL) {
+            first = newNode;
+            last = newNode;
+        } else {
+            last-&gt;link = newNode;
+            last = newNode;
+        }
+        count++;
+    }
+
+    void deleteNode(const Type&amp; deleteItem) {
+        // Implementation for deletion
+    }
+};</pre>
+                    </div>
+                <section id="linked-list">
+                    <h3>Linked List Operations</h3>
+                    <p class="section-intro">
+                        <strong>For Beginners:</strong> A linked list is like a chain of paper clips where each clip holds a piece of data and points to the next clip.
+                        Unlike arrays, linked lists can easily grow and shrink, and you can insert or remove items from anywhere in the chain.
+                    </p>
+
+                    <h4>Understanding Linked List Operations</h4>
+                    <p>Before diving into the practice questions, let's understand the key operations:</p>
+
+                    <div class="beginner-tip">
+                        <h4>🔗 Linked List Basics</h4>
+                        <p><strong>Node Structure:</strong> Each node contains data (info) and a pointer to the next node (link)</p>
+                        <p><strong>Head Pointer:</strong> Points to the first node in the list</p>
+                        <p><strong>NULL Termination:</strong> The last node's link is NULL to mark the end</p>
+                    </div>
+
+                    <h4>Common Operations:</h4>
+                    <ul>
+                        <li><strong>Head Insertion:</strong> Add new node at the beginning (new head)</li>
+                        <li><strong>Tail Insertion:</strong> Add new node at the end</li>
+                        <li><strong>Middle Insertion:</strong> Insert node at a specific position</li>
+                        <li><strong>Traversal:</strong> Visit each node from head to tail</li>
+                    </ul>
+
+                    <div class="important-note">
+                        <h4>⚠️ Memory Management</h4>
+                        <p>Always use <code>new</code> to allocate nodes and <code>delete</code> to free memory when done.
+                        Forgetting to manage memory properly can cause memory leaks!</p>
+                    </div>
+                </section>
+
+                    <!-- Question 1: Find the Error -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 1: Find the error in this stack implementation:</h4>
+                            <div class="code-block">
+                                <pre>template&lt;class T&gt;
+class Stack {
+private:
+    T* stackArray;
+    int stackSize;
+    int top;
+public:
+    Stack(int size) {
+        stackArray = new T[stackSize];  // Error!
+        top = -1;
+    }
+};</pre>
+                            </div>
+                            <span class="question-type">Type: Find the Error</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Error:</strong> Using uninitialized <code>stackSize</code> instead of <code>size</code> parameter</p>
+                            <p><strong>Explanation:</strong> The constructor parameter is <code>size</code> but the code uses <code>stackSize</code> which is uninitialized.</p>
+                            <p><strong>Fix:</strong> <code>stackArray = new T[size]; stackSize = size;</code></p>
+                        </div>
+                    </div>
+
+                    <!-- Question 2: Find the Output -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 2: What will be the output of this queue operation?</h4>
+                            <div class="code-block">
+                                <pre>#include &lt;queue&gt;
+using namespace std;
+
+int main() {
+    queue&lt;int&gt; q;
+    q.push(1);
+    q.push(2);
+    q.push(3);
+    cout &lt;&lt; q.front() &lt;&lt; " ";
+    q.pop();
+    cout &lt;&lt; q.front() &lt;&lt; " ";
+    q.pop();
+    cout &lt;&lt; q.front() &lt;&lt; endl;
+    return 0;
+}</pre>
+                            </div>
+                            <span class="question-type">Type: Find the Output</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Output:</strong> 1 2 3</p>
+                            <p><strong>Explanation:</strong> Queue is FIFO: front shows 1, after pop shows 2, after another pop shows 3.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 3: Complete the Code -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 3: Complete the linked list node structure:</h4>
+                            <div class="code-block">
+                                <pre>template&lt;class T&gt;
+struct Node {
+    T data;
+    // Complete the node structure
+};
+
+template&lt;class T&gt;
+class LinkedList {
+private:
+    Node&lt;T&gt;* head;
+    // Other members...
+};</pre>
+                            </div>
+                            <span class="question-type">Type: Complete the Code</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Completed Code:</strong></p>
+                            <div class="code-block">
+                                <pre>template&lt;class T&gt;
+struct Node {
+    T data;
+    Node* next;
+};</pre>
+                            </div>
+                            <p><strong>Explanation:</strong> Each node needs a data field and a pointer to the next node.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 4: Write a Function -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 4: Write a stack push function:</h4>
+                            <div class="code-block">
+                                <pre>template&lt;class T&gt;
+class Stack {
+private:
+    T* stackArray;
+    int top;
+    int maxSize;
+public:
+    // Constructor and other methods...
+    void push(T value) {
+        // Write the push implementation
+    }
+};</pre>
+                            </div>
+                            <span class="question-type">Type: Write a Function</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Solution:</strong></p>
+                            <div class="code-block">
+                                <pre>void push(T value) {
+    if (top &gt;= maxSize - 1) {
+        cout &lt;&lt; "Stack overflow" &lt;&lt; endl;
+        return;
+    }
+    stackArray[++top] = value;
+}</pre>
+                            </div>
+                            <p><strong>Explanation:</strong> Check for overflow, increment top, then store the value.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 5: Find the Error -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 5: Find the memory leak in this linked list:</h4>
+                            <div class="code-block">
+                                <pre>class LinkedList {
+private:
+    struct Node {
+        int data;
+        Node* next;
+    };
+    Node* head;
+public:
+    void removeFirst() {
+        if (head != nullptr) {
+            Node* temp = head;
+            head = head-&gt;next;
+            // Memory leak here!
+        }
+    }
+};</pre>
+                            </div>
+                            <span class="question-type">Type: Find the Error</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Error:</strong> Missing <code>delete temp;</code></p>
+                            <p><strong>Explanation:</strong> The node is removed from the list but not deallocated, causing a memory leak.</p>
+                            <p><strong>Fix:</strong> Add <code>delete temp;</code> after <code>head = head-&gt;next;</code></p>
+                        </div>
+                    </div>
+
+                    <!-- Question 6: Find the Output -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 6: What will be the output?</h4>
+                            <div class="code-block">
+                                <pre>#include &lt;stack&gt;
+using namespace std;
+
+int main() {
+    stack&lt;int&gt; s;
+    for(int i = 1; i &lt;= 3; i++) {
+        s.push(i);
+    }
+    while(!s.empty()) {
+        cout &lt;&lt; s.top() &lt;&lt; " ";
+        s.pop();
+    }
+    return 0;
+}</pre>
+                            </div>
+                            <span class="question-type">Type: Find the Output</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Output:</strong> 3 2 1</p>
+                            <p><strong>Explanation:</strong> Stack is LIFO: last pushed (3) comes out first, then 2, then 1.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 7: Complete the Code -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 7: Complete the queue enqueue operation:</h4>
+                            <div class="code-block">
+                                <pre>template&lt;class T&gt;
+class Queue {
+private:
+    T* queueArray;
+    int front, rear;
+    int maxSize;
+public:
+    Queue(int size) : maxSize(size), front(-1), rear(-1) {
+        queueArray = new T[maxSize];
+    }
+    
+    void enqueue(T value) {
+        // Complete the enqueue implementation
+    }
+};</pre>
+                            </div>
+                            <span class="question-type">Type: Complete the Code</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Completed Code:</strong></p>
+                            <div class="code-block">
+                                <pre>void enqueue(T value) {
+    if (rear == maxSize - 1) {
+        cout &lt;&lt; "Queue overflow" &lt;&lt; endl;
+        return;
+    }
+    if (front == -1) front = 0;
+    queueArray[++rear] = value;
+}</pre>
+                            </div>
+                            <p><strong>Explanation:</strong> Check overflow, set front if first element, increment rear, store value.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 8: Write a Function -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 8: Write a function to find the middle element of a linked list:</h4>
+                            <div class="code-block">
+                                <pre>struct Node {
+    int data;
+    Node* next;
+};
+
+int findMiddle(Node* head) {
+    // Write the implementation using slow and fast pointers
+}</pre>
+                            </div>
+                            <span class="question-type">Type: Write a Function</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Solution:</strong></p>
+                            <div class="code-block">
+                                <pre>int findMiddle(Node* head) {
+    if (head == nullptr) return -1;
+    
+    Node* slow = head;
+    Node* fast = head;
+    
+    while (fast != nullptr && fast-&gt;next != nullptr) {
+        slow = slow-&gt;next;
+        fast = fast-&gt;next-&gt;next;
+    }
+    
+    return slow-&gt;data;
+}</pre>
+                            </div>
+                            <p><strong>Explanation:</strong> Slow pointer moves one step, fast pointer moves two steps. When fast reaches end, slow is at middle.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 9: Find the Error -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 9: Find the error in this stack pop operation:</h4>
+                            <div class="code-block">
+                                <pre>template&lt;class T&gt;
+class Stack {
+private:
+    T* stackArray;
+    int top;
+public:
+    T pop() {
+        if (top == -1) {
+            cout &lt;&lt; "Stack underflow" &lt;&lt; endl;
+            return T();  // Error for non-POD types
+        }
+        return stackArray[top--];
+    }
+};</pre>
+                            </div>
+                            <span class="question-type">Type: Find the Error</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Issue:</strong> Returning default-constructed object on underflow</p>
+                            <p><strong>Explanation:</strong> For complex types, <code>T()</code> may not be appropriate or could cause issues.</p>
+                            <p><strong>Better approach:</strong> Throw exception or return by reference with error flag.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 10: Find the Output -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 10: What will be the output?</h4>
+                            <div class="code-block">
+                                <pre>#include &lt;queue&gt;
+using namespace std;
+
+int main() {
+    queue&lt;string&gt; q;
+    q.push("First");
+    q.push("Second");
+    q.push("Third");
+    
+    cout &lt;&lt; q.size() &lt;&lt; " ";
+    q.pop();
+    cout &lt;&lt; q.size() &lt;&lt; " ";
+    cout &lt;&lt; q.front() &lt;&lt; endl;
+    return 0;
+}</pre>
+                            </div>
+                            <span class="question-type">Type: Find the Output</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Output:</strong> 3 2 Second</p>
+                            <p><strong>Explanation:</strong> Initial size 3, after pop size 2, front becomes "Second".</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 11: Complete the Code -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 11: Complete the linked list insert at beginning:</h4>
+                            <div class="code-block">
+                                <pre>class LinkedList {
+private:
+    struct Node {
+        int data;
+        Node* next;
+    };
+    Node* head;
+public:
+    void insertAtBeginning(int value) {
+        // Complete the implementation
+    }
+};</pre>
+                            </div>
+                            <span class="question-type">Type: Complete the Code</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Completed Code:</strong></p>
+                            <div class="code-block">
+                                <pre>void insertAtBeginning(int value) {
+    Node* newNode = new Node();
+    newNode-&gt;data = value;
+    newNode-&gt;next = head;
+    head = newNode;
+}</pre>
+                            </div>
+                            <p><strong>Explanation:</strong> Create new node, set its data, point it to current head, update head to new node.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 12: Write a Function -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 12: Write a function to reverse a stack using recursion:</h4>
+                            <div class="code-block">
+                                <pre>#include &lt;stack&gt;
+using namespace std;
+
+void insertAtBottom(stack&lt;int&gt;&amp; s, int item) {
+    if (s.empty()) {
+        s.push(item);
+        return;
+    }
+    int top = s.top();
+    s.pop();
+    insertAtBottom(s, item);
+    s.push(top);
+}
+
+void reverseStack(stack&lt;int&gt;&amp; s) {
+    // Complete the reverse implementation
+}</pre>
+                            </div>
+                            <span class="question-type">Type: Write a Function</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Solution:</strong></p>
+                            <div class="code-block">
+                                <pre>void reverseStack(stack&lt;int&gt;&amp; s) {
+    if (s.empty()) return;
+    
+    int top = s.top();
+    s.pop();
+    reverseStack(s);
+    insertAtBottom(s, top);
+}</pre>
+                            </div>
+                            <p><strong>Explanation:</strong> Recursively pop all elements, then insert them at bottom in reverse order.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 13: Find the Error -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 13: Find the error in this circular queue:</h4>
+                            <div class="code-block">
+                                <pre>class CircularQueue {
+private:
+    int* arr;
+    int front, rear, size;
+public:
+    CircularQueue(int s) : size(s), front(-1), rear(-1) {
+        arr = new int[size];
+    }
+    
+    void enqueue(int value) {
+        if ((rear + 1) % size == front) return; // Full
+        if (front == -1) front = 0;
+        rear = (rear + 1) % size;
+        arr[rear] = value;
+    }
+    
+    int dequeue() {
+        if (front == -1) return -1; // Empty
+        int item = arr[front];
+        if (front == rear) { // Only one element
+            front = rear = -1;
+        } else {
+            front = (front + 1) % size;
+        }
+        return item;
+    }
+};</pre>
+                            </div>
+                            <span class="question-type">Type: Find the Error</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Issue:</strong> The full condition is incorrect</p>
+                            <p><strong>Explanation:</strong> Should check if <code>(rear + 1) % size == front</code> for full, but the return should indicate error.</p>
+                            <p><strong>Fix:</strong> Add proper overflow handling instead of silent return.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 14: Find the Output -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 14: What will be the output?</h4>
+                            <div class="code-block">
+                                <pre>struct Node {
+    int data;
+    Node* next;
+};
+
+void printList(Node* head) {
+    while (head != nullptr) {
+        cout &lt;&lt; head-&gt;data &lt;&lt; " ";
+        head = head-&gt;next;
+    }
+}
+
+int main() {
+    Node* head = new Node{1, nullptr};
+    head-&gt;next = new Node{2, nullptr};
+    head-&gt;next-&gt;next = new Node{3, nullptr};
+    printList(head);
+    return 0;
+}</pre>
+                            </div>
+                            <span class="question-type">Type: Find the Output</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Output:</strong> 1 2 3</p>
+                            <p><strong>Explanation:</strong> Traverses the linked list from head to tail, printing each node's data.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 15: Complete the Code -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 15: Complete the stack using linked list:</h4>
+                            <div class="code-block">
+                                <pre>template&lt;class T&gt;
+class LinkedStack {
+private:
+    struct Node {
+        T data;
+        Node* next;
+    };
+    Node* top;
+    
+public:
+    LinkedStack() : top(nullptr) {}
+    
+    void push(T value) {
+        // Complete the push implementation
+    }
+    
+    T pop() {
+        // Complete the pop implementation
+    }
+};</pre>
+                            </div>
+                            <span class="question-type">Type: Complete the Code</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Completed Code:</strong></p>
+                            <div class="code-block">
+                                <pre>void push(T value) {
+    Node* newNode = new Node();
+    newNode-&gt;data = value;
+    newNode-&gt;next = top;
+    top = newNode;
+}
+
+T pop() {
+    if (top == nullptr) {
+        throw runtime_error("Stack underflow");
+    }
+    T value = top-&gt;data;
+    Node* temp = top;
+    top = top-&gt;next;
+    delete temp;
+    return value;
+}</pre>
+                            </div>
+                            <p><strong>Explanation:</strong> Push creates new node and makes it the new top. Pop removes top node and returns its value.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 16: Write a Function -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 16: Write a function to detect cycle in linked list:</h4>
+                            <div class="code-block">
+                                <pre>struct Node {
+    int data;
+    Node* next;
+};
+
+bool hasCycle(Node* head) {
+    // Write Floyd's cycle detection algorithm
+}</pre>
+                            </div>
+                            <span class="question-type">Type: Write a Function</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Solution:</strong></p>
+                            <div class="code-block">
+                                <pre>bool hasCycle(Node* head) {
+    if (head == nullptr) return false;
+    
+    Node* slow = head;
+    Node* fast = head-&gt;next;
+    
+    while (fast != nullptr && fast-&gt;next != nullptr) {
+        if (slow == fast) return true;
+        slow = slow-&gt;next;
+        fast = fast-&gt;next-&gt;next;
+    }
+    
+    return false;
+}</pre>
+                            </div>
+                            <p><strong>Explanation:</strong> Floyd's algorithm uses slow and fast pointers. If they meet, there's a cycle.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 17: Find the Error -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 17: Find the error in this queue implementation:</h4>
+                            <div class="code-block">
+                                <pre>template&lt;class T&gt;
+class Queue {
+private:
+    T* arr;
+    int front, rear, capacity;
+public:
+    Queue(int size) : capacity(size), front(0), rear(0) {
+        arr = new T[capacity];
+    }
+    
+    void enqueue(T item) {
+        arr[rear++] = item;  // No overflow check!
+    }
+    
+    T dequeue() {
+        return arr[front++];  // No underflow check!
+    }
+};</pre>
+                            </div>
+                            <span class="question-type">Type: Find the Error</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Errors:</strong> Missing overflow and underflow checks</p>
+                            <p><strong>Explanation:</strong> enqueue can write beyond array bounds, dequeue can read invalid data.</p>
+                            <p><strong>Fix:</strong> Add proper bounds checking before operations.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 18: Find the Output -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 18: What will be the output?</h4>
+                            <div class="code-block">
+                                <pre>#include &lt;stack&gt;
+using namespace std;
+
+bool isBalanced(string expr) {
+    stack&lt;char&gt; s;
+    for(char c : expr) {
+        if (c == '(' || c == '[' || c == '{') {
+            s.push(c);
+        } else if (c == ')' || c == ']' || c == '}') {
+            if (s.empty()) return false;
+            s.pop();
+        }
+    }
+    return s.empty();
+}
+
+int main() {
+    cout &lt;&lt; isBalanced("(([]))") &lt;&lt; " ";
+    cout &lt;&lt; isBalanced("([)]") &lt;&lt; endl;
+    return 0;
+}</pre>
+                            </div>
+                            <span class="question-type">Type: Find the Output</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Output:</strong> 1 0</p>
+                            <p><strong>Explanation:</strong> "(([]))" is balanced (returns 1/true), "([)]" is not balanced (returns 0/false).</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 19: Complete the Code -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 19: Complete the doubly linked list node:</h4>
+                            <div class="code-block">
+                                <pre>template&lt;class T&gt;
+struct DoublyNode {
+    T data;
+    // Complete with prev and next pointers
+};
+
+template&lt;class T&gt;
+class DoublyLinkedList {
+private:
+    DoublyNode&lt;T&gt;* head;
+    DoublyNode&lt;T&gt;* tail;
+public:
+    // Constructor and methods...
+};</pre>
+                            </div>
+                            <span class="question-type">Type: Complete the Code</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Completed Code:</strong></p>
+                            <div class="code-block">
+                                <pre>template&lt;class T&gt;
+struct DoublyNode {
+    T data;
+    DoublyNode* prev;
+    DoublyNode* next;
+};</pre>
+                            </div>
+                            <p><strong>Explanation:</strong> Doubly linked list nodes need both previous and next pointers for bidirectional traversal.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 20: Write a Function -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 20: Write a function to merge two sorted linked lists:</h4>
+                            <div class="code-block">
+                                <pre>struct Node {
+    int data;
+    Node* next;
+};
+
+Node* mergeSortedLists(Node* l1, Node* l2) {
+    // Write the merge implementation
+}</pre>
+                            </div>
+                            <span class="question-type">Type: Write a Function</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Solution:</strong></p>
+                            <div class="code-block">
+                                <pre>Node* mergeSortedLists(Node* l1, Node* l2) {
+    if (l1 == nullptr) return l2;
+    if (l2 == nullptr) return l1;
+    
+    Node* result = nullptr;
+    
+    if (l1-&gt;data &lt;= l2-&gt;data) {
+        result = l1;
+        result-&gt;next = mergeSortedLists(l1-&gt;next, l2);
+    } else {
+        result = l2;
+        result-&gt;next = mergeSortedLists(l1, l2-&gt;next);
+    }
+    
+    return result;
+}</pre>
+                            </div>
+                            <p><strong>Explanation:</strong> Recursively compare nodes from both lists and build the merged result.</p>
+                        </div>
+                    </div>
+
+                    <!-- Linked List Output Questions -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 21: What output is produced by the following C++ code segment?</h4>
+                            <div class="code-block">
+                                <pre>#include &lt;iostream&gt;
+using namespace std;
+struct nodeType{
+int info;
+nodeType *link;
+};
+int main(){
+nodeType *list, *ptr;
+list = new nodeType;
+list-&gt;info = 20;
+ptr = new nodeType;
+ptr-&gt;info = 28;
+ptr-&gt;link = NULL;
+list-&gt;link = ptr;
+ptr = new nodeType;
+ptr-&gt;info = 30;
+ptr-&gt;link = list;
+list = ptr;
+ptr = new nodeType;
+ptr-&gt;info = 42;
+ptr-&gt;link = list-&gt;link;
+list-&gt;link = ptr;
+ptr = list;
+while (ptr != NULL){
+cout &lt;&lt; ptr-&gt;info &lt;&lt; endl;
+ptr = ptr-&gt;link;
+}
+system("PAUSE");
+return 0;
+}</pre>
+                            </div>
+                            <span class="question-type">Type: Find the Output</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Output:</strong></p>
+                            <div class="code-block">
+                                <pre>30
+42
+20
+28</pre>
+                            </div>
+                            <p><strong>Explanation:</strong> Let's trace through the linked list operations:</p>
+                            <ul>
+                                <li>Create node with info=20, this becomes the initial list</li>
+                                <li>Create node with info=28, link it to NULL, and make it list's next</li>
+                                <li>Create node with info=30, make it point to current list (20→28), then make this new node the list head</li>
+                                <li>Create node with info=42, insert it between 30 and 20</li>
+                                <li>Final list: 30 → 42 → 20 → 28 → NULL</li>
+                            </ul>
+                            <p><strong>Visual representation:</strong> The list structure shows how nodes are created and linked together through pointer manipulations.</p>
+                        </div>
+                    </div>
+
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 22: What output is produced by the following C++ code segment on execution?</h4>
+                            <div class="code-block">
+                                <pre>#include &lt;iostream&gt;
+using namespace std;
+struct nodeType{
+int info;
+nodeType *link;
+};
+int main(){
+nodeType *list, *ptr;
+list = new nodeType;
+list -&gt; info = 21;
+ptr = new nodeType;
+ptr -&gt; info = 45;
+ptr -&gt; link = NULL;
+list -&gt; link = ptr;
+ptr = new nodeType;
+ptr -&gt; info = 79;
+ptr -&gt; link = list -&gt; link;
+list -&gt; link = ptr;
+cout &lt;&lt; list -&gt; info &lt;&lt; " " &lt;&lt; ptr -&gt; info &lt;&lt; " ";
+ptr = ptr -&gt; link;
+cout &lt;&lt; ptr -&gt; info &lt;&lt; endl;
+return 0;
+}</pre>
+                            </div>
+                            <span class="question-type">Type: Find the Output</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Output:</strong> 21 79 45</p>
+                            <p><strong>Step-by-step analysis:</strong></p>
+                            <ul>
+                                <li><strong>Initial setup:</strong> Create list node (21) → ptr node (45) → NULL</li>
+                                <li><strong>Insert operation:</strong> Create new node (79), point it to list's current next (45), then make it list's new next</li>
+                                <li><strong>Final structure:</strong> 21 → 79 → 45 → NULL</li>
+                                <li><strong>Output sequence:</strong> list→info (21), ptr→info (79), then ptr moves to ptr→link (45)</li>
+                            </ul>
+                            <p><strong>Key concept:</strong> Understanding how insertion in the middle of a linked list works by manipulating pointers.</p>
+                        </div>
+                    </div>
+
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 23: What output is produced by the following C++ code segment?</h4>
+                            <div class="code-block">
+                                <pre>struct nodeType{
+int info;
+nodeType *link;
+};
+int main(){
+nodeType *list, *ptr;
+list = new nodeType;
+list-&gt;info = 34;
+ptr = new nodeType;
+ptr-&gt;info = 56;
+ptr-&gt;link = NULL;
+list-&gt;link = ptr;
+ptr = new nodeType;
+ptr-&gt;info = 73;
+ptr-&gt;link = list;
+list = ptr;
+ptr = new nodeType;
+ptr-&gt;info = 99;
+ptr-&gt;link = list-&gt;link;
+list-&gt;link = ptr;
+ptr = list;
+while (ptr != NULL) {
+cout &lt;&lt; ptr-&gt;info &lt;&lt; endl;
+ptr = ptr-&gt;link;
+}
+system("PAUSE");
+return 0;
+}</pre>
+                            </div>
+                            <span class="question-type">Type: Find the Output</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Output:</strong></p>
+                            <div class="code-block">
+                                <pre>73
+99
+34
+56</pre>
+                            </div>
+                            <p><strong>Detailed walkthrough:</strong></p>
+                            <ol>
+                                <li><strong>Step 1:</strong> Create list (34) → ptr (56) → NULL</li>
+                                <li><strong>Step 2:</strong> Create new ptr (73) pointing to current list, then make this new node the list head</li>
+                                <li><strong>Step 3:</strong> Create new ptr (99), insert it between 73 and 34</li>
+                                <li><strong>Step 4:</strong> Traverse and print: 73 → 99 → 34 → 56</li>
+                            </ol>
+                            <p><strong>Learning point:</strong> This demonstrates head insertion and middle insertion operations in linked lists.</p>
+                        </div>
+                    </div>
+
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 24: What output is produced by the following C++ code segment on execution?</h4>
+                            <div class="code-block">
+                                <pre>#include &lt;iostream&gt;
+using namespace std;
+struct nodeType{
+int info;
+nodeType *link;
+};
+int main(){
+nodeType *list, *ptr;
+list = new nodeType;
+list -&gt; info = 34;
+ptr = new nodeType;
+ptr -&gt; info = 45;
+ptr -&gt; link = NULL;
+list -&gt; link = ptr;
+ptr = new nodeType;
+ptr -&gt; info = 55;
+ptr -&gt; link = list -&gt; link;
+list -&gt; link = ptr;
+cout &lt;&lt; list -&gt; info &lt;&lt; " " &lt;&lt; ptr -&gt; info &lt;&lt; " ";
+ptr = ptr -&gt; link;
+cout &lt;&lt; ptr -&gt; info &lt;&lt; endl;
+return 0;
+}</pre>
+                            </div>
+                            <span class="question-type">Type: Find the Output</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Output:</strong> 34 55 45</p>
+                            <p><strong>Analysis:</strong></p>
+                            <ul>
+                                <li><strong>Initial list:</strong> 34 → 45 → NULL</li>
+                                <li><strong>Insert 55:</strong> Create new node (55), point it to list's current next (45), make it list's new next</li>
+                                <li><strong>Result:</strong> 34 → 55 → 45 → NULL</li>
+                                <li><strong>Print sequence:</strong> list→info (34), ptr→info (55), ptr→link→info (45)</li>
+                            </ul>
+                            <p><strong>Concept:</strong> Middle insertion without changing the head of the list.</p>
+                        </div>
+                    </div>
+
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 25: What output is produced by the following C++ code segment?</h4>
+                            <div class="code-block">
+                                <pre>struct nodeType{
+int info;
+nodeType *link;
+};
+int main(){
+nodeType *list, *ptr;
+list = new nodeType;
+list-&gt;info = 45;
+ptr = new nodeType;
+ptr-&gt;info = 66;
+ptr-&gt;link = NULL;
+list-&gt;link = ptr;
+ptr = new nodeType;
+ptr-&gt;info = 91;
+ptr-&gt;link = list;
+list = ptr;
+ptr = new nodeType;
+ptr-&gt;info = 70;
+ptr-&gt;link = list-&gt;link;
+list-&gt;link = ptr;
+ptr = list;
+while (ptr != NULL) {
+cout &lt;&lt; ptr-&gt;info &lt;&lt; endl;
+ptr = ptr-&gt;link;
+}
+system("PAUSE");
+return 0;
+}</pre>
+                            </div>
+                            <span class="question-type">Type: Find the Output</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Output:</strong></p>
+                            <div class="code-block">
+                                <pre>91
+70
+45
+66</pre>
+                            </div>
+                            <p><strong>Step-by-step execution:</strong></p>
+                            <ol>
+                                <li><strong>Build initial list:</strong> 45 → 66 → NULL</li>
+                                <li><strong>Head insertion:</strong> Create 91, point to current list, make it new head</li>
+                                <li><strong>Middle insertion:</strong> Create 70, insert between 91 and 45</li>
+                                <li><strong>Traversal:</strong> Print all nodes: 91 → 70 → 45 → 66</li>
+                            </ol>
+                            <p><strong>Key operations:</strong> Demonstrates both head insertion and insertion at specific positions in linked lists.</p>
+                        </div>
+                    </div>
+
+                    <!-- Linked List Concept Questions -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 26: Explain the difference between head insertion and tail insertion in linked lists.</h4>
+                            <span class="question-type">Type: Conceptual Understanding</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Head Insertion:</strong></p>
+                            <ul>
+                                <li>Adds new node at the beginning of the list</li>
+                                <li>New node becomes the new head</li>
+                                <li>O(1) time complexity</li>
+                                <li>Example: Original: A→B→C becomes X→A→B→C</li>
+                            </ul>
+                            <p><strong>Tail Insertion:</strong></p>
+                            <ul>
+                                <li>Adds new node at the end of the list</li>
+                                <li>Requires traversing to the end (O(n) time)</li>
+                                <li>Last node's link becomes NULL</li>
+                                <li>Example: Original: A→B→C becomes A→B→C→X</li>
+                            </ul>
+                            <p><strong>When to use each:</strong> Head insertion for stacks/LIFO, tail insertion for queues/FIFO.</p>
+                        </div>
+                    </div>
+
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 27: What are the advantages and disadvantages of linked lists compared to arrays?</h4>
+                            <span class="question-type">Type: Comparative Analysis</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Advantages of Linked Lists:</strong></p>
+                            <ul>
+                                <li><strong>Dynamic size:</strong> Can grow/shrink during runtime</li>
+                                <li><strong>Efficient insertions/deletions:</strong> O(1) at known positions</li>
+                                <li><strong>No memory waste:</strong> Only allocate what you need</li>
+                                <li><strong>Flexible memory usage:</strong> Nodes can be scattered in memory</li>
+                            </ul>
+                            <p><strong>Disadvantages of Linked Lists:</strong></p>
+                            <ul>
+                                <li><strong>Random access:</strong> O(n) to access element at index i</li>
+                                <li><strong>Extra memory:</strong> Each node stores data + pointer</li>
+                                <li><strong>Cache unfriendly:</strong> Nodes not contiguous in memory</li>
+                                <li><strong>Complex implementation:</strong> More complex than arrays</li>
+                            </ul>
+                            <p><strong>Use linked lists when:</strong> Frequent insertions/deletions, unknown size. Use arrays when: Random access needed, size is fixed.</p>
+                        </div>
+                    </div>
+
+                    <!-- Stack and Queue Output Questions -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 28: Suppose that stack is an object of type DynIntStack that provides a typical stack implementation for integers. What is the output of the following code segment?</h4>
+                            <div class="code-block">
+                                <pre>#include &lt;iostream&gt;
+using namespace std;
+
+int main()
+{
+stackType&lt;int&gt; stack;
+int x = 9;
+int y = 0;
+stack.push(3);
+stack.push(4);
+stack.push(x);
+stack.push(x+2);
+y = stack.top();
+stack.pop();
+stack.push(x+y+3);
+stack.push(y-2);
+stack.push(8);
+x = stack.top();
+stack.pop();
+cout &lt;&lt; "x= " &lt;&lt; x &lt;&lt; endl;
+cout &lt;&lt; "y= " &lt;&lt; y &lt;&lt; endl;
+while (!stack.isEmptyStack())
+{
+cout &lt;&lt; stack.top() &lt;&lt; endl;
+stack.pop();
+}
+return 0;
+}</pre>
+                            </div>
+                            <span class="question-type">Type: Find the Output</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Output:</strong></p>
+                            <div class="code-block">
+                                <pre>x= 8
+y= 9
+7
+21
+9
+4
+3</pre>
+                            </div>
+                            <p><strong>Step-by-step analysis:</strong></p>
+                            <ul>
+                                <li><strong>Initial setup:</strong> x=9, y=0</li>
+                                <li><strong>Stack operations:</strong> push(3), push(4), push(9), push(11) → Stack: [3, 4, 9, 11]</li>
+                                <li><strong>y = stack.top():</strong> y=11, then pop() → Stack: [3, 4, 9]</li>
+                                <li><strong>push(x+y+3):</strong> push(9+11+3=23) → Stack: [3, 4, 9, 23]</li>
+                                <li><strong>push(y-2):</strong> push(11-2=9) → Stack: [3, 4, 9, 23, 9]</li>
+                                <li><strong>push(8):</strong> push(8) → Stack: [3, 4, 9, 23, 9, 8]</li>
+                                <li><strong>x = stack.top():</strong> x=8, then pop() → Stack: [3, 4, 9, 23, 9]</li>
+                                <li><strong>Print remaining:</strong> 9, 23, 9, 4, 3 (LIFO order)</li>
+                            </ul>
+                            <p><strong>Key concept:</strong> Stack follows LIFO (Last In, First Out) principle. The last element pushed is the first one popped.</p>
+                        </div>
+                    </div>
+
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 29: Suppose that queue is an object of type DynIntQueue that provides a typical queue implementation for integers. What is the output of the following code segment?</h4>
+                            <div class="code-block">
+                                <pre>#include &lt;iostream&gt;
+using namespace std;
+
+int main()
+{
+int catchVar;
+DynIntQueue iqueue;
+catchVar = 5;
+iqueue.enqueue(catchVar);
+iqueue.enqueue (10);
+iqueue.enqueue (15);
+iqueue.dequeue (catchVar);
+cout &lt;&lt; catchVar &lt;&lt; endl;
+iqueue.dequeue (catchVar);
+cout &lt;&lt; catchVar &lt;&lt; endl;
+iqueue.enqueue (10);
+iqueue.enqueue (catchVar);
+cout &lt;&lt; catchVar &lt;&lt; endl;
+while (!iqueue.isEmpty())
+{
+iqueue.dequeue(catchVar);
+cout &lt;&lt; catchVar &lt;&lt; endl;
+}
+system("PAUSE");
+return 0;
+}</pre>
+                            </div>
+                            <span class="question-type">Type: Find the Output</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Output:</strong></p>
+                            <div class="code-block">
+                                <pre>5
+10
+10
+15
+10
+10</pre>
+                            </div>
+                            <p><strong>Step-by-step analysis:</strong></p>
+                            <ul>
+                                <li><strong>Initial setup:</strong> catchVar = 5</li>
+                                <li><strong>Enqueue operations:</strong> enqueue(5), enqueue(10), enqueue(15) → Queue: [5, 10, 15]</li>
+                                <li><strong>dequeue(catchVar):</strong> Removes 5, catchVar=5 → Queue: [10, 15]</li>
+                                <li><strong>dequeue(catchVar):</strong> Removes 10, catchVar=10 → Queue: [15]</li>
+                                <li><strong>enqueue(10):</strong> enqueue(10) → Queue: [15, 10]</li>
+                                <li><strong>enqueue(catchVar):</strong> enqueue(10) → Queue: [15, 10, 10]</li>
+                                <li><strong>Print catchVar:</strong> 10 (unchanged from last dequeue)</li>
+                                <li><strong>Dequeue remaining:</strong> 15, 10, 10</li>
+                            </ul>
+                            <p><strong>Key concept:</strong> Queue follows FIFO (First In, First Out) principle. The first element enqueued is the first one dequeued.</p>
+                        </div>
+                    </div>
+
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 30: Suppose that queue is an object of type DynIntQueue that provides a typical queue implementation for integers. What is the output of the following code segment?</h4>
+                            <div class="code-block">
+                                <pre>#include &lt;iostream&gt;
+using namespace std;
+
+int main()
+{
+DynIntQueue iqueue;
+int x = 9;
+int y = 0;
+iqueue.enqueue (3);
+iqueue.enqueue (4);
+iqueue.enqueue (x);
+iqueue.enqueue (x+2);
+iqueue.dequeue(y);
+iqueue.enqueue (x+y+3);
+iqueue.enqueue (y-2);
+iqueue.enqueue (8);
+iqueue.dequeue(x);
+cout &lt;&lt; "x= " &lt;&lt; x &lt;&lt; endl;
+cout &lt;&lt; "y= " &lt;&lt; y &lt;&lt; endl;
+while (!iqueue.isEmpty())
+{
+iqueue.dequeue(x);
+cout &lt;&lt; x &lt;&lt; endl;
+}
+system("PAUSE");
+return 0;
+}</pre>
+                            </div>
+                            <span class="question-type">Type: Find the Output</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Output:</strong></p>
+                            <div class="code-block">
+                                <pre>x= 4
+y= 3
+9
+11
+21
+1
+8</pre>
+                            </div>
+                            <p><strong>Step-by-step analysis:</strong></p>
+                            <ul>
+                                <li><strong>Initial setup:</strong> x=9, y=0</li>
+                                <li><strong>Enqueue operations:</strong> enqueue(3), enqueue(4), enqueue(9), enqueue(11) → Queue: [3, 4, 9, 11]</li>
+                                <li><strong>dequeue(y):</strong> Removes 3, y=3 → Queue: [4, 9, 11]</li>
+                                <li><strong>enqueue(x+y+3):</strong> enqueue(9+3+3=15) → Queue: [4, 9, 11, 15]</li>
+                                <li><strong>enqueue(y-2):</strong> enqueue(3-2=1) → Queue: [4, 9, 11, 15, 1]</li>
+                                <li><strong>enqueue(8):</strong> enqueue(8) → Queue: [4, 9, 11, 15, 1, 8]</li>
+                                <li><strong>dequeue(x):</strong> Removes 4, x=4 → Queue: [9, 11, 15, 1, 8]</li>
+                                <li><strong>Print remaining:</strong> 9, 11, 15, 1, 8 (FIFO order)</li>
+                            </ul>
+                            <p><strong>Key concept:</strong> Queue maintains insertion order. Elements are processed in the same order they were added.</p>
+                        </div>
+                    </div>
+
+                    <!-- Stack vs Queue Comparison -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 31: Explain the fundamental differences between stacks and queues with real-world examples.</h4>
+                            <span class="question-type">Type: Conceptual Understanding</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Stack (LIFO - Last In, First Out):</strong></p>
+                            <ul>
+                                <li><strong>Operations:</strong> push() adds to top, pop() removes from top, top() views top element</li>
+                                <li><strong>Real-world example:</strong> Browser back button - last page visited is the first to go back to</li>
+                                <li><strong>Use cases:</strong> Function call stack, undo operations, expression evaluation</li>
+                                <li><strong>Access pattern:</strong> Only top element is accessible</li>
+                            </ul>
+                            <p><strong>Queue (FIFO - First In, First Out):</strong></p>
+                            <ul>
+                                <li><strong>Operations:</strong> enqueue() adds to rear, dequeue() removes from front, front() views front element</li>
+                                <li><strong>Real-world example:</strong> Printer queue - first document sent is the first to print</li>
+                                <li><strong>Use cases:</strong> Job scheduling, breadth-first search, customer service lines</li>
+                                <li><strong>Access pattern:</strong> Front and rear elements are accessible</li>
+                            </ul>
+                            <p><strong>Key Differences:</strong></p>
+                            <ul>
+                                <li><strong>Order:</strong> Stack reverses order, Queue preserves order</li>
+                                <li><strong>Access:</strong> Stack = one end, Queue = both ends</li>
+                                <li><strong>Applications:</strong> Stack for nesting, Queue for ordering</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <div class="sidebar">
+                <h3>Navigation</h3>
+                <ul>
+                    <li><a href="#overview">Overview</a></li>
+                    <li><a href="#stack">Stack</a></li>
+                    <li><a href="#queue">Queue</a></li>
+                    <li><a href="#linked-list">Linked List Operations</a></li>
+                    <li><a href="#qa-section">Practice Questions (31)</a></li>
+                </ul>
+
+                <h4>Question Types</h4>
+                <ul class="question-types">
+                    <li>Find the Error</li>
+                    <li>Find the Output</li>
+                    <li>Complete the Code</li>
+                    <li>Write a Function</li>
+                    <li>Conceptual Understanding</li>
+                    <li>Comparative Analysis</li>
+                </ul>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 CSY2006 C++ Programming Course. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 18: Trees and Graphs - CSY2006</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>CSY2006 C++ Programming Course Notes</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="code-library.html">Code Library</a></li>
+                <li><a href="week10.html">Week 10</a></li>
+                <li><a href="week15.html">Week 15</a></li>
+                <li><a href="week16.html">Week 16</a></li>
+                <li><a href="week17.html">Week 17</a></li>
+                <li><a href="week18.html">Week 18</a></li>
+                <li><a href="week19.html">Week 19</a></li>
+                <li><a href="week20.html">Week 20</a></li>
+                <li><a href="week21.html">Week 21</a></li>
+                <li><a href="week22.html">Week 22</a></li>
+                <li><a href="week23.html">Week 23</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="week-header">
+            <h2>Week 18: Trees and Graphs</h2>
+            <p>Advanced Data Structures</p>
+        </section>
+
+        <div class="week-content">
+            <div class="main-content">
+                <section id="overview">
+                    <h3>Week 18 Overview</h3>
+                    <p>This week covers tree and graph data structures, including binary trees, binary search trees, and graph traversal algorithms.</p>
+
+                    <h4>Key Topics:</h4>
+                    <ul>
+                        <li>Binary Tree implementation</li>
+                        <li>Binary Search Tree (BST)</li>
+                        <li>Tree traversals (Inorder, Preorder, Postorder)</li>
+                        <li>Graph representation (Adjacency List/Matrix)</li>
+                        <li>Graph traversal (DFS, BFS)</li>
+                    </ul>
+                </section>
+
+                <section id="binary-tree">
+                    <h3>Binary Tree Implementation</h3>
+
+                    <div class="code-block">
+                        <pre>struct TreeNode {
+    int data;
+    TreeNode* left;
+    TreeNode* right;
+
+    TreeNode(int val) : data(val), left(NULL), right(NULL) {}
+};
+
+class BinaryTree {
+private:
+    TreeNode* root;
+
+public:
+    BinaryTree() : root(NULL) {}
+
+    void insert(int val) {
+        root = insertRecursive(root, val);
+    }
+
+    TreeNode* insertRecursive(TreeNode* node, int val) {
+        if (node == NULL) {
+            return new TreeNode(val);
+        }
+
+        if (val &lt; node-&gt;data) {
+            node-&gt;left = insertRecursive(node-&gt;left, val);
+        } else {
+            node-&gt;right = insertRecursive(node-&gt;right, val);
+        }
+
+        return node;
+    }
+
+    void inorderTraversal(TreeNode* node) {
+        if (node != NULL) {
+            inorderTraversal(node-&gt;left);
+            cout &lt;&lt; node-&gt;data &lt;&lt; " ";
+            inorderTraversal(node-&gt;right);
+        }
+    }
+};</pre>
+                    </div>
+                </section>
+
+                <section id="qa-section">
+                    <h3>Practice Questions & Answers (20 Questions)</h3>
+
+                    <!-- Question 1: Find the Error -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 1: Find the error in this BST insertion:</h4>
+                            <div class="code-block">
+                                <pre>struct Node {
+    int data;
+    Node* left;
+    Node* right;
+};
+
+Node* insert(Node* root, int value) {
+    if (root == nullptr) {
+        root = new Node();
+        root-&gt;data = value;
+        root-&gt;left = root-&gt;right = nullptr;
+        return root;
+    }
+    
+    if (value &lt; root-&gt;data) {
+        root-&gt;left = insert(root-&gt;left, value);
+    } else {
+        root-&gt;right = insert(root-&gt;right, value);
+    }
+    
+    return root;  // This is correct!
+}</pre>
+                            </div>
+                            <span class="question-type">Type: Find the Error</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Actually, this code is correct!</strong></p>
+                            <p><strong>Explanation:</strong> The insertion properly handles the recursive case and returns the updated root. The only potential issue would be memory allocation failure, but that's not shown here.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 2: Find the Output -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 2: What will be the inorder traversal of this BST?</h4>
+                            <div class="code-block">
+                                <pre>// Insert sequence: 50, 30, 70, 20, 40, 60, 80
+// What is the inorder traversal?</pre>
+                            </div>
+                            <span class="question-type">Type: Find the Output</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Inorder:</strong> 20, 30, 40, 50, 60, 70, 80</p>
+                            <p><strong>Explanation:</strong> BST inorder traversal always produces sorted order regardless of insertion sequence.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 3: Complete the Code -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 3: Complete the binary tree height function:</h4>
+                            <div class="code-block">
+                                <pre>int getHeight(Node* root) {
+    if (root == nullptr) return 0;
+    // Complete the recursive height calculation
+}</pre>
+                            </div>
+                            <span class="question-type">Type: Complete the Code</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Completed Code:</strong></p>
+                            <div class="code-block">
+                                <pre>int getHeight(Node* root) {
+    if (root == nullptr) return 0;
+    int leftHeight = getHeight(root-&gt;left);
+    int rightHeight = getHeight(root-&gt;right);
+    return 1 + max(leftHeight, rightHeight);
+}</pre>
+                            </div>
+                            <p><strong>Explanation:</strong> Height is 1 + maximum of left and right subtree heights.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 4: Write a Function -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 4: Write a function to count leaf nodes:</h4>
+                            <div class="code-block">
+                                <pre>struct Node {
+    int data;
+    Node* left;
+    Node* right;
+};
+
+int countLeaves(Node* root) {
+    // Write the implementation
+}</pre>
+                            </div>
+                            <span class="question-type">Type: Write a Function</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Solution:</strong></p>
+                            <div class="code-block">
+                                <pre>int countLeaves(Node* root) {
+    if (root == nullptr) return 0;
+    if (root-&gt;left == nullptr && root-&gt;right == nullptr) return 1;
+    return countLeaves(root-&gt;left) + countLeaves(root-&gt;right);
+}</pre>
+                            </div>
+                            <p><strong>Explanation:</strong> A leaf node has no children. Count leaves in left and right subtrees recursively.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 5: Find the Error -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 5: Find the error in this graph adjacency list:</h4>
+                            <div class="code-block">
+                                <pre>class Graph {
+private:
+    vector&lt;vector&lt;int&gt;&gt; adjList;
+    int vertices;
+    
+public:
+    Graph(int v) : vertices(v), adjList(v) {}
+    
+    void addEdge(int u, int v) {
+        adjList[u].push_back(v);
+        // Missing reverse edge for undirected graph!
+    }
+};</pre>
+                            </div>
+                            <span class="question-type">Type: Find the Error</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Error:</strong> Missing reverse edge for undirected graph</p>
+                            <p><strong>Explanation:</strong> For undirected graphs, edges go both ways, so we need <code>adjList[v].push_back(u)</code> too.</p>
+                            <p><strong>Fix:</strong> Add <code>adjList[v].push_back(u);</code> for undirected graphs.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 6: Find the Output -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 6: What will be the preorder traversal?</h4>
+                            <div class="code-block">
+                                <pre>// Tree structure:
+//       1
+//      / \
+//     2   3
+//    / \
+//   4   5
+//
+// Preorder traversal:</pre>
+                            </div>
+                            <span class="question-type">Type: Find the Output</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Preorder:</strong> 1, 2, 4, 5, 3</p>
+                            <p><strong>Explanation:</strong> Preorder visits root, left subtree, right subtree.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 7: Complete the Code -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 7: Complete the BST search function:</h4>
+                            <div class="code-block">
+                                <pre>bool search(Node* root, int value) {
+    // Complete the recursive search
+    if (root == nullptr) return false;
+    // Your code here
+}</pre>
+                            </div>
+                            <span class="question-type">Type: Complete the Code</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Completed Code:</strong></p>
+                            <div class="code-block">
+                                <pre>bool search(Node* root, int value) {
+    if (root == nullptr) return false;
+    if (root-&gt;data == value) return true;
+    if (value &lt; root-&gt;data) return search(root-&gt;left, value);
+    return search(root-&gt;right, value);
+}</pre>
+                            </div>
+                            <p><strong>Explanation:</strong> Search left subtree if value is smaller, right subtree if larger.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 8: Write a Function -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 8: Write a BFS traversal function:</h4>
+                            <div class="code-block">
+                                <pre>#include &lt;queue&gt;
+#include &lt;vector&gt;
+
+void BFS(vector&lt;vector&lt;int&gt;&gt;&amp; adj, int start) {
+    vector&lt;bool&gt; visited(adj.size(), false);
+    queue&lt;int&gt; q;
+    // Write the BFS implementation
+}</pre>
+                            </div>
+                            <span class="question-type">Type: Write a Function</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Solution:</strong></p>
+                            <div class="code-block">
+                                <pre>void BFS(vector&lt;vector&lt;int&gt;&gt;&amp; adj, int start) {
+    vector&lt;bool&gt; visited(adj.size(), false);
+    queue&lt;int&gt; q;
+    
+    visited[start] = true;
+    q.push(start);
+    
+    while (!q.empty()) {
+        int node = q.front(); q.pop();
+        cout &lt;&lt; node &lt;&lt; " ";
+        
+        for (int neighbor : adj[node]) {
+            if (!visited[neighbor]) {
+                visited[neighbor] = true;
+                q.push(neighbor);
+            }
+        }
+    }
+}</pre>
+                            </div>
+                            <p><strong>Explanation:</strong> Use queue to visit nodes level by level, mark visited to avoid cycles.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 9: Find the Error -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 9: Find the error in this DFS implementation:</h4>
+                            <div class="code-block">
+                                <pre>void DFS(vector&lt;vector&lt;int&gt;&gt;&amp; adj, vector&lt;bool&gt;&amp; visited, int node) {
+    visited[node] = true;
+    cout &lt;&lt; node &lt;&lt; " ";
+    
+    for (int neighbor : adj[node]) {
+        if (!visited[neighbor]) {
+            DFS(adj, visited, neighbor);
+        }
+    }
+}
+
+// In main:
+vector&lt;bool&gt; visited(V, false);
+DFS(adj, visited, 0);  // What if graph has disconnected components?</pre>
+                            </div>
+                            <span class="question-type">Type: Find the Error</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Issue:</strong> Doesn't handle disconnected graphs</p>
+                            <p><strong>Explanation:</strong> Single DFS call only visits connected component of start node.</p>
+                            <p><strong>Fix:</strong> Call DFS for each unvisited node to handle all components.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 10: Find the Output -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 10: What will be the postorder traversal?</h4>
+                            <div class="code-block">
+                                <pre>// Same tree as Question 6
+//       1
+//      / \
+//     2   3
+//    / \
+//   4   5
+//
+// Postorder traversal:</pre>
+                            </div>
+                            <span class="question-type">Type: Find the Output</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Postorder:</strong> 4, 5, 2, 3, 1</p>
+                            <p><strong>Explanation:</strong> Postorder visits left subtree, right subtree, then root.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 11: Complete the Code -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 11: Complete the binary tree mirror function:</h4>
+                            <div class="code-block">
+                                <pre>void mirror(Node* root) {
+    if (root == nullptr) return;
+    // Complete the mirror operation
+}</pre>
+                            </div>
+                            <span class="question-type">Type: Complete the Code</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Completed Code:</strong></p>
+                            <div class="code-block">
+                                <pre>void mirror(Node* root) {
+    if (root == nullptr) return;
+    
+    // Swap left and right subtrees
+    Node* temp = root-&gt;left;
+    root-&gt;left = root-&gt;right;
+    root-&gt;right = temp;
+    
+    // Recursively mirror subtrees
+    mirror(root-&gt;left);
+    mirror(root-&gt;right);
+}</pre>
+                            </div>
+                            <p><strong>Explanation:</strong> Swap left and right children, then recursively mirror both subtrees.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 12: Write a Function -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 12: Write a function to check if tree is balanced:</h4>
+                            <div class="code-block">
+                                <pre>bool isBalanced(Node* root) {
+    // Write the balanced tree check
+}</pre>
+                            </div>
+                            <span class="question-type">Type: Write a Function</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Solution:</strong></p>
+                            <div class="code-block">
+                                <pre>bool isBalanced(Node* root) {
+    if (root == nullptr) return true;
+    
+    int leftHeight = getHeight(root-&gt;left);
+    int rightHeight = getHeight(root-&gt;right);
+    
+    if (abs(leftHeight - rightHeight) &lt;= 1 && 
+        isBalanced(root-&gt;left) && 
+        isBalanced(root-&gt;right)) {
+        return true;
+    }
+    
+    return false;
+}</pre>
+                            </div>
+                            <p><strong>Explanation:</strong> A tree is balanced if height difference between subtrees ≤ 1 and both subtrees are balanced.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 13: Find the Error -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 13: Find the error in this tree deletion:</h4>
+                            <div class="code-block">
+                                <pre>Node* deleteNode(Node* root, int value) {
+    if (root == nullptr) return root;
+    
+    if (value &lt; root-&gt;data) {
+        root-&gt;left = deleteNode(root-&gt;left, value);
+    } else if (value &gt; root-&gt;data) {
+        root-&gt;right = deleteNode(root-&gt;right, value);
+    } else {
+        // Node to be deleted found
+        if (root-&gt;left == nullptr) {
+            Node* temp = root-&gt;right;
+            delete root;
+            return temp;
+        } else if (root-&gt;right == nullptr) {
+            Node* temp = root-&gt;left;
+            delete root;
+            return temp;
+        }
+        
+        // Node with two children - find inorder successor
+        Node* temp = findMin(root-&gt;right);
+        root-&gt;data = temp-&gt;data;
+        root-&gt;right = deleteNode(root-&gt;right, temp-&gt;data);
+    }
+    return root;
+}</pre>
+                            </div>
+                            <span class="question-type">Type: Find the Error</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>This code is actually correct!</strong></p>
+                            <p><strong>Explanation:</strong> The deletion properly handles all three cases: no children, one child, and two children using inorder successor.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 14: Find the Output -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 14: What will be the BFS traversal order?</h4>
+                            <div class="code-block">
+                                <pre>// Graph adjacency list:
+// 0: 1, 2
+// 1: 0, 3, 4  
+// 2: 0, 4
+// 3: 1
+// 4: 1, 2
+//
+// BFS starting from node 0:</pre>
+                            </div>
+                            <span class="question-type">Type: Find the Output</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>BFS:</strong> 0, 1, 2, 3, 4</p>
+                            <p><strong>Explanation:</strong> Level 0: 0, Level 1: 1, 2, Level 2: 3, 4</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 15: Complete the Code -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 15: Complete the graph cycle detection:</h4>
+                            <div class="code-block">
+                                <pre>bool hasCycleDFS(vector&lt;vector&lt;int&gt;&gt;&amp; adj, vector&lt;bool&gt;&amp; visited, 
+                               vector&lt;bool&gt;&amp; recStack, int node) {
+    visited[node] = true;
+    recStack[node] = true;
+    
+    for (int neighbor : adj[node]) {
+        // Complete the cycle detection logic
+    }
+    
+    recStack[node] = false;
+    return false;
+}</pre>
+                            </div>
+                            <span class="question-type">Type: Complete the Code</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Completed Code:</strong></p>
+                            <div class="code-block">
+                                <pre>        if (!visited[neighbor]) {
+            if (hasCycleDFS(adj, visited, recStack, neighbor)) {
+                return true;
+            }
+        } else if (recStack[neighbor]) {
+            return true; // Cycle detected
+        }</pre>
+                            </div>
+                            <p><strong>Explanation:</strong> If neighbor is visited and in recursion stack, there's a back edge (cycle).</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 16: Write a Function -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 16: Write a function to find tree diameter:</h4>
+                            <div class="code-block">
+                                <pre>pair&lt;int, int&gt; diameterHelper(Node* root) {
+    // Returns {height, diameter}
+    if (root == nullptr) return {0, 0};
+    
+    auto left = diameterHelper(root-&gt;left);
+    auto right = diameterHelper(root-&gt;right);
+    
+    int height = 1 + max(left.first, right.first);
+    int diameter = max({left.second, right.second, 
+                       left.first + right.first});
+    
+    return {height, diameter};
+}
+
+int getDiameter(Node* root) {
+    return diameterHelper(root).second;
+}</pre>
+                            </div>
+                            <span class="question-type">Type: Write a Function</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>The code is already complete!</strong></p>
+                            <p><strong>Explanation:</strong> Diameter is the longest path between any two nodes. It can be through root or in subtrees.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 17: Find the Error -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 17: Find the error in this tree construction:</h4>
+                            <div class="code-block">
+                                <pre>// Attempting to build BST from array [1, 2, 3, 4, 5]
+Node* buildBST(vector&lt;int&gt;&amp; arr, int start, int end) {
+    if (start &gt; end) return nullptr;
+    
+    int mid = (start + end) / 2;
+    Node* root = new Node(arr[mid]);
+    
+    root-&gt;left = buildBST(arr, start, mid - 1);
+    root-&gt;right = buildBST(arr, mid + 1, end);  // Error!
+    
+    return root;
+}</pre>
+                            </div>
+                            <span class="question-type">Type: Find the Error</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>This code is correct for building a balanced BST!</strong></p>
+                            <p><strong>Explanation:</strong> Using middle element as root creates a balanced BST from sorted array.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 18: Find the Output -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 18: What will be the DFS traversal order?</h4>
+                            <div class="code-block">
+                                <pre>// Same graph as Question 14
+// DFS starting from node 0:</pre>
+                            </div>
+                            <span class="question-type">Type: Find the Output</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>DFS:</strong> 0, 1, 3, 4, 2</p>
+                            <p><strong>Explanation:</strong> Explores deep before backtracking: 0→1→3, then 1→4, then back to 0→2.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 19: Complete the Code -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 19: Complete the lowest common ancestor (LCA):</h4>
+                            <div class="code-block">
+                                <pre>Node* findLCA(Node* root, int n1, int n2) {
+    if (root == nullptr) return nullptr;
+    
+    // Complete the LCA logic for BST
+}</pre>
+                            </div>
+                            <span class="question-type">Type: Complete the Code</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Completed Code:</strong></p>
+                            <div class="code-block">
+                                <pre>Node* findLCA(Node* root, int n1, int n2) {
+    if (root == nullptr) return nullptr;
+    
+    // If both n1 and n2 are smaller than root, LCA is in left subtree
+    if (root-&gt;data > n1 && root-&gt;data > n2) {
+        return findLCA(root-&gt;left, n1, n2);
+    }
+    
+    // If both n1 and n2 are greater than root, LCA is in right subtree
+    if (root-&gt;data &lt; n1 && root-&gt;data &lt; n2) {
+        return findLCA(root-&gt;right, n1, n2);
+    }
+    
+    // Root is LCA
+    return root;
+}</pre>
+                            </div>
+                            <p><strong>Explanation:</strong> In BST, LCA is the node where paths to n1 and n2 diverge.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 20: Write a Function -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 20: Write a function to check if binary tree is BST:</h4>
+                            <div class="code-block">
+                                <pre>bool isBST(Node* root, int min = INT_MIN, int max = INT_MAX) {
+    // Write the BST validation
+}</pre>
+                            </div>
+                            <span class="question-type">Type: Write a Function</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Solution:</strong></p>
+                            <div class="code-block">
+                                <pre>bool isBST(Node* root, int min, int max) {
+    if (root == nullptr) return true;
+    
+    if (root-&gt;data &lt;= min || root-&gt;data &gt;= max) return false;
+    
+    return isBST(root-&gt;left, min, root-&gt;data) && 
+           isBST(root-&gt;right, root-&gt;data, max);
+}</pre>
+                            </div>
+                            <p><strong>Explanation:</strong> Each node must be within valid range (greater than left subtree max, less than right subtree min).</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <div class="sidebar">
+                <h3>Navigation</h3>
+                <ul>
+                    <li><a href="#overview">Overview</a></li>
+                    <li><a href="#binary-tree">Binary Tree</a></li>
+                    <li><a href="#qa-section">Q&A</a></li>
+                </ul>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 CSY2006 C++ Programming Course. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

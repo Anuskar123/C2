@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 19: Advanced Algorithms - CSY2006</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>CSY2006 C++ Programming Course Notes</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="code-library.html">Code Library</a></li>
+                <li><a href="week10.html">Week 10</a></li>
+                <li><a href="week15.html">Week 15</a></li>
+                <li><a href="week16.html">Week 16</a></li>
+                <li><a href="week17.html">Week 17</a></li>
+                <li><a href="week18.html">Week 18</a></li>
+                <li><a href="week19.html">Week 19</a></li>
+                <li><a href="week20.html">Week 20</a></li>
+                <li><a href="week21.html">Week 21</a></li>
+                <li><a href="week22.html">Week 22</a></li>
+                <li><a href="week23.html">Week 23</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="week-header">
+            <h2>Week 19: Advanced Algorithms</h2>
+            <p>Sorting, Searching, and Optimization</p>
+        </section>
+
+        <div class="week-content">
+            <div class="main-content">
+                <section id="overview">
+                    <h3>Week 19 Overview</h3>
+                    <p>This week covers advanced algorithms including sorting techniques, searching algorithms, and algorithm analysis.</p>
+
+                    <h4>Key Topics:</h4>
+                    <ul>
+                        <li>Sorting algorithms (QuickSort, MergeSort, HeapSort)</li>
+                        <li>Searching algorithms (Binary Search, Hashing)</li>
+                        <li>Algorithm complexity analysis (Big O notation)</li>
+                        <li>Divide and conquer strategies</li>
+                        <li>Optimization techniques</li>
+                    </ul>
+                </section>
+
+                <section id="sorting">
+                    <h3>Sorting Algorithms</h3>
+
+                    <h4>QuickSort Implementation</h4>
+                    <div class="code-block">
+                        <pre>int partition(int arr[], int low, int high) {
+    int pivot = arr[high];
+    int i = low - 1;
+
+    for (int j = low; j &lt; high; j++) {
+        if (arr[j] &lt; pivot) {
+            i++;
+            swap(arr[i], arr[j]);
+        }
+    }
+    swap(arr[i + 1], arr[high]);
+    return i + 1;
+}
+
+void quickSort(int arr[], int low, int high) {
+    if (low &lt; high) {
+        int pi = partition(arr, low, high);
+        quickSort(arr, low, pi - 1);
+        quickSort(arr, pi + 1, high);
+    }
+}</pre>
+                    </div>
+
+                    <h4>Binary Search</h4>
+                    <div class="code-block">
+                        <pre>int binarySearch(int arr[], int left, int right, int target) {
+    while (left &lt;= right) {
+        int mid = left + (right - left) / 2;
+
+        if (arr[mid] == target)
+            return mid;
+
+        if (arr[mid] &lt; target)
+            left = mid + 1;
+        else
+            right = mid - 1;
+    }
+    return -1; // Not found
+}</pre>
+                    </div>
+                </section>
+
+                <section id="qa-section">
+                    <h3>Practice Questions & Answers (20 Questions)</h3>
+
+                    <!-- Question 1: Find the Error -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 1: Find the error in this QuickSort partition:</h4>
+                            <div class="code-block">
+                                <pre>int partition(int arr[], int low, int high) {
+    int pivot = arr[low];  // Using first element as pivot
+    int i = low;
+    int j = high;
+    
+    while (i &lt; j) {
+        while (arr[i] &lt;= pivot) i++;
+        while (arr[j] &gt; pivot) j--;
+        
+        if (i &lt; j) {
+            swap(arr[i], arr[j]);
+        }
+    }
+    swap(arr[low], arr[j]);  // Error in pivot placement!
+    return j;
+}</pre>
+                            </div>
+                            <span class="question-type">Type: Find the Error</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Error:</strong> Incorrect pivot placement</p>
+                            <p><strong>Explanation:</strong> Should swap <code>arr[low]</code> with <code>arr[j]</code>, but the logic assumes pivot is at <code>arr[low]</code>.</p>
+                            <p><strong>Fix:</strong> The swap should be <code>swap(arr[low], arr[j]);</code> which is already correct in this code.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 2: Find the Output -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 2: What will be the time complexity of this algorithm?</h4>
+                            <div class="code-block">
+                                <pre>void algorithm(int n) {
+    for(int i = 0; i &lt; n; i++) {
+        for(int j = i; j &lt; n; j++) {
+            cout &lt;&lt; "Hello";
+        }
+    }
+}</pre>
+                            </div>
+                            <span class="question-type">Type: Find the Output</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Time Complexity:</strong> O(n²)</p>
+                            <p><strong>Explanation:</strong> Outer loop runs n times, inner loop runs n-i times on average n/2 times, so total is O(n²).</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 3: Complete the Code -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 3: Complete the MergeSort implementation:</h4>
+                            <div class="code-block">
+                                <pre>void merge(int arr[], int left, int mid, int right) {
+    int n1 = mid - left + 1;
+    int n2 = right - mid;
+    
+    int* L = new int[n1];
+    int* R = new int[n2];
+    
+    // Complete copying elements to temp arrays
+    // Your code here
+}</pre>
+                            </div>
+                            <span class="question-type">Type: Complete the Code</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Completed Code:</strong></p>
+                            <div class="code-block">
+                                <pre>    for(int i = 0; i &lt; n1; i++)
+        L[i] = arr[left + i];
+    for(int j = 0; j &lt; n2; j++)
+        R[j] = arr[mid + 1 + j];
+    
+    // Then merge back...</pre>
+                            </div>
+                            <p><strong>Explanation:</strong> Copy left half to L array, right half to R array for merging.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 4: Write a Function -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 4: Write a function to find the median of two sorted arrays:</h4>
+                            <div class="code-block">
+                                <pre>double findMedian(vector&lt;int&gt;&amp; nums1, vector&lt;int&gt;&amp; nums2) {
+    // Write the implementation using binary search approach
+}</pre>
+                            </div>
+                            <span class="question-type">Type: Write a Function</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Solution:</strong></p>
+                            <div class="code-block">
+                                <pre>double findMedian(vector&lt;int&gt;&amp; nums1, vector&lt;int&gt;&amp; nums2) {
+    if (nums1.size() > nums2.size()) swap(nums1, nums2);
+    
+    int m = nums1.size(), n = nums2.size();
+    int total = m + n;
+    int half = (total + 1) / 2;
+    
+    int left = 0, right = m;
+    while (left &lt;= right) {
+        int i = (left + right) / 2;
+        int j = half - i;
+        
+        int nums1Left = (i > 0) ? nums1[i-1] : INT_MIN;
+        int nums1Right = (i &lt; m) ? nums1[i] : INT_MAX;
+        int nums2Left = (j > 0) ? nums2[j-1] : INT_MIN;
+        int nums2Right = (j &lt; n) ? nums2[j] : INT_MAX;
+        
+        if (nums1Left &lt;= nums2Right && nums2Left &lt;= nums1Right) {
+            if (total % 2 == 1) return max(nums1Left, nums2Left);
+            return (max(nums1Left, nums2Left) + min(nums1Right, nums2Right)) / 2.0;
+        } else if (nums1Left > nums2Right) {
+            right = i - 1;
+        } else {
+            left = i + 1;
+        }
+    }
+    return 0;
+}</pre>
+                            </div>
+                            <p><strong>Explanation:</strong> Uses binary search to partition arrays such that elements on left are ≤ elements on right.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 5: Find the Error -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 5: Find the error in this binary search for first occurrence:</h4>
+                            <div class="code-block">
+                                <pre>int findFirstOccurrence(vector&lt;int&gt;&amp; arr, int target) {
+    int left = 0, right = arr.size() - 1;
+    int result = -1;
+    
+    while (left &lt;= right) {
+        int mid = left + (right - left) / 2;
+        
+        if (arr[mid] == target) {
+            result = mid;
+            right = mid - 1;  // Search left half
+        } else if (arr[mid] &lt; target) {
+            left = mid + 1;
+        } else {
+            right = mid - 1;
+        }
+    }
+    return result;
+}</pre>
+                            </div>
+                            <span class="question-type">Type: Find the Error</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>This code is correct!</strong></p>
+                            <p><strong>Explanation:</strong> When target is found, it continues searching left half to find the first occurrence.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 6: Find the Output -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 6: What will be the space complexity of this recursive algorithm?</h4>
+                            <div class="code-block">
+                                <pre>int fibonacci(int n) {
+    if (n &lt;= 1) return n;
+    return fibonacci(n-1) + fibonacci(n-2);
+}</pre>
+                            </div>
+                            <span class="question-type">Type: Find the Output</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Space Complexity:</strong> O(n)</p>
+                            <p><strong>Explanation:</strong> Maximum recursion depth is n, so O(n) stack space is used.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 7: Complete the Code -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 7: Complete the heapify function for HeapSort:</h4>
+                            <div class="code-block">
+                                <pre>void heapify(int arr[], int n, int i) {
+    int largest = i;
+    int left = 2 * i + 1;
+    int right = 2 * i + 2;
+    
+    // Complete the heapify logic
+}</pre>
+                            </div>
+                            <span class="question-type">Type: Complete the Code</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Completed Code:</strong></p>
+                            <div class="code-block">
+                                <pre>    if (left &lt; n && arr[left] > arr[largest])
+        largest = left;
+    
+    if (right &lt; n && arr[right] > arr[largest])
+        largest = right;
+    
+    if (largest != i) {
+        swap(arr[i], arr[largest]);
+        heapify(arr, n, largest);
+    }</pre>
+                            </div>
+                            <p><strong>Explanation:</strong> Find largest among root, left, right children, swap if needed, and recursively heapify.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 8: Write a Function -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 8: Write a function to find the kth largest element:</h4>
+                            <div class="code-block">
+                                <pre>int findKthLargest(vector&lt;int&gt;&amp; nums, int k) {
+    // Write using QuickSelect algorithm
+}</pre>
+                            </div>
+                            <span class="question-type">Type: Write a Function</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Solution:</strong></p>
+                            <div class="code-block">
+                                <pre>int findKthLargest(vector&lt;int&gt;&amp; nums, int k) {
+    int left = 0, right = nums.size() - 1;
+    
+    while (left &lt;= right) {
+        int pivotIndex = partition(nums, left, right);
+        
+        if (pivotIndex == nums.size() - k) {
+            return nums[pivotIndex];
+        } else if (pivotIndex &lt; nums.size() - k) {
+            left = pivotIndex + 1;
+        } else {
+            right = pivotIndex - 1;
+        }
+    }
+    return -1;
+}
+
+int partition(vector&lt;int&gt;&amp; nums, int left, int right) {
+    int pivot = nums[right];
+    int i = left;
+    
+    for (int j = left; j &lt; right; j++) {
+        if (nums[j] &lt;= pivot) {
+            swap(nums[i], nums[j]);
+            i++;
+        }
+    }
+    swap(nums[i], nums[right]);
+    return i;
+}</pre>
+                            </div>
+                            <p><strong>Explanation:</strong> QuickSelect finds kth element in average O(n) time using partitioning.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 9: Find the Error -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 9: Find the error in this complexity analysis:</h4>
+                            <div class="code-block">
+                                <pre>// Algorithm: Find maximum element in array
+int findMax(int arr[], int n) {
+    int max = arr[0];
+    for(int i = 1; i &lt; n; i++) {
+        if(arr[i] > max) max = arr[i];
+    }
+    return max;
+}
+
+// Someone claims: "This algorithm has O(log n) time complexity"
+// Is this correct?</pre>
+                            </div>
+                            <span class="question-type">Type: Find the Error</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Error:</strong> Incorrect complexity claim</p>
+                            <p><strong>Explanation:</strong> The algorithm scans through all n elements, so it's O(n), not O(log n).</p>
+                            <p><strong>Correction:</strong> O(log n) would be for algorithms like binary search that divide the problem size.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 10: Find the Output -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 10: What will be the best case time complexity of QuickSort?</h4>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Best Case:</strong> O(n log n)</p>
+                            <p><strong>Explanation:</strong> Occurs when pivot divides array into roughly equal halves at each step.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 11: Complete the Code -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 11: Complete the interpolation search:</h4>
+                            <div class="code-block">
+                                <pre>int interpolationSearch(int arr[], int n, int target) {
+    int low = 0, high = n - 1;
+    
+    while (low &lt;= high && target &gt;= arr[low] && target &lt;= arr[high]) {
+        // Complete the position calculation
+        int pos = low + ((target - arr[low]) * (high - low)) / (arr[high] - arr[low]);
+        
+        if (arr[pos] == target) return pos;
+        // Complete the search logic
+    }
+    return -1;
+}</pre>
+                            </div>
+                            <span class="question-type">Type: Complete the Code</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Completed Code:</strong></p>
+                            <div class="code-block">
+                                <pre>        if (arr[pos] == target) return pos;
+        else if (arr[pos] &lt; target) low = pos + 1;
+        else high = pos - 1;</pre>
+                            </div>
+                            <p><strong>Explanation:</strong> If target is greater, search right half; if smaller, search left half.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 12: Write a Function -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 12: Write a function to count inversions in an array:</h4>
+                            <div class="code-block">
+                                <pre>// Inversion: i &lt; j but arr[i] > arr[j]
+long long countInversions(vector&lt;int&gt;&amp; arr) {
+    // Write using merge sort approach
+}</pre>
+                            </div>
+                            <span class="question-type">Type: Write a Function</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Solution:</strong></p>
+                            <div class="code-block">
+                                <pre>long long merge(vector&lt;int&gt;&amp; arr, int left, int mid, int right) {
+    vector&lt;int&gt; temp(right - left + 1);
+    int i = left, j = mid + 1, k = 0;
+    long long inv_count = 0;
+    
+    while (i &lt;= mid && j &lt;= right) {
+        if (arr[i] &lt;= arr[j]) {
+            temp[k++] = arr[i++];
+        } else {
+            temp[k++] = arr[j++];
+            inv_count += (mid - i + 1); // All remaining left elements are greater
+        }
+    }
+    
+    while (i &lt;= mid) temp[k++] = arr[i++];
+    while (j &lt;= right) temp[k++] = arr[j++];
+    
+    for (int p = 0; p &lt; k; p++) {
+        arr[left + p] = temp[p];
+    }
+    
+    return inv_count;
+}
+
+long long _mergeSort(vector&lt;int&gt;&amp; arr, int left, int right) {
+    long long inv_count = 0;
+    if (left &lt; right) {
+        int mid = left + (right - left) / 2;
+        inv_count += _mergeSort(arr, left, mid);
+        inv_count += _mergeSort(arr, mid + 1, right);
+        inv_count += merge(arr, left, mid, right);
+    }
+    return inv_count;
+}
+
+long long countInversions(vector&lt;int&gt;&amp; arr) {
+    return _mergeSort(arr, 0, arr.size() - 1);
+}</pre>
+                            </div>
+                            <p><strong>Explanation:</strong> Modified merge sort counts inversions during the merge step.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 13: Find the Error -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 13: Find the error in this dynamic programming solution:</h4>
+                            <div class="code-block">
+                                <pre>// Longest Increasing Subsequence
+int LIS(vector&lt;int&gt;&amp; nums) {
+    int n = nums.size();
+    vector&lt;int&gt; dp(n, 1);
+    
+    for(int i = 1; i &lt; n; i++) {
+        for(int j = 0; j &lt; i; j++) {
+            if(nums[i] > nums[j]) {
+                dp[i] = max(dp[i], dp[j] + 1);
+            }
+        }
+    }
+    
+    return *max_element(dp.begin(), dp.end());
+}</pre>
+                            </div>
+                            <span class="question-type">Type: Find the Error</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>This code is correct!</strong></p>
+                            <p><strong>Explanation:</strong> This is the standard O(n²) dynamic programming solution for LIS.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 14: Find the Output -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 14: What will be the time complexity of this nested loop?</h4>
+                            <div class="code-block">
+                                <pre>for(int i = 0; i &lt; n; i++) {
+    for(int j = i + 1; j &lt; n; j++) {
+        for(int k = j + 1; k &lt; n; k++) {
+            // O(1) operation
+        }
+    }
+}</pre>
+                            </div>
+                            <span class="question-type">Type: Find the Output</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Time Complexity:</strong> O(n³)</p>
+                            <p><strong>Explanation:</strong> Three nested loops: i from 0 to n-1, j from i+1 to n-1, k from j+1 to n-1.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 15: Complete the Code -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 15: Complete the Rabin-Karp string matching:</h4>
+                            <div class="code-block">
+                                <pre>vector&lt;int&gt; rabinKarp(string text, string pattern) {
+    vector&lt;int&gt; result;
+    int n = text.size(), m = pattern.size();
+    int d = 256; // Number of characters
+    int q = 101; // Prime number
+    
+    // Complete the algorithm
+}</pre>
+                            </div>
+                            <span class="question-type">Type: Complete the Code</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Completed Code:</strong></p>
+                            <div class="code-block">
+                                <pre>    int h = 1;
+    for (int i = 0; i &lt; m - 1; i++)
+        h = (h * d) % q;
+    
+    int p = 0, t = 0;
+    for (int i = 0; i &lt; m; i++) {
+        p = (d * p + pattern[i]) % q;
+        t = (d * t + text[i]) % q;
+    }
+    
+    for (int i = 0; i &lt;= n - m; i++) {
+        if (p == t) {
+            bool match = true;
+            for (int j = 0; j &lt; m; j++) {
+                if (text[i + j] != pattern[j]) {
+                    match = false;
+                    break;
+                }
+            }
+            if (match) result.push_back(i);
+        }
+        
+        if (i &lt; n - m) {
+            t = (d * (t - text[i] * h) + text[i + m]) % q;
+            if (t &lt; 0) t += q;
+        }
+    }
+    
+    return result;</pre>
+                            </div>
+                            <p><strong>Explanation:</strong> Rolling hash technique for efficient string pattern matching.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 16: Write a Function -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 16: Write a function to find the maximum subarray sum:</h4>
+                            <div class="code-block">
+                                <pre>// Kadane's Algorithm
+int maxSubarraySum(vector&lt;int&gt;&amp; nums) {
+    // Write the implementation
+}</pre>
+                            </div>
+                            <span class="question-type">Type: Write a Function</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Solution:</strong></p>
+                            <div class="code-block">
+                                <pre>int maxSubarraySum(vector&lt;int&gt;&amp; nums) {
+    int max_so_far = INT_MIN;
+    int max_ending_here = 0;
+    
+    for (int i = 0; i &lt; nums.size(); i++) {
+        max_ending_here += nums[i];
+        
+        if (max_so_far &lt; max_ending_here) {
+            max_so_far = max_ending_here;
+        }
+        
+        if (max_ending_here &lt; 0) {
+            max_ending_here = 0;
+        }
+    }
+    
+    return max_so_far;
+}</pre>
+                            </div>
+                            <p><strong>Explanation:</strong> Kadane's algorithm finds maximum contiguous subarray sum in O(n) time.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 17: Find the Error -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 17: Find the error in this hash table implementation:</h4>
+                            <div class="code-block">
+                                <pre>class HashTable {
+private:
+    vector&lt;string&gt; table;
+    int size;
+    
+public:
+    HashTable(int s) : size(s), table(s) {}
+    
+    int hashFunction(string key) {
+        int hash = 0;
+        for(char c : key) {
+            hash += c;
+        }
+        return hash % size;  // Linear probing?
+    }
+    
+    void insert(string key) {
+        int index = hashFunction(key);
+        while (!table[index].empty()) {
+            index = (index + 1) % size;  // Linear probing
+        }
+        table[index] = key;
+    }
+};</pre>
+                            </div>
+                            <span class="question-type">Type: Find the Error</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Issue:</strong> No handling of table full condition</p>
+                            <p><strong>Explanation:</strong> If table becomes full, the while loop will infinite loop. Need to check if we've probed all positions.</p>
+                            <p><strong>Fix:</strong> Add a counter to detect when table is full.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 18: Find the Output -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 18: What will be the worst case time complexity of QuickSort?</h4>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Worst Case:</strong> O(n²)</p>
+                            <p><strong>Explanation:</strong> Occurs when pivot is always the smallest or largest element, leading to unbalanced partitions.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 19: Complete the Code -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 19: Complete the Floyd-Warshall algorithm:</h4>
+                            <div class="code-block">
+                                <pre>void floydWarshall(vector&lt;vector&lt;int&gt;&gt;&amp; dist, int V) {
+    // Complete the all-pairs shortest path algorithm
+    for(int k = 0; k &lt; V; k++) {
+        for(int i = 0; i &lt; V; i++) {
+            for(int j = 0; j &lt; V; j++) {
+                // Complete the relaxation step
+            }
+        }
+    }
+}</pre>
+                            </div>
+                            <span class="question-type">Type: Complete the Code</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Completed Code:</strong></p>
+                            <div class="code-block">
+                                <pre>                if (dist[i][k] != INT_MAX && dist[k][j] != INT_MAX && 
+                    dist[i][k] + dist[k][j] &lt; dist[i][j]) {
+                    dist[i][j] = dist[i][k] + dist[k][j];
+                }</pre>
+                            </div>
+                            <p><strong>Explanation:</strong> If path through k is shorter than direct path, update distance.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 20: Write a Function -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 20: Write a function to find the longest common subsequence:</h4>
+                            <div class="code-block">
+                                <pre>string LCS(string text1, string text2) {
+    int m = text1.size(), n = text2.size();
+    vector&lt;vector&lt;int&gt;&gt; dp(m + 1, vector&lt;int&gt;(n + 1, 0));
+    
+    // Fill DP table
+    for(int i = 1; i &lt;= m; i++) {
+        for(int j = 1; j &lt;= n; j++) {
+            if(text1[i-1] == text2[j-1]) {
+                dp[i][j] = dp[i-1][j-1] + 1;
+            } else {
+                dp[i][j] = max(dp[i-1][j], dp[i][j-1]);
+            }
+        }
+    }
+    
+    // Reconstruct LCS
+    string lcs = "";
+    int i = m, j = n;
+    while(i > 0 && j > 0) {
+        if(text1[i-1] == text2[j-1]) {
+            lcs = text1[i-1] + lcs;
+            i--; j--;
+        } else if(dp[i-1][j] > dp[i][j-1]) {
+            i--;
+        } else {
+            j--;
+        }
+    }
+    return lcs;
+}</pre>
+                            </div>
+                            <span class="question-type">Type: Write a Function</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>The code is already complete!</strong></p>
+                            <p><strong>Explanation:</strong> Dynamic programming solution that finds LCS by comparing characters and building the result backwards.</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <div class="sidebar">
+                <h3>Navigation</h3>
+                <ul>
+                    <li><a href="#overview">Overview</a></li>
+                    <li><a href="#sorting">Sorting</a></li>
+                    <li><a href="#qa-section">Q&A</a></li>
+                </ul>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 CSY2006 C++ Programming Course. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

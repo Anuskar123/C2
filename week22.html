@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 22: STL - CSY2006</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>CSY2006 C++ Programming Course Notes</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="code-library.html">Code Library</a></li>
+                <li><a href="week10.html">Week 10</a></li>
+                <li><a href="week15.html">Week 15</a></li>
+                <li><a href="week16.html">Week 16</a></li>
+                <li><a href="week17.html">Week 17</a></li>
+                <li><a href="week18.html">Week 18</a></li>
+                <li><a href="week19.html">Week 19</a></li>
+                <li><a href="week20.html">Week 20</a></li>
+                <li><a href="week21.html">Week 21</a></li>
+                <li><a href="week22.html">Week 22</a></li>
+                <li><a href="week23.html">Week 23</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="week-header">
+            <h2>Week 22: Standard Template Library (STL)</h2>
+            <p>Using STL Containers and Algorithms</p>
+        </section>
+
+        <div class="week-content">
+            <div class="main-content">
+                <section id="overview">
+                    <h3>Week 22 Overview</h3>
+                    <p>This week covers the Standard Template Library (STL), which provides reusable components for common data structures and algorithms.</p>
+
+                    <h4>Key Topics:</h4>
+                    <ul>
+                        <li>STL Containers (vector, list, deque, set, map)</li>
+                        <li>STL Algorithms (sort, find, transform)</li>
+                        <li>Iterators</li>
+                        <li>Function objects and lambdas</li>
+                        <li>STL utility classes</li>
+                    </ul>
+                </section>
+
+                <section id="containers">
+                    <h3>STL Containers</h3>
+
+                    <h4>Vector Usage</h4>
+                    <div class="code-block">
+                        <pre>#include &lt;vector&gt;
+#include &lt;algorithm&gt;
+using namespace std;
+
+int main() {
+    vector&lt;int&gt; numbers = {1, 2, 3, 4, 5};
+
+    // Add elements
+    numbers.push_back(6);
+    numbers.push_back(7);
+
+    // Sort the vector
+    sort(numbers.begin(), numbers.end());
+
+    // Display elements
+    for (int num : numbers) {
+        cout &lt;&lt; num &lt;&lt; " ";
+    }
+    cout &lt;&lt; endl;
+
+    return 0;
+}</pre>
+                    </div>
+
+                    <h4>Map Usage</h4>
+                    <div class="code-block">
+                        <pre>#include &lt;map&gt;
+#include &lt;string&gt;
+
+int main() {
+    map&lt;string, int&gt; studentGrades;
+
+    // Insert elements
+    studentGrades["Alice"] = 95;
+    studentGrades["Bob"] = 87;
+    studentGrades.insert({"Charlie", 92});
+
+    // Access elements
+    cout &lt;&lt; "Alice's grade: " &lt;&lt; studentGrades["Alice"] &lt;&lt; endl;
+
+    // Iterate through map
+    for (auto&amp; pair : studentGrades) {
+        cout &lt;&lt; pair.first &lt;&lt; ": " &lt;&lt; pair.second &lt;&lt; endl;
+    }
+
+    return 0;
+}</pre>
+                    </div>
+                </section>
+
+                <section id="qa-section">
+                    <h3>Practice Questions & Answers</h3>
+
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>What are the main categories of STL containers?</h4>
+                        </div>
+                        <div class="answer">
+                            <p>STL containers are divided into four main categories:<br>1. <strong>Sequence containers</strong>: vector, deque, list, array, forward_list<br>2. <strong>Associative containers</strong>: set, multiset, map, multimap<br>3. <strong>Unordered associative</strong>: unordered_set, unordered_map, etc.<br>4. <strong>Container adapters</strong>: stack, queue, priority_queue</p>
+                        </div>
+                    </div>
+
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Find the error in this vector usage:</h4>
+                            <div class="code-block">
+                                <pre>#include &lt;vector&gt;
+using namespace std;
+
+int main() {
+    vector&lt;int&gt; v;
+    v.push_back(1);
+    v.push_back(2);
+    v.push_back(3);
+    
+    cout &lt;&lt; v[3] &lt;&lt; endl;  // Error here
+    return 0;
+}</pre>
+                            </div>
+                        </div>
+                        <div class="answer">
+                            <p>The error is accessing <code>v[3]</code> when the vector only has indices 0, 1, 2 (for elements 1, 2, 3). This causes undefined behavior - it might crash or return garbage values. Should use <code>v.at(3)</code> for bounds checking or check <code>v.size()</code> first.</p>
+                        </div>
+                    </div>
+
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>What will be the output of this code?</h4>
+                            <div class="code-block">
+                                <pre>#include &lt;vector&gt;
+#include &lt;algorithm&gt;
+using namespace std;
+
+int main() {
+    vector&lt;int&gt; v = {3, 1, 4, 1, 5};
+    sort(v.begin(), v.end());
+    reverse(v.begin(), v.end());
+    
+    for(int x : v) cout &lt;&lt; x &lt;&lt; " ";
+    return 0;
+}</pre>
+                            </div>
+                        </div>
+                        <div class="answer">
+                            <p>The output will be: 5 4 3 1 1<br>The vector is first sorted in ascending order (1, 1, 3, 4, 5), then reversed to descending order (5, 4, 3, 1, 1).</p>
+                        </div>
+                    </div>
+
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Write code to find an element in a vector and handle the case when it's not found.</h4>
+                        </div>
+                        <div class="answer">
+                            <p>Here's how to find an element in a vector:</p>
+                            <div class="code-block">
+                                <pre>#include &lt;vector&gt;
+#include &lt;algorithm&gt;
+using namespace std;
+
+int main() {
+    vector&lt;int&gt; v = {10, 20, 30, 40, 50};
+    
+    // Using find algorithm
+    auto it = find(v.begin(), v.end(), 30);
+    
+    if (it != v.end()) {
+        cout &lt;&lt; "Found at index: " &lt;&lt; (it - v.begin()) &lt;&lt; endl;
+    } else {
+        cout &lt;&lt; "Element not found" &lt;&lt; endl;
+    }
+    
+    return 0;
+}</pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>What is the difference between map and unordered_map?</h4>
+                        </div>
+                        <div class="answer">
+                            <p><strong>map:</strong><br>• Ordered container (red-black tree)<br>• O(log n) insertion/lookup<br>• Elements sorted by key<br>• Requires comparable keys<br><br><strong>unordered_map:</strong><br>• Unordered container (hash table)<br>• Average O(1) insertion/lookup<br>• Elements not sorted<br>• Requires hashable keys</p>
+                        </div>
+                    </div>
+
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Find the compilation error in this set usage:</h4>
+                            <div class="code-block">
+                                <pre>#include &lt;set&gt;
+using namespace std;
+
+int main() {
+    set&lt;int&gt; s = {1, 2, 3, 4, 5};
+    s.insert(3);  // This is fine
+    cout &lt;&lt; s[0] &lt;&lt; endl;  // Error here
+    return 0;
+}</pre>
+                            </div>
+                        </div>
+                        <div class="answer">
+                            <p>The error is trying to use <code>s[0]</code> with a set. Sets don't support random access with <code>[]</code> operator. You should use iterators: <code>*s.begin()</code> for the first element, or <code>auto it = s.begin(); advance(it, 0);</code> for indexed access.</p>
+                        </div>
+                    </div>
+
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>What are iterators and why are they important in STL?</h4>
+                        </div>
+                        <div class="answer">
+                            <p>Iterators are objects that point to elements in containers and provide a way to traverse them. They're important because:<br>1. <strong>Unified interface</strong> - Same way to traverse different containers<br>2. <strong>Algorithm compatibility</strong> - Algorithms work with any container via iterators<br>3. <strong>Abstraction</strong> - Hide internal container implementation<br>4. <strong>Flexibility</strong> - Can traverse in different ways (forward, reverse, etc.)</p>
+                        </div>
+                    </div>
+
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Write a complete program that uses a map to count word frequencies in a string.</h4>
+                        </div>
+                        <div class="answer">
+                            <p>Here's a word frequency counter using map:</p>
+                            <div class="code-block">
+                                <pre>#include &lt;map&gt;
+#include &lt;string&gt;
+#include &lt;sstream&gt;
+#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    string text = "the quick brown fox jumps over the lazy dog";
+    map&lt;string, int&gt; wordCount;
+    
+    stringstream ss(text);
+    string word;
+    
+    while (ss &gt;&gt; word) {
+        wordCount[word]++;
+    }
+    
+    cout &lt;&lt; "Word frequencies:" &lt;&lt; endl;
+    for (const auto&amp; pair : wordCount) {
+        cout &lt;&lt; pair.first &lt;&lt; ": " &lt;&lt; pair.second &lt;&lt; endl;
+    }
+    
+    return 0;
+}</pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>What is the difference between deque and vector?</h4>
+                        </div>
+                        <div class="answer">
+                            <p><strong>deque (double-ended queue):</strong><br>• Efficient insertions/removals at both ends<br>• No reallocation when growing<br>• Slightly slower random access than vector<br>• Good for queue-like operations<br><br><strong>vector:</strong><br>• Efficient random access<br>• Efficient end insertions<br>• May reallocate when growing<br>• Better for random access patterns</p>
+                        </div>
+                    </div>
+
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Find the error in this algorithm usage:</h4>
+                            <div class="code-block">
+                                <pre>#include &lt;vector&gt;
+#include &lt;algorithm&gt;
+using namespace std;
+
+int main() {
+    vector&lt;int&gt; v = {1, 2, 3, 4, 5};
+    auto it = find(v.begin(), v.end(), 3);
+    
+    if (it != v.end()) {
+        v.erase(it);
+    }
+    
+    // Now try to use the iterator again
+    cout &lt;&lt; *it &lt;&lt; endl;  // Error here
+    return 0;
+}</pre>
+                            </div>
+                        </div>
+                        <div class="answer">
+                            <p>The error is using the iterator <code>it</code> after <code>v.erase(it)</code>. When you erase an element, all iterators pointing to that element or elements after it become invalid. You should not use <code>it</code> after the erase operation.</p>
+                        </div>
+                    </div>
+
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>What are lambda expressions and how are they used with STL algorithms?</h4>
+                        </div>
+                        <div class="answer">
+                            <p>Lambda expressions are anonymous functions. They're used with STL algorithms for custom operations:</p>
+                            <div class="code-block">
+                                <pre>#include &lt;vector&gt;
+#include &lt;algorithm&gt;
+using namespace std;
+
+int main() {
+    vector&lt;int&gt; v = {1, 2, 3, 4, 5};
+    
+    // Lambda for custom condition
+    auto isEven = [](int x) { return x % 2 == 0; };
+    
+    // Count even numbers
+    int evenCount = count_if(v.begin(), v.end(), isEven);
+    cout &lt;&lt; "Even numbers: " &lt;&lt; evenCount &lt;&lt; endl;
+    
+    // Transform with lambda
+    transform(v.begin(), v.end(), v.begin(), 
+              [](int x) { return x * x; });
+              
+    return 0;
+}</pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Write code to remove all even numbers from a vector.</h4>
+                        </div>
+                        <div class="answer">
+                            <p>Here's how to remove even numbers from a vector:</p>
+                            <div class="code-block">
+                                <pre>#include &lt;vector&gt;
+#include &lt;algorithm&gt;
+using namespace std;
+
+int main() {
+    vector&lt;int&gt; v = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    
+    // Remove even numbers
+    auto it = remove_if(v.begin(), v.end(), 
+                       [](int x) { return x % 2 == 0; });
+    
+    // Erase the removed elements
+    v.erase(it, v.end());
+    
+    // Display result
+    for(int x : v) cout &lt;&lt; x &lt;&lt; " ";
+    cout &lt;&lt; endl;  // Output: 1 3 5 7 9
+    
+    return 0;
+}</pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>What is a function object (functor) and when would you use it?</h4>
+                        </div>
+                        <div class="answer">
+                            <p>A function object is a class that overloads the <code>operator()</code>, making instances callable like functions. Use them when:<br>1. You need to maintain state between calls<br>2. Performance is critical (no function pointer overhead)<br>3. You need a callable object that can be copied/stored<br>Example:</p>
+                            <div class="code-block">
+                                <pre>class Counter {
+private:
+    int count = 0;
+public:
+    void operator()(int x) {
+        if (x > 0) count++;
+    }
+    int getCount() const { return count; }
+};
+
+int main() {
+    vector&lt;int&gt; v = {1, -2, 3, -4, 5};
+    Counter c = for_each(v.begin(), v.end(), Counter());
+    cout &lt;&lt; "Positive numbers: " &lt;&lt; c.getCount() &lt;&lt; endl;
+}</pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>What will happen if you try to access a map element that doesn't exist?</h4>
+                        </div>
+                        <div class="answer">
+                            <p>Using <code>operator[]</code> on a non-existent key will:<br>1. Create a new element with that key<br>2. Initialize the value to default (0 for int, empty string for string)<br>3. Return a reference to the new element<br><br>This can be dangerous as it silently adds elements. Use <code>.at(key)</code> for bounds-checked access or <code>.find(key)</code> to check existence first.</p>
+                        </div>
+                    </div>
+
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Write a program that uses priority_queue to sort elements in descending order.</h4>
+                        </div>
+                        <div class="answer">
+                            <p>Here's how to use priority_queue for sorting:</p>
+                            <div class="code-block">
+                                <pre>#include &lt;queue&gt;
+#include &lt;vector&gt;
+#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    vector&lt;int&gt; v = {3, 1, 4, 1, 5, 9, 2, 6};
+    priority_queue&lt;int&gt; pq;
+    
+    // Push all elements to priority queue
+    for(int x : v) {
+        pq.push(x);
+    }
+    
+    // Extract in descending order
+    cout &lt;&lt; "Sorted descending: ";
+    while (!pq.empty()) {
+        cout &lt;&lt; pq.top() &lt;&lt; " ";
+        pq.pop();
+    }
+    cout &lt;&lt; endl;  // Output: 9 6 5 4 3 2 1 1
+    
+    return 0;
+}</pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>What are the different types of iterators in STL?</h4>
+                        </div>
+                        <div class="answer">
+                            <p>STL has five main iterator categories:<br>1. <strong>Input iterators</strong> - Read from sequence (cin, istream)<br>2. <strong>Output iterators</strong> - Write to sequence (cout, ostream)<br>3. <strong>Forward iterators</strong> - Read/write, single pass (forward_list)<br>4. <strong>Bidirectional iterators</strong> - Forward/backward movement (list, set, map)<br>5. <strong>Random access iterators</strong> - Direct access by index (vector, deque, array)</p>
+                        </div>
+                    </div>
+
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Find the error in this multimap usage:</h4>
+                            <div class="code-block">
+                                <pre>#include &lt;map&gt;
+using namespace std;
+
+int main() {
+    multimap&lt;int, string&gt; mm;
+    mm.insert({1, "one"});
+    mm.insert({1, "uno"});
+    mm.insert({2, "two"});
+    
+    cout &lt;&lt; mm[1] &lt;&lt; endl;  // Error here
+    return 0;
+}</pre>
+                            </div>
+                        </div>
+                        <div class="answer">
+                            <p>The error is using <code>mm[1]</code> with a multimap. Multimaps don't have <code>operator[]</code> because a key can have multiple values. You should use <code>mm.find(1)</code> or iterate over the range with <code>mm.equal_range(1)</code> to access multiple values for the same key.</p>
+                        </div>
+                    </div>
+
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>What is the difference between resize() and reserve() for vectors?</h4>
+                        </div>
+                        <div class="answer">
+                            <p><strong>reserve(size):</strong><br>• Allocates memory for at least 'size' elements<br>• Doesn't change vector size<br>• Doesn't initialize elements<br>• Used to prevent reallocations during growth<br><br><strong>resize(size):</strong><br>• Changes vector size to 'size'<br>• Allocates memory if needed<br>• Initializes new elements to default values<br>• Can shrink or grow the vector</p>
+                        </div>
+                    </div>
+
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Write code to merge two sorted vectors into one sorted vector.</h4>
+                        </div>
+                        <div class="answer">
+                            <p>Here's how to merge two sorted vectors:</p>
+                            <div class="code-block">
+                                <pre>#include &lt;vector&gt;
+#include &lt;algorithm&gt;
+using namespace std;
+
+int main() {
+    vector&lt;int&gt; v1 = {1, 3, 5, 7};
+    vector&lt;int&gt; v2 = {2, 4, 6, 8};
+    vector&lt;int&gt; result;
+    
+    // Reserve space for efficiency
+    result.reserve(v1.size() + v2.size());
+    
+    // Merge the two sorted vectors
+    merge(v1.begin(), v1.end(),
+          v2.begin(), v2.end(),
+          back_inserter(result));
+    
+    // Display result
+    for(int x : result) cout &lt;&lt; x &lt;&lt; " ";
+    cout &lt;&lt; endl;  // Output: 1 2 3 4 5 6 7 8
+    
+    return 0;
+}</pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>What are some common pitfalls when using STL containers?</h4>
+                        </div>
+                        <div class="answer">
+                            <p>Common pitfalls include:<br>1. <strong>Iterator invalidation</strong> - Using iterators after container modification<br>2. <strong>Wrong container choice</strong> - Using vector for frequent middle insertions<br>3. <strong>Memory leaks</strong> - Forgetting containers manage their own memory<br>4. <strong>Reference invalidation</strong> - Storing references to elements that may move<br>5. <strong>Algorithm complexity</strong> - Not understanding O(n) vs O(log n) operations</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <div class="sidebar">
+                <h3>Navigation</h3>
+                <ul>
+                    <li><a href="#overview">Overview</a></li>
+                    <li><a href="#containers">Containers</a></li>
+                    <li><a href="#qa-section">Q&A</a></li>
+                </ul>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 CSY2006 C++ Programming Course. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

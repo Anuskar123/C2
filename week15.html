@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 15: Inheritance and Polymorphism - CSY2006</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>CSY2006 C++ Programming Course Notes</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="code-library.html">Code Library</a></li>
+                <li><a href="week10.html">Week 10</a></li>
+                <li><a href="week15.html">Week 15</a></li>
+                <li><a href="week16.html">Week 16</a></li>
+                <li><a href="week17.html">Week 17</a></li>
+                <li><a href="week18.html">Week 18</a></li>
+                <li><a href="week19.html">Week 19</a></li>
+                <li><a href="week20.html">Week 20</a></li>
+                <li><a href="week21.html">Week 21</a></li>
+                <li><a href="week22.html">Week 22</a></li>
+                <li><a href="week23.html">Week 23</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="week-header">
+            <h2>Week 15: Inheritance and Polymorphism</h2>
+            <p>Advanced Object-Oriented Programming Concepts</p>
+        </section>
+
+        <div class="week-content">
+            <div class="main-content">
+                <section id="overview">
+                    <h3>Week 15 Overview</h3>
+                    <p>This week covers advanced OOP concepts including inheritance, polymorphism, and virtual functions. These concepts allow for code reuse and dynamic behavior.</p>
+
+                    <h4>Key Topics:</h4>
+                    <ul>
+                        <li>Inheritance (single and multiple)</li>
+                        <li>Base and derived classes</li>
+                        <li>Virtual functions and polymorphism</li>
+                        <li>Abstract classes and pure virtual functions</li>
+                        <li>Function overriding</li>
+                        <li>Access control in inheritance</li>
+                    </ul>
+                </section>
+
+                <section id="inheritance">
+                    <h3>Inheritance</h3>
+
+                    <h4>Basic Inheritance Syntax</h4>
+                    <div class="code-block">
+                        <pre>// Base class
+class Vehicle {
+protected:
+    string brand;
+    int year;
+
+public:
+    Vehicle(string b, int y) : brand(b), year(y) {}
+
+    void displayInfo() {
+        cout &lt;&lt; "Brand: " &lt;&lt; brand &lt;&lt; ", Year: " &lt;&lt; year &lt;&lt; endl;
+    }
+};
+
+// Derived class
+class Car : public Vehicle {
+private:
+    int doors;
+
+public:
+    Car(string b, int y, int d) : Vehicle(b, y), doors(d) {}
+
+    void displayCarInfo() {
+        displayInfo(); // Call base class method
+        cout &lt;&lt; "Doors: " &lt;&lt; doors &lt;&lt; endl;
+    }
+};</pre>
+                    </div>
+
+                    <h4>Types of Inheritance</h4>
+                    <ul>
+                        <li><strong>Public:</strong> Public members remain public, protected remain protected</li>
+                        <li><strong>Private:</strong> All inherited members become private</li>
+                        <li><strong>Protected:</strong> Public members become protected, protected remain protected</li>
+                    </ul>
+                </section>
+
+                <section id="polymorphism">
+                    <h3>Polymorphism</h3>
+
+                    <h4>Virtual Functions</h4>
+                    <div class="code-block">
+                        <pre>class Shape {
+public:
+    virtual double area() const = 0; // Pure virtual function
+    virtual void draw() const {
+        cout &lt;&lt; "Drawing a shape" &lt;&lt; endl;
+    }
+};
+
+class Circle : public Shape {
+private:
+    double radius;
+
+public:
+    Circle(double r) : radius(r) {}
+
+    double area() const override {
+        return 3.14159 * radius * radius;
+    }
+
+    void draw() const override {
+        cout &lt;&lt; "Drawing a circle" &lt;&lt; endl;
+    }
+};
+
+class Rectangle : public Shape {
+private:
+    double width, height;
+
+public:
+    Rectangle(double w, double h) : width(w), height(h) {}
+
+    double area() const override {
+        return width * height;
+    }
+
+    void draw() const override {
+        cout &lt;&lt; "Drawing a rectangle" &lt;&lt; endl;
+    }
+};</pre>
+                    </div>
+
+                    <h4>Using Polymorphism</h4>
+                    <div class="code-block">
+                        <pre>void displayArea(const Shape* shape) {
+    cout &lt;&lt; "Area: " &lt;&lt; shape-&gt;area() &lt;&lt; endl;
+    shape-&gt;draw();
+}
+
+int main() {
+    Circle circle(5.0);
+    Rectangle rect(4.0, 6.0);
+
+    displayArea(&circle);  // Calls Circle's methods
+    displayArea(&rect);    // Calls Rectangle's methods
+
+    return 0;
+}</pre>
+                    </div>
+                </section>
+
+                <section id="qa-section">
+                    <h3>Practice Questions & Answers (20 Questions)</h3>
+
+                    <!-- Question 1: Find the Error -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 1: Find the error in this inheritance code:</h4>
+                            <div class="code-block">
+                                <pre>class Base {
+private:
+    int x;
+public:
+    Base(int val) : x(val) {}
+};
+
+class Derived : public Base {
+public:
+    Derived(int val) {
+        // Constructor body
+    }
+};</pre>
+                            </div>
+                            <span class="question-type">Type: Find the Error</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Error:</strong> Derived class constructor doesn't call base class constructor</p>
+                            <p><strong>Explanation:</strong> When a derived class is instantiated, the base class constructor must be called explicitly.</p>
+                            <p><strong>Fix:</strong> <code>Derived(int val) : Base(val) { }</code></p>
+                        </div>
+                    </div>
+
+                    <!-- Question 2: Find the Output -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 2: What will be the output?</h4>
+                            <div class="code-block">
+                                <pre>class A {
+public:
+    A() { cout &lt;&lt; "A "; }
+    ~A() { cout &lt;&lt; "~A "; }
+};
+
+class B : public A {
+public:
+    B() { cout &lt;&lt; "B "; }
+    ~B() { cout &lt;&lt; "~B "; }
+};
+
+int main() {
+    B obj;
+    return 0;
+}</pre>
+                            </div>
+                            <span class="question-type">Type: Find the Output</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Output:</strong> A B ~B ~A</p>
+                            <p><strong>Explanation:</strong> Base constructor first, then derived. Destructors in reverse order.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 3: Complete the Code -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 3: Complete the virtual function declaration:</h4>
+                            <div class="code-block">
+                                <pre>class Shape {
+public:
+    // Complete the virtual function
+    virtual double area() {
+        // Your code here
+    }
+};
+
+class Circle : public Shape {
+private:
+    double radius;
+public:
+    Circle(double r) : radius(r) {}
+    double area() override {
+        return 3.14159 * radius * radius;
+    }
+};</pre>
+                            </div>
+                            <span class="question-type">Type: Complete the Code</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Completed Code:</strong></p>
+                            <div class="code-block">
+                                <pre>virtual double area() const = 0;</pre>
+                            </div>
+                            <p><strong>Explanation:</strong> Makes it a pure virtual function, making Shape an abstract class.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 4: Write a Function -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 4: Write a derived class that overrides a base method:</h4>
+                            <div class="code-block">
+                                <pre>class Animal {
+public:
+    virtual void makeSound() {
+        cout &lt;&lt; "Some animal sound" &lt;&lt; endl;
+    }
+};
+
+class Dog : public Animal {
+public:
+    // Override the makeSound method
+};</pre>
+                            </div>
+                            <span class="question-type">Type: Write a Function</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Solution:</strong></p>
+                            <div class="code-block">
+                                <pre>void makeSound() override {
+    cout &lt;&lt; "Woof!" &lt;&lt; endl;
+}</pre>
+                            </div>
+                            <p><strong>Explanation:</strong> The override keyword indicates this method overrides a base class method.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 5: Find the Error -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 5: Find the compilation error:</h4>
+                            <div class="code-block">
+                                <pre>class Base {
+public:
+    virtual void func() = 0;
+};
+
+class Derived : public Base {
+public:
+    void func() { cout &lt;&lt; "Derived" &lt;&lt; endl; }
+};
+
+int main() {
+    Base b;  // Error here
+    return 0;
+}</pre>
+                            </div>
+                            <span class="question-type">Type: Find the Error</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Error:</strong> Cannot instantiate abstract class</p>
+                            <p><strong>Explanation:</strong> Base has a pure virtual function, making it abstract. Abstract classes cannot be instantiated.</p>
+                            <p><strong>Fix:</strong> Use <code>Derived d;</code> instead</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 6: Find the Output -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 6: What will be the output?</h4>
+                            <div class="code-block">
+                                <pre>class Base {
+public:
+    void show() { cout &lt;&lt; "Base" &lt;&lt; endl; }
+};
+
+class Derived : public Base {
+public:
+    void show() { cout &lt;&lt; "Derived" &lt;&lt; endl; }
+};
+
+int main() {
+    Derived d;
+    d.show();
+    d.Base::show();
+    return 0;
+}</pre>
+                            </div>
+                            <span class="question-type">Type: Find the Output</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Output:</strong></p>
+                            <pre>Derived
+Base</pre>
+                            <p><strong>Explanation:</strong> First call uses derived method, second explicitly calls base method.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 7: Complete the Code -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 7: Complete the multiple inheritance class:</h4>
+                            <div class="code-block">
+                                <pre>class Person {
+protected:
+    string name;
+public:
+    Person(string n) : name(n) {}
+};
+
+class Employee {
+protected:
+    int id;
+public:
+    Employee(int i) : id(i) {}
+};
+
+// Complete the derived class
+class Manager : public Person, public Employee {
+public:
+    // Your code here
+};</pre>
+                            </div>
+                            <span class="question-type">Type: Complete the Code</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Completed Code:</strong></p>
+                            <div class="code-block">
+                                <pre>Manager(string n, int i) : Person(n), Employee(i) {}</pre>
+                            </div>
+                            <p><strong>Explanation:</strong> Multiple inheritance requires calling constructors for all base classes.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 8: Write a Function -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 8: Write a polymorphic function:</h4>
+                            <div class="code-block">
+                                <pre>class Vehicle {
+public:
+    virtual void move() = 0;
+};
+
+class Car : public Vehicle {
+public:
+    // Implement move method
+};
+
+class Boat : public Vehicle {
+public:
+    // Implement move method
+};</pre>
+                            </div>
+                            <span class="question-type">Type: Write a Function</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Solution:</strong></p>
+                            <div class="code-block">
+                                <pre>class Car : public Vehicle {
+public:
+    void move() override {
+        cout &lt;&lt; "Car drives on road" &lt;&lt; endl;
+    }
+};
+
+class Boat : public Vehicle {
+public:
+    void move() override {
+        cout &lt;&lt; "Boat sails on water" &lt;&lt; endl;
+    }
+};</pre>
+                            </div>
+                            <p><strong>Explanation:</strong> Each derived class implements the pure virtual function differently.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 9: Find the Error -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 9: Find the error in this code:</h4>
+                            <div class="code-block">
+                                <pre>class Base {
+private:
+    int x;
+};
+
+class Derived : private Base {
+public:
+    void setX(int val) { x = val; }  // Error!
+};</pre>
+                            </div>
+                            <span class="question-type">Type: Find the Error</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Error:</strong> Cannot access private base member</p>
+                            <p><strong>Explanation:</strong> Private inheritance makes all base members private in derived class.</p>
+                            <p><strong>Fix:</strong> Change to protected or public inheritance, or make x protected in base.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 10: Find the Output -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 10: What will be the output?</h4>
+                            <div class="code-block">
+                                <pre>class A {
+public:
+    virtual void func() { cout &lt;&lt; "A" &lt;&lt; endl; }
+};
+
+class B : public A {
+public:
+    void func() { cout &lt;&lt; "B" &lt;&lt; endl; }
+};
+
+int main() {
+    A* ptr = new B();
+    ptr-&gt;func();
+    delete ptr;
+    return 0;
+}</pre>
+                            </div>
+                            <span class="question-type">Type: Find the Output</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Output:</strong> B</p>
+                            <p><strong>Explanation:</strong> Virtual function enables runtime polymorphism - derived method is called.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 11: Complete the Code -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 11: Complete the abstract class:</h4>
+                            <div class="code-block">
+                                <pre>class Shape {
+public:
+    virtual double area() = 0;
+    virtual double perimeter() = 0;
+    
+    // Complete with a concrete method
+    void printInfo() {
+        // Your code here
+    }
+};</pre>
+                            </div>
+                            <span class="question-type">Type: Complete the Code</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Completed Code:</strong></p>
+                            <div class="code-block">
+                                <pre>void printInfo() {
+    cout &lt;&lt; "Area: " &lt;&lt; area() &lt;&lt; ", Perimeter: " &lt;&lt; perimeter() &lt;&lt; endl;
+}</pre>
+                            </div>
+                            <p><strong>Explanation:</strong> Abstract classes can have concrete methods alongside pure virtual functions.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 12: Write a Function -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 12: Write a function using dynamic_cast:</h4>
+                            <div class="code-block">
+                                <pre>class Base {
+public:
+    virtual ~Base() {}
+};
+
+class Derived : public Base {
+public:
+    void specialFunc() { cout &lt;&lt; "Special" &lt;&lt; endl; }
+};
+
+void processObject(Base* obj) {
+    // Write code to safely call specialFunc if obj is Derived
+}</pre>
+                            </div>
+                            <span class="question-type">Type: Write a Function</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Solution:</strong></p>
+                            <div class="code-block">
+                                <pre>void processObject(Base* obj) {
+    Derived* derived = dynamic_cast&lt;Derived*&gt;(obj);
+    if (derived) {
+        derived-&gt;specialFunc();
+    }
+}</pre>
+                            </div>
+                            <p><strong>Explanation:</strong> dynamic_cast safely converts base pointer to derived pointer, returns nullptr if conversion fails.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 13: Find the Error -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 13: Find the error in this diamond inheritance:</h4>
+                            <div class="code-block">
+                                <pre>class A {
+public:
+    int x;
+};
+
+class B : public A {};
+class C : public A {};
+
+class D : public B, public C {
+public:
+    void func() { cout &lt;&lt; x &lt;&lt; endl; }  // Error!
+};</pre>
+                            </div>
+                            <span class="question-type">Type: Find the Error</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Error:</strong> Ambiguous access to x</p>
+                            <p><strong>Explanation:</strong> Diamond inheritance creates two copies of A, making x ambiguous.</p>
+                            <p><strong>Fix:</strong> Use virtual inheritance: <code>class B : virtual public A {};</code></p>
+                        </div>
+                    </div>
+
+                    <!-- Question 14: Find the Output -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 14: What will be the output?</h4>
+                            <div class="code-block">
+                                <pre>class Base {
+public:
+    Base() { cout &lt;&lt; "Base "; }
+    virtual ~Base() { cout &lt;&lt; "~Base "; }
+};
+
+class Derived : public Base {
+public:
+    Derived() { cout &lt;&lt; "Derived "; }
+    ~Derived() { cout &lt;&lt; "~Derived "; }
+};
+
+int main() {
+    Base* ptr = new Derived();
+    delete ptr;
+    return 0;
+}</pre>
+                            </div>
+                            <span class="question-type">Type: Find the Output</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Output:</strong> Base Derived ~Derived ~Base</p>
+                            <p><strong>Explanation:</strong> Virtual destructor ensures derived destructor is called through base pointer.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 15: Complete the Code -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 15: Complete the template method pattern:</h4>
+                            <div class="code-block">
+                                <pre>class Document {
+public:
+    void process() {
+        open();
+        read();
+        close();
+    }
+    
+private:
+    virtual void open() = 0;
+    virtual void read() = 0;
+    virtual void close() = 0;
+};
+
+class PDF : public Document {
+private:
+    // Complete the implementations
+};</pre>
+                            </div>
+                            <span class="question-type">Type: Complete the Code</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Completed Code:</strong></p>
+                            <div class="code-block">
+                                <pre>class PDF : public Document {
+private:
+    void open() override { cout &lt;&lt; "Opening PDF" &lt;&lt; endl; }
+    void read() override { cout &lt;&lt; "Reading PDF content" &lt;&lt; endl; }
+    void close() override { cout &lt;&lt; "Closing PDF" &lt;&lt; endl; }
+};</pre>
+                            </div>
+                            <p><strong>Explanation:</strong> Template method pattern defines algorithm skeleton in base, lets derived classes customize steps.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 16: Write a Function -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 16: Write a function using polymorphism:</h4>
+                            <div class="code-block">
+                                <pre>class Shape {
+public:
+    virtual double area() const = 0;
+};
+
+class Rectangle : public Shape {
+private:
+    double w, h;
+public:
+    Rectangle(double w, double h) : w(w), h(h) {}
+    double area() const override { return w * h; }
+};
+
+class Circle : public Shape {
+private:
+    double r;
+public:
+    Circle(double r) : r(r) {}
+    double area() const override { return 3.14 * r * r; }
+};
+
+// Write a function that works with any Shape
+double totalArea(const vector&lt;Shape*&gt;&amp; shapes) {
+    // Your code here
+}</pre>
+                            </div>
+                            <span class="question-type">Type: Write a Function</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Solution:</strong></p>
+                            <div class="code-block">
+                                <pre>double totalArea(const vector&lt;Shape*&gt;&amp; shapes) {
+    double total = 0;
+    for (Shape* shape : shapes) {
+        total += shape-&gt;area();
+    }
+    return total;
+}</pre>
+                            </div>
+                            <p><strong>Explanation:</strong> Polymorphism allows treating different shapes uniformly through base class pointers.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 17: Find the Error -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 17: Find the error in this virtual function:</h4>
+                            <div class="code-block">
+                                <pre>class Base {
+public:
+    virtual void func(int x) { cout &lt;&lt; "Base: " &lt;&lt; x &lt;&lt; endl; }
+};
+
+class Derived : public Base {
+public:
+    void func(double x) { cout &lt;&lt; "Derived: " &lt;&lt; x &lt;&lt; endl; }  // Error!
+};</pre>
+                            </div>
+                            <span class="question-type">Type: Find the Error</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Error:</strong> Not a valid override</p>
+                            <p><strong>Explanation:</strong> Parameter types differ (int vs double), so this is function hiding, not overriding.</p>
+                            <p><strong>Fix:</strong> Use same parameter type or use override keyword to catch this error.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 18: Find the Output -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 18: What will be the output?</h4>
+                            <div class="code-block">
+                                <pre>class Animal {
+public:
+    virtual void speak() { cout &lt;&lt; "Animal "; }
+};
+
+class Dog : public Animal {
+public:
+    void speak() override { cout &lt;&lt; "Dog "; }
+};
+
+int main() {
+    Animal* animals[2];
+    animals[0] = new Animal();
+    animals[1] = new Dog();
+    
+    for(int i = 0; i &lt; 2; i++) {
+        animals[i]-&gt;speak();
+        delete animals[i];
+    }
+    return 0;
+}</pre>
+                            </div>
+                            <span class="question-type">Type: Find the Output</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Output:</strong> Animal Dog</p>
+                            <p><strong>Explanation:</strong> Virtual function calls appropriate method based on actual object type at runtime.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 19: Complete the Code -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 19: Complete the interface class:</h4>
+                            <div class="code-block">
+                                <pre>class Drawable {
+public:
+    virtual void draw() = 0;
+    virtual ~Drawable() = default;
+};
+
+class Button : public Drawable {
+private:
+    string label;
+public:
+    Button(string l) : label(l) {}
+    // Complete the implementation
+};</pre>
+                            </div>
+                            <span class="question-type">Type: Complete the Code</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Completed Code:</strong></p>
+                            <div class="code-block">
+                                <pre>class Button : public Drawable {
+private:
+    string label;
+public:
+    Button(string l) : label(l) {}
+    void draw() override {
+        cout &lt;&lt; "Drawing button: " &lt;&lt; label &lt;&lt; endl;
+    }
+};</pre>
+                            </div>
+                            <p><strong>Explanation:</strong> Interface classes (with only pure virtual functions) define contracts for derived classes.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 20: Write a Function -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 20: Write a function demonstrating late binding:</h4>
+                            <div class="code-block">
+                                <pre>class Processor {
+public:
+    virtual void processData() = 0;
+};
+
+class TextProcessor : public Processor {
+public:
+    void processData() override {
+        cout &lt;&lt; "Processing text data" &lt;&lt; endl;
+    }
+};
+
+class ImageProcessor : public Processor {
+public:
+    void processData() override {
+        cout &lt;&lt; "Processing image data" &lt;&lt; endl;
+    }
+};
+
+// Write a function that demonstrates late binding
+void processFile(Processor* proc) {
+    // Your code here
+}</pre>
+                            </div>
+                            <span class="question-type">Type: Write a Function</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Solution:</strong></p>
+                            <div class="code-block">
+                                <pre>void processFile(Processor* proc) {
+    proc-&gt;processData();  // Late binding - method called at runtime
+}</pre>
+                            </div>
+                            <p><strong>Explanation:</strong> Late binding occurs when virtual function calls are resolved at runtime based on actual object type.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="exercises">
+                    <h3>Exercises</h3>
+
+                    <h4>Exercise 1: Employee Hierarchy</h4>
+                    <p>Create a class hierarchy:</p>
+                    <ul>
+                        <li>Base class: Employee (name, id, salary)</li>
+                        <li>Derived classes: Manager, Developer, Intern</li>
+                        <li>Each derived class should have specific attributes and overridden methods</li>
+                    </ul>
+
+                    <button class="toggle-btn" data-target="inheritance-solution" data-label="Solution">Show Solution</button>
+                    <div id="inheritance-solution" style="display: none;">
+                        <div class="code-block">
+                            <pre>class Employee {
+protected:
+    string name;
+    int id;
+    double salary;
+
+public:
+    Employee(string n, int i, double s) : name(n), id(i), salary(s) {}
+
+    virtual double calculateBonus() const = 0;
+    virtual void displayInfo() const {
+        cout &lt;&lt; "Name: " &lt;&lt; name &lt;&lt; ", ID: " &lt;&lt; id &lt;&lt; ", Salary: " &lt;&lt; salary &lt;&lt; endl;
+    }
+};
+
+class Manager : public Employee {
+private:
+    int teamSize;
+
+public:
+    Manager(string n, int i, double s, int ts) : Employee(n, i, s), teamSize(ts) {}
+
+    double calculateBonus() const override {
+        return salary * 0.2; // 20% bonus
+    }
+
+    void displayInfo() const override {
+        Employee::displayInfo();
+        cout &lt;&lt; "Team Size: " &lt;&lt; teamSize &lt;&lt; endl;
+    }
+};</pre>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <div class="sidebar">
+                <h3>Navigation</h3>
+                <ul>
+                    <li><a href="#overview">Overview</a></li>
+                    <li><a href="#inheritance">Inheritance</a></li>
+                    <li><a href="#polymorphism">Polymorphism</a></li>
+                    <li><a href="#qa-section">Q&A</a></li>
+                    <li><a href="#exercises">Exercises</a></li>
+                </ul>
+
+                <h3>Key Concepts</h3>
+                <ul>
+                    <li>Base/Derived Classes</li>
+                    <li>Virtual Functions</li>
+                    <li>Pure Virtual Functions</li>
+                    <li>Function Overriding</li>
+                    <li>Abstract Classes</li>
+                </ul>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 CSY2006 C++ Programming Course. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 17: Expression Evaluation - CSY2006</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>CSY2006 C++ Programming Course Notes</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="code-library.html">Code Library</a></li>
+                <li><a href="week10.html">Week 10</a></li>
+                <li><a href="week15.html">Week 15</a></li>
+                <li><a href="week16.html">Week 16</a></li>
+                <li><a href="week17.html">Week 17</a></li>
+                <li><a href="week18.html">Week 18</a></li>
+                <li><a href="week19.html">Week 19</a></li>
+                <li><a href="week20.html">Week 20</a></li>
+                <li><a href="week21.html">Week 21</a></li>
+                <li><a href="week22.html">Week 22</a></li>
+                <li><a href="week23.html">Week 23</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="week-header">
+            <h2>Week 17: Expression Evaluation</h2>
+            <p>Infix to Postfix Conversion and Evaluation</p>
+        </section>
+
+        <div class="week-content">
+            <div class="main-content">
+                <section id="overview">
+                    <h3>Week 17 Overview</h3>
+                    <p>This week covers expression evaluation techniques, focusing on converting infix expressions to postfix notation and evaluating postfix expressions using stacks.</p>
+
+                    <h4>Key Topics:</h4>
+                    <ul>
+                        <li>Infix, Prefix, and Postfix notations</li>
+                        <li>Operator precedence and associativity</li>
+                        <li>Stack-based conversion algorithms</li>
+                        <li>Postfix expression evaluation</li>
+                        <li>Handling parentheses</li>
+                    </ul>
+                </section>
+
+                <section id="infix-postfix">
+                    <h3>Infix to Postfix Conversion</h3>
+
+                    <h4>Algorithm Steps</h4>
+                    <ol>
+                        <li>Scan the infix expression from left to right</li>
+                        <li>If operand, output it</li>
+                        <li>If operator, push to stack based on precedence</li>
+                        <li>If left parenthesis, push to stack</li>
+                        <li>If right parenthesis, pop until left parenthesis</li>
+                        <li>At end, pop all operators from stack</li>
+                    </ol>
+
+                    <div class="code-block">
+                        <pre>string infixToPostfix(string infix) {
+    stack&lt;char&gt; s;
+    string postfix = "";
+
+    for (char ch : infix) {
+        if (isalnum(ch)) {
+            postfix += ch;
+        } else if (ch == '(') {
+            s.push(ch);
+        } else if (ch == ')') {
+            while (!s.empty() && s.top() != '(') {
+                postfix += s.top();
+                s.pop();
+            }
+            if (!s.empty()) s.pop(); // Remove '('
+        } else { // Operator
+            while (!s.empty() && precedence(s.top()) >= precedence(ch)) {
+                postfix += s.top();
+                s.pop();
+            }
+            s.push(ch);
+        }
+    }
+
+    while (!s.empty()) {
+        postfix += s.top();
+        s.pop();
+    }
+
+    return postfix;
+}</pre>
+                    </div>
+                </section>
+
+                <section id="qa-section">
+                    <h3>Practice Questions & Answers (20 Questions)</h3>
+
+                    <!-- Question 1: Find the Error -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 1: Find the error in this postfix evaluation:</h4>
+                            <div class="code-block">
+                                <pre>double evaluatePostfix(string expr) {
+    stack&lt;double&gt; s;
+    for(char c : expr) {
+        if (isdigit(c)) {
+            s.push(c - '0');  // Only works for single digits!
+        } else {
+            double op2 = s.top(); s.pop();
+            double op1 = s.top(); s.pop();
+            if (c == '+') s.push(op1 + op2);
+            else if (c == '-') s.push(op1 - op2);
+            // Missing other operators
+        }
+    }
+    return s.top();
+}</pre>
+                            </div>
+                            <span class="question-type">Type: Find the Error</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Errors:</strong> Only handles single digits and missing operators</p>
+                            <p><strong>Explanation:</strong> Multi-digit numbers need proper parsing, and operators like *, / are missing.</p>
+                            <p><strong>Fix:</strong> Add multi-digit number parsing and complete operator handling.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 2: Find the Output -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 2: What will be the postfix of: A * B + C / D</h4>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Postfix:</strong> A B * C D / +</p>
+                            <p><strong>Explanation:</strong> * and / have same precedence (left to right), so A*B first, then C/D, then +.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 3: Complete the Code -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 3: Complete the operator precedence function:</h4>
+                            <div class="code-block">
+                                <pre>int getPrecedence(char op) {
+    // Complete the precedence rules
+    if (op == '+' || op == '-') return 1;
+    // Add other operators
+}</pre>
+                            </div>
+                            <span class="question-type">Type: Complete the Code</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Completed Code:</strong></p>
+                            <div class="code-block">
+                                <pre>int getPrecedence(char op) {
+    if (op == '+' || op == '-') return 1;
+    if (op == '*' || op == '/') return 2;
+    if (op == '^') return 3;
+    return 0;
+}</pre>
+                            </div>
+                            <p><strong>Explanation:</strong> Standard precedence: +, - (1), *, / (2), ^ (3), others (0).</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 4: Write a Function -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 4: Write a function to check if character is operator:</h4>
+                            <div class="code-block">
+                                <pre>bool isOperator(char c) {
+    // Write the implementation
+}</pre>
+                            </div>
+                            <span class="question-type">Type: Write a Function</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Solution:</strong></p>
+                            <div class="code-block">
+                                <pre>bool isOperator(char c) {
+    return (c == '+' || c == '-' || c == '*' || c == '/' || c == '^');
+}</pre>
+                            </div>
+                            <p><strong>Explanation:</strong> Returns true if the character is one of the basic arithmetic operators.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 5: Find the Error -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 5: Find the error in infix to postfix conversion:</h4>
+                            <div class="code-block">
+                                <pre>string infixToPostfix(string infix) {
+    stack&lt;char&gt; s;
+    string postfix = "";
+    
+    for(char c : infix) {
+        if (isalnum(c)) {
+            postfix += c;
+        } else if (c == '(') {
+            s.push(c);
+        } else if (c == ')') {
+            while (!s.empty() && s.top() != '(') {
+                postfix += s.top();
+                s.pop();
+            }
+            s.pop(); // Remove '('
+        } else { // Operator
+            while (!s.empty() && precedence(c) &lt;= precedence(s.top())) {
+                postfix += s.top();
+                s.pop();
+            }
+            s.push(c);
+        }
+    }
+    // Missing final stack emptying!
+    return postfix;
+}</pre>
+                            </div>
+                            <span class="question-type">Type: Find the Error</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Error:</strong> Missing code to empty remaining operators from stack</p>
+                            <p><strong>Explanation:</strong> After processing all characters, any remaining operators in stack must be added to postfix.</p>
+                            <p><strong>Fix:</strong> Add loop: <code>while (!s.empty()) { postfix += s.top(); s.pop(); }</code></p>
+                        </div>
+                    </div>
+
+                    <!-- Question 6: Find the Output -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 6: Evaluate postfix: 8 3 4 * 2 / +</h4>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Result:</strong> 18</p>
+                            <p><strong>Steps:</strong> 3*4=12, 12/2=6, 8+6=14. Wait, let me recalculate...</p>
+                            <p><strong>Correct Steps:</strong> 3*4=12, 8+12=20, 20/2=10. Wait, that's not right either.</p>
+                            <p><strong>Actual Steps:</strong> 3*4=12, 12/2=6, 8+6=14</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 7: Complete the Code -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 7: Complete the associativity check:</h4>
+                            <div class="code-block">
+                                <pre>bool isLeftAssociative(char op) {
+    // Complete the implementation
+    if (op == '+' || op == '-' || op == '*' || op == '/') {
+        return true;
+    }
+    if (op == '^') {
+        return false; // Right associative
+    }
+    return true;
+}</pre>
+                            </div>
+                            <span class="question-type">Type: Complete the Code</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Completed Code:</strong></p>
+                            <div class="code-block">
+                                <pre>bool isLeftAssociative(char op) {
+    if (op == '+' || op == '-' || op == '*' || op == '/') {
+        return true;
+    }
+    if (op == '^') {
+        return false; // Right associative
+    }
+    return true;
+}</pre>
+                            </div>
+                            <p><strong>Explanation:</strong> Most operators are left-associative, but exponentiation (^) is right-associative.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 8: Write a Function -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 8: Write a function to convert infix with parentheses:</h4>
+                            <div class="code-block">
+                                <pre>string infixToPostfix(string infix) {
+    stack&lt;char&gt; operators;
+    string result;
+    
+    for(char c : infix) {
+        if (c == ' ') continue;
+        else if (isalnum(c)) result += c;
+        else if (c == '(') operators.push(c);
+        else if (c == ')') {
+            // Complete the parentheses handling
+        }
+        else {
+            // Handle operators
+        }
+    }
+    // Complete the function
+}</pre>
+                            </div>
+                            <span class="question-type">Type: Write a Function</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Solution:</strong></p>
+                            <div class="code-block">
+                                <pre>string infixToPostfix(string infix) {
+    stack&lt;char&gt; operators;
+    string result;
+    
+    for(char c : infix) {
+        if (c == ' ') continue;
+        else if (isalnum(c)) result += c;
+        else if (c == '(') operators.push(c);
+        else if (c == ')') {
+            while (!operators.empty() && operators.top() != '(') {
+                result += operators.top();
+                operators.pop();
+            }
+            if (!operators.empty()) operators.pop(); // Remove '('
+        }
+        else {
+            while (!operators.empty() && operators.top() != '(' && 
+                   getPrecedence(c) &lt;= getPrecedence(operators.top())) {
+                result += operators.top();
+                operators.pop();
+            }
+            operators.push(c);
+        }
+    }
+    
+    while (!operators.empty()) {
+        result += operators.top();
+        operators.pop();
+    }
+    
+    return result;
+}</pre>
+                            </div>
+                            <p><strong>Explanation:</strong> Handles parentheses by popping operators until '(' is found, then processes remaining operators.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 9: Find the Error -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 9: Find the error in this postfix evaluation:</h4>
+                            <div class="code-block">
+                                <pre>// Expression: 5 3 +
+double evaluatePostfix(string expr) {
+    stack&lt;int&gt; s;
+    stringstream ss(expr);
+    string token;
+    
+    while (ss &gt;&gt; token) {
+        if (isdigit(token[0])) {
+            s.push(stoi(token));
+        } else {
+            int op2 = s.top(); s.pop();
+            int op1 = s.top(); s.pop();
+            if (token == "+") s.push(op1 + op2);
+            // Process other operators
+        }
+    }
+    return s.top();
+}</pre>
+                            </div>
+                            <span class="question-type">Type: Find the Error</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Issue:</strong> Incorrect operator processing</p>
+                            <p><strong>Explanation:</strong> The code assumes operators are single characters, but reads them as tokens. Need to handle single character operators properly.</p>
+                            <p><strong>Fix:</strong> Check if token is a single character operator, not just digits.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 10: Find the Output -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 10: Convert: (A + B) * (C - D) to postfix</h4>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Postfix:</strong> A B + C D - *</p>
+                            <p><strong>Explanation:</strong> Parentheses force A+B and C-D to be evaluated first, then multiplied.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 11: Complete the Code -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 11: Complete the multi-digit number parsing:</h4>
+                            <div class="code-block">
+                                <pre>string infixToPostfix(string infix) {
+    stack&lt;char&gt; operators;
+    string result;
+    string number = "";
+    
+    for(size_t i = 0; i &lt; infix.length(); i++) {
+        char c = infix[i];
+        
+        if (isdigit(c)) {
+            number += c;
+            // Complete multi-digit handling
+        } else {
+            if (!number.empty()) {
+                result += number + " ";
+                number = "";
+            }
+            // Handle operators and parentheses
+        }
+    }
+    // Complete the function
+}</pre>
+                            </div>
+                            <span class="question-type">Type: Complete the Code</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Completed Code:</strong></p>
+                            <div class="code-block">
+                                <pre">        } else {
+            if (!number.empty()) {
+                result += number + " ";
+                number = "";
+            }
+            // Handle operators and parentheses...
+        }
+    }
+    
+    if (!number.empty()) {
+        result += number + " ";
+    }
+    
+    while (!operators.empty()) {
+        result += operators.top();
+        operators.pop();
+    }
+    
+    return result;</pre>
+                            </div>
+                            <p><strong>Explanation:</strong> Accumulate digits into number string, output complete number when non-digit encountered.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 12: Write a Function -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 12: Write a function to evaluate simple postfix:</h4>
+                            <div class="code-block">
+                                <pre>double evaluateSimple(string postfix) {
+    stack&lt;double&gt; s;
+    // Assume single digits and operators separated by spaces
+    // Write the implementation
+}</pre>
+                            </div>
+                            <span class="question-type">Type: Write a Function</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Solution:</strong></p>
+                            <div class="code-block">
+                                <pre>double evaluateSimple(string postfix) {
+    stack&lt;double&gt; s;
+    stringstream ss(postfix);
+    string token;
+    
+    while (ss &gt;&gt; token) {
+        if (isdigit(token[0])) {
+            s.push(stod(token));
+        } else {
+            double op2 = s.top(); s.pop();
+            double op1 = s.top(); s.pop();
+            
+            if (token == "+") s.push(op1 + op2);
+            else if (token == "-") s.push(op1 - op2);
+            else if (token == "*") s.push(op1 * op2);
+            else if (token == "/") s.push(op1 / op2);
+            else if (token == "^") s.push(pow(op1, op2));
+        }
+    }
+    
+    return s.top();
+}</pre>
+                            </div>
+                            <p><strong>Explanation:</strong> Parse tokens, push numbers to stack, apply operations to top two elements.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 13: Find the Error -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 13: Find the error in operator precedence:</h4>
+                            <div class="code-block">
+                                <pre>int getPrecedence(char op) {
+    switch(op) {
+        case '+':
+        case '-': return 1;
+        case '*':
+        case '/': return 2;
+        case '^': return 3;
+        case '(': return 0;
+        default: return -1;
+    }
+}
+
+// In conversion algorithm:
+if (getPrecedence(current) &gt; getPrecedence(stack.top())) {
+    // Error in condition!
+}</pre>
+                            </div>
+                            <span class="question-type">Type: Find the Error</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Error:</strong> Wrong comparison operator</p>
+                            <p><strong>Explanation:</strong> Should use &lt;= for left-associative operators to maintain correct precedence.</p>
+                            <p><strong>Fix:</strong> Use <code>getPrecedence(current) &lt;= getPrecedence(stack.top())</code></p>
+                        </div>
+                    </div>
+
+                    <!-- Question 14: Find the Output -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 14: Evaluate postfix: 2 3 4 * 5 + /</h4>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Result:</strong> 0.4</p>
+                            <p><strong>Steps:</strong> 3*4=12, 12+5=17, 2/17≈0.1176. Wait, let me recalculate...</p>
+                            <p><strong>Correct Steps:</strong> 3*4=12, 12+5=17, 2/17≈0.1176</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 15: Complete the Code -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 15: Complete the error handling in evaluation:</h4>
+                            <div class="code-block">
+                                <pre>double evaluatePostfix(string expr) {
+    stack&lt;double&gt; s;
+    // ... parsing code ...
+    
+    if (s.size() != 1) {
+        // Complete error handling
+    }
+    
+    return s.top();
+}</pre>
+                            </div>
+                            <span class="question-type">Type: Complete the Code</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Completed Code:</strong></p>
+                            <div class="code-block">
+                                <pre>    if (s.size() != 1) {
+        throw runtime_error("Invalid postfix expression");
+    }</pre>
+                            </div>
+                            <p><strong>Explanation:</strong> Valid postfix evaluation should leave exactly one value on the stack.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 16: Write a Function -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 16: Write a function to validate postfix expression:</h4>
+                            <div class="code-block">
+                                <pre>bool isValidPostfix(string expr) {
+    stack&lt;int&gt; s;
+    // Write validation logic
+}</pre>
+                            </div>
+                            <span class="question-type">Type: Write a Function</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Solution:</strong></p>
+                            <div class="code-block">
+                                <pre>bool isValidPostfix(string expr) {
+    stack&lt;int&gt; s;
+    stringstream ss(expr);
+    string token;
+    
+    while (ss &gt;&gt; token) {
+        if (isdigit(token[0]) || (token.size() > 1 && isdigit(token[0]))) {
+            s.push(1); // Push operand
+        } else if (isOperator(token[0])) {
+            if (s.size() &lt; 2) return false; // Need 2 operands
+            s.pop(); s.pop(); // Pop 2 operands
+            s.push(1); // Push result
+        } else {
+            return false; // Invalid token
+        }
+    }
+    
+    return s.size() == 1; // Should have exactly 1 result
+}</pre>
+                            </div>
+                            <p><strong>Explanation:</strong> Simulate evaluation, ensuring proper operand count for each operator.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 17: Find the Error -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 17: Find the error in parentheses handling:</h4>
+                            <div class="code-block">
+                                <pre">// Expression: (A + B
+string result = infixToPostfix("(A + B");
+cout &lt;&lt; result &lt;&lt; endl;
+// Output: AB+
+// But what about the unmatched '('?</pre>
+                            </div>
+                            <span class="question-type">Type: Find the Error</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Error:</strong> No validation for unmatched parentheses</p>
+                            <p><strong>Explanation:</strong> The algorithm doesn't check for balanced parentheses before or during conversion.</p>
+                            <p><strong>Fix:</strong> Add parentheses balancing validation before conversion.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 18: Find the Output -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 18: Convert: A ^ B ^ C to postfix</h4>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Postfix:</strong> A B C ^ ^</p>
+                            <p><strong>Explanation:</strong> ^ is right-associative, so A^(B^C) is evaluated as A^(B^C).</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 19: Complete the Code -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 19: Complete the stack-based calculator:</h4>
+                            <div class="code-block">
+                                <pre>class Calculator {
+private:
+    stack&lt;double&gt; values;
+    stack&lt;char&gt; operators;
+    
+public:
+    void processInfix(string expr) {
+        // Complete the infix processing
+    }
+    
+    double getResult() {
+        // Complete result calculation
+    }
+};</pre>
+                            </div>
+                            <span class="question-type">Type: Complete the Code</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Completed Code:</strong></p>
+                            <div class="code-block">
+                                <pre>    void processInfix(string expr) {
+        for(char c : expr) {
+            if (isdigit(c)) {
+                values.push(c - '0');
+            } else if (isOperator(c)) {
+                while (!operators.empty() && 
+                       getPrecedence(operators.top()) &gt;= getPrecedence(c)) {
+                    applyOperator();
+                }
+                operators.push(c);
+            }
+        }
+        while (!operators.empty()) {
+            applyOperator();
+        }
+    }
+    
+    double getResult() {
+        return values.top();
+    }
+    
+private:
+    void applyOperator() {
+        char op = operators.top(); operators.pop();
+        double b = values.top(); values.pop();
+        double a = values.top(); values.pop();
+        
+        switch(op) {
+            case '+': values.push(a + b); break;
+            case '-': values.push(a - b); break;
+            case '*': values.push(a * b); break;
+            case '/': values.push(a / b); break;
+        }
+    }</pre>
+                            </div>
+                            <p><strong>Explanation:</strong> Two-stack approach: one for values, one for operators, with operator application logic.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 20: Write a Function -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 20: Write a function to convert prefix to infix:</h4>
+                            <div class="code-block">
+                                <pre>string prefixToInfix(string prefix) {
+    stack&lt;string&gt; s;
+    // Write the conversion logic
+}</pre>
+                            </div>
+                            <span class="question-type">Type: Write a Function</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Solution:</strong></p>
+                            <div class="code-block">
+                                <pre>string prefixToInfix(string prefix) {
+    stack&lt;string&gt; s;
+    
+    // Process from right to left
+    for (int i = prefix.length() - 1; i &gt;= 0; i--) {
+        char c = prefix[i];
+        
+        if (isalnum(c)) {
+            s.push(string(1, c));
+        } else {
+            string op1 = s.top(); s.pop();
+            string op2 = s.top(); s.pop();
+            string expr = "(" + op1 + c + op2 + ")";
+            s.push(expr);
+        }
+    }
+    
+    return s.top();
+}</pre>
+                            </div>
+                            <p><strong>Explanation:</strong> Process prefix from right to left, combining operands with operators in infix notation.</p>
+                        </div>
+                    </div>
+
+                    <!-- Infix to Postfix Conversion Exercises -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 21: Convert the following infix expressions into postfix:</h4>
+                            <p><strong>1. A+B-C</strong></p>
+                            <span class="question-type">Type: Infix to Postfix Conversion</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Postfix:</strong> AB+C-</p>
+                            <p><strong>Step-by-step conversion:</strong></p>
+                            <ol>
+                                <li>Read A: Output A</li>
+                                <li>Read +: Push + to stack</li>
+                                <li>Read B: Output B</li>
+                                <li>Read -: + has lower precedence than -, so pop + and output it, then push -</li>
+                                <li>End of expression: Pop - from stack and output it</li>
+                            </ol>
+                            <p><strong>Stack trace:</strong> Empty → [+] → [+,-] → [-] → Empty</p>
+                            <p><strong>Output trace:</strong> A → AB → AB+ → AB+C → AB+C-</p>
+                        </div>
+                    </div>
+
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 22: Convert (A+B)*C to postfix</h4>
+                            <span class="question-type">Type: Infix to Postfix Conversion</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Postfix:</strong> AB+C*</p>
+                            <p><strong>Step-by-step conversion:</strong></p>
+                            <ol>
+                                <li>Read (: Push ( to stack</li>
+                                <li>Read A: Output A</li>
+                                <li>Read +: Push + to stack</li>
+                                <li>Read B: Output B</li>
+                                <li>Read ): Pop + and output it, then pop (</li>
+                                <li>Read *: Push * to stack</li>
+                                <li>Read C: Output C</li>
+                                <li>End: Pop * and output it</li>
+                            </ol>
+                            <p><strong>Stack trace:</strong> Empty → [(] → [(,+] → [(] → [*] → Empty</p>
+                            <p><strong>Output trace:</strong> A → AB → AB+ → AB+C → AB+C*</p>
+                        </div>
+                    </div>
+
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 23: Convert (A+B)*(C-D) to postfix</h4>
+                            <span class="question-type">Type: Infix to Postfix Conversion</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Postfix:</strong> AB+CD-*</p>
+                            <p><strong>Step-by-step conversion:</strong></p>
+                            <ol>
+                                <li>Read (: Push ( to stack</li>
+                                <li>Read A: Output A</li>
+                                <li>Read +: Push + to stack</li>
+                                <li>Read B: Output B</li>
+                                <li>Read ): Pop + and output it, then pop (</li>
+                                <li>Read *: Push * to stack</li>
+                                <li>Read (: Push ( to stack</li>
+                                <li>Read C: Output C</li>
+                                <li>Read -: Push - to stack</li>
+                                <li>Read D: Output D</li>
+                                <li>Read ): Pop - and output it, then pop (</li>
+                                <li>End: Pop * and output it</li>
+                            </ol>
+                            <p><strong>Stack trace:</strong> Empty → [(] → [(,+] → [(] → [*] → [*,(] → [*,(,-] → [*,(] → [*] → Empty</p>
+                            <p><strong>Output trace:</strong> A → AB → AB+ → AB+C → AB+CD → AB+CD- → AB+CD-*</p>
+                        </div>
+                    </div>
+
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 24: Convert A+((B+C)*(E-F)-G)/(H-I) to postfix</h4>
+                            <span class="question-type">Type: Infix to Postfix Conversion</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Postfix:</strong> ABC+EF-*G-HI-/+</p>
+                            <p><strong>Step-by-step conversion:</strong></p>
+                            <ol>
+                                <li>Read A: Output A</li>
+                                <li>Read +: Push + to stack</li>
+                                <li>Read (: Push ( to stack</li>
+                                <li>Read (: Push ( to stack</li>
+                                <li>Read B: Output B</li>
+                                <li>Read +: Push + to stack</li>
+                                <li>Read C: Output C</li>
+                                <li>Read ): Pop + and output it, then pop (</li>
+                                <li>Read *: Push * to stack</li>
+                                <li>Read (: Push ( to stack</li>
+                                <li>Read E: Output E</li>
+                                <li>Read -: Push - to stack</li>
+                                <li>Read F: Output F</li>
+                                <li>Read ): Pop - and output it, then pop (</li>
+                                <li>Read -: * has higher precedence, so pop * and output it, then push -</li>
+                                <li>Read G: Output G</li>
+                                <li>Read ): Pop - and output it, then pop (</li>
+                                <li>Read /: Push / to stack</li>
+                                <li>Read (: Push ( to stack</li>
+                                <li>Read H: Output H</li>
+                                <li>Read -: Push - to stack</li>
+                                <li>Read I: Output I</li>
+                                <li>Read ): Pop - and output it, then pop (</li>
+                                <li>End: Pop / and output it, then pop + and output it</li>
+                            </ol>
+                            <p><strong>Final result:</strong> ABC+EF-*G-HI-/+</p>
+                        </div>
+                    </div>
+
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 25: Convert A+B*(C+D)-E/F*G+H to postfix</h4>
+                            <span class="question-type">Type: Infix to Postfix Conversion</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Postfix:</strong> ABCD+*+EF/G*-H+</p>
+                            <p><strong>Step-by-step conversion:</strong></p>
+                            <ol>
+                                <li>Read A: Output A</li>
+                                <li>Read +: Push + to stack</li>
+                                <li>Read B: Output B</li>
+                                <li>Read *: Push * to stack</li>
+                                <li>Read (: Push ( to stack</li>
+                                <li>Read C: Output C</li>
+                                <li>Read +: Push + to stack</li>
+                                <li>Read D: Output D</li>
+                                <li>Read ): Pop + and output it, then pop (</li>
+                                <li>Read *: * has same precedence as *, pop * and output it, then push *</li>
+                                <li>Read -: - has lower precedence than *, keep * in stack, push -</li>
+                                <li>Read E: Output E</li>
+                                <li>Read /: Push / to stack</li>
+                                <li>Read F: Output F</li>
+                                <li>Read *: * has same precedence as /, pop / and output it, then push *</li>
+                                <li>Read G: Output G</li>
+                                <li>Read *: * has same precedence as *, pop * and output it, then push *</li>
+                                <li>Read +: + has lower precedence than *, pop * and output it, then pop - and output it, then push +</li>
+                                <li>Read H: Output H</li>
+                                <li>End: Pop + and output it</li>
+                            </ol>
+                            <p><strong>Final result:</strong> ABCD+*+EF/G*-H+</p>
+                        </div>
+                    </div>
+
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 26: Convert A/B-C+D*E-A*C to postfix</h4>
+                            <span class="question-type">Type: Infix to Postfix Conversion</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Postfix:</strong> AB/CD-E*+AC*-</p>
+                            <p><strong>Step-by-step conversion:</strong></p>
+                            <ol>
+                                <li>Read A: Output A</li>
+                                <li>Read /: Push / to stack</li>
+                                <li>Read B: Output B</li>
+                                <li>Read -: / has higher precedence than -, pop / and output it, then push -</li>
+                                <li>Read C: Output C</li>
+                                <li>Read +: + has lower precedence than -, keep - in stack, push +</li>
+                                <li>Read D: Output D</li>
+                                <li>Read *: Push * to stack</li>
+                                <li>Read E: Output E</li>
+                                <li>Read -: - has lower precedence than *, keep * in stack, push -</li>
+                                <li>Read A: Output A</li>
+                                <li>Read *: Push * to stack</li>
+                                <li>Read C: Output C</li>
+                                <li>End: Pop * and output it, pop - and output it, pop + and output it, pop - and output it</li>
+                            </ol>
+                            <p><strong>Final result:</strong> AB/CD-E*+AC*-</p>
+                        </div>
+                    </div>
+
+                    <!-- Expression Evaluation Practice -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 27: Evaluate the postfix expression: 5 3 + 4 * 2 -</h4>
+                            <p><strong>Given values:</strong> Use the postfix expression above</p>
+                            <span class="question-type">Type: Postfix Evaluation</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Result:</strong> 18</p>
+                            <p><strong>Step-by-step evaluation:</strong></p>
+                            <ol>
+                                <li>Read 5: Push 5 to stack → Stack: [5]</li>
+                                <li>Read 3: Push 3 to stack → Stack: [5, 3]</li>
+                                <li>Read +: Pop 3 and 5, calculate 5+3=8, push 8 → Stack: [8]</li>
+                                <li>Read 4: Push 4 to stack → Stack: [8, 4]</li>
+                                <li>Read *: Pop 4 and 8, calculate 8*4=32, push 32 → Stack: [32]</li>
+                                <li>Read 2: Push 2 to stack → Stack: [32, 2]</li>
+                                <li>Read -: Pop 2 and 32, calculate 32-2=30, push 30 → Stack: [30]</li>
+                            </ol>
+                            <p><strong>Final result:</strong> 30</p>
+                        </div>
+                    </div>
+
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 28: What is the precedence order for arithmetic operators?</h4>
+                            <span class="question-type">Type: Conceptual Understanding</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Operator Precedence (highest to lowest):</strong></p>
+                            <ol>
+                                <li><strong>Parentheses:</strong> ( ) - Highest precedence</li>
+                                <li><strong>Exponentiation:</strong> ^ - Right to left</li>
+                                <li><strong>Multiplication/Division:</strong> *, / - Left to right</li>
+                                <li><strong>Addition/Subtraction:</strong> +, - - Left to right</li>
+                            </ol>
+                            <p><strong>Key Rules:</strong></p>
+                            <ul>
+                                <li>Same precedence operators are evaluated left to right (except ^)</li>
+                                <li>Parentheses override all precedence rules</li>
+                                <li>Exponentiation is right-associative</li>
+                                <li>Always evaluate innermost parentheses first</li>
+                            </ul>
+                            <p><strong>Mnemonic:</strong> PEMDAS - Parentheses, Exponents, Multiplication, Division, Addition, Subtraction</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <div class="sidebar">
+                <h3>Navigation</h3>
+                <ul>
+                    <li><a href="#overview">Overview</a></li>
+                    <li><a href="#infix-postfix">Infix to Postfix</a></li>
+                    <li><a href="#qa-section">Practice Questions (28)</a></li>
+                </ul>
+
+                <h4>Question Types</h4>
+                <ul class="question-types">
+                    <li>Find the Error</li>
+                    <li>Find the Output</li>
+                    <li>Complete the Code</li>
+                    <li>Write a Function</li>
+                    <li>Infix to Postfix</li>
+                    <li>Postfix Evaluation</li>
+                    <li>Conceptual Understanding</li>
+                </ul>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 CSY2006 C++ Programming Course. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

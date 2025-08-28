@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 20: File I/O - CSY2006</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>CSY2006 C++ Programming Course Notes</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="code-library.html">Code Library</a></li>
+                <li><a href="week10.html">Week 10</a></li>
+                <li><a href="week15.html">Week 15</a></li>
+                <li><a href="week16.html">Week 16</a></li>
+                <li><a href="week17.html">Week 17</a></li>
+                <li><a href="week18.html">Week 18</a></li>
+                <li><a href="week19.html">Week 19</a></li>
+                <li><a href="week20.html">Week 20</a></li>
+                <li><a href="week21.html">Week 21</a></li>
+                <li><a href="week22.html">Week 22</a></li>
+                <li><a href="week23.html">Week 23</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="week-header">
+            <h2>Week 20: File I/O</h2>
+            <p>File Operations and Data Persistence</p>
+        </section>
+
+        <div class="week-content">
+            <div class="main-content">
+                <section id="overview">
+                    <h3>Week 20 Overview</h3>
+                    <p>This week covers file input/output operations in C++, including reading from and writing to files, error handling, and data serialization.</p>
+
+                    <h4>Key Topics:</h4>
+                    <ul>
+                        <li>File streams (ifstream, ofstream, fstream)</li>
+                        <li>Reading and writing text files</li>
+                        <li>Binary file operations</li>
+                        <li>Error handling and file status</li>
+                        <li>Data serialization</li>
+                    </ul>
+                </section>
+
+                <section id="file-io">
+                    <h3>File I/O Operations</h3>
+
+                    <h4>Writing to Files</h4>
+                    <div class="code-block">
+                        <pre>#include &lt;fstream&gt;
+#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    ofstream outFile("data.txt");
+
+    if (outFile.is_open()) {
+        outFile &lt;&lt; "Hello, World!" &lt;&lt; endl;
+        outFile &lt;&lt; "This is a test file." &lt;&lt; endl;
+        outFile.close();
+    } else {
+        cout &lt;&lt; "Unable to open file" &lt;&lt; endl;
+    }
+
+    return 0;
+}</pre>
+                    </div>
+
+                    <h4>Reading from Files</h4>
+                    <div class="code-block">
+                        <pre>ifstream inFile("data.txt");
+string line;
+
+if (inFile.is_open()) {
+    while (getline(inFile, line)) {
+        cout &lt;&lt; line &lt;&lt; endl;
+    }
+    inFile.close();
+} else {
+    cout &lt;&lt; "Unable to open file" &lt;&lt; endl;
+}</pre>
+                    </div>
+                </section>
+
+                <section id="qa-section">
+                    <h3>Practice Questions & Answers (20 Questions)</h3>
+
+                    <!-- Question 1: Find the Error -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 1: Find the error in this file opening code:</h4>
+                            <div class="code-block">
+                                <pre>ofstream file;
+file.open("data.txt");
+// No error checking!
+file &lt;&lt; "Hello World" &lt;&lt; endl;
+file.close();</pre>
+                            </div>
+                            <span class="question-type">Type: Find the Error</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Error:</strong> Missing error checking after opening file</p>
+                            <p><strong>Explanation:</strong> Should check if file opened successfully before writing to it.</p>
+                            <p><strong>Fix:</strong> Add <code>if (!file.is_open()) { /* handle error */ }</code></p>
+                        </div>
+                    </div>
+
+                    <!-- Question 2: Find the Output -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 2: What will happen when this code runs?</h4>
+                            <div class="code-block">
+                                <pre>ofstream out("test.txt");
+out &lt;&lt; "Line 1" &lt;&lt; endl;
+out &lt;&lt; "Line 2" &lt;&lt; endl;
+// No explicit close
+// File goes out of scope</pre>
+                            </div>
+                            <span class="question-type">Type: Find the Output</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Result:</strong> File will be properly closed and contain both lines</p>
+                            <p><strong>Explanation:</strong> Destructor automatically closes the file when object goes out of scope.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 3: Complete the Code -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 3: Complete the binary file writing:</h4>
+                            <div class="code-block">
+                                <pre>struct Student {
+    char name[50];
+    int age;
+    float gpa;
+};
+
+void writeStudentToFile(Student s, const char* filename) {
+    // Complete the binary file writing
+}</pre>
+                            </div>
+                            <span class="question-type">Type: Complete the Code</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Completed Code:</strong></p>
+                            <div class="code-block">
+                                <pre>    ofstream file(filename, ios::binary);
+    if (file.is_open()) {
+        file.write(reinterpret_cast&lt;char*&gt;(&s), sizeof(Student));
+        file.close();
+    }</pre>
+                            </div>
+                            <p><strong>Explanation:</strong> Use binary mode and write raw bytes of the struct.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 4: Write a Function -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 4: Write a function to count lines in a file:</h4>
+                            <div class="code-block">
+                                <pre>int countLines(const string&amp; filename) {
+    // Write the implementation
+}</pre>
+                            </div>
+                            <span class="question-type">Type: Write a Function</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Solution:</strong></p>
+                            <div class="code-block">
+                                <pre>int countLines(const string&amp; filename) {
+    ifstream file(filename);
+    if (!file.is_open()) return -1;
+    
+    int count = 0;
+    string line;
+    while (getline(file, line)) {
+        count++;
+    }
+    file.close();
+    return count;
+}</pre>
+                            </div>
+                            <p><strong>Explanation:</strong> Read each line and increment counter until end of file.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 5: Find the Error -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 5: Find the error in this file reading loop:</h4>
+                            <div class="code-block">
+                                <pre>ifstream file("data.txt");
+string line;
+int count = 0;
+
+while (!file.eof()) {
+    getline(file, line);
+    count++;
+    cout &lt;&lt; line &lt;&lt; endl;
+}
+cout &lt;&lt; "Total lines: " &lt;&lt; count &lt;&lt; endl;</pre>
+                            </div>
+                            <span class="question-type">Type: Find the Error</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Error:</strong> Last line will be counted and processed twice</p>
+                            <p><strong>Explanation:</strong> <code>eof()</code> is only true after trying to read past end of file. The last successful read doesn't set eof flag yet.</p>
+                            <p><strong>Fix:</strong> Use <code>while (getline(file, line))</code> instead.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 6: Find the Output -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 6: What will be the file content after this code?</h4>
+                            <div class="code-block">
+                                <pre>ofstream file("output.txt");
+file &lt;&lt; "First line" &lt;&lt; endl;
+file &lt;&lt; "Second line" &lt;&lt; endl;
+file.close();
+
+ofstream file2("output.txt", ios::app);
+file2 &lt;&lt; "Third line" &lt;&lt; endl;
+file2.close();</pre>
+                            </div>
+                            <span class="question-type">Type: Find the Output</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>File Content:</strong></p>
+                            <pre>First line
+Second line
+Third line</pre>
+                            <p><strong>Explanation:</strong> <code>ios::app</code> opens file in append mode, so new content is added to existing content.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 7: Complete the Code -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 7: Complete the CSV file reader:</h4>
+                            <div class="code-block">
+                                <pre>vector&lt;vector&lt;string&gt;&gt; readCSV(const string&amp; filename) {
+    vector&lt;vector&lt;string&gt;&gt; data;
+    ifstream file(filename);
+    string line;
+    
+    while (getline(file, line)) {
+        vector&lt;string&gt; row;
+        stringstream ss(line);
+        string cell;
+        
+        // Complete the CSV parsing
+        data.push_back(row);
+    }
+    return data;
+}</pre>
+                            </div>
+                            <span class="question-type">Type: Complete the Code</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Completed Code:</strong></p>
+                            <div class="code-block">
+                                <pre>        while (getline(ss, cell, ',')) {
+            row.push_back(cell);
+        }</pre>
+                            </div>
+                            <p><strong>Explanation:</strong> Use comma as delimiter in getline to parse CSV cells.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 8: Write a Function -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 8: Write a function to copy a file:</h4>
+                            <div class="code-block">
+                                <pre>bool copyFile(const string&amp; source, const string&amp; destination) {
+    // Write the file copying implementation
+}</pre>
+                            </div>
+                            <span class="question-type">Type: Write a Function</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Solution:</strong></p>
+                            <div class="code-block">
+                                <pre>bool copyFile(const string&amp; source, const string&amp; destination) {
+    ifstream src(source, ios::binary);
+    ofstream dst(destination, ios::binary);
+    
+    if (!src.is_open() || !dst.is_open()) {
+        return false;
+    }
+    
+    dst &lt;&lt; src.rdbuf(); // Copy entire stream
+    return true;
+}</pre>
+                            </div>
+                            <p><strong>Explanation:</strong> Use binary mode and stream buffer copy for efficient file copying.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 9: Find the Error -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 9: Find the error in this binary file reading:</h4>
+                            <div class="code-block">
+                                <pre>struct Data {
+    int id;
+    char name[20];
+};
+
+void readData(const char* filename) {
+    ifstream file(filename, ios::binary);
+    Data d;
+    file.read((char*)&d, sizeof(Data));
+    cout &lt;&lt; d.id &lt;&lt; " " &lt;&lt; d.name &lt;&lt; endl;
+    // No error checking!
+}</pre>
+                            </div>
+                            <span class="question-type">Type: Find the Error</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Error:</strong> Missing error checking after read operation</p>
+                            <p><strong>Explanation:</strong> Should check if read was successful before using the data.</p>
+                            <p><strong>Fix:</strong> Add <code>if (file.read(...)) { /* use data */ }</code></p>
+                        </div>
+                    </div>
+
+                    <!-- Question 10: Find the Output -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 10: What will be the output of tellg() and tellp()?</h4>
+                            <div class="code-block">
+                                <pre>fstream file("test.txt", ios::in | ios::out);
+file &lt;&lt; "Hello";
+cout &lt;&lt; "Write position: " &lt;&lt; file.tellp() &lt;&lt; endl;
+file.seekg(0);
+cout &lt;&lt; "Read position: " &lt;&lt; file.tellg() &lt;&lt; endl;</pre>
+                            </div>
+                            <span class="question-type">Type: Find the Output</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Output:</strong></p>
+                            <pre>Write position: 5
+Read position: 0</pre>
+                            <p><strong>Explanation:</strong> tellp() shows write position (after "Hello"), tellg() shows read position (after seekg(0)).</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 11: Complete the Code -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 11: Complete the file size calculator:</h4>
+                            <div class="code-block">
+                                <pre>long long getFileSize(const string&amp; filename) {
+    // Complete the implementation
+}</pre>
+                            </div>
+                            <span class="question-type">Type: Complete the Code</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Completed Code:</strong></p>
+                            <div class="code-block">
+                                <pre>    ifstream file(filename, ios::binary | ios::ate);
+    if (!file.is_open()) return -1;
+    return file.tellg();</pre>
+                            </div>
+                            <p><strong>Explanation:</strong> Open with <code>ios::ate</code> to position at end, then tellg() gives file size.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 12: Write a Function -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 12: Write a function to search for a word in a file:</h4>
+                            <div class="code-block">
+                                <pre>vector&lt;int&gt; findWordLines(const string&amp; filename, const string&amp; word) {
+    // Return line numbers where word appears
+}</pre>
+                            </div>
+                            <span class="question-type">Type: Write a Function</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Solution:</strong></p>
+                            <div class="code-block">
+                                <pre>vector&lt;int&gt; findWordLines(const string&amp; filename, const string&amp; word) {
+    vector&lt;int&gt; lines;
+    ifstream file(filename);
+    if (!file.is_open()) return lines;
+    
+    string line;
+    int lineNum = 1;
+    
+    while (getline(file, line)) {
+        if (line.find(word) != string::npos) {
+            lines.push_back(lineNum);
+        }
+        lineNum++;
+    }
+    
+    return lines;
+}</pre>
+                            </div>
+                            <p><strong>Explanation:</strong> Read each line, check if word exists using find(), store line numbers.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 13: Find the Error -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 13: Find the error in this file mode usage:</h4>
+                            <div class="code-block">
+                                <pre>fstream file("data.txt", ios::in | ios::out | ios::trunc);
+// Trying to read and write to same file
+string data;
+getline(file, data);  // Read first
+file &lt;&lt; "New data" &lt;&lt; endl;  // Then write
+string moreData;
+getline(file, moreData);  // Try to read more</pre>
+                            </div>
+                            <span class="question-type">Type: Find the Error</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Error:</strong> File pointer position after writing</p>
+                            <p><strong>Explanation:</strong> After writing, file pointer is at end. Need to seek back to read more data.</p>
+                            <p><strong>Fix:</strong> Add <code>file.seekg(0, ios::end);</code> or reposition pointer as needed.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 14: Find the Output -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 14: What will be the content of the file?</h4>
+                            <div class="code-block">
+                                <pre>ofstream file("test.txt");
+file &lt;&lt; 123 &lt;&lt; " " &lt;&lt; 456.78 &lt;&lt; endl;
+file.close();
+
+ifstream inFile("test.txt");
+int num;
+double decimal;
+inFile &gt;&gt; num &gt;&gt; decimal;
+cout &lt;&lt; num &lt;&lt; " " &lt;&lt; decimal &lt;&lt; endl;</pre>
+                            </div>
+                            <span class="question-type">Type: Find the Output</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Output:</strong> 123 456.78</p>
+                            <p><strong>Explanation:</strong> Formatted output and input work correctly for numbers.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 15: Complete the Code -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 15: Complete the error handling for file operations:</h4>
+                            <div class="code-block">
+                                <pre>bool safeFileOperation(const string&amp; filename) {
+    ofstream file(filename);
+    // Complete with proper error handling
+    if (/* check condition */) {
+        // handle error
+        return false;
+    }
+    // perform operations
+    return true;
+}</pre>
+                            </div>
+                            <span class="question-type">Type: Complete the Code</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Completed Code:</strong></p>
+                            <div class="code-block">
+                                <pre>    if (!file.is_open()) {
+        cerr &lt;&lt; "Error opening file: " &lt;&lt; filename &lt;&lt; endl;
+        return false;
+    }</pre>
+                            </div>
+                            <p><strong>Explanation:</strong> Check if file opened successfully and provide error message.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 16: Write a Function -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 16: Write a function to merge two text files:</h4>
+                            <div class="code-block">
+                                <pre>bool mergeFiles(const string&amp; file1, const string&amp; file2, const string&amp; output) {
+    // Write the implementation
+}</pre>
+                            </div>
+                            <span class="question-type">Type: Write a Function</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Solution:</strong></p>
+                            <div class="code-block">
+                                <pre>bool mergeFiles(const string&amp; file1, const string&amp; file2, const string&amp; output) {
+    ifstream in1(file1);
+    ifstream in2(file2);
+    ofstream out(output);
+    
+    if (!in1.is_open() || !in2.is_open() || !out.is_open()) {
+        return false;
+    }
+    
+    string line;
+    while (getline(in1, line)) {
+        out &lt;&lt; line &lt;&lt; endl;
+    }
+    while (getline(in2, line)) {
+        out &lt;&lt; line &lt;&lt; endl;
+    }
+    
+    return true;
+}</pre>
+                            </div>
+                            <p><strong>Explanation:</strong> Read all lines from first file, then all lines from second file, write to output.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 17: Find the Error -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 17: Find the error in this binary struct writing:</h4>
+                            <div class="code-block">
+                                <pre>struct Person {
+    string name;  // Variable length!
+    int age;
+};
+
+void savePerson(Person p) {
+    ofstream file("person.dat", ios::binary);
+    file.write((char*)&p, sizeof(Person));  // Error!
+}</pre>
+                            </div>
+                            <span class="question-type">Type: Find the Error</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Error:</strong> Writing struct with string member to binary file</p>
+                            <p><strong>Explanation:</strong> String is a complex object with dynamic memory. Can't directly write/read it as binary.</p>
+                            <p><strong>Fix:</strong> Use fixed-size char array or serialize string data separately.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 18: Find the Output -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 18: What will be the file content?</h4>
+                            <div class="code-block">
+                                <pre>ofstream file("data.txt");
+file &lt;&lt; setw(5) &lt;&lt; left &lt;&lt; "Hi" &lt;&lt; "There" &lt;&lt; endl;
+file &lt;&lt; setw(5) &lt;&lt; right &lt;&lt; "Hi" &lt;&lt; "There" &lt;&lt; endl;</pre>
+                            </div>
+                            <span class="question-type">Type: Find the Output</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>File Content:</strong></p>
+                            <pre>Hi   There
+   HiThere</pre>
+                            <p><strong>Explanation:</strong> First line left-justified in 5-character field, second line right-justified.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 19: Complete the Code -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 19: Complete the file position manipulation:</h4>
+                            <div class="code-block">
+                                <pre>fstream file("data.txt", ios::in | ios::out);
+file &lt;&lt; "Hello World";
+// Move to position 6 (after "Hello ")
+file.seekp(6);
+// Complete the operation
+file &lt;&lt; "C++";
+// Move back to beginning to read
+// Complete the seek operation</pre>
+                            </div>
+                            <span class="question-type">Type: Complete the Code</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Completed Code:</strong></p>
+                            <div class="code-block">
+                                <pre>file.seekg(0);</pre>
+                            </div>
+                            <p><strong>Explanation:</strong> Use seekg(0) to move read position to beginning of file.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 20: Write a Function -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 20: Write a function to check if file exists:</h4>
+                            <div class="code-block">
+                                <pre>bool fileExists(const string&amp; filename) {
+    // Write the implementation
+}</pre>
+                            </div>
+                            <span class="question-type">Type: Write a Function</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Solution:</strong></p>
+                            <div class="code-block">
+                                <pre>bool fileExists(const string&amp; filename) {
+    ifstream file(filename);
+    return file.is_open();
+}</pre>
+                            </div>
+                            <p><strong>Explanation:</strong> Try to open file for reading. If successful, file exists and is accessible.</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <div class="sidebar">
+                <h3>Navigation</h3>
+                <ul>
+                    <li><a href="#overview">Overview</a></li>
+                    <li><a href="#file-io">File I/O</a></li>
+                    <li><a href="#qa-section">Q&A</a></li>
+                </ul>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 CSY2006 C++ Programming Course. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

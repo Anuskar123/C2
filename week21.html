@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 21: Templates - CSY2006</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>CSY2006 C++ Programming Course Notes</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="code-library.html">Code Library</a></li>
+                <li><a href="week10.html">Week 10</a></li>
+                <li><a href="week15.html">Week 15</a></li>
+                <li><a href="week16.html">Week 16</a></li>
+                <li><a href="week17.html">Week 17</a></li>
+                <li><a href="week18.html">Week 18</a></li>
+                <li><a href="week19.html">Week 19</a></li>
+                <li><a href="week20.html">Week 20</a></li>
+                <li><a href="week21.html">Week 21</a></li>
+                <li><a href="week22.html">Week 22</a></li>
+                <li><a href="week23.html">Week 23</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="week-header">
+            <h2>Week 21: Templates</h2>
+            <p>Generic Programming in C++</p>
+        </section>
+
+        <div class="week-content">
+            <div class="main-content">
+                <section id="overview">
+                    <h3>Week 21 Overview</h3>
+                    <p>This week introduces C++ templates, which enable generic programming by allowing functions and classes to work with different data types.</p>
+
+                    <h4>Key Topics:</h4>
+                    <ul>
+                        <li>Function templates</li>
+                        <li>Class templates</li>
+                        <li>Template specialization</li>
+                        <li>Template parameters</li>
+                        <li>Standard Template Library (STL) introduction</li>
+                    </ul>
+                </section>
+
+                <section id="function-templates">
+                    <h3>Function Templates</h3>
+
+                    <div class="code-block">
+                        <pre>// Function template for finding maximum
+template &lt;typename T&gt;
+T maximum(T a, T b) {
+    return (a &gt; b) ? a : b;
+}
+
+// Usage
+int main() {
+    cout &lt;&lt; maximum(5, 10) &lt;&lt; endl;        // Works with int
+    cout &lt;&lt; maximum(3.14, 2.71) &lt;&lt; endl;  // Works with double
+    cout &lt;&lt; maximum('a', 'z') &lt;&lt; endl;    // Works with char
+    return 0;
+}</pre>
+                    </div>
+
+                    <h4>Class Templates</h4>
+                    <div class="code-block">
+                        <pre>template &lt;class T&gt;
+class Stack {
+private:
+    T* arr;
+    int top;
+    int capacity;
+
+public:
+    Stack(int size) {
+        capacity = size;
+        arr = new T[capacity];
+        top = -1;
+    }
+
+    void push(T element) {
+        if (top &lt; capacity - 1) {
+            arr[++top] = element;
+        }
+    }
+
+    T pop() {
+        if (top >= 0) {
+            return arr[top--];
+        }
+    }
+};</pre>
+                    </div>
+                </section>
+
+                <section id="qa-section">
+                    <h3>Practice Questions & Answers</h3>
+
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>What is the difference between function templates and class templates?</h4>
+                        </div>
+                        <div class="answer">
+                            <p>Function templates define generic functions that can work with different data types, while class templates define generic classes. Function templates are instantiated when called, class templates when objects are created. Function templates use <code>template &lt;typename T&gt;</code> before the function, class templates before the class definition.</p>
+                        </div>
+                    </div>
+
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Find the error in this template code:</h4>
+                            <div class="code-block">
+                                <pre>template &lt;typename T&gt;
+class Container {
+private:
+    T data;
+public:
+    Container(T val) : data(val) {}
+    T getData() { return data; }
+};
+
+int main() {
+    Container&lt;int&gt; c1(42);
+    Container c2(3.14);  // Error here
+    return 0;
+}</pre>
+                            </div>
+                        </div>
+                        <div class="answer">
+                            <p>The error is on line where <code>Container c2(3.14)</code> is declared. When using class templates, you must specify the template parameter type explicitly. It should be <code>Container&lt;double&gt; c2(3.14)</code> or the compiler can't deduce the type.</p>
+                        </div>
+                    </div>
+
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>What will be the output of this code?</h4>
+                            <div class="code-block">
+                                <pre>template &lt;typename T&gt;
+T multiply(T a, T b) {
+    return a * b;
+}
+
+int main() {
+    cout &lt;&lt; multiply(3, 4) &lt;&lt; endl;
+    cout &lt;&lt; multiply(2.5, 3.0) &lt;&lt; endl;
+    return 0;
+}</pre>
+                            </div>
+                        </div>
+                        <div class="answer">
+                            <p>The output will be:<br>12<br>7.5<br>The template function works with both int and double types, performing multiplication for each.</p>
+                        </div>
+                    </div>
+
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Write a function template that swaps two values of any type.</h4>
+                        </div>
+                        <div class="answer">
+                            <p>Here's a complete swap function template:</p>
+                            <div class="code-block">
+                                <pre>template &lt;typename T&gt;
+void swapValues(T& a, T& b) {
+    T temp = a;
+    a = b;
+    b = temp;
+}
+
+int main() {
+    int x = 5, y = 10;
+    swapValues(x, y);
+    cout &lt;&lt; x &lt;&lt; " " &lt;&lt; y &lt;&lt; endl;  // Output: 10 5
+    
+    double a = 3.14, b = 2.71;
+    swapValues(a, b);
+    cout &lt;&lt; a &lt;&lt; " " &lt;&lt; b &lt;&lt; endl;  // Output: 2.71 3.14
+}</pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>What is template specialization and when would you use it?</h4>
+                        </div>
+                        <div class="answer">
+                            <p>Template specialization allows you to provide a custom implementation for a specific type. Use it when the generic template doesn't work correctly for certain types. Example:</p>
+                            <div class="code-block">
+                                <pre>// Generic template
+template &lt;typename T&gt;
+bool isEqual(T a, T b) {
+    return a == b;
+}
+
+// Specialization for char*
+template &lt;&gt;
+bool isEqual&lt;char*&gt;(char* a, char* b) {
+    return strcmp(a, b) == 0;
+}</pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Find the compilation error in this class template:</h4>
+                            <div class="code-block">
+                                <pre>template &lt;typename T&gt;
+class Array {
+private:
+    T* data;
+    int size;
+public:
+    Array(int s) : size(s) {
+        data = new T[size];
+    }
+    ~Array() {
+        delete[] data;
+    }
+    T& operator[](int index) {
+        return data[index];
+    }
+};
+
+int main() {
+    Array&lt;int&gt; arr(5);
+    arr[0] = 10;
+    cout &lt;&lt; arr[0] &lt;&lt; endl;
+    return 0;
+}</pre>
+                            </div>
+                        </div>
+                        <div class="answer">
+                            <p>The code is actually correct and will compile successfully! It demonstrates a proper class template for a dynamic array with proper memory management and operator overloading.</p>
+                        </div>
+                    </div>
+
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>What are the advantages of using templates over function overloading?</h4>
+                        </div>
+                        <div class="answer">
+                            <p>Templates provide:<br>1. <strong>Generic code</strong> - One implementation works for all types<br>2. <strong>Type safety</strong> - Compile-time type checking<br>3. <strong>Code reusability</strong> - No need to rewrite similar functions<br>4. <strong>Performance</strong> - No runtime overhead like virtual functions<br>5. <strong>Maintainability</strong> - Single source of truth for the algorithm</p>
+                        </div>
+                    </div>
+
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Write a class template for a simple Pair class that can hold two values of potentially different types.</h4>
+                        </div>
+                        <div class="answer">
+                            <p>Here's a Pair class template with two template parameters:</p>
+                            <div class="code-block">
+                                <pre>template &lt;typename T1, typename T2&gt;
+class Pair {
+private:
+    T1 first;
+    T2 second;
+public:
+    Pair(T1 f, T2 s) : first(f), second(s) {}
+    
+    T1 getFirst() const { return first; }
+    T2 getSecond() const { return second; }
+    
+    void setFirst(T1 f) { first = f; }
+    void setSecond(T2 s) { second = s; }
+};
+
+int main() {
+    Pair&lt;int, string&gt; p1(42, "Hello");
+    Pair&lt;double, char&gt; p2(3.14, 'A');
+    
+    cout &lt;&lt; p1.getFirst() &lt;&lt; ", " &lt;&lt; p1.getSecond() &lt;&lt; endl;
+    cout &lt;&lt; p2.getFirst() &lt;&lt; ", " &lt;&lt; p2.getSecond() &lt;&lt; endl;
+}</pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>What is the difference between <code>typename</code> and <code>class</code> in template declarations?</h4>
+                        </div>
+                        <div class="answer">
+                            <p>In template declarations, <code>typename</code> and <code>class</code> are interchangeable and mean the same thing - they declare a type parameter. <code>typename</code> is preferred in modern C++ because:<br>1. It's more descriptive of what it represents<br>2. It avoids confusion with actual classes<br>3. It's required in some contexts (like nested types)</p>
+                        </div>
+                    </div>
+
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Find the error in this template function:</h4>
+                            <div class="code-block">
+                                <pre>template &lt;typename T&gt;
+void printArray(T arr[], int size) {
+    for(int i = 0; i &lt; size; i++) {
+        cout &lt;&lt; arr[i] &lt;&lt; " ";
+    }
+    cout &lt;&lt; endl;
+}
+
+int main() {
+    int numbers[] = {1, 2, 3, 4, 5};
+    printArray(numbers, 5);
+    
+    char message[] = "Hello";
+    printArray(message, 5);
+    return 0;
+}</pre>
+                            </div>
+                        </div>
+                        <div class="answer">
+                            <p>The code is actually correct! Both calls work fine. The template function accepts arrays of any type and prints their elements. The char array will print individual characters: H e l l o</p>
+                        </div>
+                    </div>
+
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>What will happen if you try to use a template with a type that doesn't support certain operations?</h4>
+                        </div>
+                        <div class="answer">
+                            <p>You'll get a compilation error. For example, if your template uses the <code>&gt;</code> operator but you try to use it with a custom class that doesn't overload that operator, the compiler will report an error at the point of instantiation, not at the template definition.</p>
+                        </div>
+                    </div>
+
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Write a template function that finds the minimum of three values.</h4>
+                        </div>
+                        <div class="answer">
+                            <p>Here's a template function for finding the minimum of three values:</p>
+                            <div class="code-block">
+                                <pre>template &lt;typename T&gt;
+T minimum(T a, T b, T c) {
+    T min = a;
+    if (b &lt; min) min = b;
+    if (c &lt; min) min = c;
+    return min;
+}
+
+int main() {
+    cout &lt;&lt; minimum(5, 2, 8) &lt;&lt; endl;        // Output: 2
+    cout &lt;&lt; minimum(3.1, 4.2, 2.9) &lt;&lt; endl;  // Output: 2.9
+    cout &lt;&lt; minimum('z', 'a', 'm') &lt;&lt; endl;   // Output: a
+}</pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>What is template argument deduction?</h4>
+                        </div>
+                        <div class="answer">
+                            <p>Template argument deduction is when the compiler automatically determines the template parameters from the function arguments. For example, in <code>maximum(5, 10)</code>, the compiler deduces that T should be <code>int</code>. This works for function templates but not for class templates.</p>
+                        </div>
+                    </div>
+
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Create a template for a Stack class with push, pop, and isEmpty operations.</h4>
+                        </div>
+                        <div class="answer">
+                            <p>Here's a complete Stack class template:</p>
+                            <div class="code-block">
+                                <pre>template &lt;typename T&gt;
+class Stack {
+private:
+    T* data;
+    int capacity;
+    int top;
+public:
+    Stack(int cap = 100) : capacity(cap), top(-1) {
+        data = new T[capacity];
+    }
+    
+    ~Stack() {
+        delete[] data;
+    }
+    
+    void push(T element) {
+        if (top &lt; capacity - 1) {
+            data[++top] = element;
+        }
+    }
+    
+    T pop() {
+        if (!isEmpty()) {
+            return data[top--];
+        }
+        throw "Stack underflow";
+    }
+    
+    bool isEmpty() const {
+        return top == -1;
+    }
+    
+    T peek() const {
+        if (!isEmpty()) {
+            return data[top];
+        }
+        throw "Stack is empty";
+    }
+};</pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>What are some common pitfalls when using templates?</h4>
+                        </div>
+                        <div class="answer">
+                            <p>Common pitfalls include:<br>1. <strong>Code bloat</strong> - Multiple instantiations increase binary size<br>2. <strong>Compilation errors</strong> - Errors appear at instantiation point, not definition<br>3. <strong>Debugging difficulty</strong> - Template code can be harder to debug<br>4. <strong>Linker errors</strong> - Template definitions usually need to be in header files<br>5. <strong>Type requirements</strong> - Templates assume certain operations are available</p>
+                        </div>
+                    </div>
+
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>How do templates relate to the Standard Template Library (STL)?</h4>
+                        </div>
+                        <div class="answer">
+                            <p>The STL is built entirely on templates! It provides:<br>• <strong>Containers</strong> (vector, list, map, etc.) - Class templates<br>• <strong>Algorithms</strong> (sort, find, etc.) - Function templates<br>• <strong>Iterators</strong> - Template-based traversal objects<br>Templates enable the STL to work with any data type while maintaining type safety.</p>
+                        </div>
+                    </div>
+
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Write a template function that checks if two arrays of the same type are equal.</h4>
+                        </div>
+                        <div class="answer">
+                            <p>Here's a template function to compare arrays:</p>
+                            <div class="code-block">
+                                <pre>template &lt;typename T&gt;
+bool arraysEqual(T arr1[], T arr2[], int size) {
+    for(int i = 0; i &lt; size; i++) {
+        if (arr1[i] != arr2[i]) {
+            return false;
+        }
+    }
+    return true;
+}
+
+int main() {
+    int a1[] = {1, 2, 3};
+    int a2[] = {1, 2, 3};
+    int a3[] = {1, 2, 4};
+    
+    cout &lt;&lt; arraysEqual(a1, a2, 3) &lt;&lt; endl;  // true
+    cout &lt;&lt; arraysEqual(a1, a3, 3) &lt;&lt; endl;  // false
+}</pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>What is the difference between template instantiation and template specialization?</h4>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Instantiation</strong> creates specific code from a template for particular types (automatic process).<br><strong>Specialization</strong> provides custom implementations for specific types (manual process). Instantiation happens when you use a template, specialization when you provide <code>template &lt;&gt;</code> with specific types.</p>
+                        </div>
+                    </div>
+
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Can you have multiple template parameters? Show an example.</h4>
+                        </div>
+                        <div class="answer">
+                            <p>Yes! Here's an example with multiple template parameters:</p>
+                            <div class="code-block">
+                                <pre>template &lt;typename T, typename U, int Size&gt;
+class Matrix {
+private:
+    T data[Size][Size];
+public:
+    void set(int row, int col, T value) {
+        data[row][col] = value;
+    }
+    
+    T get(int row, int col) const {
+        return data[row][col];
+    }
+    
+    U calculateSum() const {
+        U sum = 0;
+        for(int i = 0; i &lt; Size; i++) {
+            for(int j = 0; j &lt; Size; j++) {
+                sum += data[i][j];
+            }
+        }
+        return sum;
+    }
+};
+
+int main() {
+    Matrix&lt;int, long long, 3&gt; matrix;
+    matrix.set(0, 0, 5);
+    cout &lt;&lt; matrix.calculateSum() &lt;&lt; endl;
+}</pre>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <div class="sidebar">
+                <h3>Navigation</h3>
+                <ul>
+                    <li><a href="#overview">Overview</a></li>
+                    <li><a href="#function-templates">Templates</a></li>
+                    <li><a href="#qa-section">Q&A</a></li>
+                </ul>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 CSY2006 C++ Programming Course. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

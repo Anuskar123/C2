@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 10: Classes and Objects - CSY2006</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>CSY2006 C++ Programming Course Notes</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="code-library.html">Code Library</a></li>
+                <li><a href="week10.html">Week 10</a></li>
+                <li><a href="week15.html">Week 15</a></li>
+                <li><a href="week16.html">Week 16</a></li>
+                <li><a href="week17.html">Week 17</a></li>
+                <li><a href="week18.html">Week 18</a></li>
+                <li><a href="week19.html">Week 19</a></li>
+                <li><a href="week20.html">Week 20</a></li>
+                <li><a href="week21.html">Week 21</a></li>
+                <li><a href="week22.html">Week 22</a></li>
+                <li><a href="week23.html">Week 23</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="week-header">
+            <h2>Week 10: Classes and Objects</h2>
+            <p>Introduction to Object-Oriented Programming in C++</p>
+        </section>
+
+        <div class="week-content">
+            <div class="main-content">
+                <section id="overview">
+                    <h3>Week 10 Overview</h3>
+                    <p>This week introduces the fundamental concepts of Object-Oriented Programming (OOP) in C++. Think of OOP like building with LEGO blocks - each block (object) has its own properties and can do specific things, but they all follow the same basic design pattern (class).</p>
+
+                    <div class="beginner-tip">
+                        <h4>🧠 Think Like a Beginner</h4>
+                        <p><strong>Real-World Analogy:</strong> A class is like a cookie cutter, and objects are the cookies you make with it. The cookie cutter defines the shape, but each cookie is a separate, edible instance!</p>
+                    </div>
+
+                    <h4>Key Topics:</h4>
+                    <ul>
+                        <li><strong>Class definition:</strong> The blueprint or template for creating objects</li>
+                        <li><strong>Creating objects:</strong> Making actual instances of your class (like stamping out cookies)</li>
+                        <li><strong>Constructors:</strong> Special setup functions that run when you create an object</li>
+                        <li><strong>Destructors:</strong> Cleanup functions that run when an object is destroyed</li>
+                        <li><strong>Member functions:</strong> Actions that objects can perform (like a car's "drive" or "stop" functions)</li>
+                        <li><strong>Access control:</strong> Deciding what data is private (secret) and what is public (shareable)</li>
+                        <li><strong>Data encapsulation:</strong> Protecting your data like keeping money in a wallet, not loose in your pocket</li>
+                    </ul>
+
+                    <div class="important-note">
+                        <h4>💡 Why OOP Matters</h4>
+                        <p>OOP helps you organize complex programs by breaking them into smaller, manageable pieces. It's like organizing your closet - instead of throwing everything in a pile, you use shelves, drawers, and boxes to keep things organized and easy to find.</p>
+                    </div>
+                </section>
+
+                <section id="theory">
+                    <h3>Theoretical Concepts Made Simple</h3>
+
+                    <h4>🎯 What is a Class?</h4>
+                    <p><strong>Simple Explanation:</strong> A class is like a recipe for baking cookies. The recipe tells you what ingredients you need (data) and what steps to follow (functions), but it isn't a cookie itself. You use the recipe to make actual cookies (objects).</p>
+                    <p><strong>Technical Definition:</strong> A class is a user-defined data type that encapsulates data and functions into a single unit. It serves as a blueprint for creating objects.</p>
+
+                    <h4>🏗️ Class vs Object</h4>
+                    <div class="comparison-table">
+                        <div class="comparison-item">
+                            <h5>🏠 Class (The Blueprint)</h5>
+                            <ul>
+                                <li>Like a house plan</li>
+                                <li>Defines structure and capabilities</li>
+                                <li>Exists only once</li>
+                                <li>Cannot be lived in directly</li>
+                            </ul>
+                        </div>
+                        <div class="comparison-item">
+                            <h5>🏡 Object (The Actual House)</h5>
+                            <ul>
+                                <li>Like a built house</li>
+                                <li>Actual instance you can use</li>
+                                <li>Can have multiple instances</li>
+                                <li>You interact with objects</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <h4>🔒 Access Specifiers (Privacy Settings)</h4>
+                    <p><strong>Think of it like social media privacy:</strong></p>
+                    <ul>
+                        <li><strong>🌐 Public:</strong> Like a public Facebook post - anyone can see and interact with it</li>
+                        <li><strong>🔐 Private:</strong> Like your personal diary - only you (the class) can access it</li>
+                        <li><strong>👨‍👩‍👧‍👦 Protected:</strong> Like family photos - only you and your close relatives (derived classes) can see it</li>
+                    </ul>
+
+                    <div class="beginner-tip">
+                        <h4>🧠 Pro Tip for Beginners</h4>
+                        <p><strong>Start with Public:</strong> When learning, make everything public first to avoid confusion. As you get comfortable, gradually add private members to protect your data.</p>
+                    </div>
+                </section>
+
+                <section id="code-examples">
+                    <h3>Code Examples</h3>
+
+                    <h4>Basic Class Definition</h4>
+                    <div class="code-block">
+                        <pre>// Rectangle.h - Specification file
+#ifndef RECTANGLE_H
+#define RECTANGLE_H
+
+class Rectangle
+{
+private:
+    double width;
+    double length;
+
+public:
+    // Constructor
+    Rectangle(double w = 0.0, double len = 0.0)
+    {
+        width = w;
+        length = len;
+    }
+
+    // Destructor
+    ~Rectangle() {}
+
+    // Member functions
+    void setWidth(double w) { width = w; }
+    void setLength(double len) { length = len; }
+    double getWidth() const { return width; }
+    double getLength() const { return length; }
+    double getArea() const { return width * length; }
+};
+
+#endif</pre>
+                    </div>
+
+                    <h4>Using the Class</h4>
+                    <div class="code-block">
+                        <pre>#include &lt;iostream&gt;
+#include "Rectangle.h"
+using namespace std;
+
+int main()
+{
+    // Create objects
+    Rectangle box1;           // Default constructor
+    Rectangle box2(10.0, 5.0); // Parameterized constructor
+
+    // Set dimensions
+    box1.setWidth(8.0);
+    box1.setLength(12.0);
+
+    // Display results
+    cout &lt;&lt; "Box1 area: " &lt;&lt; box1.getArea() &lt;&lt; endl;
+    cout &lt;&lt; "Box2 area: " &lt;&lt; box2.getArea() &lt;&lt; endl;
+
+    return 0;
+}</pre>
+                    </div>
+
+                    <h4>Account Class Example</h4>
+                    <div class="code-block">
+                        <pre>// Account.h
+#ifndef ACCOUNT_H
+#define ACCOUNT_H
+
+class Account
+{
+private:
+    double balance;
+    int transactions;
+
+public:
+    Account(double initialBalance = 0.0)
+    {
+        balance = initialBalance;
+        transactions = 0;
+    }
+
+    bool withdraw(double amount)
+    {
+        if (amount > balance)
+            return false;
+        balance -= amount;
+        transactions++;
+        return true;
+    }
+
+    void deposit(double amount)
+    {
+        balance += amount;
+        transactions++;
+    }
+
+    double getBalance() const { return balance; }
+    int getTransactions() const { return transactions; }
+};
+
+#endif</pre>
+                    </div>
+                </section>
+
+                <section id="qa-section">
+                    <h3>Practice Questions & Answers (20 Questions)</h3>
+
+                    <!-- Question 1: Find the Error -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 1: Find the error in this class definition:</h4>
+                            <div class="code-block">
+                                <pre>class Student {
+public:
+    string name;
+    int age;
+};
+
+int main() {
+    Student s;
+    s.name = "John";
+    s.age = 20;
+    cout &lt;&lt; s.name &lt;&lt; endl;
+    return 0;
+}</pre>
+                            </div>
+                            <span class="question-type">Type: Find the Error</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Error:</strong> Missing <code>#include &lt;string&gt;</code> and <code>using namespace std;</code></p>
+                            <p><strong>Explanation:</strong> The code uses <code>string</code> and <code>cout</code> without proper includes and namespace declaration.</p>
+                            <p><strong>Fix:</strong> Add <code>#include &lt;string&gt;</code> and <code>#include &lt;iostream&gt;</code> at the top, and <code>using namespace std;</code></p>
+                        </div>
+                    </div>
+
+                    <!-- Question 2: Find the Output -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 2: What will be the output of this program?</h4>
+                            <div class="code-block">
+                                <pre>#include &lt;iostream&gt;
+using namespace std;
+
+class Counter {
+private:
+    int count;
+public:
+    Counter() { count = 0; }
+    void increment() { count++; }
+    int getCount() { return count; }
+};
+
+int main() {
+    Counter c1, c2;
+    c1.increment();
+    c1.increment();
+    c2.increment();
+    cout &lt;&lt; c1.getCount() &lt;&lt; " " &lt;&lt; c2.getCount() &lt;&lt; endl;
+    return 0;
+}</pre>
+                            </div>
+                            <span class="question-type">Type: Find the Output</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Output:</strong> 2 1</p>
+                            <p><strong>Explanation:</strong> Each object has its own <code>count</code> variable. c1 is incremented twice (count=2), c2 is incremented once (count=1).</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 3: Complete the Code -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 3: Complete the constructor and destructor for this class:</h4>
+                            <div class="code-block">
+                                <pre>class BankAccount {
+private:
+    string accountNumber;
+    double balance;
+public:
+    BankAccount(string accNum, double initialBalance) {
+        // Complete this constructor
+    }
+    
+    // Complete the destructor
+};</pre>
+                            </div>
+                            <span class="question-type">Type: Complete the Code</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Completed Code:</strong></p>
+                            <div class="code-block">
+                                <pre>class BankAccount {
+private:
+    string accountNumber;
+    double balance;
+public:
+    BankAccount(string accNum, double initialBalance) {
+        accountNumber = accNum;
+        balance = initialBalance;
+    }
+    
+    ~BankAccount() {
+        // Destructor - could be empty or perform cleanup
+    }
+};</pre>
+                            </div>
+                            <p><strong>Explanation:</strong> The constructor initializes the member variables with the provided parameters. The destructor is needed for proper cleanup.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 4: Write a Function -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 4: Write a member function to calculate the perimeter of a Rectangle class:</h4>
+                            <div class="code-block">
+                                <pre>class Rectangle {
+private:
+    double width;
+    double length;
+public:
+    // Constructor and other methods...
+    // Write the perimeter function here
+};</pre>
+                            </div>
+                            <span class="question-type">Type: Write a Function</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Solution:</strong></p>
+                            <div class="code-block">
+                                <pre>double Rectangle::getPerimeter() const {
+    return 2 * (width + length);
+}</pre>
+                            </div>
+                            <p><strong>Explanation:</strong> Perimeter = 2 × (width + length). The function is const because it doesn't modify member variables.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 5: Find the Error -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 5: Find the compilation error:</h4>
+                            <div class="code-block">
+                                <pre>class Circle {
+private:
+    double radius;
+public:
+    Circle(double r) { radius = r; }
+};
+
+int main() {
+    Circle c;
+    return 0;
+}</pre>
+                            </div>
+                            <span class="question-type">Type: Find the Error</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Error:</strong> No default constructor available</p>
+                            <p><strong>Explanation:</strong> The class only has a parameterized constructor, but in main() we're trying to create an object without arguments, which requires a default constructor.</p>
+                            <p><strong>Fix:</strong> Either provide a default constructor or initialize with parameters: <code>Circle c(5.0);</code></p>
+                        </div>
+                    </div>
+
+                    <!-- Question 6: Find the Output -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 6: What will be the output?</h4>
+                            <div class="code-block">
+                                <pre>#include &lt;iostream&gt;
+using namespace std;
+
+class Test {
+public:
+    Test() { cout &lt;&lt; "Constructor "; }
+    ~Test() { cout &lt;&lt; "Destructor "; }
+};
+
+int main() {
+    Test t;
+    cout &lt;&lt; "Main ";
+    return 0;
+}</pre>
+                            </div>
+                            <span class="question-type">Type: Find the Output</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Output:</strong> Constructor Main Destructor</p>
+                            <p><strong>Explanation:</strong> Constructor runs when object is created, then "Main" is printed, destructor runs when object goes out of scope at program end.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 7: Complete the Code -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 7: Complete the class definition with proper access specifiers:</h4>
+                            <div class="code-block">
+                                <pre>class Employee {
+    string name;
+    double salary;
+    
+    // Complete with proper access specifiers and methods
+};</pre>
+                            </div>
+                            <span class="question-type">Type: Complete the Code</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Completed Code:</strong></p>
+                            <div class="code-block">
+                                <pre>class Employee {
+private:
+    string name;
+    double salary;
+    
+public:
+    Employee(string n, double s) : name(n), salary(s) {}
+    
+    void setName(string n) { name = n; }
+    void setSalary(double s) { salary = s; }
+    string getName() const { return name; }
+    double getSalary() const { return salary; }
+};</pre>
+                            </div>
+                            <p><strong>Explanation:</strong> Data members should be private, accessor/mutator methods should be public for encapsulation.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 8: Write a Function -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 8: Write a function to check if a Rectangle is a square:</h4>
+                            <div class="code-block">
+                                <pre>class Rectangle {
+private:
+    double width, length;
+public:
+    // Write the isSquare function
+};</pre>
+                            </div>
+                            <span class="question-type">Type: Write a Function</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Solution:</strong></p>
+                            <div class="code-block">
+                                <pre>bool Rectangle::isSquare() const {
+    return (width == length);
+}</pre>
+                            </div>
+                            <p><strong>Explanation:</strong> A rectangle is a square if width equals length. The function is const since it doesn't modify data.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 9: Find the Error -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 9: Find the error in this code:</h4>
+                            <div class="code-block">
+                                <pre>class Car {
+private:
+    string model;
+public:
+    Car(string m) : model(m) {}
+};
+
+int main() {
+    Car* carPtr = new Car("Toyota");
+    cout &lt;&lt; carPtr-&gt;model &lt;&lt; endl;
+    return 0;
+}</pre>
+                            </div>
+                            <span class="question-type">Type: Find the Error</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Error:</strong> Trying to access private member <code>model</code> from outside the class</p>
+                            <p><strong>Explanation:</strong> Private members can only be accessed within the class. Need a public getter method.</p>
+                            <p><strong>Fix:</strong> Add <code>string getModel() const { return model; }</code> and use <code>carPtr-&gt;getModel()</code></p>
+                        </div>
+                    </div>
+
+                    <!-- Question 10: Find the Output -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 10: What will be the output?</h4>
+                            <div class="code-block">
+                                <pre>#include &lt;iostream&gt;
+using namespace std;
+
+class Number {
+private:
+    int value;
+public:
+    Number(int v = 0) : value(v) {}
+    void display() { cout &lt;&lt; value &lt;&lt; " "; }
+};
+
+int main() {
+    Number n1;
+    Number n2(5);
+    Number n3 = 10;
+    n1.display();
+    n2.display();
+    n3.display();
+    return 0;
+}</pre>
+                            </div>
+                            <span class="question-type">Type: Find the Output</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Output:</strong> 0 5 10</p>
+                            <p><strong>Explanation:</strong> n1 uses default constructor (value=0), n2 uses parameterized constructor (value=5), n3 also uses parameterized constructor (value=10).</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 11: Complete the Code -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 11: Complete the copy constructor:</h4>
+                            <div class="code-block">
+                                <pre>class Array {
+private:
+    int* data;
+    int size;
+public:
+    Array(int s) : size(s) {
+        data = new int[size];
+    }
+    
+    // Complete the copy constructor
+    Array(const Array&amp; other) {
+        // Your code here
+    }
+};</pre>
+                            </div>
+                            <span class="question-type">Type: Complete the Code</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Completed Code:</strong></p>
+                            <div class="code-block">
+                                <pre>Array(const Array&amp; other) {
+    size = other.size;
+    data = new int[size];
+    for(int i = 0; i &lt; size; i++) {
+        data[i] = other.data[i];
+    }
+}</pre>
+                            </div>
+                            <p><strong>Explanation:</strong> Copy constructor performs deep copy of the dynamic array to avoid shallow copy issues.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 12: Write a Function -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 12: Write a function to resize a Rectangle:</h4>
+                            <div class="code-block">
+                                <pre>class Rectangle {
+private:
+    double width, length;
+public:
+    // Write the resize function that multiplies both dimensions by a factor
+};</pre>
+                            </div>
+                            <span class="question-type">Type: Write a Function</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Solution:</strong></p>
+                            <div class="code-block">
+                                <pre>void Rectangle::resize(double factor) {
+    width *= factor;
+    length *= factor;
+}</pre>
+                            </div>
+                            <p><strong>Explanation:</strong> The function multiplies both width and length by the given factor to resize the rectangle.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 13: Find the Error -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 13: Find the error in this inheritance code:</h4>
+                            <div class="code-block">
+                                <pre>class Base {
+public:
+    int x;
+};
+
+class Derived : public Base {
+public:
+    int x;  // Same name as base class
+};
+
+int main() {
+    Derived d;
+    d.x = 10;  // Which x?
+    return 0;
+}</pre>
+                            </div>
+                            <span class="question-type">Type: Find the Error</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Issue:</strong> Name hiding - derived class member hides base class member</p>
+                            <p><strong>Explanation:</strong> Both classes have a member named <code>x</code>. The derived class <code>x</code> hides the base class <code>x</code>.</p>
+                            <p><strong>Fix:</strong> Use different names or access base member with <code>Base::x</code></p>
+                        </div>
+                    </div>
+
+                    <!-- Question 14: Find the Output -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 14: What will be the output?</h4>
+                            <div class="code-block">
+                                <pre>#include &lt;iostream&gt;
+using namespace std;
+
+class StaticDemo {
+private:
+    static int count;
+public:
+    StaticDemo() { count++; }
+    static int getCount() { return count; }
+};
+
+int StaticDemo::count = 0;
+
+int main() {
+    StaticDemo s1, s2, s3;
+    cout &lt;&lt; StaticDemo::getCount() &lt;&lt; endl;
+    StaticDemo s4;
+    cout &lt;&lt; s4.getCount() &lt;&lt; endl;
+    return 0;
+}</pre>
+                            </div>
+                            <span class="question-type">Type: Find the Output</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Output:</strong></p>
+                            <pre>3
+4</pre>
+                            <p><strong>Explanation:</strong> Static variable is shared. After 3 objects: count=3. After 4th object: count=4.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 15: Complete the Code -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 15: Complete the operator overloading:</h4>
+                            <div class="code-block">
+                                <pre>class Point {
+private:
+    int x, y;
+public:
+    Point(int x=0, int y=0) : x(x), y(y) {}
+    
+    // Complete the + operator overload
+    Point operator+(const Point&amp; other) {
+        // Your code here
+    }
+};</pre>
+                            </div>
+                            <span class="question-type">Type: Complete the Code</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Completed Code:</strong></p>
+                            <div class="code-block">
+                                <pre>Point operator+(const Point&amp; other) {
+    return Point(x + other.x, y + other.y);
+}</pre>
+                            </div>
+                            <p><strong>Explanation:</strong> The operator adds corresponding coordinates and returns a new Point object.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 16: Write a Function -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 16: Write a function to compare two Rectangles:</h4>
+                            <div class="code-block">
+                                <pre>class Rectangle {
+private:
+    double width, length;
+public:
+    // Write a function that returns true if this rectangle has larger area
+    bool hasLargerArea(const Rectangle&amp; other) const;
+};</pre>
+                            </div>
+                            <span class="question-type">Type: Write a Function</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Solution:</strong></p>
+                            <div class="code-block">
+                                <pre>bool Rectangle::hasLargerArea(const Rectangle&amp; other) const {
+    return (width * length) > (other.width * other.length);
+}</pre>
+                            </div>
+                            <p><strong>Explanation:</strong> Compares the areas of two rectangles and returns true if current rectangle has larger area.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 17: Find the Error -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 17: Find the memory leak in this code:</h4>
+                            <div class="code-block">
+                                <pre>class StringWrapper {
+private:
+    char* str;
+public:
+    StringWrapper(const char* s) {
+        str = new char[strlen(s) + 1];
+        strcpy(str, s);
+    }
+    // Missing destructor!
+};
+
+int main() {
+    StringWrapper* sw = new StringWrapper("Hello");
+    delete sw;  // Memory leak!
+    return 0;
+}</pre>
+                            </div>
+                            <span class="question-type">Type: Find the Error</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Error:</strong> Memory leak due to missing destructor</p>
+                            <p><strong>Explanation:</strong> The constructor allocates memory with <code>new</code> but there's no destructor to deallocate it with <code>delete[]</code>.</p>
+                            <p><strong>Fix:</strong> Add destructor: <code>~StringWrapper() { delete[] str; }</code></p>
+                        </div>
+                    </div>
+
+                    <!-- Question 18: Find the Output -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 18: What will be the output?</h4>
+                            <div class="code-block">
+                                <pre>#include &lt;iostream&gt;
+using namespace std;
+
+class A {
+public:
+    A() { cout &lt;&lt; "A"; }
+    ~A() { cout &lt;&lt; "~A"; }
+};
+
+class B : public A {
+public:
+    B() { cout &lt;&lt; "B"; }
+    ~B() { cout &lt;&lt; "~B"; }
+};
+
+int main() {
+    B b;
+    return 0;
+}</pre>
+                            </div>
+                            <span class="question-type">Type: Find the Output</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Output:</strong> AB~B~A</p>
+                            <p><strong>Explanation:</strong> Base constructor first, then derived constructor. Destructors in reverse order.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 19: Complete the Code -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 19: Complete the friend function:</h4>
+                            <div class="code-block">
+                                <pre>class Complex {
+private:
+    double real, imag;
+public:
+    Complex(double r = 0, double i = 0) : real(r), imag(i) {}
+    
+    // Declare friend function
+    friend Complex operator+(const Complex&amp; c1, const Complex&amp; c2);
+};
+
+// Complete the friend function definition
+Complex operator+(const Complex&amp; c1, const Complex&amp; c2) {
+    // Your code here
+}</pre>
+                            </div>
+                            <span class="question-type">Type: Complete the Code</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Completed Code:</strong></p>
+                            <div class="code-block">
+                                <pre>Complex operator+(const Complex&amp; c1, const Complex&amp; c2) {
+    return Complex(c1.real + c2.real, c1.imag + c2.imag);
+}</pre>
+                            </div>
+                            <p><strong>Explanation:</strong> Friend function can access private members to add real and imaginary parts separately.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 20: Write a Function -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 20: Write a function to validate Rectangle dimensions:</h4>
+                            <div class="code-block">
+                                <pre>class Rectangle {
+private:
+    double width, length;
+public:
+    void setDimensions(double w, double l) {
+        // Write validation logic here
+        width = w;
+        length = l;
+    }
+};</pre>
+                            </div>
+                            <span class="question-type">Type: Write a Function</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Solution:</strong></p>
+                            <div class="code-block">
+                                <pre>void setDimensions(double w, double l) {
+    if (w > 0 && l > 0) {
+        width = w;
+        length = l;
+    } else {
+        cout &lt;&lt; "Invalid dimensions! Must be positive." &lt;&lt; endl;
+        width = length = 1.0; // Default values
+    }
+}</pre>
+                            </div>
+                            <p><strong>Explanation:</strong> Validates that dimensions are positive before setting them, provides error message and defaults if invalid.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="exercises">
+                    <h3>Exercises</h3>
+
+                    <h4>Exercise 1: Create a Bank Account Class</h4>
+                    <p>Create a BankAccount class with the following features:</p>
+                    <ul>
+                        <li>Private members: accountNumber, balance, accountHolderName</li>
+                        <li>Public methods: deposit, withdraw, getBalance, getAccountInfo</li>
+                        <li>Constructor to initialize account details</li>
+                    </ul>
+
+                    <h4>Exercise 2: Student Grade Management</h4>
+                    <p>Create a Student class that can:</p>
+                    <ul>
+                        <li>Store student name and ID</li>
+                        <li>Store multiple grades</li>
+                        <li>Calculate average grade</li>
+                        <li>Display student information</li>
+                    </ul>
+
+                    <button class="toggle-btn" data-target="exercise-solutions" data-label="Solutions">Show Solutions</button>
+                    <div id="exercise-solutions" style="display: none;">
+                        <h5>Solution for Exercise 1:</h5>
+                        <div class="code-block">
+                            <pre>class BankAccount {
+private:
+    string accountNumber;
+    double balance;
+    string accountHolderName;
+
+public:
+    BankAccount(string accNum, string name, double initialBalance = 0.0) {
+        accountNumber = accNum;
+        accountHolderName = name;
+        balance = initialBalance;
+    }
+
+    void deposit(double amount) {
+        if (amount > 0) {
+            balance += amount;
+        }
+    }
+
+    bool withdraw(double amount) {
+        if (amount > 0 && amount <= balance) {
+            balance -= amount;
+            return true;
+        }
+        return false;
+    }
+
+    double getBalance() const { return balance; }
+
+    void getAccountInfo() const {
+        cout &lt;&lt; "Account: " &lt;&lt; accountNumber &lt;&lt; endl;
+        cout &lt;&lt; "Holder: " &lt;&lt; accountHolderName &lt;&lt; endl;
+        cout &lt;&lt; "Balance: $" &lt;&lt; balance &lt;&lt; endl;
+    }
+};</pre>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <div class="sidebar">
+                <h3>Navigation</h3>
+                <ul>
+                    <li><a href="#overview">Overview</a></li>
+                    <li><a href="#theory">Theory</a></li>
+                    <li><a href="#code-examples">Code Examples</a></li>
+                    <li><a href="#qa-section">Q&A</a></li>
+                    <li><a href="#exercises">Exercises</a></li>
+                </ul>
+
+                <h3>Key Concepts</h3>
+                <ul>
+                    <li>Class Declaration</li>
+                    <li>Object Creation</li>
+                    <li>Constructors</li>
+                    <li>Destructors</li>
+                    <li>Access Specifiers</li>
+                    <li>Member Functions</li>
+                </ul>
+
+                <h3>Sample Programs</h3>
+                <ul>
+                    <li>Rectangle Class</li>
+                    <li>Account Class</li>
+                    <li>Student Management</li>
+                    <li>Bank Account</li>
+                </ul>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 CSY2006 C++ Programming Course. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
