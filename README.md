@@ -1,128 +1,148 @@
-# C++ Programming Notes Website
+# CSY2006 C++ Programming Course
 
-## Overview
-This is an interactive website containing comprehensive C++ programming notes for CSY2006 - Software Engineering 2. The website covers all major C++ concepts from basic classes to advanced data structures.
+## 📖 Course Overview
 
-## Features
+Welcome to CSY2006 C++ Programming! This comprehensive course introduces you to the fundamentals of C++ programming with a focus on object-oriented programming principles, data structures, and algorithms.
 
-### 📚 Comprehensive Content
-- **Week 10**: Introduction to Classes (Circle, Car, PayRoll, BankAccount classes)
-- **Week 15**: Operator Overloading (Time class, FeetInches class)
-- **Week 16**: Inheritance (Employee hierarchy, ProductionWorker, TeamLeader)
-- **Week 17**: Polymorphism & Virtual Functions (Publication hierarchy, Abstract shapes)
-- **Week 18**: Templates & Exception Handling (Function templates, Custom exceptions)
-- **Week 19**: Linked Lists (Dynamic data structures, Template implementations)
-- **Week 20**: Stacks & Queues (LIFO/FIFO data structures)
+## 🎯 Learning Objectives
 
-### 🎯 Interactive Features
-- **Interactive Quiz**: 10 comprehensive questions covering all topics
-- **Code Examples**: Full, runnable C++ code with syntax highlighting
-- **Practice Questions**: Click-to-reveal answers with detailed explanations
-- **Copy Code Functionality**: Easy copy-paste for code examples
-- **Responsive Design**: Works on desktop, tablet, and mobile devices
+By the end of this course, you will be able to:
+- Understand and apply object-oriented programming concepts in C++
+- Implement fundamental data structures and algorithms
+- Analyze algorithm complexity and performance
+- Debug and test C++ programs effectively
+- Work with file I/O and data persistence
+- Apply advanced C++ features like templates and STL
 
-### 🛠 Technical Features
-- Modern HTML5, CSS3, and JavaScript
-- Syntax highlighting using Prism.js
-- Smooth animations and transitions
-- Local storage for progress tracking
-- Keyboard shortcuts (Ctrl+1-7 for weeks, Ctrl+Q for quiz)
+## 📁 Course Structure
 
+### 📚 Course Materials
+- **Website**: Interactive course website with detailed explanations and examples
+- **Sample Programs**: Complete code examples for each week's topics
+- **Lab Exercises**: Hands-on practice exercises with solutions
+- **PDF Documents**: Comprehensive lab exercise guides
 
+### 📅 Weekly Topics
 
-## How to Use
+| Week | Topic | Key Concepts |
+|------|-------|--------------|
+| 10 | Classes and Objects | Class definition, constructors, destructors, member functions |
+| 15 | Advanced Classes | Inheritance, polymorphism, abstract classes, operator overloading |
+| 16 | Data Structures | Arrays, linked lists, stacks, queues, sorting algorithms |
+| 17 | Expression Evaluation | Infix to postfix conversion, postfix evaluation, stack-based algorithms |
+| 18 | Trees and Graphs | Binary trees, tree traversal, graph representation, graph algorithms |
+| 19 | Advanced Algorithms | Advanced sorting, searching techniques, algorithm analysis |
+| 20 | File I/O | File streams, data persistence, error handling |
+| 21 | Templates | Function templates, class templates, generic programming |
+| 22 | STL | Standard Template Library, containers, algorithms, iterators |
+| 23 | Review & Projects | Course review, final projects, best practices |
 
-### 🌐 Opening the Website
-1. Open `index.html` in any modern web browser
-2. Navigate through different weeks using the navigation menu
-3. Click on code examples to copy them
-4. Take the interactive quiz to test your knowledge
+## 🚀 Getting Started
 
+### Prerequisites
+- Basic understanding of programming concepts
+- Familiarity with any programming language is helpful but not required
 
+### Development Environment Setup
 
-### 📝 Quiz Features
-- 10 multiple-choice questions
-- Immediate feedback with explanations
-- Score tracking and percentage calculation
-- Retake functionality
+1. **Install a C++ Compiler**:
+   - **Windows**: Install Visual Studio Community Edition or MinGW
+   - **macOS**: Install Xcode Command Line Tools
+   - **Linux**: Install GCC (`sudo apt install g++`)
 
-## Content Coverage
+2. **Recommended IDEs**:
+   - Visual Studio Code with C++ extensions
+   - Code::Blocks
+   - Visual Studio
+   - CLion
 
-### Classes and Objects
-- Class declaration and implementation
-- Constructors and destructors
-- Access specifiers (public, private, protected)
-- Member functions and data members
-- Separation of specification and implementation
+3. **Verify Installation**:
+   ```bash
+   g++ --version
+   ```
 
-### Operator Overloading
-- Overloading arithmetic operators
-- Comparison operators
-- Copy constructors
-- Const correctness
+### Course Website
+Access the interactive course website by opening `website/index.html` in your web browser.
 
-### Inheritance
-- Single and multiple inheritance
-- Base and derived classes
-- Constructor chaining
-- Access control in inheritance
+## 📋 Assessment Structure
 
-### Polymorphism
-- Virtual functions
-- Pure virtual functions
-- Abstract classes
-- Dynamic binding
+| Component | Weight | Description |
+|-----------|--------|-------------|
+| Weekly Exercises | 40% | Hands-on programming exercises and lab work |
+| Mid-term Project | 30% | Implementation of a complete C++ application |
+| Final Examination | 30% | Comprehensive written and practical examination |
 
-### Templates
-- Function templates
-- Class templates
-- Template specialization
-- Generic programming
+## 📖 Required Materials
 
-### Exception Handling
-- try-catch blocks
-- Standard exceptions
-- Custom exception classes
-- Exception safety
+### Textbook
+"C++ Programming: From Problem Analysis to Program Design" by D.S. Malik
 
-### Data Structures
-- Linked lists (singly linked)
-- Stacks (LIFO)
-- Queues (FIFO)
-- Dynamic memory management
+### Online Resources
+- [C++ Reference](https://en.cppreference.com/)
+- [cplusplus.com](http://www.cplusplus.com/)
+- [LearnCpp.com](https://www.learncpp.com/)
 
-## Code Examples
-All code examples are:
-- ✅ Complete and compilable
-- ✅ Well-commented
-- ✅ Follow best practices
-- ✅ Include sample input/output
-- ✅ Demonstrate proper error handling
+## 🗂️ Directory Structure
 
-## Browser Compatibility
-- ✅ Chrome 80+
-- ✅ Firefox 75+
-- ✅ Safari 13+
-- ✅ Edge 80+
+```
+CSY2006_C++_Course/
+├── website/                    # Interactive course website
+│   ├── index.html             # Main course page
+│   ├── syllabus.html          # Course syllabus
+│   ├── code-library.html      # Complete code examples
+│   ├── styles.css             # Website styling
+│   ├── script.js              # Interactive functionality
+│   └── week*.html             # Individual week pages
+├── Week 10 sample programs/   # Code examples for Week 10
+├── Week 15 sample programs v1/
+├── Week 16 Sample Programs/
+├── Week 17 sample programs/
+├── Week 18 sample Programs/
+├── Week 19 Sample Programs/
+├── Week 20 Sample Programs/
+├── Week 21 Sample Programs/
+├── Week_22_Sample_Programs/
+├── Week_23_Sample_Programs/
+├── InfixtoPostFix/            # Expression evaluation examples
+├── PostFixEvaluation/         # Postfix evaluation examples
+├── *.pdf                      # Lab exercise documents
+└── README.md                  # This file
+```
 
-## Educational Use
-This website is designed for:
-- Computer Science students
-- C++ programming courses
-- Self-study and reference
-- Exam preparation
-- Coding practice
+## 💡 Tips for Success
 
-## Contributing
-To add new content or improve existing material:
-1. Edit the HTML file for new content
-2. Update CSS for styling changes
-3. Modify JavaScript for new interactive features
-4. Test across different browsers
+1. **Practice Regularly**: Complete all weekly exercises and lab work
+2. **Read Ahead**: Review the next week's material before class
+3. **Debug Systematically**: Learn to use debugging tools effectively
+4. **Code Comments**: Always comment your code for clarity
+5. **Version Control**: Use Git to track your code changes
+6. **Ask Questions**: Don't hesitate to ask for help when stuck
 
-## License
-This educational resource is created for academic purposes. Please respect copyright and attribution requirements when using or distributing this material.
+## 🆘 Getting Help
+
+- **Course Website**: Check the website for detailed explanations and examples
+- **Lab Documents**: Refer to the PDF lab exercises for additional practice
+- **Office Hours**: Attend instructor office hours for personalized help
+- **Discussion Forums**: Participate in course discussion forums
+
+## 📞 Contact Information
+
+- **Course Instructor**: [Instructor Name]
+- **Email**: [instructor.email@university.edu]
+- **Office Hours**: [Office hours schedule]
+- **Course Website**: [Course management system link]
+
+## 📜 Academic Integrity
+
+All work submitted must be your own. Plagiarism and cheating will result in academic penalties. When working on assignments, you may discuss concepts with classmates but must write your own code.
+
+## 🎓 Course Completion
+
+Upon successful completion of this course, you will receive [number] credits and be prepared to take advanced programming courses or pursue software development careers.
 
 ---
 
+**Happy Coding! 🚀**
 
+*Last updated: September 2025*</content>
+<parameter name="filePath">c:\Users\DEII\Downloads\C2\README.md
