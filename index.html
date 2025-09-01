@@ -8,21 +8,50 @@
 </head>
 <body>
     <header>
-        <h1>CSY2006 C++ Programming Course Notes</h1>
+        <div class="header-content">
+            <h1>CSY2006 C++ Programming Course Notes</h1>
+            <div class="header-controls">
+                <div class="search-container">
+                    <input type="text" id="search-input" placeholder="Search content..." class="search-input">
+                    <button class="search-btn">🔍</button>
+                </div>
+                <button id="theme-toggle" class="theme-toggle-btn" title="Toggle theme">
+                    <span class="theme-icon">🌙</span>
+                </button>
+            </div>
+        </div>
+        <div class="progress-container">
+            <div class="progress-bar" id="progress-bar">0%</div>
+        </div>
         <nav>
             <ul>
                 <li><a href="#home">Home</a></li>
+                <li><a href="syllabus.html">Syllabus</a></li>
                 <li><a href="code-library.html">Code Library</a></li>
-                <li><a href="week10.html">Week 10</a></li>
-                <li><a href="week15.html">Week 15</a></li>
-                <li><a href="week16.html">Week 16</a></li>
-                <li><a href="week17.html">Week 17</a></li>
-                <li><a href="week18.html">Week 18</a></li>
-                <li><a href="week19.html">Week 19</a></li>
-                <li><a href="week20.html">Week 20</a></li>
-                <li><a href="week21.html">Week 21</a></li>
-                <li><a href="week22.html">Week 22</a></li>
-                <li><a href="week23.html">Week 23</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle">Weeks <span class="dropdown-arrow">▼</span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="week10.html">Week 10: Classes & Objects</a></li>
+                        <li><a href="week15.html">Week 15: Advanced Classes</a></li>
+                        <li><a href="week16.html">Week 16: Data Structures</a></li>
+                        <li><a href="week17.html">Week 17: Expression Evaluation</a></li>
+                        <li><a href="week18.html">Week 18: Trees & Graphs</a></li>
+                        <li><a href="week19.html">Week 19: Advanced Algorithms</a></li>
+                        <li><a href="week20.html">Week 20: File I/O</a></li>
+                        <li><a href="week21.html">Week 21: Templates</a></li>
+                        <li><a href="week22.html">Week 22: STL</a></li>
+                        <li><a href="week23.html">Week 23: Review</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle">More <span class="dropdown-arrow">▼</span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#resources">Resources</a></li>
+                        <li><a href="#practice">Practice Exercises</a></li>
+                        <li><a href="#projects">Sample Projects</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </li>
             </ul>
         </nav>
     </header>
@@ -32,7 +61,8 @@
             <h2>Welcome to CSY2006 C++ Programming</h2>
             <p>This website contains comprehensive notes, sample programs, and practice exercises for each week of the course.</p>
             <div class="hero-buttons">
-                <a href="code-library.html" class="btn-primary">📚 Complete Code Library</a>
+                <a href="syllabus.html" class="btn-primary">📋 Course Syllabus</a>
+                <a href="code-library.html" class="btn-secondary">📚 Complete Code Library</a>
                 <a href="#weekly-content" class="btn-secondary">View Weekly Content</a>
             </div>
         </section>

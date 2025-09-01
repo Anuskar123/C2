@@ -1,6 +1,214 @@
 // Interactive functionality for the C++ course website
 
 document.addEventListener('DOMContentLoaded', function() {
+    // Theme toggle functionality
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeIcon = document.querySelector('.theme-icon');
+    const body = document.body;
+
+    // Check for saved theme preference or default to dark
+    const currentTheme = localStorage.getItem('theme') || 'dark';
+    setTheme(currentTheme);
+
+    if (themeToggle) {
+        themeToggle.addEventListener('click', function() {
+            const currentTheme = body.classList.contains('light-theme') ? 'dark' : 'light';
+            setTheme(currentTheme);
+            localStorage.setItem('theme', currentTheme);
+        });
+    }
+
+    function setTheme(theme) {
+        if (theme === 'light') {
+            body.classList.add('light-theme');
+            if (themeIcon) themeIcon.textContent = '☀️';
+        } else {
+            body.classList.remove('light-theme');
+            if (themeIcon) themeIcon.textContent = '🌙';
+        }
+    }
+
+    // Dropdown menu functionality
+    const dropdowns = document.querySelectorAll('.dropdown');
+
+    dropdowns.forEach(dropdown => {
+        const toggle = dropdown.querySelector('.dropdown-toggle');
+        const menu = dropdown.querySelector('.dropdown-menu');
+
+        // Toggle dropdown on click
+        toggle.addEventListener('click', function(e) {
+            e.preventDefault();
+
+            // Close other dropdowns
+            dropdowns.forEach(otherDropdown => {
+                if (otherDropdown !== dropdown) {
+                    otherDropdown.classList.remove('active');
+                }
+            });
+
+            // Toggle current dropdown
+            dropdown.classList.toggle('active');
+        });
+    });
+
+    // Close dropdowns when clicking outside
+    document.addEventListener('click', function(e) {
+        if (!e.target.closest('.dropdown')) {
+            dropdowns.forEach(dropdown => {
+                dropdown.classList.remove('active');
+            });
+        }
+    });
+
+    // Close dropdowns on escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            dropdowns.forEach(dropdown => {
+                dropdown.classList.remove('active');
+            });
+        }
+    });
+
+    // Add active class for CSS styling
+    dropdowns.forEach(dropdown => {
+        dropdown.addEventListener('mouseenter', function() {
+            if (window.innerWidth > 768) { // Only on desktop
+                this.classList.add('active');
+            }
+        });
+
+        dropdown.addEventListener('mouseleave', function() {
+            if (window.innerWidth > 768) { // Only on desktop
+                this.classList.remove('active');
+            }
+        });
+    });
+
+    // Navigation hide/show on scroll
+    let lastScrollTop = 0;
+    const nav = document.querySelector('nav');
+    const header = document.querySelector('header');
+    const headerContent = document.querySelector('.header-content') || document.querySelector('header h1');
+    const progressContainer = document.querySelector('.progress-container');
+    const scrollThreshold = 100; // Minimum scroll distance before hiding/showing
+
+    // Initialize navigation and header content as visible
+    nav.classList.add('nav-visible');
+    header.classList.add('nav-visible');
+    header.classList.add('header-bg-visible');
+    if (headerContent) {
+        if (headerContent.classList.contains('header-content')) {
+            headerContent.classList.add('header-visible');
+        } else {
+            // For pages with direct h1, add a class to the h1
+            headerContent.classList.add('header-title-visible');
+        }
+    }
+    if (progressContainer) {
+        progressContainer.classList.add('progress-visible');
+    }
+
+    window.addEventListener('scroll', function() {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+        // Only apply effect after scrolling past threshold
+        if (Math.abs(lastScrollTop - scrollTop) <= scrollThreshold) {
+            return;
+        }
+
+        if (scrollTop > lastScrollTop && scrollTop > 100) {
+            // Scrolling down - hide navigation and header content
+            nav.classList.add('nav-hidden');
+            nav.classList.remove('nav-visible');
+            header.classList.add('nav-hidden');
+            header.classList.remove('nav-visible');
+            header.classList.add('header-bg-hidden');
+            header.classList.remove('header-bg-visible');
+            if (headerContent) {
+                if (headerContent.classList.contains('header-content')) {
+                    headerContent.classList.add('header-hidden');
+                    headerContent.classList.remove('header-visible');
+                } else {
+                    headerContent.classList.add('header-title-hidden');
+                    headerContent.classList.remove('header-title-visible');
+                }
+            }
+            if (progressContainer) {
+                progressContainer.classList.add('progress-hidden');
+                progressContainer.classList.remove('progress-visible');
+            }
+        } else {
+            // Scrolling up - show navigation and header content
+            nav.classList.add('nav-visible');
+            nav.classList.remove('nav-hidden');
+            header.classList.add('nav-visible');
+            header.classList.remove('nav-hidden');
+            header.classList.add('header-bg-visible');
+            header.classList.remove('header-bg-hidden');
+            if (headerContent) {
+                if (headerContent.classList.contains('header-content')) {
+                    headerContent.classList.add('header-visible');
+                    headerContent.classList.remove('header-hidden');
+                } else {
+                    headerContent.classList.add('header-title-visible');
+                    headerContent.classList.remove('header-title-hidden');
+                }
+            }
+            if (progressContainer) {
+                progressContainer.classList.add('progress-visible');
+                progressContainer.classList.remove('progress-hidden');
+            }
+        }
+
+        // Always show navigation and header content at the top of the page
+        if (scrollTop <= 50) {
+            nav.classList.add('nav-visible');
+            nav.classList.remove('nav-hidden');
+            header.classList.add('nav-visible');
+            header.classList.remove('nav-hidden');
+            header.classList.add('header-bg-visible');
+            header.classList.remove('header-bg-hidden');
+            if (headerContent) {
+                if (headerContent.classList.contains('header-content')) {
+                    headerContent.classList.add('header-visible');
+                    headerContent.classList.remove('header-hidden');
+                } else {
+                    headerContent.classList.add('header-title-visible');
+                    headerContent.classList.remove('header-title-hidden');
+                }
+            }
+            if (progressContainer) {
+                progressContainer.classList.add('progress-visible');
+                progressContainer.classList.remove('progress-hidden');
+            }
+        }
+
+        lastScrollTop = scrollTop;
+    });
+
+    // Show navigation and header content when mouse hovers over header area
+    header.addEventListener('mouseenter', function() {
+        nav.classList.add('nav-visible');
+        nav.classList.remove('nav-hidden');
+        header.classList.add('nav-visible');
+        header.classList.remove('nav-hidden');
+        header.classList.add('header-bg-visible');
+        header.classList.remove('header-bg-hidden');
+        if (headerContent) {
+            if (headerContent.classList.contains('header-content')) {
+                headerContent.classList.add('header-visible');
+                headerContent.classList.remove('header-hidden');
+            } else {
+                headerContent.classList.add('header-title-visible');
+                headerContent.classList.remove('header-title-hidden');
+            }
+        }
+        if (progressContainer) {
+            progressContainer.classList.add('progress-visible');
+            progressContainer.classList.remove('progress-hidden');
+        }
+    });
+
     // Toggle Q&A answers
     const questions = document.querySelectorAll('.question');
 
@@ -123,22 +331,54 @@ document.addEventListener('DOMContentLoaded', function() {
     `;
     document.head.appendChild(style);
 
-    // Search functionality (if search input exists)
-    const searchInput = document.querySelector('#search-input');
+    // Search functionality
+    const searchInput = document.getElementById('search-input');
+    const searchBtn = document.querySelector('.search-btn');
+
     if (searchInput) {
         searchInput.addEventListener('input', function() {
-            const query = this.value.toLowerCase();
-            const searchableItems = document.querySelectorAll('.searchable');
-
-            searchableItems.forEach(item => {
-                const text = item.textContent.toLowerCase();
-                if (text.includes(query)) {
-                    item.style.display = 'block';
-                } else {
-                    item.style.display = 'none';
-                }
-            });
+            performSearch(this.value);
         });
+
+        searchInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                performSearch(this.value);
+            }
+        });
+    }
+
+    if (searchBtn) {
+        searchBtn.addEventListener('click', function() {
+            const searchTerm = searchInput ? searchInput.value : '';
+            performSearch(searchTerm);
+        });
+    }
+
+    function performSearch(query) {
+        const searchableElements = document.querySelectorAll('h1, h2, h3, p, li');
+        const lowerQuery = query.toLowerCase();
+
+        // Remove previous highlights
+        document.querySelectorAll('.search-highlight').forEach(el => {
+            el.outerHTML = el.innerHTML;
+        });
+
+        if (query.length < 2) return;
+
+        searchableElements.forEach(element => {
+            if (element.textContent.toLowerCase().includes(lowerQuery)) {
+                element.innerHTML = element.innerHTML.replace(
+                    new RegExp(`(${query})`, 'gi'),
+                    '<mark class="search-highlight">$1</mark>'
+                );
+            }
+        });
+
+        // Scroll to first result
+        const firstResult = document.querySelector('.search-highlight');
+        if (firstResult) {
+            firstResult.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
     }
 
     // Initialize any collapsible content
