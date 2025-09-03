@@ -716,6 +716,454 @@ Node* buildBST(vector&lt;int&gt;&amp; arr, int start, int end) {
                         </div>
                     </div>
                 </section>
+
+                <section id="exceptions-templates">
+                    <h3>Exceptions and Templates Practice Questions</h3>
+
+                    <!-- Question 21: Find the Output -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 21: What will be the output of this exception example?</h4>
+                            <div class="code-block">
+                                <pre>double divide(int numerator, int denominator) {
+    if (denominator == 0) {
+        throw string("ERROR: Cannot divide by zero.\n");
+    }
+    return static_cast&lt;double&gt;(numerator) / denominator;
+}
+
+int main() {
+    try {
+        cout &lt;&lt; "Result: " &lt;&lt; divide(10, 0) &lt;&lt; endl;
+    }
+    catch (string exceptionString) {
+        cout &lt;&lt; exceptionString;
+    }
+    cout &lt;&lt; "End of the program.\n";
+    return 0;
+}</pre>
+                            </div>
+                            <span class="question-type">Type: Find the Output</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Output:</strong></p>
+                            <pre>ERROR: Cannot divide by zero.
+End of the program.</pre>
+                            <p><strong>Explanation:</strong> When division by zero occurs, the exception is thrown and caught by the catch block. Program continues after handling the exception.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 22: Complete the Code -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 22: Complete the Rectangle class with exception handling:</h4>
+                            <div class="code-block">
+                                <pre>class Rectangle {
+private:
+    double width, length;
+public:
+    class NegativeSize { };
+    
+    Rectangle() { width = 0.0; length = 0.0; }
+    
+    void setWidth(double w) {
+        // Complete with exception handling
+    }
+    
+    void setLength(double len) {
+        // Complete with exception handling
+    }
+    
+    double getArea() const { return width * length; }
+};</pre>
+                            </div>
+                            <span class="question-type">Type: Complete the Code</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Completed Code:</strong></p>
+                            <div class="code-block">
+                                <pre>    void setWidth(double w) {
+        if (w &gt;= 0)
+            width = w;
+        else
+            throw NegativeSize();
+    }
+    
+    void setLength(double len) {
+        if (len &gt;= 0)
+            length = len;
+        else
+            throw NegativeSize();
+    }</pre>
+                            </div>
+                            <p><strong>Explanation:</strong> Check for negative values and throw custom exception class if invalid dimensions are provided.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 23: Write a Function -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 23: Write a function with multiple exception types:</h4>
+                            <div class="code-block">
+                                <pre>class Calculator {
+public:
+    class DivideByZero { };
+    class InvalidOperation { };
+    
+    double divide(double a, double b) {
+        // Complete with exception handling
+    }
+    
+    double sqrt(double x) {
+        // Complete with exception handling
+    }
+};</pre>
+                            </div>
+                            <span class="question-type">Type: Write a Function</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Solution:</strong></p>
+                            <div class="code-block">
+                                <pre>    double divide(double a, double b) {
+        if (b == 0) {
+            throw DivideByZero();
+        }
+        return a / b;
+    }
+    
+    double sqrt(double x) {
+        if (x &lt; 0) {
+            throw InvalidOperation();
+        }
+        return std::sqrt(x);
+    }</pre>
+                            </div>
+                            <p><strong>Explanation:</strong> Different exception types allow specific error handling for different error conditions.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 24: Find the Error -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 24: Find the error in this exception handling:</h4>
+                            <div class="code-block">
+                                <pre>try {
+    int* arr = new int[10];
+    // Some code that might throw
+    delete[] arr;
+}
+catch(...) {
+    cout &lt;&lt; "Error occurred" &lt;&lt; endl;
+    // Memory leak! arr not deleted if exception thrown
+}</pre>
+                            </div>
+                            <span class="question-type">Type: Find the Error</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Error:</strong> Memory leak - dynamically allocated memory not freed if exception occurs</p>
+                            <p><strong>Explanation:</strong> When an exception is thrown, the code after the exception point is skipped, including cleanup code.</p>
+                            <p><strong>Fix:</strong> Use RAII (Resource Acquisition Is Initialization) or smart pointers, or put cleanup in catch block.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 25: Find the Output -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 25: What will be the output of this exception propagation?</h4>
+                            <div class="code-block">
+                                <pre>void func3() {
+    throw runtime_error("Error in func3");
+}
+
+void func2() {
+    func3();
+}
+
+void func1() {
+    try {
+        func2();
+    }
+    catch (const runtime_error&amp; e) {
+        cout &lt;&lt; "Caught: " &lt;&lt; e.what() &lt;&lt; endl;
+    }
+}
+
+int main() {
+    func1();
+    cout &lt;&lt; "Program continues" &lt;&lt; endl;
+    return 0;
+}</pre>
+                            </div>
+                            <span class="question-type">Type: Find the Output</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Output:</strong></p>
+                            <pre>Caught: Error in func3
+Program continues</pre>
+                            <p><strong>Explanation:</strong> Exceptions propagate up the call stack until caught. The program continues after the exception is handled.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 26: Complete the Code -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 26: Complete the template class SimpleVector:</h4>
+                            <div class="code-block">
+                                <pre>template &lt;class T&gt;
+class SimpleVector {
+private:
+    T* array;
+    int size;
+public:
+    SimpleVector(int s) {
+        // Complete constructor
+    }
+    
+    ~SimpleVector() {
+        // Complete destructor
+    }
+    
+    T&amp; operator[](int index) {
+        // Complete with bounds checking
+    }
+};</pre>
+                            </div>
+                            <span class="question-type">Type: Complete the Code</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Completed Code:</strong></p>
+                            <div class="code-block">
+                                <pre>    SimpleVector(int s) {
+        size = s;
+        array = new T[size];
+    }
+    
+    ~SimpleVector() {
+        delete[] array;
+    }
+    
+    T&amp; operator[](int index) {
+        if (index &lt; 0 || index &gt;= size) {
+            throw out_of_range("Index out of bounds");
+        }
+        return array[index];
+    }</pre>
+                            </div>
+                            <p><strong>Explanation:</strong> Template class that can work with any data type, with proper memory management and bounds checking.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 27: Write a Function -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 27: Write a template function to find maximum:</h4>
+                            <div class="code-block">
+                                <pre>template &lt;typename T&gt;
+T findMax(T arr[], int size) {
+    // Complete the template function
+}
+
+int main() {
+    int intArr[] = {1, 5, 3, 9, 2};
+    double doubleArr[] = {1.1, 5.5, 3.3, 9.9, 2.2};
+    
+    cout &lt;&lt; findMax(intArr, 5) &lt;&lt; endl;
+    cout &lt;&lt; findMax(doubleArr, 5) &lt;&lt; endl;
+    return 0;
+}</pre>
+                            </div>
+                            <span class="question-type">Type: Write a Function</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Solution:</strong></p>
+                            <div class="code-block">
+                                <pre>template &lt;typename T&gt;
+T findMax(T arr[], int size) {
+    if (size &lt;= 0) {
+        throw invalid_argument("Array size must be positive");
+    }
+    
+    T maxVal = arr[0];
+    for (int i = 1; i &lt; size; i++) {
+        if (arr[i] &gt; maxVal) {
+            maxVal = arr[i];
+        }
+    }
+    return maxVal;
+}</pre>
+                            </div>
+                            <p><strong>Explanation:</strong> Generic function that works with any comparable type, includes error checking for empty arrays.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 28: Find the Error -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 28: Find the error in this template usage:</h4>
+                            <div class="code-block">
+                                <pre>template &lt;typename T&gt;
+class Stack {
+private:
+    T* data;
+    int capacity;
+    int top;
+public:
+    Stack(int cap) {
+        capacity = cap;
+        data = new T[capacity];
+        top = -1;
+    }
+    
+    void push(T item) {
+        if (top &gt;= capacity - 1) {
+            throw overflow_error("Stack overflow");
+        }
+        data[++top] = item;
+    }
+    
+    T pop() {
+        if (top &lt; 0) {
+            throw underflow_error("Stack underflow");
+        }
+        return data[top--];
+    }
+};
+
+int main() {
+    Stack&lt;int&gt; s(5);
+    s.push(1);
+    s.push(2);
+    cout &lt;&lt; s.pop() &lt;&lt; endl;
+    cout &lt;&lt; s.pop() &lt;&lt; endl;
+    cout &lt;&lt; s.pop() &lt;&lt; endl;  // Error!
+    return 0;
+}</pre>
+                            </div>
+                            <span class="question-type">Type: Find the Error</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Error:</strong> Attempting to pop from empty stack</p>
+                            <p><strong>Explanation:</strong> After popping 2 elements, the stack is empty. Third pop() will throw underflow_error.</p>
+                            <p><strong>Fix:</strong> Check if stack is empty before popping, or handle the exception.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 29: Find the Output -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 29: What will be the output of this template specialization?</h4>
+                            <div class="code-block">
+                                <pre>template &lt;typename T&gt;
+void printType(T value) {
+    cout &lt;&lt; "Generic type" &lt;&lt; endl;
+}
+
+template &lt;&gt;
+void printType&lt;int&gt;(int value) {
+    cout &lt;&lt; "Integer: " &lt;&lt; value &lt;&lt; endl;
+}
+
+template &lt;&gt;
+void printType&lt;double&gt;(double value) {
+    cout &lt;&lt; "Double: " &lt;&lt; value &lt;&lt; endl;
+}
+
+int main() {
+    printType(5);
+    printType(3.14);
+    printType("hello");
+    return 0;
+}</pre>
+                            </div>
+                            <span class="question-type">Type: Find the Output</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Output:</strong></p>
+                            <pre>Integer: 5
+Double: 3.14
+Generic type</pre>
+                            <p><strong>Explanation:</strong> Template specialization allows different behavior for specific types. Generic version used for types without specialization.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 30: Complete the Code -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 30: Complete the exception-safe template class:</h4>
+                            <div class="code-block">
+                                <pre>template &lt;typename T&gt;
+class SafeArray {
+private:
+    T* data;
+    size_t size;
+public:
+    SafeArray(size_t s) : size(s) {
+        // Complete with exception safety
+    }
+    
+    ~SafeArray() {
+        // Complete destructor
+    }
+    
+    T&amp; at(size_t index) {
+        // Complete with bounds checking
+    }
+    
+    SafeArray(const SafeArray&amp; other) {
+        // Complete copy constructor
+    }
+    
+    SafeArray&amp; operator=(const SafeArray&amp; other) {
+        // Complete assignment operator
+    }
+};</pre>
+                            </div>
+                            <span class="question-type">Type: Complete the Code</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Completed Code:</strong></p>
+                            <div class="code-block">
+                                <pre>    SafeArray(size_t s) : size(s) {
+        if (s == 0) {
+            throw invalid_argument("Size must be positive");
+        }
+        data = new T[size];
+    }
+    
+    ~SafeArray() {
+        delete[] data;
+    }
+    
+    T&amp; at(size_t index) {
+        if (index &gt;= size) {
+            throw out_of_range("Index out of bounds");
+        }
+        return data[index];
+    }
+    
+    SafeArray(const SafeArray&amp; other) : size(other.size) {
+        data = new T[size];
+        for (size_t i = 0; i &lt; size; i++) {
+            data[i] = other.data[i];
+        }
+    }
+    
+    SafeArray&amp; operator=(const SafeArray&amp; other) {
+        if (this != &amp;other) {
+            delete[] data;
+            size = other.size;
+            data = new T[size];
+            for (size_t i = 0; i &lt; size; i++) {
+                data[i] = other.data[i];
+            }
+        }
+        return *this;
+    }</pre>
+                            </div>
+                            <p><strong>Explanation:</strong> Exception-safe template with proper resource management, bounds checking, and copy semantics.</p>
+                        </div>
+                    </div>
+                </section>
             </div>
 
             <div class="sidebar">
@@ -723,7 +1171,8 @@ Node* buildBST(vector&lt;int&gt;&amp; arr, int start, int end) {
                 <ul>
                     <li><a href="#overview">Overview</a></li>
                     <li><a href="#binary-tree">Binary Tree</a></li>
-                    <li><a href="#qa-section">Q&A</a></li>
+                    <li><a href="#qa-section">Q&A (20)</a></li>
+                    <li><a href="#exceptions-templates">Exceptions & Templates</a></li>
                 </ul>
             </div>
         </div>

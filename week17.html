@@ -147,7 +147,7 @@
                 </section>
 
                 <section id="qa-section">
-                    <h3>Practice Questions & Answers (20 Questions)</h3>
+                    <h3>Practice Questions & Answers (35 Questions)</h3>
 
                     <!-- Question 1: Find the Error -->
                     <div class="qa-section">
@@ -1000,6 +1000,306 @@ private:
                         </div>
                     </div>
                 </section>
+
+                <section id="inheritance-polymorphism">
+                    <h3>Inheritance and Polymorphism Practice Questions</h3>
+
+                    <!-- Question 29: Find the Output -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 29: What will be the output of this inheritance example?</h4>
+                            <div class="code-block">
+                                <pre>class A {
+public:
+    void print() {
+        cout &lt;&lt; "Hello" &lt;&lt; endl;
+    }
+};
+
+class B: public A {
+public:
+    void print() {
+        cout &lt;&lt; "Goodbye" &lt;&lt; endl;
+    }
+};
+
+void display(A &obj) {
+    obj.print();
+}
+
+int main() {
+    A a;
+    B b;
+    display(a);
+    display(b);
+    return 0;
+}</pre>
+                            </div>
+                            <span class="question-type">Type: Find the Output</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Output:</strong></p>
+                            <pre>Hello
+Hello</pre>
+                            <p><strong>Explanation:</strong> Without virtual functions, C++ uses static binding. The function called depends on the reference type (A&), not the actual object type.</p>
+                            <p><strong>To get dynamic binding:</strong> Declare <code>print()</code> as <code>virtual</code> in the base class.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 30: Complete the Code -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 30: Complete the GradedActivity class:</h4>
+                            <div class="code-block">
+                                <pre>class GradedActivity {
+private:
+    double score;
+public:
+    GradedActivity() { score = 0.0; }
+    GradedActivity(double s) { score = s; }
+    void setScore(double s) { score = s; }
+    double getScore() const { return score; }
+    // Complete the getLetterGrade function
+};</pre>
+                            </div>
+                            <span class="question-type">Type: Complete the Code</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Completed Code:</strong></p>
+                            <div class="code-block">
+                                <pre>char getLetterGrade() const {
+    if (score > 89) return 'A';
+    else if (score > 79) return 'B';
+    else if (score > 69) return 'C';
+    else if (score > 59) return 'D';
+    else return 'F';
+}</pre>
+                            </div>
+                            <p><strong>Explanation:</strong> Standard grading scale: A (90-100), B (80-89), C (70-79), D (60-69), F (0-59).</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 31: Write a Function -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 31: Write a derived FinalExam class:</h4>
+                            <div class="code-block">
+                                <pre>class FinalExam : public GradedActivity {
+private:
+    int numQuestions;
+    double pointsEach;
+    int numMissed;
+public:
+    FinalExam(int questions, int missed) {
+        // Complete the constructor
+    }
+    // Complete the set function
+};</pre>
+                            </div>
+                            <span class="question-type">Type: Write a Function</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Solution:</strong></p>
+                            <div class="code-block">
+                                <pre>FinalExam(int questions, int missed) {
+    set(questions, missed);
+}
+
+void set(int questions, int missed) {
+    numQuestions = questions;
+    numMissed = missed;
+    pointsEach = 100.0 / numQuestions;
+    double numericScore = 100.0 - (missed * pointsEach);
+    setScore(numericScore);
+}</pre>
+                            </div>
+                            <p><strong>Explanation:</strong> Calculate points per question, subtract missed points from 100, call inherited setScore().</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 32: Find the Error -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 32: Find the error in this virtual function example:</h4>
+                            <div class="code-block">
+                                <pre>class Employee {
+    string name;
+public:
+    Employee(string n) : name(n) {}
+    virtual void print() const {
+        cout &lt;&lt; name &lt;&lt; " ";
+    }
+};
+
+class Manager : public Employee {
+    short level;
+public:
+    Manager(string n, short lvl) : Employee(n), level(lvl) {}
+    void print() const {
+        Employee::print();
+        cout &lt;&lt; "level: " &lt;&lt; level;
+    }
+};
+
+int main() {
+    vector&lt;Employee*&gt; empList;
+    empList.push_back(new Employee("John"));
+    empList.push_back(new Manager("Jane", 2));
+    
+    for(auto p : empList) {
+        p-&gt;print();
+        cout &lt;&lt; endl;
+    }
+    // Missing cleanup!
+}</pre>
+                            </div>
+                            <span class="question-type">Type: Find the Error</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Error:</strong> Memory leak - objects created with <code>new</code> are never deleted</p>
+                            <p><strong>Explanation:</strong> When using pointers to base class, must delete objects to prevent memory leaks.</p>
+                            <p><strong>Fix:</strong> Add loop to delete objects: <code>for(auto p : empList) delete p;</code></p>
+                        </div>
+                    </div>
+
+                    <!-- Question 33: Find the Output -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 33: What will be the output of this polymorphism example?</h4>
+                            <div class="code-block">
+                                <pre>class Shape {
+public:
+    virtual void draw() const { cout &lt;&lt; "Shape" &lt;&lt; endl; }
+};
+
+class Circle : public Shape {
+public:
+    void draw() const { cout &lt;&lt; "Circle" &lt;&lt; endl; }
+};
+
+class Square : public Shape {
+public:
+    void draw() const { cout &lt;&lt; "Square" &lt;&lt; endl; }
+};
+
+int main() {
+    Shape* shapes[3];
+    shapes[0] = new Circle();
+    shapes[1] = new Square();
+    shapes[2] = new Shape();
+    
+    for(int i = 0; i &lt; 3; i++) {
+        shapes[i]-&gt;draw();
+    }
+    return 0;
+}</pre>
+                            </div>
+                            <span class="question-type">Type: Find the Output</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Output:</strong></p>
+                            <pre>Circle
+Square
+Shape</pre>
+                            <p><strong>Explanation:</strong> Virtual functions enable dynamic binding. The correct <code>draw()</code> is called based on the actual object type, not the pointer type.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 34: Complete the Code -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 34: Complete the destructor for polymorphism:</h4>
+                            <div class="code-block">
+                                <pre>class Base {
+public:
+    Base() { cout &lt;&lt; "Base constructor" &lt;&lt; endl; }
+    // Complete the virtual destructor
+};
+
+class Derived : public Base {
+public:
+    Derived() { cout &lt;&lt; "Derived constructor" &lt;&lt; endl; }
+    // Complete the destructor
+};
+
+int main() {
+    Base* ptr = new Derived();
+    delete ptr;  // Should call both destructors
+    return 0;
+}</pre>
+                            </div>
+                            <span class="question-type">Type: Complete the Code</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Completed Code:</strong></p>
+                            <div class="code-block">
+                                <pre>class Base {
+public:
+    Base() { cout &lt;&lt; "Base constructor" &lt;&lt; endl; }
+    virtual ~Base() { cout &lt;&lt; "Base destructor" &lt;&lt; endl; }
+};
+
+class Derived : public Base {
+public:
+    Derived() { cout &lt;&lt; "Derived constructor" &lt;&lt; endl; }
+    ~Derived() { cout &lt;&lt; "Derived destructor" &lt;&lt; endl; }
+};</pre>
+                            </div>
+                            <p><strong>Explanation:</strong> Virtual destructors ensure proper cleanup when deleting derived objects through base pointers.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 35: Write a Function -->
+                    <div class="qa-section">
+                        <div class="question" tabindex="0">
+                            <h4>Question 35: Write a function to demonstrate function overriding:</h4>
+                            <div class="code-block">
+                                <pre>class Animal {
+public:
+    virtual void makeSound() const {
+        cout &lt;&lt; "Some animal sound" &lt;&lt; endl;
+    }
+};
+
+class Dog : public Animal {
+public:
+    // Complete the overriding function
+};
+
+class Cat : public Animal {
+public:
+    // Complete the overriding function
+};
+
+void animalSounds(const Animal* animals[], int size) {
+    for(int i = 0; i &lt; size; i++) {
+        animals[i]-&gt;makeSound();
+    }
+}</pre>
+                            </div>
+                            <span class="question-type">Type: Write a Function</span>
+                        </div>
+                        <div class="answer">
+                            <p><strong>Solution:</strong></p>
+                            <div class="code-block">
+                                <pre>class Dog : public Animal {
+public:
+    void makeSound() const override {
+        cout &lt;&lt; "Woof!" &lt;&lt; endl;
+    }
+};
+
+class Cat : public Animal {
+public:
+    void makeSound() const override {
+        cout &lt;&lt; "Meow!" &lt;&lt; endl;
+    }
+};</pre>
+                            </div>
+                            <p><strong>Explanation:</strong> Function overriding allows derived classes to provide specific implementations of inherited virtual functions.</p>
+                        </div>
+                    </div>
+                </section>
             </div>
 
             <div class="sidebar">
@@ -1007,7 +1307,8 @@ private:
                 <ul>
                     <li><a href="#overview">Overview</a></li>
                     <li><a href="#infix-postfix">Infix to Postfix</a></li>
-                    <li><a href="#qa-section">Practice Questions (28)</a></li>
+                    <li><a href="#qa-section">Practice Questions (35)</a></li>
+                    <li><a href="#inheritance-polymorphism">Inheritance & Polymorphism</a></li>
                 </ul>
 
                 <h4>Question Types</h4>
