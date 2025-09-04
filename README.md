@@ -64,6 +64,14 @@ By the end of this course, you will be able to:
 ### Course Website
 Access the interactive course website by opening `website/index.html` in your web browser.
 
+**Website Features:**
+- **Interactive Navigation**: Easy navigation between all course materials
+- **Code Library**: Complete collection of sample programs and examples
+- **MCQs & Practice**: 110+ multiple choice questions covering all course topics
+- **Weekly Content**: Detailed explanations for each week's material
+- **Search Functionality**: Find content quickly with the built-in search
+- **Responsive Design**: Works on desktop, tablet, and mobile devices
+
 ## 📋 Assessment Structure
 
 | Component | Weight | Description |

@@ -1,0 +1,1396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MCQs & Practice - CSY2006 C++ Programming</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .mcq-section { margin-bottom: 2rem; }
+        .mcq-question { 
+            margin: 1rem 0; 
+            padding: 1rem; 
+            background: #1a1a1a; 
+            border-radius: 8px; 
+            border: 1px solid #333;
+            color: #ffffff;
+        }
+        .mcq-options { margin-left: 1rem; }
+        .mcq-option { 
+            margin: 0.5rem 0; 
+            color: #e0e0e0;
+        }
+        .mcq-answer { 
+            margin-top: 0.5rem; 
+            font-weight: bold; 
+            color: #4CAF50;
+            background: #2a2a2a;
+            padding: 0.5rem;
+            border-radius: 4px;
+        }
+        .topic-nav { 
+            background: #1a1a1a; 
+            padding: 1rem; 
+            margin-bottom: 2rem; 
+            border-radius: 8px; 
+            border: 1px solid #333;
+        }
+        .topic-nav a { 
+            margin: 0 1rem; 
+            text-decoration: none; 
+            color: #4CAF50; 
+        }
+        .topic-nav a:hover { 
+            text-decoration: underline; 
+            color: #66BB6A;
+        }
+        .resources-section { 
+            background: #1a1a1a; 
+            padding: 1rem; 
+            margin: 2rem 0; 
+            border-radius: 8px; 
+            border: 1px solid #333;
+            color: #ffffff;
+        }
+        .resources-section h3 {
+            color: #4CAF50;
+        }
+        .resources-section a {
+            color: #66BB6A;
+        }
+        .resources-section a:hover {
+            color: #81C784;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>CSY2006 C++ Programming Course Notes</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="syllabus.html">Syllabus</a></li>
+                <li><a href="code-library.html">Code Library</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle">Weeks <span class="dropdown-arrow">▼</span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="week10.html">Week 10: Classes & Objects</a></li>
+                        <li><a href="week15.html">Week 15: Advanced Classes</a></li>
+                        <li><a href="week16.html">Week 16: Data Structures</a></li>
+                        <li><a href="week17.html">Week 17: Expression Evaluation</a></li>
+                        <li><a href="week18.html">Week 18: Trees & Graphs</a></li>
+                        <li><a href="week19.html">Week 19: Advanced Algorithms</a></li>
+                        <li><a href="week20.html">Week 20: File I/O</a></li>
+                        <li><a href="week21.html">Week 21: Templates</a></li>
+                        <li><a href="week22.html">Week 22: STL</a></li>
+                        <li><a href="week23.html">Week 23: Review</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle">More <span class="dropdown-arrow">▼</span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="mcqs.html">MCQs & Practice</a></li>
+                        <li><a href="#resources">Resources</a></li>
+                        <li><a href="#practice">Practice Exercises</a></li>
+                        <li><a href="#projects">Sample Projects</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h2>Multiple Choice Questions & Practice</h2>
+            <p>Test your knowledge with 100+ MCQs covering all course topics</p>
+        </section>
+
+        <div class="topic-nav">
+            <strong>Jump to Topic:</strong>
+            <a href="#classes-objects">Classes & Objects</a>
+            <a href="#inheritance">Inheritance</a>
+            <a href="#data-structures">Data Structures</a>
+            <a href="#expression-eval">Expression Evaluation</a>
+            <a href="#trees-graphs">Trees & Graphs</a>
+            <a href="#algorithms">Algorithms</a>
+            <a href="#file-io">File I/O</a>
+            <a href="#templates">Templates</a>
+            <a href="#stl">STL</a>
+            <a href="#mixed">Mixed Questions</a>
+        </div>
+
+        <div class="resources-section">
+            <h3>📚 Related Resources</h3>
+            <ul>
+                <li><a href="code-library.html">Complete Code Library</a> - Sample programs for all topics</li>
+                <li><a href="week16.html">Week 16: Data Structures</a> - 31 practice questions</li>
+                <li><a href="week17.html">Week 17: Expression Evaluation</a> - 28 practice questions</li>
+                <li><strong>Lab Exercises PDFs:</strong> Available in course materials</li>
+                <li><strong>Weekly PDFs:</strong> Download comprehensive notes for each week</li>
+            </ul>
+        </div>
+
+        <!-- Classes & Objects MCQs -->
+        <section id="classes-objects" class="mcq-section">
+            <h3>Classes & Objects (Questions 1-15)</h3>
+            
+            <div class="mcq-question">
+                <p><strong>1.</strong> What is the correct syntax to declare a class in C++?</p>
+                <div class="mcq-options">
+                    <div class="mcq-option">a) class MyClass {};</div>
+                    <div class="mcq-option">b) class MyClass;</div>
+                    <div class="mcq-option">c) MyClass class {};</div>
+                    <div class="mcq-option">d) declare class MyClass;</div>
+                </div>
+                <div class="mcq-answer">Answer: a) class MyClass {};</div>
+            </div>
+
+            <div class="mcq-question">
+                <p><strong>2.</strong> Which of the following is NOT a valid access specifier in C++?</p>
+                <div class="mcq-options">
+                    <div class="mcq-option">a) public</div>
+                    <div class="mcq-option">b) private</div>
+                    <div class="mcq-option">c) protected</div>
+                    <div class="mcq-option">d) internal</div>
+                </div>
+                <div class="mcq-answer">Answer: d) internal</div>
+            </div>
+
+            <div class="mcq-question">
+                <p><strong>3.</strong> What is the purpose of a constructor in C++?</p>
+                <div class="mcq-options">
+                    <div class="mcq-option">a) To destroy objects</div>
+                    <div class="mcq-option">b) To initialize objects</div>
+                    <div class="mcq-option">c) To copy objects</div>
+                    <div class="mcq-option">d) To compare objects</div>
+                </div>
+                <div class="mcq-answer">Answer: b) To initialize objects</div>
+            </div>
+
+            <div class="mcq-question">
+                <p><strong>4.</strong> Which operator is used to access members of a class through a pointer?</p>
+                <div class="mcq-options">
+                    <div class="mcq-option">a) .</div>
+                    <div class="mcq-option">b) -></div>
+                    <div class="mcq-option">c) ::</div>
+                    <div class="mcq-option">d) *</div>
+                </div>
+                <div class="mcq-answer">Answer: b) -></div>
+            </div>
+
+            <div class="mcq-question">
+                <p><strong>5.</strong> What is the default access specifier for class members in C++?</p>
+                <div class="mcq-options">
+                    <div class="mcq-option">a) public</div>
+                    <div class="mcq-option">b) private</div>
+                    <div class="mcq-option">c) protected</div>
+                    <div class="mcq-option">d) internal</div>
+                </div>
+                <div class="mcq-answer">Answer: b) private</div>
+            </div>
+
+            <div class="mcq-question">
+                <p><strong>6.</strong> Which of the following correctly declares a destructor?</p>
+                <div class="mcq-options">
+                    <div class="mcq-option">a) ~MyClass() {}</div>
+                    <div class="mcq-option">b) MyClass~() {}</div>
+                    <div class="mcq-option">c) destroy() {}</div>
+                    <div class="mcq-option">d) delete() {}</div>
+                </div>
+                <div class="mcq-answer">Answer: a) ~MyClass() {}</div>
+            </div>
+
+            <div class="mcq-question">
+                <p><strong>7.</strong> What is the 'this' pointer in C++?</p>
+                <div class="mcq-options">
+                    <div class="mcq-option">a) A pointer to the base class</div>
+                    <div class="mcq-option">b) A pointer to the current object</div>
+                    <div class="mcq-option">c) A pointer to the derived class</div>
+                    <div class="mcq-option">d) A pointer to global variables</div>
+                </div>
+                <div class="mcq-answer">Answer: b) A pointer to the current object</div>
+            </div>
+
+            <div class="mcq-question">
+                <p><strong>8.</strong> Which keyword is used to define a constant member function?</p>
+                <div class="mcq-options">
+                    <div class="mcq-option">a) static</div>
+                    <div class="mcq-option">b) const</div>
+                    <div class="mcq-option">c) final</div>
+                    <div class="mcq-option">d) virtual</div>
+                </div>
+                <div class="mcq-answer">Answer: b) const</div>
+            </div>
+
+            <div class="mcq-question">
+                <p><strong>9.</strong> What happens when an object is passed by value to a function?</p>
+                <div class="mcq-options">
+                    <div class="mcq-option">a) The original object is modified</div>
+                    <div class="mcq-option">b) A copy of the object is created</div>
+                    <div class="mcq-option">c) The object is deleted</div>
+                    <div class="mcq-option">d) The function cannot access the object</div>
+                </div>
+                <div class="mcq-answer">Answer: b) A copy of the object is created</div>
+            </div>
+
+            <div class="mcq-question">
+                <p><strong>10.</strong> Which of the following is true about static members?</p>
+                <div class="mcq-options">
+                    <div class="mcq-option">a) They belong to the class, not instances</div>
+                    <div class="mcq-option">b) They can only be accessed by const functions</div>
+                    <div class="mcq-option">c) They cannot be inherited</div>
+                    <div class="mcq-option">d) They must be initialized in the constructor</div>
+                </div>
+                <div class="mcq-answer">Answer: a) They belong to the class, not instances</div>
+            </div>
+
+            <div class="mcq-question">
+                <p><strong>11.</strong> What is the purpose of the 'friend' keyword in C++?</p>
+                <div class="mcq-options">
+                    <div class="mcq-option">a) To declare a function as virtual</div>
+                    <div class="mcq-option">b) To allow access to private members</div>
+                    <div class="mcq-option">c) To create a copy of an object</div>
+                    <div class="mcq-option">d) To define a constant</div>
+                </div>
+                <div class="mcq-answer">Answer: b) To allow access to private members</div>
+            </div>
+
+            <div class="mcq-question">
+                <p><strong>12.</strong> Which operator is used for dynamic memory allocation in C++?</p>
+                <div class="mcq-options">
+                    <div class="mcq-option">a) malloc</div>
+                    <div class="mcq-option">b) new</div>
+                    <div class="mcq-option">c) alloc</div>
+                    <div class="mcq-option">d) create</div>
+                </div>
+                <div class="mcq-answer">Answer: b) new</div>
+            </div>
+
+            <div class="mcq-question">
+                <p><strong>13.</strong> What is the correct way to deallocate memory in C++?</p>
+                <div class="mcq-options">
+                    <div class="mcq-option">a) free()</div>
+                    <div class="mcq-option">b) delete</div>
+                    <div class="mcq-option">c) destroy()</div>
+                    <div class="mcq-option">d) remove()</div>
+                </div>
+                <div class="mcq-answer">Answer: b) delete</div>
+            </div>
+
+            <div class="mcq-question">
+                <p><strong>14.</strong> Which of the following is NOT a valid way to initialize an object?</p>
+                <div class="mcq-options">
+                    <div class="mcq-option">a) MyClass obj;</div>
+                    <div class="mcq-option">b) MyClass obj = MyClass();</div>
+                    <div class="mcq-option">c) MyClass obj{};</div>
+                    <div class="mcq-option">d) MyClass obj = new MyClass();</div>
+                </div>
+                <div class="mcq-answer">Answer: d) MyClass obj = new MyClass();</div>
+            </div>
+
+            <div class="mcq-question">
+                <p><strong>15.</strong> What is the difference between struct and class in C++?</p>
+                <div class="mcq-options">
+                    <div class="mcq-option">a) No difference</div>
+                    <div class="mcq-option">b) Struct members are public by default</div>
+                    <div class="mcq-option">c) Class members are public by default</div>
+                    <div class="mcq-option">d) Struct cannot have functions</div>
+                </div>
+                <div class="mcq-answer">Answer: b) Struct members are public by default</div>
+            </div>
+        </section>
+
+        <!-- Inheritance MCQs -->
+        <section id="inheritance" class="mcq-section">
+            <h3>Inheritance & Polymorphism (Questions 16-30)</h3>
+            
+            <div class="mcq-question">
+                <p><strong>16.</strong> Which symbol is used for inheritance in C++?</p>
+                <div class="mcq-options">
+                    <div class="mcq-option">a) :</div>
+                    <div class="mcq-option">b) ::</div>
+                    <div class="mcq-option">c) -></div>
+                    <div class="mcq-option">d) .</div>
+                </div>
+                <div class="mcq-answer">Answer: a) :</div>
+            </div>
+
+            <div class="mcq-question">
+                <p><strong>17.</strong> What is the default inheritance type in C++?</p>
+                <div class="mcq-options">
+                    <div class="mcq-option">a) public</div>
+                    <div class="mcq-option">b) private</div>
+                    <div class="mcq-option">c) protected</div>
+                    <div class="mcq-option">d) No default</div>
+                </div>
+                <div class="mcq-answer">Answer: b) private</div>
+            </div>
+
+            <div class="mcq-question">
+                <p><strong>18.</strong> Which of the following is true about multiple inheritance?</p>
+                <div class="mcq-options">
+                    <div class="mcq-option">a) A class can inherit from multiple base classes</div>
+                    <div class="mcq-option">b) A class can only inherit from one base class</div>
+                    <div class="mcq-option">c) Multiple inheritance is not supported in C++</div>
+                    <div class="mcq-option">d) Multiple inheritance requires virtual functions</div>
+                </div>
+                <div class="mcq-answer">Answer: a) A class can inherit from multiple base classes</div>
+            </div>
+
+            <div class="mcq-question">
+                <p><strong>19.</strong> What is polymorphism in C++?</p>
+                <div class="mcq-options">
+                    <div class="mcq-option">a) Ability to take many forms</div>
+                    <div class="mcq-option">b) Ability to inherit from multiple classes</div>
+                    <div class="mcq-option">c) Ability to have multiple constructors</div>
+                    <div class="mcq-option">d) Ability to have private members</div>
+                </div>
+                <div class="mcq-answer">Answer: a) Ability to take many forms</div>
+            </div>
+
+            <div class="mcq-question">
+                <p><strong>20.</strong> Which keyword is used to declare a virtual function?</p>
+                <div class="mcq-options">
+                    <div class="mcq-option">a) abstract</div>
+                    <div class="mcq-option">b) virtual</div>
+                    <div class="mcq-option">c) override</div>
+                    <div class="mcq-option">d) pure</div>
+                </div>
+                <div class="mcq-answer">Answer: b) virtual</div>
+            </div>
+
+            <div class="mcq-question">
+                <p><strong>21.</strong> What is a pure virtual function?</p>
+                <div class="mcq-options">
+                    <div class="mcq-option">a) A function with no implementation</div>
+                    <div class="mcq-option">b) A function that cannot be overridden</div>
+                    <div class="mcq-option">c) A function that is automatically called</div>
+                    <div class="mcq-option">d) A function with default parameters</div>
+                </div>
+                <div class="mcq-answer">Answer: a) A function with no implementation</div>
+            </div>
+
+            <div class="mcq-question">
+                <p><strong>22.</strong> Which of the following is true about abstract classes?</p>
+                <div class="mcq-options">
+                    <div class="mcq-option">a) They cannot be instantiated</div>
+                    <div class="mcq-option">b) They must have at least one pure virtual function</div>
+                    <div class="mcq-option">c) Both a and b</div>
+                    <div class="mcq-option">d) Neither a nor b</div>
+                </div>
+                <div class="mcq-answer">Answer: c) Both a and b</div>
+            </div>
+
+            <div class="mcq-question">
+                <p><strong>23.</strong> What is the diamond problem in multiple inheritance?</p>
+                <div class="mcq-options">
+                    <div class="mcq-option">a) A syntax error</div>
+                    <div class="mcq-option">b) Ambiguity in method resolution</div>
+                    <div class="mcq-option">c) Memory allocation issue</div>
+                    <div class="mcq-option">d) Compilation failure</div>
+                </div>
+                <div class="mcq-answer">Answer: b) Ambiguity in method resolution</div>
+            </div>
+
+            <div class="mcq-question">
+                <p><strong>24.</strong> How is the diamond problem solved in C++?</p>
+                <div class="mcq-options">
+                    <div class="mcq-option">a) Using virtual inheritance</div>
+                    <div class="mcq-option">b) Using multiple inheritance</div>
+                    <div class="mcq-option">c) Using abstract classes</div>
+                    <div class="mcq-option">d) Using templates</div>
+                </div>
+                <div class="mcq-answer">Answer: a) Using virtual inheritance</div>
+            </div>
+
+            <div class="mcq-question">
+                <p><strong>25.</strong> Which operator is used for dynamic casting in C++?</p>
+                <div class="mcq-options">
+                    <div class="mcq-option">a) static_cast</div>
+                    <div class="mcq-option">b) dynamic_cast</div>
+                    <div class="mcq-option">c) reinterpret_cast</div>
+                    <div class="mcq-option">d) const_cast</div>
+                </div>
+                <div class="mcq-answer">Answer: b) dynamic_cast</div>
+            </div>
+
+            <div class="mcq-question">
+                <p><strong>26.</strong> What is the purpose of the 'override' keyword?</p>
+                <div class="mcq-options">
+                    <div class="mcq-option">a) To declare a virtual function</div>
+                    <div class="mcq-option">b) To indicate that a function overrides a base class function</div>
+                    <div class="mcq-option">c) To prevent overriding</div>
+                    <div class="mcq-option">d) To declare a pure virtual function</div>
+                </div>
+                <div class="mcq-answer">Answer: b) To indicate that a function overrides a base class function</div>
+            </div>
+
+            <div class="mcq-question">
+                <p><strong>27.</strong> Which of the following is true about protected members?</p>
+                <div class="mcq-options">
+                    <div class="mcq-option">a) Accessible only within the same class</div>
+                    <div class="mcq-option">b) Accessible within the class and derived classes</div>
+                    <div class="mcq-option">c) Accessible from anywhere</div>
+                    <div class="mcq-option">d) Not accessible in derived classes</div>
+                </div>
+                <div class="mcq-answer">Answer: b) Accessible within the class and derived classes</div>
+            </div>
+
+            <div class="mcq-question">
+                <p><strong>28.</strong> What is the base class in the following code?<br><code>class Derived : public Base { };</code></p>
+                <div class="mcq-options">
+                    <div class="mcq-option">a) Derived</div>
+                    <div class="mcq-option">b) Base</div>
+                    <div class="mcq-option">c) Both</div>
+                    <div class="mcq-option">d) Neither</div>
+                </div>
+                <div class="mcq-answer">Answer: b) Base</div>
+            </div>
+
+            <div class="mcq-question">
+                <p><strong>29.</strong> Which inheritance type makes base class public members public in derived class?</p>
+                <div class="mcq-options">
+                    <div class="mcq-option">a) private</div>
+                    <div class="mcq-option">b) protected</div>
+                    <div class="mcq-option">c) public</div>
+                    <div class="mcq-option">d) None</div>
+                </div>
+                <div class="mcq-answer">Answer: c) public</div>
+            </div>
+
+            <div class="mcq-question">
+                <p><strong>30.</strong> What is the output of the following code?<br><code>class Base { public: virtual void func() { cout << "Base"; } };<br>class Derived : public Base { public: void func() { cout << "Derived"; } };<br>Base* ptr = new Derived(); ptr->func();</code></p>
+                <div class="mcq-options">
+                    <div class="mcq-option">a) Base</div>
+                    <div class="mcq-option">b) Derived</div>
+                    <div class="mcq-option">c) Error</div>
+                    <div class="mcq-option">d) Nothing</div>
+                </div>
+                <div class="mcq-answer">Answer: b) Derived</div>
+            </div>
+        </section>
+
+        <!-- Data Structures MCQs -->
+        <section id="data-structures" class="mcq-section">
+            <h3>Data Structures (Questions 31-50)</h3>
+            
+            <div class="mcq-question">
+                <p><strong>31.</strong> What is a stack?</p>
+                <div class="mcq-options">
+                    <div class="mcq-option">a) FIFO data structure</div>
+                    <div class="mcq-option">b) LIFO data structure</div>
+                    <div class="mcq-option">c) Random access data structure</div>
+                    <div class="mcq-option">d) Sorted data structure</div>
+                </div>
+                <div class="mcq-answer">Answer: b) LIFO data structure</div>
+            </div>
+
+            <div class="mcq-question">
+                <p><strong>32.</strong> Which operation removes an element from the top of a stack?</p>
+                <div class="mcq-options">
+                    <div class="mcq-option">a) push</div>
+                    <div class="mcq-option">b) pop</div>
+                    <div class="mcq-option">c) peek</div>
+                    <div class="mcq-option">d) enqueue</div>
+                </div>
+                <div class="mcq-answer">Answer: b) pop</div>
+            </div>
+
+            <div class="mcq-question">
+                <p><strong>33.</strong> What is a queue?</p>
+                <div class="mcq-options">
+                    <div class="mcq-option">a) LIFO data structure</div>
+                    <div class="mcq-option">b) FIFO data structure</div>
+                    <div class="mcq-option">c) Random access data structure</div>
+                    <div class="mcq-option">d) Hierarchical data structure</div>
+                </div>
+                <div class="mcq-answer">Answer: b) FIFO data structure</div>
+            </div>
+
+            <div class="mcq-question">
+                <p><strong>34.</strong> Which operation adds an element to the end of a queue?</p>
+                <div class="mcq-options">
+                    <div class="mcq-option">a) push</div>
+                    <div class="mcq-option">b) pop</div>
+                    <div class="mcq-option">c) enqueue</div>
+                    <div class="mcq-option">d) dequeue</div>
+                </div>
+                <div class="mcq-answer">Answer: c) enqueue</div>
+            </div>
+
+            <div class="mcq-question">
+                <p><strong>35.</strong> What is a linked list?</p>
+                <div class="mcq-options">
+                    <div class="mcq-option">a) A contiguous block of memory</div>
+                    <div class="mcq-option">b) A collection of nodes connected by pointers</div>
+                    <div class="mcq-option">c) A fixed-size array</div>
+                    <div class="mcq-option">d) A stack implementation</div>
+                </div>
+                <div class="mcq-answer">Answer: b) A collection of nodes connected by pointers</div>
+            </div>
+
+            <div class="mcq-question">
+                <p><strong>36.</strong> Which type of linked list allows traversal in both directions?</p>
+                <div class="mcq-options">
+                    <div class="mcq-option">a) Singly linked list</div>
+                    <div class="mcq-option">b) Doubly linked list</div>
+                    <div class="mcq-option">c) Circular linked list</div>
+                    <div class="mcq-option">d) None of the above</div>
+                </div>
+                <div class="mcq-answer">Answer: b) Doubly linked list</div>
+            </div>
+
+            <div class="mcq-question">
+                <p><strong>37.</strong> What is the time complexity of inserting an element at the beginning of a linked list?</p>
+                <div class="mcq-options">
+                    <div class="mcq-option">a) O(1)</div>
+                    <div class="mcq-option">b) O(n)</div>
+                    <div class="mcq-option">c) O(log n)</div>
+                    <div class="mcq-option">d) O(n²)</div>
+                </div>
+                <div class="mcq-answer">Answer: a) O(1)</div>
+            </div>
+
+            <div class="mcq-question">
+                <p><strong>38.</strong> Which data structure uses LIFO principle?</p>
+                <div class="mcq-options">
+                    <div class="mcq-option">a) Queue</div>
+                    <div class="mcq-option">b) Stack</div>
+                    <div class="mcq-option">c) Linked List</div>
+                    <div class="mcq-option">d) Tree</div>
+                </div>
+                <div class="mcq-answer">Answer: b) Stack</div>
+            </div>
+
+            <div class="mcq-question">
+                <p><strong>39.</strong> What is the time complexity of accessing an element in an array by index?</p>
+                <div class="mcq-options">
+                    <div class="mcq-option">a) O(1)</div>
+                    <div class="mcq-option">b) O(n)</div>
+                    <div class="mcq-option">c) O(log n)</div>
+                    <div class="mcq-option">d) O(n²)</div>
+                </div>
+                <div class="mcq-answer">Answer: a) O(1)</div>
+            </div>
+
+            <div class="mcq-question">
+                <p><strong>40.</strong> Which of the following is NOT a type of linked list?</p>
+                <div class="mcq-options">
+                    <div class="mcq-option">a) Singly linked</div>
+                    <div class="mcq-option">b) Doubly linked</div>
+                    <div class="mcq-option">c) Circular linked</div>
+                    <div class="mcq-option">d) Binary linked</div>
+                </div>
+                <div class="mcq-answer">Answer: d) Binary linked</div>
+            </div>
+
+            <div class="mcq-question">
+                <p><strong>41.</strong> What is a circular linked list?</p>
+                <div class="mcq-options">
+                    <div class="mcq-option">a) A list with no end</div>
+                    <div class="mcq-option">b) A list that forms a circle</div>
+                    <div class="mcq-option">c) A list with circular nodes</div>
+                    <div class="mcq-option">d) A list that cannot be traversed</div>
+                </div>
+                <div class="mcq-answer">Answer: b) A list that forms a circle</div>
+            </div>
+
+            <div class="mcq-question">
+                <p><strong>42.</strong> Which data structure is used for implementing recursion?</p>
+                <div class="mcq-options">
+                    <div class="mcq-option">a) Queue</div>
+                    <div class="mcq-option">b) Stack</div>
+                    <div class="mcq-option">c) Linked List</div>
+                    <div class="mcq-option">d) Tree</div>
+                </div>
+                <div class="mcq-answer">Answer: b) Stack</div>
+            </div>
+
+            <div class="mcq-question">
+                <p><strong>43.</strong> What is the advantage of linked lists over arrays?</p>
+                <div class="mcq-options">
+                    <div class="mcq-option">a) Random access</div>
+                    <div class="mcq-option">b) Dynamic size</div>
+                    <div class="mcq-option">c) Memory efficiency</div>
+                    <div class="mcq-option">d) Faster search</div>
+                </div>
+                <div class="mcq-answer">Answer: b) Dynamic size</div>
+            </div>
+
+            <div class="mcq-question">
+                <p><strong>44.</strong> Which operation is more efficient in a linked list than an array?</p>
+                <div class="mcq-options">
+                    <div class="mcq-option">a) Random access</div>
+                    <div class="mcq-option">b) Insertion at beginning</div>
+                    <div class="mcq-option">c) Searching</div>
+                    <div class="mcq-option">d) Sorting</div>
+                </div>
+                <div class="mcq-answer">Answer: b) Insertion at beginning</div>
+            </div>
+
+            <div class="mcq-question">
+                <p><strong>45.</strong> What is a priority queue?</p>
+                <div class="mcq-options">
+                    <div class="mcq-option">a) A queue with priority-based ordering</div>
+                    <div class="mcq-option">b) A queue with random access</div>
+                    <div class="mcq-option">c) A queue with fixed size</div>
+                    <div class="mcq-option">d) A queue with no ordering</div>
+                </div>
+                <div class="mcq-answer">Answer: a) A queue with priority-based ordering</div>
+            </div>
+
+            <div class="mcq-question">
+                <p><strong>46.</strong> Which data structure is used to implement a priority queue?</p>
+                <div class="mcq-options">
+                    <div class="mcq-option">a) Array</div>
+                    <div class="mcq-option">b) Linked List</div>
+                    <div class="mcq-option">c) Heap</div>
+                    <div class="mcq-option">d) Stack</div>
+                </div>
+                <div class="mcq-answer">Answer: c) Heap</div>
+            </div>
+
+            <div class="mcq-question">
+                <p><strong>47.</strong> What is the time complexity of stack push operation?</p>
+                <div class="mcq-options">
+                    <div class="mcq-option">a) O(1)</div>
+                    <div class="mcq-option">b) O(n)</div>
+                    <div class="mcq-option">c) O(log n)</div>
+                    <div class="mcq-option">d) O(n²)</div>
+                </div>
+                <div class="mcq-answer">Answer: a) O(1)</div>
+            </div>
+
+            <div class="mcq-question">
+                <p><strong>48.</strong> Which of the following applications uses a stack?</p>
+                <div class="mcq-options">
+                    <div class="mcq-option">a) Job scheduling</div>
+                    <div class="mcq-option">b) Function call management</div>
+                    <div class="mcq-option">c) Database indexing</div>
+                    <div class="mcq-option">d) File system</div>
+                </div>
+                <div class="mcq-answer">Answer: b) Function call management</div>
+            </div>
+
+            <div class="mcq-question">
+                <p><strong>49.</strong> What is the disadvantage of using arrays?</p>
+                <div class="mcq-options">
+                    <div class="mcq-option">a) Fixed size</div>
+                    <div class="mcq-option">b) Slow access</div>
+                    <div class="mcq-option">c) Memory inefficient</div>
+                    <div class="mcq-option">d) Complex implementation</div>
+                </div>
+                <div class="mcq-answer">Answer: a) Fixed size</div>
+            </div>
+
+            <div class="mcq-question">
+                <p><strong>50.</strong> Which data structure is best for implementing undo functionality?</p>
+                <div class="mcq-options">
+                    <div class="mcq-option">a) Queue</div>
+                    <div class="mcq-option">b) Stack</div>
+                    <div class="mcq-option">c) Linked List</div>
+                    <div class="mcq-option">d) Tree</div>
+                </div>
+                <div class="mcq-answer">Answer: b) Stack</div>
+            </div>
+        </section>
+
+        <!-- Expression Evaluation MCQs -->
+        <section id="expression-eval" class="mcq-section">
+            <h3>Expression Evaluation (Questions 51-65)</h3>
+            
+            <div class="mcq-question">
+                <p><strong>51.</strong> What is infix notation?</p>
+                <div class="mcq-options">
+                    <div class="mcq-option">a) Operator between operands</div>
+                    <div class="mcq-option">b) Operator after operands</div>
+                    <div class="mcq-option">c) Operator before operands</div>
+                    <div class="mcq-option">d) No operators</div>
+                </div>
+                <div class="mcq-answer">Answer: a) Operator between operands</div>
+            </div>
+
+            <div class="mcq-question">
+                <p><strong>52.</strong> What is postfix notation?</p>
+                <div class="mcq-options">
+                    <div class="mcq-option">a) Operator between operands</div>
+                    <div class="mcq-option">b) Operator after operands</div>
+                    <div class="mcq-option">c) Operator before operands</div>
+                    <div class="mcq-option">d) Random order</div>
+                </div>
+                <div class="mcq-answer">Answer: b) Operator after operands</div>
+            </div>
+
+            <div class="mcq-question">
+                <p><strong>53.</strong> Which algorithm is used to convert infix to postfix?</p>
+                <div class="mcq-options">
+                    <div class="mcq-option">a) Dijkstra's algorithm</div>
+                    <div class="mcq-option">b) Shunting-yard algorithm</div>
+                    <div class="mcq-option">c) Kruskal's algorithm</div>
+                    <div class="mcq-option">d) Floyd-Warshall algorithm</div>
+                </div>
+                <div class="mcq-answer">Answer: b) Shunting-yard algorithm</div>
+            </div>
+
+            <div class="mcq-question">
+                <p><strong>54.</strong> What is the precedence of multiplication over addition?</p>
+                <div class="mcq-options">
+                    <div class="mcq-option">a) Higher</div>
+                    <div class="mcq-option">b) Lower</div>
+                    <div class="mcq-option">c) Same</div>
+                    <div class="mcq-option">d) None</div>
+                </div>
+                <div class="mcq-answer">Answer: a) Higher</div>
+            </div>
+
+            <div class="mcq-question">
+                <p><strong>55.</strong> Which operator has the highest precedence?</p>
+                <div class="mcq-options">
+                    <div class="mcq-option">a) +</div>
+                    <div class="mcq-option">b) *</div>
+                    <div class="mcq-option">c) (</div>
+                    <div class="mcq-option">d) =</div>
+                </div>
+                <div class="mcq-answer">Answer: c) (</div>
+            </div>
+
+            <div class="mcq-question">
+                <p><strong>56.</strong> What is associativity in expressions?</p>
+                <div class="mcq-options">
+                    <div class="mcq-option">a) Order of evaluation</div>
+                    <div class="mcq-option">b) Direction of evaluation</div>
+                    <div class="mcq-option">c) Both a and b</div>
+                    <div class="mcq-option">d) Neither</div>
+                </div>
+                <div class="mcq-answer">Answer: c) Both a and b</div>
+            </div>
+
+            <div class="mcq-question">
+                <p><strong>57.</strong> Which data structure is used in expression evaluation?</p>
+                <div class="mcq-options">
+                    <div class="mcq-option">a) Queue</div>
+                    <div class="mcq-option">b) Stack</div>
+                    <div class="mcq-option">c) Linked List</div>
+                    <div class="mcq-option">d) Tree</div>
+                </div>
+                <div class="mcq-answer">Answer: b) Stack</div>
+            </div>
+
+            <div class="mcq-question">
+                <p><strong>58.</strong> What is the postfix form of "A + B * C"?</p>
+                <div class="mcq-options">
+                    <div class="mcq-option">a) A B C + *</div>
+                    <div class="mcq-option">b) A B C * +</div>
+                    <div class="mcq-option">c) A + B * C</div>
+                    <div class="mcq-option">d) A B + C *</div>
+                </div>
+                <div class="mcq-answer">Answer: b) A B C * +</div>
+            </div>
+
+            <div class="mcq-question">
+                <p><strong>59.</strong> What happens when we encounter an operator in postfix evaluation?</p>
+                <div class="mcq-options">
+                    <div class="mcq-option">a) Push to stack</div>
+                    <div class="mcq-option">b) Pop two operands and apply operation</div>
+                    <div class="mcq-option">c) Ignore it</div>
+                    <div class="mcq-option">d) Convert to infix</div>
+                </div>
+                <div class="mcq-answer">Answer: b) Pop two operands and apply operation</div>
+            </div>
+
+            <div class="mcq-question">
+                <p><strong>60.</strong> Which of the following is left associative?</p>
+                <div class="mcq-options">
+                    <div class="mcq-option">a) +</div>
+                    <div class="mcq-option">b) ^</div>
+                    <div class="mcq-option">c) =</div>
+                    <div class="mcq-option">d) (unary minus)</div>
+                </div>
+                <div class="mcq-answer">Answer: a) +</div>
+            </div>
+
+            <div class="mcq-question">
+                <p><strong>61.</strong> What is the result of evaluating "2 3 4 * +"?</p>
+                <div class="mcq-options">
+                    <div class="mcq-option">a) 14</div>
+                    <div class="mcq-option">b) 20</div>
+                    <div class="mcq-option">c) 10</div>
+                    <div class="mcq-option">d) 24</div>
+                </div>
+                <div class="mcq-answer">Answer: a) 14</div>
+            </div>
+
+            <div class="mcq-question">
+                <p><strong>62.</strong> Which parenthesis has higher precedence?</p>
+                <div class="mcq-options">
+                    <div class="mcq-option">a) ()</div>
+                    <div class="mcq-option">b) []</div>
+                    <div class="mcq-option">c) {}</div>
+                    <div class="mcq-option">d) All same</div>
+                </div>
+                <div class="mcq-answer">Answer: d) All same</div>
+            </div>
+
+            <div class="mcq-question">
+                <p><strong>63.</strong> What is prefix notation?</p>
+                <div class="mcq-options">
+                    <div class="mcq-option">a) Operator between operands</div>
+                    <div class="mcq-option">b) Operator after operands</div>
+                    <div class="mcq-option">c) Operator before operands</div>
+                    <div class="mcq-option">d) No operators</div>
+                </div>
+                <div class="mcq-answer">Answer: c) Operator before operands</div>
+            </div>
+
+            <div class="mcq-question">
+                <p><strong>64.</strong> Which notation is easiest for computers to evaluate?</p>
+                <div class="mcq-options">
+                    <div class="mcq-option">a) Infix</div>
+                    <div class="mcq-option">b) Prefix</div>
+                    <div class="mcq-option">c) Postfix</div>
+                    <div class="mcq-option">d) All same</div>
+                </div>
+                <div class="mcq-answer">Answer: c) Postfix</div>
+            </div>
+
+            <div class="mcq-question">
+                <p><strong>65.</strong> What is the infix form of "A B + C * D /"?</p>
+                <div class="mcq-options">
+                    <div class="mcq-option">a) ((A + B) * C) / D</div>
+                    <div class="mcq-option">b) A + B * C / D</div>
+                    <div class="mcq-option">c) A + (B * C) / D</div>
+                    <div class="mcq-option">d) (A + B) * (C / D)</div>
+                </div>
+                <div class="mcq-answer">Answer: c) A + (B * C) / D</div>
+            </div>
+        </section>
+
+        <!-- Trees & Graphs MCQs -->
+        <section id="trees-graphs" class="mcq-section">
+            <h3>Trees & Graphs (Questions 66-80)</h3>
+            
+            <div class="mcq-question">
+                <p><strong>66.</strong> What is a binary tree?</p>
+                <div class="mcq-options">
+                    <div class="mcq-option">a) A tree with at most two children per node</div>
+                    <div class="mcq-option">b) A tree with exactly two children per node</div>
+                    <div class="mcq-option">c) A tree with no children</div>
+                    <div class="mcq-option">d) A tree with unlimited children</div>
+                </div>
+                <div class="mcq-answer">Answer: a) A tree with at most two children per node</div>
+            </div>
+
+            <div class="mcq-question">
+                <p><strong>67.</strong> What is the height of a tree?</p>
+                <div class="mcq-options">
+                    <div class="mcq-option">a) Number of nodes</div>
+                    <div class="mcq-option">b) Number of leaves</div>
+                    <div class="mcq-option">c) Longest path from root to leaf</div>
+                    <div class="mcq-option">d) Shortest path from root to leaf</div>
+                </div>
+                <div class="mcq-answer">Answer: c) Longest path from root to leaf</div>
+            </div>
+
+            <div class="mcq-question">
+                <p><strong>68.</strong> Which traversal visits root first?</p>
+                <div class="mcq-options">
+                    <div class="mcq-option">a) Inorder</div>
+                    <div class="mcq-option">b) Preorder</div>
+                    <div class="mcq-option">c) Postorder</div>
+                    <div class="mcq-option">d) Level order</div>
+                </div>
+                <div class="mcq-answer">Answer: b) Preorder</div>
+            </div>
+
+            <div class="mcq-question">
+                <p><strong>69.</strong> Which traversal visits leaves first?</p>
+                <div class="mcq-options">
+                    <div class="mcq-option">a) Inorder</div>
+                    <div class="mcq-option">b) Preorder</div>
+                    <div class="mcq-option">c) Postorder</div>
+                    <div class="mcq-option">d) Level order</div>
+                </div>
+                <div class="mcq-answer">Answer: c) Postorder</div>
+            </div>
+
+            <div class="mcq-question">
+                <p><strong>70.</strong> What is a binary search tree?</p>
+                <div class="mcq-options">
+                    <div class="mcq-option">a) A sorted binary tree</div>
+                    <div class="mcq-option">b) A balanced binary tree</div>
+                    <div class="mcq-option">c) A complete binary tree</div>
+                    <div class="mcq-option">d) A full binary tree</div>
+                </div>
+                <div class="mcq-answer">Answer: a) A sorted binary tree</div>
+            </div>
+
+            <div class="mcq-question">
+                <p><strong>71.</strong> What is the time complexity of BST search?</p>
+                <div class="mcq-options">
+                    <div class="mcq-option">a) O(1)</div>
+                    <div class="mcq-option">b) O(log n)</div>
+                    <div class="mcq-option">c) O(n)</div>
+                    <div class="mcq-option">d) O(n²)</div>
+                </div>
+                <div class="mcq-answer">Answer: b) O(log n)</div>
+            </div>
+
+            <div class="mcq-question">
+                <p><strong>72.</strong> What is a graph?</p>
+                <div class="mcq-options">
+                    <div class="mcq-option">a) A collection of vertices and edges</div>
+                    <div class="mcq-option">b) A collection of nodes only</div>
+                    <div class="mcq-option">c) A collection of edges only</div>
+                    <div class="mcq-option">d) A tree structure</div>
+                </div>
+                <div class="mcq-answer">Answer: a) A collection of vertices and edges</div>
+            </div>
+
+            <div class="mcq-question">
+                <p><strong>73.</strong> What is a directed graph?</p>
+                <div class="mcq-options">
+                    <div class="mcq-option">a) Edges have direction</div>
+                    <div class="mcq-option">b) Edges have no direction</div>
+                    <div class="mcq-option">c) All edges are bidirectional</div>
+                    <div class="mcq-option">d) No edges</div>
+                </div>
+                <div class="mcq-answer">Answer: a) Edges have direction</div>
+            </div>
+
+            <div class="mcq-question">
+                <p><strong>74.</strong> Which algorithm finds shortest path in unweighted graph?</p>
+                <div class="mcq-options">
+                    <div class="mcq-option">a) Dijkstra</div>
+                    <div class="mcq-option">b) BFS</div>
+                    <div class="mcq-option">c) DFS</div>
+                    <div class="mcq-option">d) Kruskal</div>
+                </div>
+                <div class="mcq-answer">Answer: b) BFS</div>
+            </div>
+
+            <div class="mcq-question">
+                <p><strong>75.</strong> Which algorithm finds shortest path in weighted graph?</p>
+                <div class="mcq-options">
+                    <div class="mcq-option">a) BFS</div>
+                    <div class="mcq-option">b) DFS</div>
+                    <div class="mcq-option">c) Dijkstra</div>
+                    <div class="mcq-option">d) Prim</div>
+                </div>
+                <div class="mcq-answer">Answer: c) Dijkstra</div>
+            </div>
+
+            <div class="mcq-question">
+                <p><strong>76.</strong> What is DFS?</p>
+                <div class="mcq-options">
+                    <div class="mcq-option">a) Depth First Search</div>
+                    <div class="mcq-option">b) Breadth First Search</div>
+                    <div class="mcq-option">c) Dijkstra Search</div>
+                    <div class="mcq-option">d) Dynamic Search</div>
+                </div>
+                <div class="mcq-answer">Answer: a) Depth First Search</div>
+            </div>
+
+            <div class="mcq-question">
+                <p><strong>77.</strong> What data structure is used in BFS?</p>
+                <div class="mcq-options">
+                    <div class="mcq-option">a) Stack</div>
+                    <div class="mcq-option">b) Queue</div>
+                    <div class="mcq-option">c) Priority Queue</div>
+                    <div class="mcq-option">d) Linked List</div>
+                </div>
+                <div class="mcq-answer">Answer: b) Queue</div>
+            </div>
+
+            <div class="mcq-question">
+                <p><strong>78.</strong> What is a spanning tree?</p>
+                <div class="mcq-options">
+                    <div class="mcq-option">a) A subgraph that is a tree</div>
+                    <div class="mcq-option">b) A complete graph</div>
+                    <div class="mcq-option">c) A directed graph</div>
+                    <div class="mcq-option">d) An undirected graph</div>
+                </div>
+                <div class="mcq-answer">Answer: a) A subgraph that is a tree</div>
+            </div>
+
+            <div class="mcq-question">
+                <p><strong>79.</strong> Which algorithm finds minimum spanning tree?</p>
+                <div class="mcq-options">
+                    <div class="mcq-option">a) Dijkstra</div>
+                    <div class="mcq-option">b) Kruskal</div>
+                    <div class="mcq-option">c) BFS</div>
+                    <div class="mcq-option">d) DFS</div>
+                </div>
+                <div class="mcq-answer">Answer: b) Kruskal</div>
+            </div>
+
+            <div class="mcq-question">
+                <p><strong>80.</strong> What is topological sort used for?</p>
+                <div class="mcq-options">
+                    <div class="mcq-option">a) Sorting numbers</div>
+                    <div class="mcq-option">b) Ordering tasks with dependencies</div>
+                    <div class="mcq-option">c) Finding cycles</div>
+                    <div class="mcq-option">d) Finding shortest path</div>
+                </div>
+                <div class="mcq-answer">Answer: b) Ordering tasks with dependencies</div>
+            </div>
+        </section>
+
+        <!-- Algorithms MCQs -->
+        <section id="algorithms" class="mcq-section">
+            <h3>Algorithms (Questions 81-90)</h3>
+            
+            <div class="mcq-question">
+                <p><strong>81.</strong> What is the time complexity of bubble sort?</p>
+                <div class="mcq-options">
+                    <div class="mcq-option">a) O(n)</div>
+                    <div class="mcq-option">b) O(n log n)</div>
+                    <div class="mcq-option">c) O(n²)</div>
+                    <div class="mcq-option">d) O(log n)</div>
+                </div>
+                <div class="mcq-answer">Answer: c) O(n²)</div>
+            </div>
+
+            <div class="mcq-question">
+                <p><strong>82.</strong> What is the best case time complexity of quicksort?</p>
+                <div class="mcq-options">
+                    <div class="mcq-option">a) O(n)</div>
+                    <div class="mcq-option">b) O(n log n)</div>
+                    <div class="mcq-option">c) O(n²)</div>
+                    <div class="mcq-option">d) O(log n)</div>
+                </div>
+                <div class="mcq-answer">Answer: b) O(n log n)</div>
+            </div>
+
+            <div class="mcq-question">
+                <p><strong>83.</strong> Which sorting algorithm is stable?</p>
+                <div class="mcq-options">
+                    <div class="mcq-option">a) Quick sort</div>
+                    <div class="mcq-option">b) Heap sort</div>
+                    <div class="mcq-option">c) Merge sort</div>
+                    <div class="mcq-option">d) Selection sort</div>
+                </div>
+                <div class="mcq-answer">Answer: c) Merge sort</div>
+            </div>
+
+            <div class="mcq-question">
+                <p><strong>84.</strong> What is the time complexity of binary search?</p>
+                <div class="mcq-options">
+                    <div class="mcq-option">a) O(1)</div>
+                    <div class="mcq-option">b) O(n)</div>
+                    <div class="mcq-option">c) O(log n)</div>
+                    <div class="mcq-option">d) O(n²)</div>
+                </div>
+                <div class="mcq-answer">Answer: c) O(log n)</div>
+            </div>
+
+            <div class="mcq-question">
+                <p><strong>85.</strong> Which algorithm uses divide and conquer?</p>
+                <div class="mcq-options">
+                    <div class="mcq-option">a) Bubble sort</div>
+                    <div class="mcq-option">b) Merge sort</div>
+                    <div class="mcq-option">c) Insertion sort</div>
+                    <div class="mcq-option">d) Selection sort</div>
+                </div>
+                <div class="mcq-answer">Answer: b) Merge sort</div>
+            </div>
+
+            <div class="mcq-question">
+                <p><strong>86.</strong> What is dynamic programming?</p>
+                <div class="mcq-options">
+                    <div class="mcq-option">a) Programming with objects</div>
+                    <div class="mcq-option">b) Solving problems by breaking into subproblems</div>
+                    <div class="mcq-option">c) Programming with arrays</div>
+                    <div class="mcq-option">d) Programming with loops</div>
+                </div>
+                <div class="mcq-answer">Answer: b) Solving problems by breaking into subproblems</div>
+            </div>
+
+            <div class="mcq-question">
+                <p><strong>87.</strong> Which problem is solved using dynamic programming?</p>
+                <div class="mcq-options">
+                    <div class="mcq-option">a) Sorting</div>
+                    <div class="mcq-option">b) Fibonacci sequence</div>
+                    <div class="mcq-option">c) Binary search</div>
+                    <div class="mcq-option">d) Linear search</div>
+                </div>
+                <div class="mcq-answer">Answer: b) Fibonacci sequence</div>
+            </div>
+
+            <div class="mcq-question">
+                <p><strong>88.</strong> What is greedy algorithm?</p>
+                <div class="mcq-options">
+                    <div class="mcq-option">a) Always chooses optimal solution</div>
+                    <div class="mcq-option">b) Makes locally optimal choices</div>
+                    <div class="mcq-option">c) Uses backtracking</div>
+                    <div class="mcq-option">d) Uses recursion</div>
+                </div>
+                <div class="mcq-answer">Answer: b) Makes locally optimal choices</div>
+            </div>
+
+            <div class="mcq-question">
+                <p><strong>89.</strong> Which algorithm uses greedy approach?</p>
+                <div class="mcq-options">
+                    <div class="mcq-option">a) Dijkstra</div>
+                    <div class="mcq-option">b) Floyd-Warshall</div>
+                    <div class="mcq-option">c) Bellman-Ford</div>
+                    <div class="mcq-option">d) Warshall</div>
+                </div>
+                <div class="mcq-answer">Answer: a) Dijkstra</div>
+            </div>
+
+            <div class="mcq-question">
+                <p><strong>90.</strong> What is the time complexity of linear search?</p>
+                <div class="mcq-options">
+                    <div class="mcq-option">a) O(1)</div>
+                    <div class="mcq-option">b) O(log n)</div>
+                    <div class="mcq-option">c) O(n)</div>
+                    <div class="mcq-option">d) O(n²)</div>
+                </div>
+                <div class="mcq-answer">Answer: c) O(n)</div>
+            </div>
+        </section>
+
+        <!-- File I/O MCQs -->
+        <section id="file-io" class="mcq-section">
+            <h3>File I/O (Questions 91-95)</h3>
+            
+            <div class="mcq-question">
+                <p><strong>91.</strong> Which header is used for file operations in C++?</p>
+                <div class="mcq-options">
+                    <div class="mcq-option">a) &lt;iostream&gt;</div>
+                    <div class="mcq-option">b) &lt;fstream&gt;</div>
+                    <div class="mcq-option">c) &lt;string&gt;</div>
+                    <div class="mcq-option">d) &lt;vector&gt;</div>
+                </div>
+                <div class="mcq-answer">Answer: b) &lt;fstream&gt;</div>
+            </div>
+
+            <div class="mcq-question">
+                <p><strong>92.</strong> Which mode opens file for reading?</p>
+                <div class="mcq-options">
+                    <div class="mcq-option">a) ios::out</div>
+                    <div class="mcq-option">b) ios::in</div>
+                    <div class="mcq-option">c) ios::app</div>
+                    <div class="mcq-option">d) ios::trunc</div>
+                </div>
+                <div class="mcq-answer">Answer: b) ios::in</div>
+            </div>
+
+            <div class="mcq-question">
+                <p><strong>93.</strong> Which function writes to a file?</p>
+                <div class="mcq-options">
+                    <div class="mcq-option">a) read()</div>
+                    <div class="mcq-option">b) write()</div>
+                    <div class="mcq-option">c) getline()</div>
+                    <div class="mcq-option">d) put()</div>
+                </div>
+                <div class="mcq-answer">Answer: b) write()</div>
+            </div>
+
+            <div class="mcq-question">
+                <p><strong>94.</strong> Which function reads from a file?</p>
+                <div class="mcq-options">
+                    <div class="mcq-option">a) write()</div>
+                    <div class="mcq-option">b) put()</div>
+                    <div class="mcq-option">c) read()</div>
+                    <div class="mcq-option">d) print()</div>
+                </div>
+                <div class="mcq-answer">Answer: c) read()</div>
+            </div>
+
+            <div class="mcq-question">
+                <p><strong>95.</strong> Which function closes a file?</p>
+                <div class="mcq-options">
+                    <div class="mcq-option">a) open()</div>
+                    <div class="mcq-option">b) close()</div>
+                    <div class="mcq-option">c) end()</div>
+                    <div class="mcq-option">d) finish()</div>
+                </div>
+                <div class="mcq-answer">Answer: b) close()</div>
+            </div>
+        </section>
+
+        <!-- Templates MCQs -->
+        <section id="templates" class="mcq-section">
+            <h3>Templates (Questions 96-100)</h3>
+            
+            <div class="mcq-question">
+                <p><strong>96.</strong> What is a template in C++?</p>
+                <div class="mcq-options">
+                    <div class="mcq-option">a) A class definition</div>
+                    <div class="mcq-option">b) A generic programming construct</div>
+                    <div class="mcq-option">c) A function definition</div>
+                    <div class="mcq-option">d) A variable declaration</div>
+                </div>
+                <div class="mcq-answer">Answer: b) A generic programming construct</div>
+            </div>
+
+            <div class="mcq-question">
+                <p><strong>97.</strong> Which keyword declares a template?</p>
+                <div class="mcq-options">
+                    <div class="mcq-option">a) generic</div>
+                    <div class="mcq-option">b) template</div>
+                    <div class="mcq-option">c) class</div>
+                    <div class="mcq-option">d) type</div>
+                </div>
+                <div class="mcq-answer">Answer: b) template</div>
+            </div>
+
+            <div class="mcq-question">
+                <p><strong>98.</strong> What is template specialization?</p>
+                <div class="mcq-options">
+                    <div class="mcq-option">a) Creating specific implementations</div>
+                    <div class="mcq-option">b) Creating generic implementations</div>
+                    <div class="mcq-option">c) Creating class templates</div>
+                    <div class="mcq-option">d) Creating function templates</div>
+                </div>
+                <div class="mcq-answer">Answer: a) Creating specific implementations</div>
+            </div>
+
+            <div class="mcq-question">
+                <p><strong>99.</strong> Which is true about function templates?</p>
+                <div class="mcq-options">
+                    <div class="mcq-option">a) Must have same return type</div>
+                    <div class="mcq-option">b) Can have different parameter types</div>
+                    <div class="mcq-option">c) Cannot be overloaded</div>
+                    <div class="mcq-option">d) Must be defined in header</div>
+                </div>
+                <div class="mcq-answer">Answer: b) Can have different parameter types</div>
+            </div>
+
+            <div class="mcq-question">
+                <p><strong>100.</strong> What is template metaprogramming?</p>
+                <div class="mcq-options">
+                    <div class="mcq-option">a) Programming with templates</div>
+                    <div class="mcq-option">b) Programming at compile time</div>
+                    <div class="mcq-option">c) Both a and b</div>
+                    <div class="mcq-option">d) Neither</div>
+                </div>
+                <div class="mcq-answer">Answer: c) Both a and b</div>
+            </div>
+        </section>
+
+        <!-- Mixed Questions -->
+        <section id="mixed" class="mcq-section">
+            <h3>Mixed Questions (Questions 101-110)</h3>
+            
+            <div class="mcq-question">
+                <p><strong>101.</strong> Which STL container provides fastest insertion/deletion at both ends?</p>
+                <div class="mcq-options">
+                    <div class="mcq-option">a) vector</div>
+                    <div class="mcq-option">b) deque</div>
+                    <div class="mcq-option">c) list</div>
+                    <div class="mcq-option">d) set</div>
+                </div>
+                <div class="mcq-answer">Answer: b) deque</div>
+            </div>
+
+            <div class="mcq-question">
+                <p><strong>102.</strong> What is the time complexity of std::sort?</p>
+                <div class="mcq-options">
+                    <div class="mcq-option">a) O(n)</div>
+                    <div class="mcq-option">b) O(n log n)</div>
+                    <div class="mcq-option">c) O(n²)</div>
+                    <div class="mcq-option">d) O(log n)</div>
+                </div>
+                <div class="mcq-answer">Answer: b) O(n log n)</div>
+            </div>
+
+            <div class="mcq-question">
+                <p><strong>103.</strong> Which iterator allows modification of container elements?</p>
+                <div class="mcq-options">
+                    <div class="mcq-option">a) input_iterator</div>
+                    <div class="mcq-option">b) output_iterator</div>
+                    <div class="mcq-option">c) forward_iterator</div>
+                    <div class="mcq-option">d) random_access_iterator</div>
+                </div>
+                <div class="mcq-answer">Answer: d) random_access_iterator</div>
+            </div>
+
+            <div class="mcq-question">
+                <p><strong>104.</strong> What is RAII in C++?</p>
+                <div class="mcq-options">
+                    <div class="mcq-option">a) Resource Acquisition Is Initialization</div>
+                    <div class="mcq-option">b) Random Access Is Important</div>
+                    <div class="mcq-option">c) Runtime Array Initialization</div>
+                    <div class="mcq-option">d) Recursive Algorithm Implementation</div>
+                </div>
+                <div class="mcq-answer">Answer: a) Resource Acquisition Is Initialization</div>
+            </div>
+
+            <div class="mcq-question">
+                <p><strong>105.</strong> Which smart pointer automatically deletes memory?</p>
+                <div class="mcq-options">
+                    <div class="mcq-option">a) raw pointer</div>
+                    <div class="mcq-option">b) unique_ptr</div>
+                    <div class="mcq-option">c) weak_ptr</div>
+                    <div class="mcq-option">d) auto_ptr</div>
+                </div>
+                <div class="mcq-answer">Answer: b) unique_ptr</div>
+            </div>
+
+            <div class="mcq-question">
+                <p><strong>106.</strong> What is move semantics in C++?</p>
+                <div class="mcq-options">
+                    <div class="mcq-option">a) Moving objects between scopes</div>
+                    <div class="mcq-option">b) Transferring ownership of resources</div>
+                    <div class="mcq-option">c) Both a and b</div>
+                    <div class="mcq-option">d) Neither</div>
+                </div>
+                <div class="mcq-answer">Answer: c) Both a and b</div>
+            </div>
+
+            <div class="mcq-question">
+                <p><strong>107.</strong> Which keyword is used for rvalue references?</p>
+                <div class="mcq-options">
+                    <div class="mcq-option">a) &amp;</div>
+                    <div class="mcq-option">b) &amp;&amp;</div>
+                    <div class="mcq-option">c) *</div>
+                    <div class="mcq-option">d) **</div>
+                </div>
+                <div class="mcq-answer">Answer: b) &amp;&amp;</div>
+            </div>
+
+            <div class="mcq-question">
+                <p><strong>108.</strong> What is lambda expression in C++?</p>
+                <div class="mcq-options">
+                    <div class="mcq-option">a) Anonymous function</div>
+                    <div class="mcq-option">b) Named function</div>
+                    <div class="mcq-option">c) Class method</div>
+                    <div class="mcq-option">d) Template function</div>
+                </div>
+                <div class="mcq-answer">Answer: a) Anonymous function</div>
+            </div>
+
+            <div class="mcq-question">
+                <p><strong>109.</strong> Which C++11 feature allows automatic type deduction?</p>
+                <div class="mcq-options">
+                    <div class="mcq-option">a) auto</div>
+                    <div class="mcq-option">b) decltype</div>
+                    <div class="mcq-option">c) Both a and b</div>
+                    <div class="mcq-option">d) Neither</div>
+                </div>
+                <div class="mcq-answer">Answer: c) Both a and b</div>
+            </div>
+
+            <div class="mcq-question">
+                <p><strong>110.</strong> What is the purpose of std::unique?</p>
+                <div class="mcq-options">
+                    <div class="mcq-option">a) Remove duplicates from container</div>
+                    <div class="mcq-option">b) Sort container</div>
+                    <div class="mcq-option">c) Reverse container</div>
+                    <div class="mcq-option">d) Find element</div>
+                </div>
+                <div class="mcq-answer">Answer: a) Remove duplicates from container</div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 CSY2006 C++ Programming Course. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
