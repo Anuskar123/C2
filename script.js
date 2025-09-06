@@ -1,3 +1,4 @@
+// JavaScript file for website interactivity
 // Interactive functionality for the C++ course website
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -90,7 +91,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const header = document.querySelector('header');
     const headerContent = document.querySelector('.header-content') || document.querySelector('header h1');
     const progressContainer = document.querySelector('.progress-container');
-    const scrollThreshold = 100; // Minimum scroll distance before hiding/showing
+    const scrollThreshold = 150; // Increased from 100 for less aggressive hiding
 
     // Initialize navigation and header content as visible
     nav.classList.add('nav-visible');

@@ -1,3 +1,4 @@
+/* CSS stylesheet for the website */
 /* Reset and base styles */
 * {
     margin: 0;
@@ -22,7 +23,7 @@ body {
 header {
     background: #000000;
     color: #ffffff;
-    padding: 1.5rem 0;
+    padding: 0.75rem 0; /* Reduced from 1.5rem */
     box-shadow: 0 4px 20px rgba(0,0,0,0.3);
     position: sticky;
     top: 0;
@@ -30,6 +31,7 @@ header {
     backdrop-filter: blur(10px);
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     transition: border-radius 0.4s ease, background-color 0.4s ease, opacity 0.4s ease;
+    min-height: auto; /* Ensure compact height */
 }
 
 header.header-bg-hidden {
@@ -84,7 +86,7 @@ header.nav-visible {
 header h1 {
     transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease;
     margin: 0;
-    padding: 1rem 2rem;
+    padding: 0.5rem 2rem; /* Reduced from 1rem 2rem */
 }
 
 header h1.header-title-visible {
@@ -227,7 +229,7 @@ nav ul {
     max-width: 1400px;
     margin: 0 auto;
     padding: 0 2rem;
-    gap: 1rem;
+    gap: 0.5rem; /* Reduced from 1rem */
 }
 
 nav li {
@@ -237,18 +239,20 @@ nav li {
 nav a {
     color: #ffffff;
     text-decoration: none;
-    padding: 1rem 1.5rem;
-    border-radius: 12px;
+    padding: 0.5rem 1rem; /* Reduced from 1rem 1.5rem */
+    border-radius: 8px; /* Reduced from 12px */
     transition: all 0.3s ease;
     font-weight: 500;
     position: relative;
     overflow: hidden;
     border: 1px solid transparent;
-    font-size: 1rem;
+    font-size: 0.9rem; /* Reduced from 1rem */
     display: flex;
     align-items: center;
     gap: 0.5rem;
     white-space: nowrap;
+    height: 2.5rem; /* Fixed height for consistency */
+    line-height: 1.2;
 }
 
 nav a::before {
@@ -277,10 +281,11 @@ nav a:hover {
 nav {
     transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease;
     background: #000000;
-    margin-top: 1rem;
-    border-radius: 0 0 15px 15px;
+    margin-top: 0.5rem; /* Reduced from 1rem */
+    border-radius: 0 0 12px 12px; /* Reduced from 15px */
     box-shadow: 0 4px 20px rgba(0,0,0,0.3);
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 0.25rem 0; /* Add small padding */
 }
 
 nav.nav-hidden {
@@ -440,17 +445,15 @@ em, i {
     border-bottom: none;
 }
 
-.dropdown-menu a {
-    padding: 0.8rem 1.5rem;
-    display: block;
-    font-size: 0.9rem;
-    border: none;
-    border-radius: 0;
-    white-space: nowrap;
-    transition: all 0.2s ease;
-}
-
-.dropdown-menu a:hover {
+    .dropdown-menu a {
+        padding: 0.6rem 1.2rem; /* Reduced from 0.8rem 1.5rem */
+        display: block;
+        font-size: 0.85rem; /* Reduced from 0.9rem */
+        border: none;
+        border-radius: 0;
+        white-space: nowrap;
+        transition: all 0.2s ease;
+    }.dropdown-menu a:hover {
     background: rgba(96, 165, 250, 0.1);
     border: none;
     transform: none;
@@ -1011,8 +1014,8 @@ body.light-theme .dropdown-menu a:hover {
 @media (max-width: 768px) {
     nav ul {
         flex-direction: column;
-        gap: 0.5rem;
-        padding: 1rem;
+        gap: 0.25rem; /* Reduced from 0.5rem */
+        padding: 0.5rem; /* Reduced from 1rem */
     }
 
     nav li {
@@ -1021,8 +1024,9 @@ body.light-theme .dropdown-menu a:hover {
 
     nav a {
         justify-content: center;
-        padding: 1rem 1.5rem;
-        font-size: 1.1rem;
+        padding: 0.75rem 1rem; /* Reduced from 1rem 1.5rem */
+        font-size: 1rem; /* Reduced from 1.1rem */
+        height: 3rem; /* Fixed height for mobile */
     }
 
     .dropdown-menu {
@@ -1389,6 +1393,30 @@ body.light-theme .search-highlight {
 @media (max-width: 480px) {
     main {
         padding: 1rem;
+    }
+
+    header {
+        padding: 0.5rem 0; /* Even more compact on small screens */
+    }
+
+    header h1 {
+        padding: 0.25rem 1rem; /* Reduced padding on small screens */
+        font-size: 1.2rem; /* Smaller title */
+    }
+
+    nav ul {
+        padding: 0 1rem; /* Reduced padding */
+        gap: 0.25rem; /* Tighter spacing */
+    }
+
+    nav a {
+        padding: 0.4rem 0.8rem; /* Smaller padding */
+        font-size: 0.8rem; /* Smaller font */
+        height: 2rem; /* Shorter height */
+    }
+
+    nav ul {
+        gap: 0.25rem; /* Tighter spacing */
     }
 
     header {
@@ -1944,4 +1972,46 @@ body.light-theme .search-highlight {
     .question-types {
         margin-top: 0.5rem;
     }
+}
+
+/* Algorithm table styles */
+.algorithm-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    background: #000000;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    border: 2px solid #ffffff;
+}
+
+.algorithm-table th,
+.algorithm-table td {
+    padding: 0.75rem;
+    text-align: left;
+    border-bottom: 1px solid #333333;
+    color: #ffffff;
+}
+
+.algorithm-table th {
+    background: #111111;
+    font-weight: 600;
+    color: #ffffff;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 0.5px;
+}
+
+.algorithm-table tr:nth-child(even) {
+    background: #111111;
+}
+
+.algorithm-table tr:hover {
+    background: #222222;
+}
+
+.algorithm-table td {
+    font-family: 'Courier New', monospace;
+    font-size: 0.95rem;
 }

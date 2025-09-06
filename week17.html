@@ -1,3 +1,4 @@
+<!-- Week 17: Expression Evaluation -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -145,6 +146,355 @@
     return postfix;
 }</pre>
                     </div>
+                </section>
+
+                <section id="mock-algorithm">
+                    <h3>Mock Infix to Postfix Conversion Algorithm</h3>
+                    
+                    <p>There is an algorithm to convert an infix expression into a postfix expression. It uses a stack; but in this case, the stack is used to hold operators rather than numbers. The purpose of the stack is to reverse the order of the operators in the expression. It also serves as a storage structure, since no operator can be printed until both of its operands have appeared.</p>
+                    
+                    <p>In this algorithm, all operands are printed (or sent to output) when they are read. There are more complicated rules to handle operators and parentheses.</p>
+                    
+                    <h4>Example 1: A * B + C becomes A B * C +</h4>
+                    <p>The order in which the operators appear is not reversed. When the '+' is read, it has lower precedence than the '*', so the '*' must be printed first.</p>
+                    
+                    <table class="algorithm-table">
+                        <thead>
+                            <tr>
+                                <th>Step</th>
+                                <th>Current Symbol</th>
+                                <th>Operator Stack</th>
+                                <th>Postfix String</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>A</td>
+                                <td></td>
+                                <td>A</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>*</td>
+                                <td>*</td>
+                                <td>A</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>B</td>
+                                <td>*</td>
+                                <td>A B</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>+</td>
+                                <td>+</td>
+                                <td>A B *</td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td>C</td>
+                                <td>+</td>
+                                <td>A B * C</td>
+                            </tr>
+                            <tr>
+                                <td>6</td>
+                                <td></td>
+                                <td></td>
+                                <td>A B * C +</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <h4>Example 2: A + B * C becomes A B C * +</h4>
+                    <p>Here the order of the operators must be reversed. The stack is suitable for this, since operators will be popped off in the reverse order from that in which they were pushed.</p>
+                    
+                    <table class="algorithm-table">
+                        <thead>
+                            <tr>
+                                <th>Step</th>
+                                <th>Current Symbol</th>
+                                <th>Operator Stack</th>
+                                <th>Postfix String</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>A</td>
+                                <td></td>
+                                <td>A</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>+</td>
+                                <td>+</td>
+                                <td>A</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>B</td>
+                                <td>+</td>
+                                <td>A B</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>*</td>
+                                <td>+ *</td>
+                                <td>A B</td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td>C</td>
+                                <td>+ *</td>
+                                <td>A B C</td>
+                            </tr>
+                            <tr>
+                                <td>6</td>
+                                <td></td>
+                                <td></td>
+                                <td>A B C * +</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <h4>Example 3: A * (B + C) becomes A B C + *</h4>
+                    <p>A subexpression in parentheses must be done before the rest of the expression.</p>
+                    
+                    <table class="algorithm-table">
+                        <thead>
+                            <tr>
+                                <th>Step</th>
+                                <th>Current Symbol</th>
+                                <th>Operator Stack</th>
+                                <th>Postfix String</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>A</td>
+                                <td></td>
+                                <td>A</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>*</td>
+                                <td>*</td>
+                                <td>A</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>(</td>
+                                <td>* (</td>
+                                <td>A</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>B</td>
+                                <td>* (</td>
+                                <td>A B</td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td>+</td>
+                                <td>* ( +</td>
+                                <td>A B</td>
+                            </tr>
+                            <tr>
+                                <td>6</td>
+                                <td>C</td>
+                                <td>* ( +</td>
+                                <td>A B C</td>
+                            </tr>
+                            <tr>
+                                <td>7</td>
+                                <td>)</td>
+                                <td>*</td>
+                                <td>A B C +</td>
+                            </tr>
+                            <tr>
+                                <td>8</td>
+                                <td></td>
+                                <td></td>
+                                <td>A B C + *</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <h4>Example 4: A - B + C becomes A B - C +</h4>
+                    <p>When operators have the same precedence, we must consider association. Left to right association means that the operator on the stack must be done first, while right to left association means the reverse.</p>
+                    
+                    <table class="algorithm-table">
+                        <thead>
+                            <tr>
+                                <th>Step</th>
+                                <th>Current Symbol</th>
+                                <th>Operator Stack</th>
+                                <th>Postfix String</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>A</td>
+                                <td></td>
+                                <td>A</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>A</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>B</td>
+                                <td>-</td>
+                                <td>A B</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>+</td>
+                                <td>+</td>
+                                <td>A B -</td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td>C</td>
+                                <td>+</td>
+                                <td>A B - C</td>
+                            </tr>
+                            <tr>
+                                <td>6</td>
+                                <td></td>
+                                <td></td>
+                                <td>A B - C +</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <h4>Example 5: A * B ^ C + D becomes A B C ^ * D +</h4>
+                    <p>Here both the exponentiation and the multiplication must be done before the addition.</p>
+                    
+                    <table class="algorithm-table">
+                        <thead>
+                            <tr>
+                                <th>Step</th>
+                                <th>Current Symbol</th>
+                                <th>Operator Stack</th>
+                                <th>Postfix String</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>A</td>
+                                <td></td>
+                                <td>A</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>*</td>
+                                <td>*</td>
+                                <td>A</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>B</td>
+                                <td>*</td>
+                                <td>A B</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>^</td>
+                                <td>* ^</td>
+                                <td>A B</td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td>C</td>
+                                <td>* ^</td>
+                                <td>A B C</td>
+                            </tr>
+                            <tr>
+                                <td>6</td>
+                                <td>+</td>
+                                <td>+</td>
+                                <td>A B C ^ *</td>
+                            </tr>
+                            <tr>
+                                <td>7</td>
+                                <td>D</td>
+                                <td>+</td>
+                                <td>A B C ^ * D</td>
+                            </tr>
+                            <tr>
+                                <td>8</td>
+                                <td></td>
+                                <td></td>
+                                <td>A B C ^ * D +</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <h4>Example 6: A * (B + C * D) + E becomes A B C D * + * E +</h4>
+                    
+                    <table class="algorithm-table">
+                        <thead>
+                            <tr>
+                                <th>Step</th>
+                                <th>Current Symbol</th>
+                                <th>Operator Stack</th>
+                                <th>Postfix String</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>A</td>
+                                <td></td>
+                                <td>A</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>*</td>
+                                <td>*</td>
+                                <td>A</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>(</td>
+                                <td>* (</td>
+                                <td>A</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>B</td>
+                                <td>* (</td>
+                                <td>A B</td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td>+</td>
+                                <td>* ( +</td>
+                                <td>A B</td>
+                            </tr>
+                            <tr>
+                                <td>6</td>
+                                <td>C</td>
+                                <td>* ( +</td>
+                                <td>A B C</td>
+                            </tr>
+                            <tr>
+                                <td>7</td>
+                                <td>*</td>
+                                <td>* ( + *</td>
+                                <td>A B C</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </section>
 
                 <section id="qa-section">
@@ -552,11 +902,10 @@ double evaluatePostfix(string expr) {
         case '(': return 0;
         default: return -1;
     }
-}
 
-// In conversion algorithm:
-if (getPrecedence(current) &gt; getPrecedence(stack.top())) {
-    // Error in condition!
+    // In conversion algorithm:
+    if (getPrecedence(current) &gt; getPrecedence(stack.top())) {
+        // Error in condition!
 }</pre>
                             </div>
                             <span class="question-type">Type: Find the Error</span>
@@ -653,7 +1002,7 @@ if (getPrecedence(current) &gt; getPrecedence(stack.top())) {
                         <div class="question" tabindex="0">
                             <h4>Question 17: Find the error in parentheses handling:</h4>
                             <div class="code-block">
-                                <pre">// Expression: (A + B
+                                <pre>// Expression: (A + B
 string result = infixToPostfix("(A + B");
 cout &lt;&lt; result &lt;&lt; endl;
 // Output: AB+

@@ -1,3 +1,4 @@
+<!-- Project README for CSY2006 C++ course -->
 # CSY2006 C++ Programming Course
 
 ## 📖 Course Overview
